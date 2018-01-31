@@ -19,7 +19,7 @@ public class ArticleAdm {
     @Column(name = "note")
     private String note;
 
-    public ArticleAdm(){
+    public ArticleAdm() {
 
     }
 
