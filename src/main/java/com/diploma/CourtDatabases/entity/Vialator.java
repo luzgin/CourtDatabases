@@ -27,13 +27,14 @@ public class Vialator {
     @Column(name = "private_number")
     private String privateNumber;
 
+    @OneToMany(mappedBy = "vialator", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<CardAdm> cardAdms = new HashSet<>();
 
     public Vialator() {
 
     }
 
-    @OneToMany(mappedBy = "vialator", cascade = CascadeType.ALL)
+
     public Set<CardAdm> getCardAdms() {
         return cardAdms;
     }

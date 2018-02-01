@@ -12,19 +12,20 @@ public class EntityDecreeAdm {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @ManyToOne
-    @JoinColumn(name = "name_entity_dcree_id")
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "name_entity_decree_id")
     private NameEntityDecreeAdm nameEntityDecreeAdm;
 
     @Column(name = "sum")
     private double sum;
 
-    @OneToMany(mappedBy = "entity_decree_adm", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "entityDecreeAdm", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<CardAdm> cardAdms = new HashSet<>();
 
     public EntityDecreeAdm() {
 
     }
+
 
     public Set<CardAdm> getCardAdms() {
         return cardAdms;

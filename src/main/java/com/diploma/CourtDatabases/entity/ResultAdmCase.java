@@ -15,9 +15,10 @@ public class ResultAdmCase {
     @Column(name = "name")
     private String name;
 
+    @OneToMany(mappedBy = "resultAdmCase", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<CardAdm> cardAdms = new HashSet<>();
 
-    @OneToMany(mappedBy = "result_adm", cascade = CascadeType.ALL)
+
     public Set<CardAdm> getCardAdms() {
         return cardAdms;
     }

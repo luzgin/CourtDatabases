@@ -15,9 +15,10 @@ public class EntityIskAdm {
     @Column(name = "name")
     private String name;
 
+    @OneToMany(mappedBy = "entityIskAdm", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<ComplaintsAdm> complaintsAdms = new HashSet<>();
 
-    @OneToMany(mappedBy = "entity_isk_adm", cascade = CascadeType.ALL)
+
     public Set<ComplaintsAdm> getComplaintsAdm() {
         return complaintsAdms;
     }

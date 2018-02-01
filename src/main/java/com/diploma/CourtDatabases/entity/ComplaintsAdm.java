@@ -1,7 +1,7 @@
 package com.diploma.CourtDatabases.entity;
 
 import javax.persistence.*;
-import java.sql.Date;
+import java.util.Date;
 
 @Entity
 @Table(name = "complaints_adm")
@@ -15,7 +15,7 @@ public class ComplaintsAdm {
     @Temporal(value = TemporalType.DATE)
     private Date complainDate;
 
-    @ManyToOne
+    @ManyToOne(optional = false)
     @JoinColumn(name = "entity_id")
     private EntityIskAdm entityIskAdm;
 
@@ -25,14 +25,14 @@ public class ComplaintsAdm {
     @Column(name = "activ")
     private boolean activ;
 
-    @ManyToOne
+    @ManyToOne(optional = false)
     @JoinColumn(name = "decree_adm_id")
     private DecreeAdm decreeAdm;
 
     @Column(name = "summ_pishlini")
     private double summPoshlini;
 
-    @ManyToOne
+    @ManyToOne(optional = false)
     @JoinColumn(name = "card_adm_id")
     private CardAdm cardAdm;
 

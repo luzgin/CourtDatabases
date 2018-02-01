@@ -1,7 +1,7 @@
 package com.diploma.CourtDatabases.entity;
 
 import javax.persistence.*;
-import java.sql.Date;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -16,26 +16,26 @@ public class CardAdm {
     @Column(name = "card_number")
     private Integer cardNumber;
 
-    @ManyToOne
+    @ManyToOne(optional = false)
     @JoinColumn(name = "decree_adm_id")
     private DecreeAdm decreeAdm;
 
-    @ManyToOne
+    @ManyToOne(optional = false)
     @JoinColumn(name = "vialator_id")
     private Vialator vialator;
 
-    @ManyToOne
+    @ManyToOne(optional = false)
     @JoinColumn(name = "article_id")
     private ArticleAdm articleAdm;
 
-    @ManyToOne
+    @ManyToOne(optional = false)
     @JoinColumn(name = "entity_decree_id")
     private EntityDecreeAdm entityDecreeAdm;
 
     @Column(name = "note_article")
     private String noteArticle;
 
-    @ManyToOne
+    @ManyToOne(optional = false)
     @JoinColumn(name = "judge_id")
     private AuthorDocument judge;
 
@@ -46,22 +46,23 @@ public class CardAdm {
     @Temporal(value = TemporalType.DATE)
     private Date resultDate;
 
-    @ManyToOne
+    @ManyToOne(optional = false)
     @JoinColumn(name = "result_id")
     private ResultAdmCase resultAdmCase;
 
-    @ManyToOne
+    @ManyToOne(optional = false)
     @JoinColumn(name = "date_request_delo_id")
     private DateRequestCase dateRequestCase;
 
-    @ManyToOne
+    @ManyToOne(optional = false)
     @JoinColumn(name = "date_return_delo_id")
     private DateReturnCase dateReturnCase;
 
     @Column(name = "note")
     private String note;
 
-    @OneToMany(mappedBy = "card_adm", cascade = CascadeType.ALL)
+
+    @OneToMany(mappedBy = "cardAdm", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<ComplaintsAdm> complaintsAdms = new HashSet<>();
 
 

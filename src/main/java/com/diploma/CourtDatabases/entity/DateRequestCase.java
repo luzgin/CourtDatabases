@@ -1,7 +1,7 @@
 package com.diploma.CourtDatabases.entity;
 
 import javax.persistence.*;
-import java.sql.Date;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -20,9 +20,10 @@ public class DateRequestCase {
     @Temporal(value = TemporalType.DATE)
     private Date date;
 
+    @OneToMany(mappedBy = "dateRequestCase", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<CardAdm> cardAdms = new HashSet<>();
 
-    @OneToMany(mappedBy = "date_request_case", cascade = CascadeType.ALL)
+
     public Set<CardAdm> getCardAdms() {
         return cardAdms;
     }

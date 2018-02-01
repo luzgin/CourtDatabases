@@ -21,9 +21,9 @@ public class ArticleAdm {
     @Column(name = "note")
     private String note;
 
+    @OneToMany(mappedBy = "articleAdm", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<CardAdm> cardAdms = new HashSet<>();
 
-    @OneToMany(mappedBy = "article_adm", cascade = CascadeType.ALL)
     public Set<CardAdm> getCardAdms() {
         return cardAdms;
     }

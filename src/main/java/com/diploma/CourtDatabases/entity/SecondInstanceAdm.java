@@ -1,7 +1,7 @@
 package com.diploma.CourtDatabases.entity;
 
 import javax.persistence.*;
-import java.sql.Date;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -13,11 +13,11 @@ public class SecondInstanceAdm {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @ManyToOne
+    @ManyToOne(optional = false)
     @JoinColumn(name = "organization_id")
     private Organization organization;
 
-    @ManyToOne
+    @ManyToOne(optional = false)
     @JoinColumn(name = "author_document_id")
     private AuthorDocument authorDocument;
 
@@ -25,13 +25,14 @@ public class SecondInstanceAdm {
     @Temporal(value = TemporalType.DATE)
     private Date decreeDate;
 
-    @OneToMany(mappedBy = "second_instance_adm", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "secondInstanceAdm", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<DecreeAdm> decreeAdms = new HashSet<>();
 
 
-    public SecondInstanceAdm(){
+    public SecondInstanceAdm() {
 
     }
+
 
     public Set<DecreeAdm> getDecreeAdms() {
         return decreeAdms;

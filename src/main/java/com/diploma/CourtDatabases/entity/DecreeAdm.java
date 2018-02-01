@@ -1,7 +1,7 @@
 package com.diploma.CourtDatabases.entity;
 
 import javax.persistence.*;
-import java.sql.Date;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -13,11 +13,11 @@ public class DecreeAdm {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @ManyToOne
+    @ManyToOne(optional = false)
     @JoinColumn(name = "author_document_id")
     private AuthorDocument authorDocument;
 
-    @ManyToOne
+    @ManyToOne(optional = false)
     @JoinColumn(name = "organization_id")
     private Organization organization;
 
@@ -28,19 +28,20 @@ public class DecreeAdm {
     @Column(name = "entered_into_force")
     private boolean enteredIntoForce;
 
-    @ManyToOne
+    @ManyToOne(optional = false)
     @JoinColumn(name = "second_instance_id")
     private SecondInstanceAdm secondInstanceAdm;
 
-    @OneToMany(mappedBy = "decree_adm", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "decreeAdm", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<ComplaintsAdm> complaintsAdms = new HashSet<>();
 
-    @OneToMany(mappedBy = "decree_adm", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "decreeAdm", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<CardAdm> cardAdms = new HashSet<>();
 
-    public DecreeAdm (){
+    public DecreeAdm() {
 
     }
+
 
     public Set<ComplaintsAdm> getComplaintsAdms() {
         return complaintsAdms;
@@ -49,6 +50,7 @@ public class DecreeAdm {
     public void setComplaintsAdms(Set<ComplaintsAdm> complaintsAdms) {
         this.complaintsAdms = complaintsAdms;
     }
+
 
     public Set<CardAdm> getCardAdms() {
         return cardAdms;

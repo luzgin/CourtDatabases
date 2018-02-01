@@ -18,14 +18,15 @@ public class Organization {
     @Column(name = "type")
     private Integer type;
 
-    @OneToMany(mappedBy = "organization", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "organization", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<DecreeAdm> decreeAdms = new HashSet<>();
 
-    @OneToMany(mappedBy = "organization", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "organization", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<AuthorDocument> authorDocuments = new HashSet<>();
 
-    @OneToMany(mappedBy = "organization", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "organization", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<SecondInstanceAdm> secondInstanceAdms = new HashSet<>();
+
 
     public Set<DecreeAdm> getDecreeAdms() {
         return decreeAdms;
@@ -35,6 +36,7 @@ public class Organization {
         this.decreeAdms = decreeAdms;
     }
 
+
     public Set<AuthorDocument> getAuthorDocuments() {
         return authorDocuments;
     }
@@ -42,6 +44,7 @@ public class Organization {
     public void setAuthorDocuments(Set<AuthorDocument> authorDocuments) {
         this.authorDocuments = authorDocuments;
     }
+
 
     public Set<SecondInstanceAdm> getSecondInstanceAdms() {
         return secondInstanceAdms;
@@ -51,7 +54,7 @@ public class Organization {
         this.secondInstanceAdms = secondInstanceAdms;
     }
 
-    public Organization(){
+    public Organization() {
 
     }
 

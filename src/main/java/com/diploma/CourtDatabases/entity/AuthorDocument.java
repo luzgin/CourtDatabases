@@ -18,11 +18,11 @@ public class AuthorDocument {
     @Column(name = "active_work")
     private boolean activWork;
 
-    @ManyToOne
+    @ManyToOne(optional = false)
     @JoinColumn(name = "organization_id")
     private Organization organization;
 
-    @OneToMany(mappedBy = "author_document", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "judge", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private  Set<CardAdm> cardAdms = new HashSet<>();
 
     public AuthorDocument() {
