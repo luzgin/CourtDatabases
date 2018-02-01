@@ -1,6 +1,8 @@
 package com.diploma.CourtDatabases.entity;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "organization")
@@ -15,6 +17,39 @@ public class Organization {
 
     @Column(name = "type")
     private Integer type;
+
+    @OneToMany(mappedBy = "organization", cascade = CascadeType.ALL)
+    private Set<DecreeAdm> decreeAdms = new HashSet<>();
+
+    @OneToMany(mappedBy = "organization", cascade = CascadeType.ALL)
+    private Set<AuthorDocument> authorDocuments = new HashSet<>();
+
+    @OneToMany(mappedBy = "organization", cascade = CascadeType.ALL)
+    private Set<SecondInstanceAdm> secondInstanceAdms = new HashSet<>();
+
+    public Set<DecreeAdm> getDecreeAdms() {
+        return decreeAdms;
+    }
+
+    public void setDecreeAdms(Set<DecreeAdm> decreeAdms) {
+        this.decreeAdms = decreeAdms;
+    }
+
+    public Set<AuthorDocument> getAuthorDocuments() {
+        return authorDocuments;
+    }
+
+    public void setAuthorDocuments(Set<AuthorDocument> authorDocuments) {
+        this.authorDocuments = authorDocuments;
+    }
+
+    public Set<SecondInstanceAdm> getSecondInstanceAdms() {
+        return secondInstanceAdms;
+    }
+
+    public void setSecondInstanceAdms(Set<SecondInstanceAdm> secondInstanceAdms) {
+        this.secondInstanceAdms = secondInstanceAdms;
+    }
 
     public Organization(){
 

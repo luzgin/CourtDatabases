@@ -1,9 +1,11 @@
 package com.diploma.CourtDatabases.entity;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
-@Table (name = "vialator")
+@Table(name = "vialator")
 public class Vialator {
 
     @Id
@@ -25,8 +27,19 @@ public class Vialator {
     @Column(name = "private_number")
     private String privateNumber;
 
-    public Vialator (){
+    private Set<CardAdm> cardAdms = new HashSet<>();
 
+    public Vialator() {
+
+    }
+
+    @OneToMany(mappedBy = "vialator", cascade = CascadeType.ALL)
+    public Set<CardAdm> getCardAdms() {
+        return cardAdms;
+    }
+
+    public void setCardAdms(Set<CardAdm> cardAdms) {
+        this.cardAdms = cardAdms;
     }
 
     public long getId() {

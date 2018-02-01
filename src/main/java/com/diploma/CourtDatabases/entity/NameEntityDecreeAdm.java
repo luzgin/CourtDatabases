@@ -1,6 +1,8 @@
 package com.diploma.CourtDatabases.entity;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "name_entity_decree_adm")
@@ -12,8 +14,19 @@ public class NameEntityDecreeAdm {
     @Column(name = "name")
     private String name;
 
+    @OneToMany(mappedBy = "name_entity_decree_adm", cascade = CascadeType.ALL)
+    private Set<EntityDecreeAdm> entityDecreeAdms = new HashSet<>();
+
     public NameEntityDecreeAdm(){
 
+    }
+
+    public Set<EntityDecreeAdm> getEntityDecreeAdms() {
+        return entityDecreeAdms;
+    }
+
+    public void setEntityDecreeAdms(Set<EntityDecreeAdm> entityDecreeAdms) {
+        this.entityDecreeAdms = entityDecreeAdms;
     }
 
     public long getId() {
