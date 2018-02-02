@@ -17,12 +17,16 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.orm.jpa.JpaTransactionManager;
+import org.springframework.orm.jpa.JpaVendorAdapter;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
+import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @Configuration
-@EnableJpaRepositories(basePackages = "com.diploma.CourtDatabases.repository")
+@EnableJpaRepositories(basePackages = "com.diploma.CourtDatabases.repository",
+        entityManagerFactoryRef = "entityManagerFactory",
+        transactionManagerRef = "transactionManager")
 @EnableTransactionManagement
 public class JpaConfiguration {
 
@@ -67,9 +71,19 @@ public class JpaConfiguration {
     public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
         LocalContainerEntityManagerFactoryBean factoryBean = new LocalContainerEntityManagerFactoryBean();
         factoryBean.setDataSource(dataSource());
-       // factoryBean.setPackagesToScan(new String[] { "com.diploma.CourtDatabases.entity" });
-
+        factoryBean.setPackagesToScan(new String[] { "com.diploma.CourtDatabases.entity" });
+        factoryBean.setJpaVendorAdapter(jpaVendorAdapter());
+        factoryBean.setJpaProperties(jpaProperties());
         return factoryBean;
+    }
+
+    /*
+     * Provider specific adapter.
+     */
+    @Bean
+    public JpaVendorAdapter jpaVendorAdapter() {
+        HibernateJpaVendorAdapter hibernateJpaVendorAdapter = new HibernateJpaVendorAdapter();
+        return hibernateJpaVendorAdapter;
     }
 
     /*

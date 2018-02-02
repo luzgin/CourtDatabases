@@ -6,7 +6,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name = "date_return_case")
+@Table(name = "date_request_case")
 public class DateRequestCase {
 
     @Id
