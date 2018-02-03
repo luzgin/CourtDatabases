@@ -11,26 +11,21 @@ import java.util.List;
 
 @Service("EntityIskAdmService")
 @Transactional
-public class EntityIskAdmServiceImpl implements EntityIskAdmService{
+public class EntityIskAdmServiceImpl implements EntityIskAdmService {
 
     @Autowired
     private EntityIskAdmRepository entityIskAdmRepository;
+
+
     @Override
-    public EntityIskAdm addEntityIskAdm(EntityIskAdm entityIskAdm) {
-        EntityIskAdm iskAdm = entityIskAdmRepository.saveAndFlush(entityIskAdm);
-        return iskAdm;
+    public EntityIskAdm save(EntityIskAdm entityIskAdm) {
+        return entityIskAdmRepository.save(entityIskAdm);
     }
 
     @Override
     public void delete(long id) {
         entityIskAdmRepository.delete(id);
 
-    }
-
-    @Override
-    public EntityIskAdm editEntityIskAdm(EntityIskAdm entityIskAdm) {
-        EntityIskAdm iskAdm = entityIskAdmRepository.saveAndFlush(entityIskAdm);
-        return iskAdm;
     }
 
     @Override
@@ -43,6 +38,10 @@ public class EntityIskAdmServiceImpl implements EntityIskAdmService{
         return entityIskAdmRepository.findOne(id);
     }
 
+    @Override
+    public EntityIskAdm findByName(String name) {
+        return entityIskAdmRepository.findByName(name);
+    }
 
 
 }

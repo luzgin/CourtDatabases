@@ -1,10 +1,9 @@
 package com.diploma.CourtDatabases.repository;
 
-import com.diploma.CourtDatabases.entity.ArticleAdm;
+import com.diploma.CourtDatabases.entity.Vialator;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface ArticleAdmRepository extends JpaRepository<ArticleAdm, Long> {
-
+public interface VialatorRepository extends JpaRepository<Vialator, Long> {
 }

@@ -8,4 +8,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface EntityIskAdmRepository extends JpaRepository<EntityIskAdm, Long>{
+    EntityIskAdm findByName(String name);
 }
