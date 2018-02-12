@@ -2,52 +2,42 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>YourApp</title>
-    <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css" media="all"/>
+    <title>Главная</title>
+    <link href="css/reset.css" rel="stylesheet" type="text/css" media="all"/>
+    <link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="all"/>
 </head>
-<body ng-app="courtDatabase">
-<div class="container" style="margin-top: 30px" ng-controller="FindAllEntityIskAdm">
-    <div class="row">
-        <div class="col-md-12">
-            <div class="panel panel-default">
-                <div class="panel-heading">Сущности исков</div>
-                <div class="panel-body">
-                    <table class="table table-striped">
-                        <thead>
-                        <tr>
-                            <th>id</th>
-                            <th>name</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr ng-repeat="item in entitiesAdmIsk">
-                            <td>{{item.id}}</td>
-                            <td>{{item.name}}</td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
+<body >
+<div class="container">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">ПОСД</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="index.html">Главная <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Link</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Справочники
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="html/list.html">Сущность иска</a>
+                        <a class="dropdown-item" href="#">Another action</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#">Something else here</a>
+                    </div>
+                </li>
+            </ul>
         </div>
-    </div>
+    </nav>
 </div>
-<div ng-controller="saveEntityIskAdm">
-    <form class="form-horizontal" ng-submit="saveCtrl()">
-        <div class="form-group">
-            <label class="control-label col-sm-2" for="nameID">Name:</label>
-            <div class="col-sm-5">
-                <input type="text" class="form-control" name="name" id="nameID"
-                       placeholder="Enter Name" ng-model="name"/>
-            </div>
-        </div>
-        <div class="form-group">
-            <div class="col-sm-offset-2 col-sm-10">
-                <button type="submit" class="btn btn-default">Submit</button>
-            </div>
-        </div>
-    </form>
-</div>
-<script type="text/javascript" src="js/angular.min.js"></script>
-<script type="text/javascript" src="js/main.js"></script>
+<script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
 </body>
 </html>

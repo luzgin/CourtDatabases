@@ -1,0 +1,4 @@
+/* Цвет выделения строки при наведении в таблице */
+.table-hover tbody tr:hover td, .table-hover tbody tr:hover th {
+    background-color: #6c757d;
+}
