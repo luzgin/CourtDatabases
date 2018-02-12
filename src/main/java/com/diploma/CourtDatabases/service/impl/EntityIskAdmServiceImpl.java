@@ -19,7 +19,7 @@ public class EntityIskAdmServiceImpl implements EntityIskAdmService {
 
     @Override
     public EntityIskAdm save(EntityIskAdm entityIskAdm) {
-        return entityIskAdmRepository.save(entityIskAdm);
+        return  entityIskAdmRepository.save(entityIskAdm);
     }
 
     @Override
