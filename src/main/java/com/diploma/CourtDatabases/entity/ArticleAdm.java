@@ -13,7 +13,7 @@ public class ArticleAdm {
     private long id;
 
     @Column(name = "article")
-    private Integer article;
+    private String article;
 
     @Column(name = "part")
     private Integer part;
@@ -44,11 +44,11 @@ public class ArticleAdm {
         this.id = id;
     }
 
-    public Integer getArticle() {
+    public String getArticle() {
         return article;
     }
 
-    public void setArticle(Integer article) {
+    public void setArticle(String article) {
         this.article = article;
     }
 
