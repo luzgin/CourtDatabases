@@ -7,27 +7,70 @@ app.controller("FindAllEntityIskAdm", function ($scope, $http) {
     })
 });
 
-
-app.controller('saveEntityIskAdm', function($scope, $http) {
-    $scope.saveCtrl = function(){
+app.controller('saveEntityIskAdm', function ($scope, $http) {
+    $scope.saveCtrl = function () {
         var url = "http://localhost:8080/api/save";
-
         var config = {
-            headers : {
+            headers: {
                 'Accept': 'text/plain'
             }
         }
         var data = {
-            name: $scope.name,
+            name: $scope.name
         };
-
         $http.post(url, data, config).then(function (response) {
             $scope.postResultMessage = response.data;
         }, function error(response) {
-            $scope.postResultMessage = "Error with status: " +  response.statusText;
+            $scope.postResultMessage = "Error with status: " + response.statusText;
         });
-		location.reload();
+        location.reload();
         $scope.name = "";
+    }
+});
+app.controller('deleteEntityIskAdm', function ($scope, $http) {
+    $scope.deleteCtrl = function (entity) {
+        var url = "http://localhost:8080/api/delete";
+        var config = {
+            headers: {
+                'Accept': 'text/plain'
+            }
+        }
+        $http.post(url, entity, config).then(function (response) {
+            $scope.postResultMessage = response.entity;
+        }, function error(response) {
+            $scope.postResultMessage = "Error with status: " + response.statusText;
+        });
+        location.reload();
+    }
+});
 
+app.controller('findAllResultAdmCaseList', function ($scope, $http) {
+    $scope.resultAdmCaseList = [];
+    $http.get('http://localhost:8080/api/getResultAdmCaseList').success(function (data) {
+        $scope.resultAdmCaseList = data;
+    })
+
+});
+
+
+
+app.controller('saveResultAdmIsk', function ($scope, $http) {
+    $scope.saveResultAdmCaseCtrl = function () {
+        var url = "http://localhost:8080/api/saveResultAdmCase";
+        var config = {
+            headers: {
+                'Accept': 'text/plain'
+            }
+        }
+        var result = {
+            name: $scope.resultName
+        };
+        $http.post(url, result, config).then(function (response) {
+            $scope.postResultMessage = response.result;
+        }, function error(response) {
+            $scope.postResultMessage = "Error with status: " + response.statusText;
+        });
+        location.reload();
+        $scope.resultName = "";
     }
 });

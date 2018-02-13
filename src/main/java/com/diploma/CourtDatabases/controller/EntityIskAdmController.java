@@ -24,5 +24,10 @@ public class EntityIskAdmController {
         return entityIskAdmService.save(entityIskAdm);
     }
 
+    @RequestMapping(value="/delete", method=RequestMethod.POST)
+    public void deleteEntityIskAdm(@RequestBody EntityIskAdm entityIskAdm){
+         entityIskAdmService.delete(entityIskAdm.getId());
+    }
+
 
 }
