@@ -21,5 +21,8 @@ public class ResultAdmCaseController {
     private ResultAdmCase saveResultAdmCase(@RequestBody ResultAdmCase resultAdmCase){
         return resultAdmCaseService.save(resultAdmCase);
     }
-
+    @PostMapping(value = "/deleteResultAdmCase")
+    private void deleteResultAdmCase(@RequestBody ResultAdmCase resultAdmCase){
+        resultAdmCaseService.delete(resultAdmCase.getId());
+    }
 }

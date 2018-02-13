@@ -22,7 +22,7 @@ create table entity_decree_adm(
 DROP TABLE IF EXISTS `result_adm`;
 CREATE TABLE IF NOT EXISTS result_adm(
 	id INT(10) AUTO_INCREMENT,
-	name VARCHAR(50) NOT NULL,
+	name VARCHAR(200) NOT NULL,
 	PRIMARY KEY (id)
 )ENGINE=INNODB DEFAULT CHARACTER SET utf8;
 
@@ -30,8 +30,8 @@ DROP TABLE IF EXISTS `article_adm`;
 CREATE TABLE IF NOT EXISTS article_adm(
 	id INT(10) AUTO_INCREMENT,
 	article int(5) NOT NULL,
-	part int(5) NOT NULL,
-	note varchar(50) NOT NULL,
+	part int(5),
+	note varchar NOT NULL,
 	PRIMARY KEY (id)
 )ENGINE=INNODB DEFAULT CHARACTER SET utf8;
 
@@ -157,3 +157,5 @@ CREATE TABLE IF NOT EXISTS complaints_adm(
 	FOREIGN KEY (card_adm_id) REFERENCES card_adm(id),
 	FOREIGN KEY (decree_adm_id) REFERENCES decree_adm(id)
 )ENGINE=INNODB DEFAULT CHARACTER SET utf8;
+
+INSERT INTO result_adm (name) VALUES ("оставлено без изменения, а жалоба (протест) - без удовлетворения");

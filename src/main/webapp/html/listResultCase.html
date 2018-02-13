@@ -32,6 +32,7 @@
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <a class="dropdown-item" href="../html/listEntityIsk.html">Сущность иска</a>
                                 <a class="dropdown-item" href="../html/listResultCase.html">Результат рассмотрения дела</a>
+                                <a class="dropdown-item" href="../html/listArticleAdm.html">Статьи</a>
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="#">Something else here</a>
                             </div>
@@ -54,14 +55,16 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr class="something " ng-repeat="item in resultAdmCaseList">
+                                    <tr class="something " ng-repeat="resultAdmCase in resultAdmCaseList">
                                         <td>
                                             <div class="col">
-                                                {{item.name}}
+                                                {{resultAdmCase.name}}
                                             </div>
                                         </td>
                                         <td>
-
+                                            <div ng-controller="deleteResultAdmCase" class="div-center">
+                                                <button ng-click="deleteResultAdmCaseCtrl(resultAdmCase)">Удалить</button>
+                                            </div>
                                         </td>
                                     </tr>
                                 </tbody>
@@ -72,7 +75,7 @@
 
             </div>
             <br/>
-            <div ng-controller="saveResultAdmIsk">
+            <div ng-controller="saveResultAdmCase">
                 <form class="form-horizontal" ng-submit="saveResultAdmCaseCtrl()">
                     <div class="row">
                         <div class="col-md-10 row">
@@ -81,7 +84,7 @@
                             </div>
                             <div class="col-md-10">
                                 <input type="text" class="form-control" name="name" id="resultNameID"
-                                       placeholder="Enter Name" ng-model="resultName"/>
+                                       placeholder="Enter Name" ng-model="name"/>
                             </div>
                         </div>
                         <div class="col-md-2">
@@ -95,6 +98,6 @@
         <script type="text/javascript" src="../js/jquery-3.3.1.min.js"></script>
         <script type="text/javascript" src="../js/bootstrap.min.js"></script>
         <script type="text/javascript" src="../js/angular.min.js"></script>
-        <script type="text/javascript" src="../js/main.js"></script>
+        <script type="text/javascript" src="../js/main/main.js"></script>
     </body>
 </html>

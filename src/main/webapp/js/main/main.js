@@ -53,8 +53,7 @@ app.controller('findAllResultAdmCaseList', function ($scope, $http) {
 });
 
 
-
-app.controller('saveResultAdmIsk', function ($scope, $http) {
+app.controller('saveResultAdmCase', function ($scope, $http) {
     $scope.saveResultAdmCaseCtrl = function () {
         var url = "http://localhost:8080/api/saveResultAdmCase";
         var config = {
@@ -63,7 +62,7 @@ app.controller('saveResultAdmIsk', function ($scope, $http) {
             }
         }
         var result = {
-            name: $scope.resultName
+            name: $scope.name
         };
         $http.post(url, result, config).then(function (response) {
             $scope.postResultMessage = response.result;
@@ -72,5 +71,18 @@ app.controller('saveResultAdmIsk', function ($scope, $http) {
         });
         location.reload();
         $scope.resultName = "";
+    }
+});
+
+app.controller('deleteResultAdmCase', function ($scope, $http) {
+    $scope.deleteResultAdmCaseCtrl = function (entity) {
+        var url = "http://localhost:8080/api/deleteResultAdmCase";
+        var config = {headers: {'Accept': 'text/plain'}}
+        $http.post(url, entity, config).then(function (response) {
+            $scope.postResultMessage = response.entity;
+        }, function error(response) {
+            $scope.postResultMessage = "Error with status: " + response.statusText;
+        });
+        location.reload();
     }
 });
