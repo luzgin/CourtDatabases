@@ -88,9 +88,9 @@ app.controller('deleteResultAdmCase', function ($scope, $http) {
 });
 
 $("#myModal").on('show.bs.modal', function (e) {
-    var userId = $(e.relatedTarget).data('user-id');
+    var entitiesAdmIskId = $(e.relatedTarget).data('entity-id');
 
-    var cols = $('#user-' + userId + ' td');
+    var cols = $('#entity-' + entitiesAdmIskId + ' td');
     var firstName = $(cols[0]).text();
     var name = $(cols[1]).text();
     $('#firstNameInput').val(firstName);

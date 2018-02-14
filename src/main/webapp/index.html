@@ -6,7 +6,7 @@
     <link href="css/reset.css" rel="stylesheet" type="text/css" media="all"/>
     <link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="all"/>
 </head>
-<body>
+<body ng-app="courtDatabase">
 <div class="container">
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <a class="navbar-brand" href="#">ПОСД</a>
@@ -18,7 +18,7 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="index.html">Главная <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="../index.html">Главная <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">Link</a>
@@ -32,6 +32,7 @@
                         <a class="dropdown-item" href="../html/listEntityIsk.html">Сущность иска</a>
                         <a class="dropdown-item" href="../html/listResultCase.html">Результат рассмотрения дела</a>
                         <a class="dropdown-item" href="../html/listArticleAdm.html">Статьи</a>
+                        <a class="dropdown-item" href="../html/listOrganization.html">Организации</a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="#">Something else here</a>
                     </div>
@@ -39,8 +40,67 @@
             </ul>
         </div>
     </nav>
+
+    <div id="myModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Edit entitiesAdmIsk</h4>
+                </div>
+                <div class="modal-body">
+                    <form class="form-horizontal" role="form">
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label" for="firstNameInput">First name</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="firstNameInput"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label" for="nameInput">Name</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="nameInput"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-offset-3 col-sm-10">
+                                <button type="submit" class="btn btn-default">Save</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <table class="table table-hover" ng-controller="FindAllEntityIskAdm">
+        <thead>
+        <tr>
+            <th>id</th>
+            <th>name</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr id="entity-{{item.id}}" ng-repeat="item in entitiesAdmIsk">
+            <td>{{item.id}}</td>
+            <td>{{item.name}}</td>
+            <td>
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" data-entity-id="{{item.id}}">Edit
+                </button>
+            </td>
+        </tr>
+
+        </tbody>
+    </table>
+
 </div>
-<script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
-<script type="text/javascript" src="js/bootstrap.min.js"></script>
+<script type="text/javascript" src="../js/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="../js/bootstrap.min.js"></script>
+<script type="text/javascript" src="../js/angular.min.js"></script>
+<script type="text/javascript" src="../js/main/main.js"></script>
 </body>
 </html>

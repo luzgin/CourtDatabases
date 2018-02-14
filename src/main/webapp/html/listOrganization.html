@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Организации</title>
+    <link href="../css/reset.css" rel="stylesheet" type="text/css" media="all"/>
+    <link href="../css/main.css" rel="stylesheet" type="text/css" media="all"/>
+    <link href="../css/bootstrap.css" rel="stylesheet" type="text/css" media="all"/>
+</head>
+<body ng-app="Organization">
+<div class="container">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">ПОСД</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="../index.html">Главная <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Link</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Справочники
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="../html/listEntityIsk.html">Сущность иска</a>
+                        <a class="dropdown-item" href="../html/listResultCase.html">Результат рассмотрения дела</a>
+                        <a class="dropdown-item" href="../html/listArticleAdm.html">Статьи</a>
+                        <a class="dropdown-item" href="../html/listOrganization.html">Организации</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#">Something else here</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <table class="table table-striped table-bordered table-sm table-hover" ng-controller="FindAllOrganization">
+        <thead>
+        <tr>
+            <th class="div-center" width="5%">id</th>
+            <th class="div-center" width="80%">Название</th>
+            <th class="div-center" width="5%">Тип</th>
+            <th class="div-center" width="10%"></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr id="organization-{{item.id}}" ng-repeat="item in organizationList">
+            <td>{{item.id}}</td>
+            <td>{{item.name}}</td>
+            <td>{{item.type}}</td>
+            <td><div ng-if="item.type !='1'" class="div-center">
+
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#organizationModal" data-organization-id="{{item.id}}">Edit
+                </button>
+            </div>
+            </td>
+        </tr>
+
+        </tbody>
+    </table>
+    <br>
+    <div ng-controller="SaveOrganization">
+        <form class="form-horizontal" ng-submit="saveOrganization()">
+            <div class="col-md-12">
+                <div class="row">
+                    <div class="col-md-10 nopadding">
+                        <input type="text" class="form-control" name="name" placeholder="Введите название"
+                               ng-model="name" required/>
+                    </div>
+                    <div class="col-md-2 nopadding div-center">
+                        <button type="submit" class="btn btn-default">Добавить</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+</div>
+<div id="organizationModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Edit org</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal" role="form">
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label" for="idInput">First name</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" id="idInput"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label" for="nameInput">Name</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" id="nameInput"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label" for="typeInput">Name</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" id="typeInput"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-offset-3 col-sm-10">
+                            <button type="submit" class="btn btn-default">Save</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--  <div id="orgModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Edit organization</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal" role="form">
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label" for="idInput">id</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" id="idInput"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label" for="nameInput">Name</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" id="nameInput"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-offset-3 col-sm-10">
+                            <button type="submit" class="btn btn-default">Save</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+</div> -->
+<script type="text/javascript" src="../js/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="../js/bootstrap.min.js"></script>
+<script type="text/javascript" src="../js/angular.min.js"></script>
+<script type="text/javascript" src="../js/main/orginization.js"></script>
+</body>
+</html>

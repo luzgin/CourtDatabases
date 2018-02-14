@@ -6,4 +6,8 @@
 .div-center{
     text-align: center;
 }
-:focus { outline: 1px dashed green; }
+/*Удаление отступов*/
+.nopadding {
+    padding: 0 !important;
+    margin: 0 !important;
+}
