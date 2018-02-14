@@ -23,7 +23,7 @@ app.controller('saveEntityIskAdm', function ($scope, $http) {
         }, function error(response) {
             $scope.postResultMessage = "Error with status: " + response.statusText;
         });
-        location.reload();
+        //location.reload();
         $scope.name = "";
     }
 });
@@ -85,4 +85,19 @@ app.controller('deleteResultAdmCase', function ($scope, $http) {
         });
         location.reload();
     }
+});
+
+$("#myModal").on('show.bs.modal', function (e) {
+    var userId = $(e.relatedTarget).data('user-id');
+
+    var cols = $('#user-' + userId + ' td');
+    var firstName = $(cols[0]).text();
+    var name = $(cols[1]).text();
+    $('#firstNameInput').val(firstName);
+    $('#nameInput').val(name);
+});
+
+$("#myModal").on('hidden.bs.modal', function () {
+    var form = $(this).find('form');
+    form[0].reset();
 });
