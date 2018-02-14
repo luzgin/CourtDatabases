@@ -50,15 +50,10 @@ organization.controller("EditOrganization", ['$scope', '$http', function ($scope
 }]);
 
 $("#organizationModal").on('show.bs.modal', function (e) {
-    var entitiesAdmIskId = $(e.relatedTarget).data('organization-id');
-
-    var cols = $('#organization-' + entitiesAdmIskId + ' td');
-    var id = $(cols[0]).text();
-    var name = $(cols[1]).text();
-    var type = $(cols[2]).text();
-    $('#idInput').val(id);
-    $('#nameInput').val(name);
-    $('#typeInput').val(type);
+    var organization = $(e.relatedTarget).data('organization');
+    $('#idInput').val(organization.id);
+    $('#nameInput').val(organization.name);
+    $('#typeInput').val(organization.type);
 });
 
 $("#organizationModal").on('hidden.bs.modal', function () {
