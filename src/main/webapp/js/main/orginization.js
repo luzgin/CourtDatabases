@@ -52,7 +52,7 @@ organization.controller("EditOrganization", ['$scope', '$http', function ($scope
         });
        location.reload();
     };
-    $("#organizationModal").on('show.bs.modal', function (e) {
+    $("#organizationModalEdit").on('show.bs.modal', function (e) {
         var organization = $(e.relatedTarget).data('organization');
         $scope.$apply(function () {
             $scope.id1 = organization.id;
