@@ -37,26 +37,28 @@ organization.controller("DeleteOrganization", ['$scope', '$http', function ($sco
     }
 }]);
 organization.controller("EditOrganization", ['$scope', '$http', function ($scope, $http) {
-    $scope.editOrganization = function (entity) {
+    $scope.editOrganization = function () {
         var url = "http://localhost:8080/api/editOrganization";
         var config = {headers: {'Accept': 'text/plain'}}
-        $http.post(url, entity, config).then(function (response) {
-            $scope.postResultMessage = response.entity;
+        var organization = {
+            id: $scope.id1,
+            name: $scope.name1,
+            type: $scope.type1
+        };
+        $http.post(url, organization, config).then(function (response) {
+            $scope.postResultMessage = response.organization;
         }, function error(response) {
             $scope.postResultMessage = "Error with status: " + response.statusText;
         });
-        location.reload();
-    }
+       location.reload();
+    };
+    $("#organizationModal").on('show.bs.modal', function (e) {
+        var organization = $(e.relatedTarget).data('organization');
+        $scope.$apply(function () {
+            $scope.id1 = organization.id;
+            $scope.name1 = organization.name;
+            $scope.type1 = organization.type;
+        })
+
+    });
 }]);
-
-$("#organizationModal").on('show.bs.modal', function (e) {
-    var organization = $(e.relatedTarget).data('organization');
-    $('#idInput').val(organization.id);
-    $('#nameInput').val(organization.name);
-    $('#typeInput').val(organization.type);
-});
-
-$("#organizationModal").on('hidden.bs.modal', function () {
-    var form = $(this).find('form');
-    form[0].reset();
-});

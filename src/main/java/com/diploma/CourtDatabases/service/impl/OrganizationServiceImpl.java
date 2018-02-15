@@ -20,6 +20,11 @@ public class OrganizationServiceImpl implements OrganizationService {
     }
 
     @Override
+    public Organization update(Organization organization) {
+        return organizationRepository.save(organization);
+    }
+
+    @Override
     public void delete(long id) {
         organizationRepository.delete(id);
     }

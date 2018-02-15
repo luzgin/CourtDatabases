@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <title>Организации</title>
     <link href="../css/reset.css" rel="stylesheet" type="text/css" media="all"/>
-    <link href="../css/main.css" rel="stylesheet" type="text/css" media="all"/>
     <link href="../css/bootstrap.css" rel="stylesheet" type="text/css" media="all"/>
+    <link href="../css/main.css" rel="stylesheet" type="text/css" media="all"/>
 </head>
 <body ng-app="Organization">
 <div class="container">
@@ -40,29 +40,46 @@
             </ul>
         </div>
     </nav>
-    <table class="table table-striped table-bordered table-sm table-hover" ng-controller="FindAllOrganization">
-        <thead>
-        <tr>
-            <th class="div-center" width="5%">id</th>
-            <th class="div-center" width="80%">Название</th>
-            <th class="div-center" width="5%">Тип</th>
-            <th class="div-center" width="10%"></th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr id="organization-{{item.id}}" ng-repeat="item in organizationList">
-            <td>{{item.id}}</td>
-            <td>{{item.name}}</td>
-            <td>{{item.type}}</td>
-            <td><div ng-if="item.type !='1'" class="div-center">
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#organizationModal" data-organization="{{item}}">Edit
-                </button>
-            </div>
-            </td>
-        </tr>
+    <div class="panel panel-default">
+        <br>
+        <div class="panel-heading div-center h3">Организации</div>
+        <div class="panel-body">
+            <table class="table table-striped table-bordered table-sm table-hover" ng-controller="FindAllOrganization">
+                <thead>
+                <tr>
+                    <th class="div-center" width="5%">id</th>
+                    <th class="div-center" width="80%">Название</th>
+                    <th class="div-center" width="5%">Тип</th>
+                    <th class="div-center" width="5%"></th>
+                    <th class="div-center" width="5%"></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr id="organization-{{item.id}}" ng-repeat="item in organizationList">
+                    <td class="div-center">{{item.id}}</td>
+                    <td>{{item.name}}</td>
+                    <td class="div-center">{{item.type}}</td>
+                    <td>
+                        <div ng-if="item.type !='1'" class="div-center">
+                            <button type="button" class="btn btn-primary" data-toggle="modal"
+                                    data-target="#organizationModal"
+                                    data-organization="{{item}}">Редактировать
+                            </button>
+                        </div>
+                    </td>
+                    <td>
+                        <div ng-if="item.type !='1'" class="div-center">
+                            <div ng-controller="DeleteOrganization" class="div-center">
+                                <button class="btn btn-danger" ng-click="deleteOrganization(item);">Удалить</button>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
 
-        </tbody>
-    </table>
+                </tbody>
+            </table>
+        </div>
+    </div>
     <br>
     <div ng-controller="SaveOrganization">
         <form class="form-horizontal" ng-submit="saveOrganization()">
@@ -79,82 +96,44 @@
             </div>
         </form>
     </div>
-
+</div>
 </div>
 <div id="organizationModal" class="modal fade" role="dialog">
-    <div class="modal-dialog">
+    <div class="organization-modal-dialog modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title">Edit org</h4>
+                <h4 class="modal-title">Редактирование организации</h4>
             </div>
-            <div class="modal-body">
-                <form class="form-horizontal" role="form">
-                    <div class="form-group">
-                        <label class="col-sm-3 control-label" for="idInput">First name</label>
-                        <div class="col-sm-9">
-                            <input type="text" class="form-control" id="idInput"/>
+            <div class="modal-body" ng-controller="EditOrganization">
+                <form class="form-horizontal" role="form" ng-submit="editOrganization()">
+                    <div class="form-group row">
+                        <label class="col-md-2 control-label" for="idInput">id</label>
+                        <div class="col-md-10">
+                            <input type="text" class="form-control" id="idInput" name="id1" ng-model="id1"/>
                         </div>
                     </div>
-                    <div class="form-group">
-                        <label class="col-sm-3 control-label" for="nameInput">Name</label>
-                        <div class="col-sm-9">
-                            <input type="text" class="form-control" id="nameInput"/>
+                    <div class="form-group row">
+                        <label class="col-md-2 control-label" for="nameInput">Name</label>
+                        <div class="col-md-10">
+                            <input type="text" class="form-control" id="nameInput" name="name1" ng-model="name1"/>
                         </div>
                     </div>
-                    <div class="form-group">
-                        <label class="col-sm-3 control-label" for="typeInput">Name</label>
-                        <div class="col-sm-9">
-                            <input type="text" class="form-control" id="typeInput"/>
+                    <div class="form-group row">
+                        <label class="col-md-2 control-label" for="typeInput">Тип</label>
+                        <div class="col-md-10">
+                            <input type="text" class="form-control" id="typeInput" name="type1" ng-model="type1"/>
                         </div>
                     </div>
-                    <div class="form-group">
-                        <div class="col-sm-offset-3 col-sm-10">
-                            <button type="submit" class="btn btn-default">Save</button>
-                        </div>
+                    <div class="modal-footer row mr-0">
+                        <button type="submit" class="btn btn-default">Save</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                     </div>
                 </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            </div>
-        </div>
-    </div>
-</div>
-<!--  <div id="orgModal" class="modal fade" role="dialog">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title">Edit organization</h4>
-            </div>
-            <div class="modal-body">
-                <form class="form-horizontal" role="form">
-                    <div class="form-group">
-                        <label class="col-sm-3 control-label" for="idInput">id</label>
-                        <div class="col-sm-9">
-                            <input type="text" class="form-control" id="idInput"/>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-sm-3 control-label" for="nameInput">Name</label>
-                        <div class="col-sm-9">
-                            <input type="text" class="form-control" id="nameInput"/>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-sm-offset-3 col-sm-10">
-                            <button type="submit" class="btn btn-default">Save</button>
-                        </div>
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
             </div>
         </div>
     </div>
 </div>
 
-</div> -->
 <script type="text/javascript" src="../js/jquery-3.3.1.min.js"></script>
 <script type="text/javascript" src="../js/bootstrap.min.js"></script>
 <script type="text/javascript" src="../js/angular.min.js"></script>

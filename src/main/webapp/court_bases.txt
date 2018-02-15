@@ -106,7 +106,7 @@ DROP TABLE IF EXISTS `vialator`;
 CREATE TABLE IF NOT EXISTS vialator(
 	id INT(10) AUTO_INCREMENT,
 	type_vialator int(2) NOT NULL,
-	firstname VARCHAR(150) NOT NULL,
+	firstname VARCHAR(250) NOT NULL,
 	secondname VARCHAR(50),
 	lastname VARCHAR(50),
 	private_number VARCHAR(50),

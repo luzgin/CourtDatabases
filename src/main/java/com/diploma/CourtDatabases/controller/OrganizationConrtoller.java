@@ -30,6 +30,6 @@ public class OrganizationConrtoller {
 
     @PostMapping("/editOrganization")
     public void editOrganization(@RequestBody Organization organization) {
-        organizationService.save(organization);
+        organizationService.update(organization);
     }
 }
