@@ -29,6 +29,11 @@ public class VialatorServiceImpl implements VialatorService {
     }
 
     @Override
+    public List<Vialator> findByTypeVialator(Integer type) {
+        return vialatorRepository.findByTypeVialator(type);
+    }
+
+    @Override
     public Vialator findById(long id) {
         return vialatorRepository.findOne(id);
     }
