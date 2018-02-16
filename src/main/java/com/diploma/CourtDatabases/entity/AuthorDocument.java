@@ -1,5 +1,7 @@
 package com.diploma.CourtDatabases.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
@@ -15,13 +17,14 @@ public class AuthorDocument {
     @Column(name = "name")
     private String name;
 
-    @Column(name = "active_work")
+    @Column(name = "activ_work")
     private boolean activWork;
 
     @ManyToOne(optional = false)
     @JoinColumn(name = "organization_id")
     private Organization organization;
 
+    @JsonIgnoreProperties(value = "judge", allowSetters = true)
     @OneToMany(mappedBy = "judge", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private  Set<CardAdm> cardAdms = new HashSet<>();
 

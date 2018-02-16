@@ -1,5 +1,7 @@
 package com.diploma.CourtDatabases.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 import java.util.Date;
 import java.util.HashSet;
@@ -61,7 +63,7 @@ public class CardAdm {
     @Column(name = "note")
     private String note;
 
-
+    @JsonIgnoreProperties(value = "cardAdm", allowSetters = true)
     @OneToMany(mappedBy = "cardAdm", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<ComplaintsAdm> complaintsAdms = new HashSet<>();
 

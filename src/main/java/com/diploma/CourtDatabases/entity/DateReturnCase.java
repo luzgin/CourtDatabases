@@ -1,5 +1,7 @@
 package com.diploma.CourtDatabases.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 import java.util.Date;
 import java.util.HashSet;
@@ -20,7 +22,7 @@ public class DateReturnCase {
     @Column(name = "date")
     @Temporal(value = TemporalType.DATE)
     private Date date;
-
+    @JsonIgnoreProperties(value = "dateReturnCase", allowSetters = true)
     @OneToMany(mappedBy = "dateReturnCase", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<CardAdm> cardAdms = new HashSet<>();
 

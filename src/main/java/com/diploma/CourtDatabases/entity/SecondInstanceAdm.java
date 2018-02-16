@@ -1,5 +1,7 @@
 package com.diploma.CourtDatabases.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 import java.util.Date;
 import java.util.HashSet;
@@ -24,7 +26,7 @@ public class SecondInstanceAdm {
     @Column(name = "decree_date")
     @Temporal(value = TemporalType.DATE)
     private Date decreeDate;
-
+    @JsonIgnoreProperties(value = "secondInstanceAdm", allowSetters = true)
     @OneToMany(mappedBy = "secondInstanceAdm", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<DecreeAdm> decreeAdms = new HashSet<>();
 

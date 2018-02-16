@@ -1,5 +1,7 @@
 package com.diploma.CourtDatabases.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
@@ -17,13 +19,13 @@ public class Organization {
 
     @Column(name = "type")
     private Integer type;
-
+    @JsonIgnoreProperties(value = "organization", allowSetters = true)
     @OneToMany(mappedBy = "organization", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<DecreeAdm> decreeAdms = new HashSet<>();
-
+    @JsonIgnoreProperties(value = "organization", allowSetters = true)
     @OneToMany(mappedBy = "organization", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<AuthorDocument> authorDocuments = new HashSet<>();
-
+    @JsonIgnoreProperties(value = "organization", allowSetters = true)
     @OneToMany(mappedBy = "organization", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<SecondInstanceAdm> secondInstanceAdms = new HashSet<>();
 
@@ -56,6 +58,11 @@ public class Organization {
 
     public Organization() {
 
+    }
+
+    public Organization(String name, Integer type) {
+        this.name = name;
+        this.type = type;
     }
 
     public long getId() {

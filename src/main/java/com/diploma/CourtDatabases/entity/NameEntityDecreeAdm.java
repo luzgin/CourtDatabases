@@ -1,5 +1,7 @@
 package com.diploma.CourtDatabases.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 import java.util.Collection;
 import java.util.HashSet;
@@ -14,7 +16,7 @@ public class NameEntityDecreeAdm {
 
     @Column(name = "name")
     private String name;
-
+    @JsonIgnoreProperties(value = "nameEntityDecreeAdm", allowSetters = true)
     @OneToMany(mappedBy = "nameEntityDecreeAdm", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<EntityDecreeAdm> entityDecreeAdms = new HashSet<>();
 

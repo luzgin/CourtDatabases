@@ -33,6 +33,7 @@
                         <a class="dropdown-item" href="../html/listResultCase.html">Результат рассмотрения дела</a>
                         <a class="dropdown-item" href="../html/listArticleAdm.html">Статьи</a>
                         <a class="dropdown-item" href="../html/listOrganization.html">Организации</a>
+                        <a class="dropdown-item" href="../html/listVialators.html">Правонарушители</a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="#">Something else here</a>
                     </div>
@@ -89,25 +90,9 @@
             </table>
         </div>
     </div>
-    <br>
-    <div ng-controller="SaveOrganization">
-        <form class="form-horizontal" ng-submit="saveOrganization()">
-            <div class="col-md-12">
-                <div class="row">
-                    <div class="col-md-10 nopadding">
-                        <input type="text" class="form-control" name="name" placeholder="Введите название"
-                               ng-model="name" required/>
-                    </div>
-                    <div class="col-md-2 nopadding div-center">
-                        <button type="submit" class="btn btn-default">Добавить</button>
-                    </div>
-                </div>
-            </div>
-        </form>
-    </div>
-</div>
+
 <div id="organizationModalEdit" class="modal fade" role="dialog">
-    <div class="organization-modal-dialog modal-dialog">
+    <div class="widht-modal-dialog modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
                 <h4 class="modal-title">Редактирование организации</h4>
@@ -142,7 +127,7 @@
     </div>
 </div>
 <div id="organizationModalSave" class="modal fade" role="dialog">
-    <div class="organization-modal-dialog modal-dialog">
+    <div class="widht-modal-dialog modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
                 <h4 class="modal-title">Добавление организации</h4>
