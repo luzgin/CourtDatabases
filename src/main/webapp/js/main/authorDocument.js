@@ -6,27 +6,26 @@ authorDocument.controller("FindAllAuthorDocument", ['$scope', '$http', function 
         $scope.authorDocumentList = data;
     })
 }]);
-organization.controller("SaveAuthor", ['$scope', '$http', function ($scope, $http) {
+authorDocument.controller("SaveAuthor", ['$scope', '$http', function ($scope, $http) {
+    $scope.organizationList = [];
+    $http.get('http://localhost:8080/api/findAllOrganization').success(function (data) {
+        $scope.organizationList = data;
+    })
     $scope.saveAuthor = function () {
-        $scope.organizationList = [];
-        $http.get('http://localhost:8080/api/findAllOrganization').success(function (data) {
-            $scope.organizationList = data;
-        })
-      /*  var url = "http://localhost:8080/api/saveAuthor";
+        var url = "http://localhost:8080/api/saveAuthor";
         var config = {headers: {'Accept': 'text/plain'}};
-        var org = $scope.org;
         var author = {
             name: $scope.name,
-            activWork : '1',
-            organization : org
+            activWork : true,
+            organization: $scope.organization
         };
         $http.post(url, author, config).then(function (response) {
-            $scope.postResultMessage = response.organization;
+            $scope.postResultMessage = response.author;
         }, function error(response) {
             $scope.postResultMessage = "Error with status: " + response.statusText;
         });
-
         location.reload();
-        $scope.name = "";*/
+        $scope.name = "";
+        $scope.organization = "";
     }
 }]);

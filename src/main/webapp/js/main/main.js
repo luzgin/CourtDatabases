@@ -23,7 +23,7 @@ app.controller('saveEntityIskAdm', function ($scope, $http) {
         }, function error(response) {
             $scope.postResultMessage = "Error with status: " + response.statusText;
         });
-        //location.reload();
+        location.reload();
         $scope.name = "";
     }
 });

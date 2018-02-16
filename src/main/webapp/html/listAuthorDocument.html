@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Автор документа-</title>
+    <title>Автор документа</title>
     <link href="../css/reset.css" rel="stylesheet" type="text/css" media="all"/>
     <link href="../css/bootstrap.css" rel="stylesheet" type="text/css" media="all"/>
     <link href="../css/main.css" rel="stylesheet" type="text/css" media="all"/>
@@ -68,20 +68,22 @@
                 <tbody>
                 <tr ng-repeat="item in authorDocumentList">
                     <td class="div-center">{{item.id}}</td>
-                    <td>{{item.name}}</td>
+                    <td class="div-center">{{item.name}}</td>
                     <td class="div-center">{{item.activWork}}</td>
                     <td class="div-center">{{item.organization.name}}</td>
                     <td>
                         <div ng-if="item.type !='1'" class="div-center">
                             <button type="button" class="btn btn-primary" data-toggle="modal"
-                                    data-target="#organizationModalEdit"
+                                    data-target="#authorModalSave"
                                     data-organization="{{item}}">Редактировать
                             </button>
                         </div>
                     </td>
                     <td>
-                        <div ng-controller="DeleteOrganization" class="div-center">
-                            <button class="btn btn-danger" ng-click="deleteOrganization(item);">Удалить</button>
+                        <div ng-if="item.type !='1'" class="div-center">
+                            <div ng-controller="DeleteOrganization" class="div-center">
+                                <button class="btn btn-danger" ng-click="deleteOrganization(item);">Удалить</button>
+                            </div>
                         </div>
                     </td>
                 </tr>
@@ -91,7 +93,6 @@
         </div>
     </div>
 </div>
-
 <div id="authorModalSave" class="modal fade" role="dialog">
     <div class="widht-modal-dialog modal-dialog">
         <div class="modal-content">
@@ -109,7 +110,7 @@
                     <div class="form-group row">
                         <label class="col-md-2 control-label" for="nameInputSave">Организация</label>
                         <div class="col-md-10">
-                            <select class="form-control" ng-model="org1" ng-options="org.name for org in organizationList"></select>
+                            <select class="form-control" ng-model="organization" ng-options="org.name for org in organizationList"></select>
                         </div>
                     </div>
                     <div class="modal-footer row mr-0">

@@ -32,4 +32,9 @@ public class OrganizationConrtoller {
     public void editOrganization(@RequestBody Organization organization) {
         organizationService.update(organization);
     }
+
+    @GetMapping("/findByNameOgranization")
+    public Organization findByNameOgranization(String name){
+        return organizationService.findByName(name);
+    }
 }

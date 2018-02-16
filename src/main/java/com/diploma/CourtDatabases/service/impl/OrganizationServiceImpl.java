@@ -38,4 +38,9 @@ public class OrganizationServiceImpl implements OrganizationService {
     public Organization findById(long id) {
         return organizationRepository.findOne(id);
     }
+
+    @Override
+    public Organization findByName(String name) {
+        return organizationRepository.findByName(name);
+    }
 }

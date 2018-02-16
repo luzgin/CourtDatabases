@@ -10,5 +10,6 @@ public interface OrganizationService {
     void delete(long id);
     List<Organization> gelAll();
     Organization findById(long id);
+    Organization findByName(String name);
 
 }
