@@ -74,7 +74,7 @@
                     <td class="div-center">{{item.organization.name}}</td>
                     <td>
                         <div ng-if="item.type !='1'" class="div-center">
-                            <button type="button" class="btn btn-primary" data-toggle="modal"
+                            <button type="button" class="btn btn-primary btn-sm" data-toggle="modal"
                                     data-target="#authorModalEdit"
                                     data-author="{{item}}">Редактировать
                             </button>
@@ -82,7 +82,7 @@
                     </td>
                     <td>
                         <div ng-controller="DeleteAuthor" class="div-center">
-                            <button class="btn btn-danger" ng-click="deleteAuthor(item);">Удалить</button>
+                            <button class="btn btn-danger btn-sm" ng-click="deleteAuthor(item);">Удалить</button>
                         </div>
                     </td>
                 </tr>
