@@ -6,6 +6,7 @@ import java.util.List;
 
 public interface AuthorDocumentService {
     AuthorDocument save(AuthorDocument authorDocument);
+    AuthorDocument update(AuthorDocument authorDocument);
     void delete(long id);
     List<AuthorDocument> getAll();
     AuthorDocument findById(long id);

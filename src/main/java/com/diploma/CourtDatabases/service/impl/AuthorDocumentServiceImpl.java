@@ -22,6 +22,11 @@ public class AuthorDocumentServiceImpl implements AuthorDocumentService {
     }
 
     @Override
+    public AuthorDocument update(AuthorDocument authorDocument) {
+        return authorDocumentRepository.save(authorDocument);
+    }
+
+    @Override
     public void delete(long id) {
         authorDocumentRepository.delete(id);
 

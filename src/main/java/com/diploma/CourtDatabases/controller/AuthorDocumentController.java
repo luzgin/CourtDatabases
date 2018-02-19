@@ -16,9 +16,14 @@ public class AuthorDocumentController {
     public List<AuthorDocument> findAllAuthorDocument (){
         return  authorDocumentService.getAll();
     }
+
     @PostMapping("/saveAuthor")
     public AuthorDocument saveAuthor(@RequestBody AuthorDocument authorDocument) {
         return authorDocumentService.save(authorDocument);
+    }
+    @PostMapping("/editAuthor")
+    public AuthorDocument editAuthor(@RequestBody AuthorDocument authorDocument) {
+        return authorDocumentService.update(authorDocument);
     }
     @PostMapping("/deleteAuthor")
     public void deleteAuthor(@RequestBody AuthorDocument authorDocument) {

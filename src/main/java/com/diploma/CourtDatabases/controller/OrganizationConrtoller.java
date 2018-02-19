@@ -34,7 +34,7 @@ public class OrganizationConrtoller {
     }
 
     @GetMapping("/findByNameOgranization")
-    public Organization findByNameOgranization(String name){
+    public Organization findByNameOgranization(String name) {
         return organizationService.findByName(name);
     }
 }

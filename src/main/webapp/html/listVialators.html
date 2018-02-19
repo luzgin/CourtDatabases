@@ -9,42 +9,54 @@
 </head>
 <body ng-app="Vialator">
 <div class="container">
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a class="navbar-brand" href="#">ПОСД</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="../index.html">Главная <span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Link</a>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Справочники
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="../html/listEntityIsk.html">Сущность иска</a>
-                        <a class="dropdown-item" href="../html/listResultCase.html">Результат рассмотрения дела</a>
-                        <a class="dropdown-item" href="../html/listArticleAdm.html">Статьи</a>
-                        <a class="dropdown-item" href="../html/listOrganization.html">Организации</a>
-                        <a class="dropdown-item" href="../html/listVialators.html">Правонарушители</a>
-                        <a class="dropdown-item" href="../html/listAuthorDocument.html">Автор документа</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Something else here</a>
-                    </div>
-                </li>
-            </ul>
+    <nav class="navbar navbar-default navbar-static">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target=".js-navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="../index.html" style="padding:15px 15px;">ПОСД</a>
+            </div>
+            <div class="collapse navbar-collapse js-navbar">
+                <ul class="nav navbar-nav">
+                    <li><a href="../index.html">Главная</a></li>
+                    <li class="dropdown">
+                        <a id="drop1" href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            Справочники
+                            <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="../html/listEntityIsk.html">Сущность иска</a></li>
+                            <li><a class="dropdown-item" href="../html/listResultCase.html">Результат рассмотрения
+                                дела</a></li>
+                            <li><a class="dropdown-item" href="../html/listArticleAdm.html">Статьи</a></li>
+                            <li><a class="dropdown-item" href="../html/listOrganization.html">Организации</a></li>
+                            <li><a class="dropdown-item" href="../html/listVialators.html">Правонарушители</a></li>
+                            <li><a class="dropdown-item" href="../html/listAuthorDocument.html">Автор документа</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="dropdown">
+                        <a id="drop11" href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            Меню
+                            <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">Текст подпункта</a></li>
+                            <li><a href="#">Текст подпункта</a></li>
+                            <li class="divider"></li>
+                            <li><a href="#">Текст подпункта</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
         </div>
     </nav>
     <div class="panel panel-default">
-        <br>
         <div class="panel-heading div-center h3">Нарушители</div>
         <div class="panel-body" ng-controller="RadioController">
             <div class=" mb-3 col row justify-content-end">
