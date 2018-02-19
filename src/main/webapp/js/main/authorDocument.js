@@ -29,3 +29,15 @@ authorDocument.controller("SaveAuthor", ['$scope', '$http', function ($scope, $h
         $scope.organization = "";
     }
 }]);
+authorDocument.controller("DeleteAuthor", ['$scope', '$http', function ($scope, $http) {
+    $scope.deleteAuthor = function (entity) {
+        var url = "http://localhost:8080/api/deleteAuthor";
+        var config = {headers: {'Accept': 'text/plain'}}
+        $http.post(url, entity, config).then(function (response) {
+            $scope.postResultMessage = response.entity;
+        }, function error(response) {
+            $scope.postResultMessage = "Error with status: " + response.statusText;
+        });
+        location.reload();
+    }
+}]);

@@ -20,4 +20,9 @@ public class AuthorDocumentController {
     public AuthorDocument saveAuthor(@RequestBody AuthorDocument authorDocument) {
         return authorDocumentService.save(authorDocument);
     }
+    @PostMapping("/deleteAuthor")
+    public void deleteAuthor(@RequestBody AuthorDocument authorDocument) {
+        authorDocumentService.delete(authorDocument.getId());
+    }
+
 }

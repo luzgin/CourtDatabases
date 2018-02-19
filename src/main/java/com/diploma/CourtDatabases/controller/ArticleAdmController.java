@@ -12,16 +12,19 @@ import java.util.List;
 public class ArticleAdmController {
     @Autowired
     private ArticleAdmService articleAdmService;
+
     @PostMapping("/saveArticleAdm")
-    public ArticleAdm saveArticleAdm(@RequestBody ArticleAdm articleAdm){
+    public ArticleAdm saveArticleAdm(@RequestBody ArticleAdm articleAdm) {
         return articleAdmService.save(articleAdm);
     }
+
     @GetMapping("/findAllArticleAdm")
-    public List<ArticleAdm> findAllArticleAdm (){
+    public List<ArticleAdm> findAllArticleAdm() {
         return articleAdmService.findAll();
     }
+
     @PostMapping("/deleteArticleAdm")
-    public void deleteArticleAdm(@RequestBody ArticleAdm articleAdm){
+    public void deleteArticleAdm(@RequestBody ArticleAdm articleAdm) {
         articleAdmService.delete(articleAdm.getId());
     }
 }
