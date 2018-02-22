@@ -32,4 +32,9 @@ public class ResultAdmCaseServiceImpl implements ResultAdmCaseService {
     public ResultAdmCase findById(long id) {
         return resultAdmCaseRepository.findOne(id);
     }
+
+    @Override
+    public ResultAdmCase update(ResultAdmCase resultAdmCase) {
+        return resultAdmCaseRepository.save(resultAdmCase);
+    }
 }

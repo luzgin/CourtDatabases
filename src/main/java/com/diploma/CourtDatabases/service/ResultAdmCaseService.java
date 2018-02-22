@@ -9,4 +9,6 @@ public interface ResultAdmCaseService {
     void delete (long id);
     List<ResultAdmCase> findAll();
     ResultAdmCase findById(long id);
+    ResultAdmCase update(ResultAdmCase resultAdmCase);
+
 }

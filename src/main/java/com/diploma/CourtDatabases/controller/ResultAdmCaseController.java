@@ -13,16 +13,32 @@ public class ResultAdmCaseController {
     @Autowired
     private ResultAdmCaseService resultAdmCaseService;
 
-    @GetMapping(value = "/getResultAdmCaseList")
-    public List<ResultAdmCase> findAllResultAdmCase(){
+    @GetMapping("/result/")
+    public List<ResultAdmCase> findAllResultAdmCase() {
         return resultAdmCaseService.findAll();
     }
-    @PostMapping(value = "/saveResultAdmCase")
-    private ResultAdmCase saveResultAdmCase(@RequestBody ResultAdmCase resultAdmCase){
+
+    @PostMapping("/result/")
+    private ResultAdmCase saveResultAdmCase(@RequestBody ResultAdmCase resultAdmCase) {
         return resultAdmCaseService.save(resultAdmCase);
     }
-    @PostMapping(value = "/deleteResultAdmCase")
-    private void deleteResultAdmCase(@RequestBody ResultAdmCase resultAdmCase){
-        resultAdmCaseService.delete(resultAdmCase.getId());
+
+    @DeleteMapping("/result/{id}")
+    private void deleteResultAdmCase(@PathVariable("id") long id) {
+        resultAdmCaseService.delete(id);
     }
+
+    @GetMapping("/result/{id}")
+    public ResultAdmCase findById(@PathVariable("id") long id) {
+        return resultAdmCaseService.findById(id);
+    }
+
+    @PutMapping("/result/{id}")
+    public void editResultAdmCase(@PathVariable("id") long id, @RequestBody ResultAdmCase resultAdmCase) {
+        ResultAdmCase currentResultAdmCase = resultAdmCaseService.findById(id);
+        currentResultAdmCase.setName(resultAdmCase.getName());
+        resultAdmCaseService.update(currentResultAdmCase);
+    }
+
+
 }

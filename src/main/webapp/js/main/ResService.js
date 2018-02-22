@@ -1,23 +1,23 @@
 'use strict';
-angular.module('courtApp').factory('OrgService',
+angular.module('courtApp').factory('ResService',
     ['$localStorage', '$http', '$q', 'urls',
         function ($localStorage, $http, $q, urls) {
             var factory = {
-                loadAllOrganizations: loadAllOrganizations,
-                getAllOrganizations: getAllOrganizations,
-                getOrganization: getOrganization,
-                createOrganization: createOrganization,
-                updateOrganization: updateOrganization,
-                removeOrganization: removeOrganization
+                loadAllResults: loadAllResults,
+                getAllResults: getAllResults,
+                getResult: getResult,
+                createResult: createResult,
+                updateResult: updateResult,
+                removeResult: removeResult
             };
             return factory;
 
-            function loadAllOrganizations() {
+            function loadAllResults() {
                 var deferred = $q.defer();
-                $http.get(urls.ORGANIZATION_SERVICE_API)
+                $http.get(urls.RESULT_SERVICE_API)
                     .then(
                         function (response) {
-                            $localStorage.organizations = response.data;
+                            $localStorage.results = response.data;
                             deferred.resolve(response);
                         },
                         function (errResponse) {
@@ -27,72 +27,72 @@ angular.module('courtApp').factory('OrgService',
                 return deferred.promise;
             }
 
-            function getAllOrganizations() {
-                return $localStorage.organizations;
+            function getAllResults() {
+                return $localStorage.results;
             }
 
-            function getOrganization(id) {
-                console.log('Fetching Organization with id :' + id);
+            function getResult(id) {
+                console.log('Fetching result with id :' + id);
                 var deferred = $q.defer();
-                $http.get(urls.ORGANIZATION_SERVICE_API + id)
+                $http.get(urls.RESULT_SERVICE_API + id)
                     .then(
                         function (response) {
-                            console.log('Fetched successfully Organization with id :' + id);
+                            console.log('Fetched successfully result with id :' + id);
                             deferred.resolve(response.data);
                         },
                         function (errResponse) {
-                            console.error('Error while loading Organization with id :' + id);
+                            console.error('Error while loading result with id :' + id);
                             deferred.reject(errResponse);
                         }
                     );
                 return deferred.promise;
             }
 
-            function createOrganization(organization) {
-                console.log('Creating organization');
+            function createResult(result) {
+                console.log('Creating result');
                 var deferred = $q.defer();
-                $http.post(urls.ORGANIZATION_SERVICE_API, organization)
+                $http.post(urls.RESULT_SERVICE_API, result)
                     .then(
                         function (response) {
-                            loadAllOrganizations();
+                            loadAllResults();
                             deferred.resolve(response.data);
                         },
                         function (errResponse) {
-                            console.error('Error while creating organization : ' + errResponse.data.errorMessage);
+                            console.error('Error while creating result : ' + errResponse.data.errorMessage);
                             deferred.reject(errResponse);
                         }
                     );
                 return deferred.promise;
             }
 
-            function updateOrganization(organization, id) {
-                console.log('Updating organization with id ' + id);
+            function updateResult(result, id) {
+                console.log('Updating result with id ' + id);
                 var deferred = $q.defer();
-                $http.put(urls.ORGANIZATION_SERVICE_API + id, organization)
+                $http.put(urls.RESULT_SERVICE_API + id, result)
                     .then(
                         function (response) {
-                            loadAllOrganizations();
+                            loadAllResults();
                             deferred.resolve(response.data);
                         },
                         function (errResponse) {
-                            console.error('Error while updating organization with id :' + id);
+                            console.error('Error while updating result with id :' + id);
                             deferred.reject(errResponse);
                         }
                     );
                 return deferred.promise;
             }
 
-            function removeOrganization(id) {
-                console.log('Removing Organization with id ' + id);
+            function removeResult(id) {
+                console.log('Removing result with id ' + id);
                 var deferred = $q.defer();
-                $http.delete(urls.ORGANIZATION_SERVICE_API + id)
+                $http.delete(urls.RESULT_SERVICE_API + id)
                     .then(
                         function (response) {
-                            loadAllOrganizations();
+                            loadAllResults();
                             deferred.resolve(response.data);
                         },
                         function (errResponse) {
-                            console.error('Error while removing Organization with id :' + id);
+                            console.error('Error while removing result with id :' + id);
                             deferred.reject(errResponse);
                         }
                     );

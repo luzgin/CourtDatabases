@@ -37,4 +37,5 @@ public class VialatorController {
     public void deleteVialator(@RequestBody Vialator vialator) {
         vialatorService.delete(vialator.getId());
     }
+
 }

@@ -31,10 +31,8 @@ public class OrganizationConrtoller {
     @PutMapping("/organization/{id}")
     public void editOrganization(@PathVariable("id") long id, @RequestBody Organization organization) {
         Organization currentOrganization = organizationService.findById(id);
-
         currentOrganization.setName(organization.getName());
         currentOrganization.setType(organization.getType());
-
         organizationService.update(currentOrganization);
     }
 
