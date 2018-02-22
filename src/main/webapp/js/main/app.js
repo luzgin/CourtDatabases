@@ -10,10 +10,10 @@ posdApp.config(function ($routeProvider) {
     $routeProvider
         .when('/', {
             templateUrl: 'listResult.html',
-            controller: 'Resontroller',
+            controller: 'ResController',
             controllerAs: 'resC',
             resolve: {
-                organizations: function ($q, ResService) {
+                results: function ($q, ResService) {
                     var deferred = $q.defer();
                     ResService.loadAllResults().then(deferred.resolve, deferred.resolve);
                     return deferred.promise;

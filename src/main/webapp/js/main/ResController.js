@@ -59,7 +59,7 @@ angular.module('courtApp').controller('ResController',
         }
         function editResult(id) {
             console.log('result get');
-            ResService.getOResult(id).then(
+            ResService.getResult(id).then(
                 function (result) {
                     self.result = result;
                     console.log('Result get'+ self.result);
