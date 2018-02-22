@@ -1,4 +1,7 @@
+
 var organization = angular.module("Organization", []);
+
+
 
 organization.controller("FindAllOrganization", ['$scope', '$http', function ($scope, $http) {
     $scope.organizationList = [];

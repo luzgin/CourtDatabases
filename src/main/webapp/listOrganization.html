@@ -1,0 +1,75 @@
+<div class="panel panel-default">
+    <div class="panel-heading div-center h3">Организации</div>
+    <div class="panel-body">
+
+        <div class=" mb-3 col row justify-content-end">
+            <button type="button" class="btn btn-primary" data-toggle="modal"
+                    data-target="#organizationModalSave"
+                    data-organization="{{}}">Добавить организацию
+            </button>
+        </div>
+        <table class="table table-striped table-bordered table-sm table-hover">
+            <thead>
+            <tr>
+                <th class="div-center" width="5%">id</th>
+                <th class="div-center" width="80%">Название</th>
+                <th class="div-center" width="5%">Тип</th>
+                <th class="div-center" width="5%"></th>
+                <th class="div-center" width="5%"></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="item in orgC.getAllOrganizations()">
+                <td class="div-center">{{item.id}}</td>
+                <td>{{item.name}}</td>
+                <td class="div-center">{{item.type}}</td>
+                <td>
+                    <div ng-if="item.type !='1'" class="div-center">
+                        <button type="button"data-toggle="modal"
+                                data-target="#organizationModalSave" ng-click="orgC.editOrganization(item.id)" class="btn btn-success custom-width">Edit</button>
+                    </div>
+                </td>
+                <td>
+                    <div ng-if="item.type !='1'" class="div-center">
+                        <div class="div-center">
+                            <button class="btn btn-danger" ng-click="orgC.removeOrganization(item.id);">Удалить</button>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+
+            </tbody>
+
+        </table>
+    </div>
+</div>
+<div id="organizationModalSave" class="modal fade" role="dialog">
+    <div class="widht-modal-dialog modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Добавление организации</h4>
+            </div>
+            <div class="modal-body">
+                <form ng-submit="orgC.submit()" class="form-horizontal" role="form">
+                    <input type="hidden" ng-model="orgC.organization.id" />
+                    <div class="form-group row">
+                        <label class="col-md-2 control-label" for="nameInputSave">Название</label>
+                        <div class="col-md-10">
+                            <input type="text" class="form-control" id="nameInputSave" ng-model="orgC.organization.name"/>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-md-2 control-label" for="typeSave">тип</label>
+                        <div class="col-md-10">
+                            <input type="text" class="form-control" id="typeSave" ng-model="orgC.organization.type"/>
+                        </div>
+                    </div>
+                    <div class="modal-footer row mr-0">
+                        <input type="submit"  value="{{!orgC.organization.id ? 'Добавить' : 'Обновить'}}" class="btn btn-primary btn-sm">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

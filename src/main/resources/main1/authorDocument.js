@@ -1,5 +1,5 @@
 var authorDocument = angular.module("AuthorDocument", []);
-
+/*
 authorDocument.controller("FindAllAuthorDocument", ['$scope', '$http', function ($scope, $http) {
     $scope.authorDocumentList = [];
     $http.get('http://localhost:8080/api/findAllAuthorDocument').success(function (data) {
@@ -87,3 +87,4 @@ authorDocument.controller("DeleteAuthor", ['$scope', '$http', function ($scope, 
         location.reload();
     }
 }]);
+*/

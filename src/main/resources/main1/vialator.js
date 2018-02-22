@@ -1,5 +1,5 @@
 var vialator = angular.module("Vialator", []);
-
+/*
 vialator.controller("RadioController", function ($scope) {
     $scope.radioChecked = {on: '1'};
 
@@ -71,3 +71,5 @@ vialator.controller("DeleteVialator", ['$scope', '$http', function ($scope, $htt
         location.reload();
     }
 }]);
+
+*/

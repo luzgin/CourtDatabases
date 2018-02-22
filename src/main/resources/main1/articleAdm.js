@@ -1,5 +1,5 @@
 var articleAdm = angular.module("ArticleAdm", []);
-
+/*
 articleAdm.controller("FindAllArticleAdm", ['$scope', '$http', function ($scope, $http) {
     $scope.articleAdmList = [];
     $http.get('http://localhost:8080/api/findAllArticleAdm').success(function (data) {
@@ -40,3 +40,5 @@ articleAdm.controller("DeleteAtricleAdm", ['$scope', '$http', function ($scope, 
         location.reload();
     }
 }])
+
+*/

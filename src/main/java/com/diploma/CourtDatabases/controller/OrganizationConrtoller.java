@@ -13,28 +13,35 @@ public class OrganizationConrtoller {
     @Autowired
     private OrganizationService organizationService;
 
-    @PostMapping("/saveOrganization")
-    public Organization saveOrganization(@RequestBody Organization organization) {
-        return organizationService.save(organization);
-    }
-
-    @GetMapping("/findAllOrganization")
+    @GetMapping("/organization/")
     public List<Organization> findAllOrganization() {
         return organizationService.gelAll();
     }
 
-    @PostMapping("/deleteOrganization")
-    public void deleteOrganization(@RequestBody Organization organization) {
-        organizationService.delete(organization.getId());
+    @GetMapping("/organization/{id}")
+    public Organization findOrganizationById(@PathVariable("id") long id) {
+        return organizationService.findById(id);
     }
 
-    @PostMapping("/editOrganization")
-    public void editOrganization(@RequestBody Organization organization) {
-        organizationService.update(organization);
+    @PostMapping("/organization/")
+    public Organization saveOrganization(@RequestBody Organization organization) {
+        return organizationService.save(organization);
     }
 
-    @GetMapping("/findByNameOgranization")
-    public Organization findByNameOgranization(String name) {
-        return organizationService.findByName(name);
+    @PutMapping("/organization/{id}")
+    public void editOrganization(@PathVariable("id") long id, @RequestBody Organization organization) {
+        Organization currentOrganization = organizationService.findById(id);
+
+        currentOrganization.setName(organization.getName());
+        currentOrganization.setType(organization.getType());
+
+        organizationService.update(currentOrganization);
     }
+
+    @DeleteMapping("/organization/{id}")
+    public void deleteOrganization(@PathVariable("id") long id) {
+        organizationService.delete(id);
+    }
+
+
 }
