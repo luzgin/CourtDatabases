@@ -1,23 +1,44 @@
 'use strict';
-angular.module('courtApp').factory('ArticleService',
+angular.module('courtApp').factory('VialatorService',
     ['$localStorage', '$http', '$q', 'urls',
         function ($localStorage, $http, $q, urls) {
             var factory = {
-                loadAllArticles: loadAllArticles,
-                getAllArticles: getAllArticles,
-                getArticle: getArticle,
-                createArticle: createArticle,
-                updateArticle: updateArticle,
-                removeArticle: removeArticle
+                loadAllVialators: loadAllVialators,
+                loadAllVialatorsFiz: loadAllVialatorsFiz,
+                loadAllVialatorsOrg: loadAllVialatorsOrg,
+                getAllVialatorsFiz: getAllVialatorsFiz,
+                getAllVialatorsOrg: getAllVialatorsOrg,
+                getVialator: getVialator,
+                createVialator: createVialator,
+                updateVialator: updateVialator,
+                removeVialator: removeVialator
             };
             return factory;
 
-            function loadAllArticles() {
+            function loadAllVialators() {
+                loadAllVialatorsFiz();
+                loadAllVialatorsOrg();
+            }
+            function loadAllVialatorsFiz() {
                 var deferred = $q.defer();
-                $http.get(urls.ARTICLE_SERVICE_API)
+                $http.get(urls.VIALATOR_SERVICE_API + 'fiz')
                     .then(
                         function (response) {
-                            $localStorage.articles = response.data;
+                            $localStorage.vialatorsFiz = response.data;
+                            deferred.resolve(response);
+                        },
+                        function (errResponse) {
+                            deferred.reject(errResponse);
+                        }
+                    );
+                return deferred.promise;
+            }
+            function loadAllVialatorsOrg() {
+                var deferred = $q.defer();
+                $http.get(urls.VIALATOR_SERVICE_API + 'org')
+                    .then(
+                        function (response) {
+                            $localStorage.vialatorsOrg = response.data;
                             deferred.resolve(response);
                         },
                         function (errResponse) {
@@ -27,34 +48,37 @@ angular.module('courtApp').factory('ArticleService',
                 return deferred.promise;
             }
 
-            function getAllArticles() {
-                return $localStorage.articles;
+            function getAllVialatorsFiz() {
+                return $localStorage.vialatorsFiz ;
+            }
+            function getAllVialatorsOrg() {
+                return $localStorage.vialatorsOrg ;
             }
 
-            function getArticle(id) {
-                console.log('Fetching Article with id :' + id);
+            function getVialator(id) {
+                console.log('Fetching Vialator with id :' + id);
                 var deferred = $q.defer();
-                $http.get(urls.ARTICLE_SERVICE_API + id)
+                $http.get(urls.VIALATOR_SERVICE_API + id)
                     .then(
                         function (response) {
-                            console.log('Fetched successfully Article with id :' + id);
+                            console.log('Fetched successfully Vialator with id :' + id);
                             deferred.resolve(response.data);
                         },
                         function (errResponse) {
-                            console.error('Error while loading Article with id :' + id);
+                            console.error('Error while loading Vialator with id :' + id);
                             deferred.reject(errResponse);
                         }
                     );
                 return deferred.promise;
             }
 
-            function createArticle(entity) {
+            function createVialator(entity) {
                 console.log('Creating entity');
                 var deferred = $q.defer();
-                $http.post(urls.ARTICLE_SERVICE_API, entity)
+                $http.post(urls.VIALATOR_SERVICE_API, entity)
                     .then(
                         function (response) {
-                            loadAllArticles();
+                            loadAllVialators();
                             deferred.resolve(response.data);
                         },
                         function (errResponse) {
@@ -65,13 +89,13 @@ angular.module('courtApp').factory('ArticleService',
                 return deferred.promise;
             }
 
-            function updateArticle(entity, id) {
+            function updateVialator(entity, id) {
                 console.log('Updating entity with id ' + id);
                 var deferred = $q.defer();
-                $http.put(urls.ARTICLE_SERVICE_API + id, entity)
+                $http.put(urls.VIALATOR_SERVICE_API + id, entity)
                     .then(
                         function (response) {
-                            loadAllArticles();
+                            loadAllVialators();
                             deferred.resolve(response.data);
                         },
                         function (errResponse) {
@@ -82,17 +106,17 @@ angular.module('courtApp').factory('ArticleService',
                 return deferred.promise;
             }
 
-            function removeArticle(id) {
-                console.log('Removing Article with id ' + id);
+            function removeVialator(id) {
+                console.log('Removing Vialator with id ' + id);
                 var deferred = $q.defer();
-                $http.delete(urls.ARTICLE_SERVICE_API + id)
+                $http.delete(urls.VIALATOR_SERVICE_API + id)
                     .then(
                         function (response) {
-                            loadAllArticles();
+                            loadAllVialators();
                             deferred.resolve(response.data);
                         },
                         function (errResponse) {
-                            console.error('Error while removing Article with id :' + id);
+                            console.error('Error while removing Vialator with id :' + id);
                             deferred.reject(errResponse);
                         }
                     );

@@ -19,6 +19,11 @@ public class VialatorServiceImpl implements VialatorService {
     }
 
     @Override
+    public Vialator update(Vialator vialator) {
+        return vialatorRepository.save(vialator);
+    }
+
+    @Override
     public void delete(long id) {
         vialatorRepository.delete(id);
     }

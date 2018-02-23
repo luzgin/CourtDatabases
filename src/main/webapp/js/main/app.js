@@ -5,19 +5,25 @@ posdApp.constant('urls', {
     ORGANIZATION_SERVICE_API: 'http://localhost:8080/api/organization/',
     RESULT_SERVICE_API: 'http://localhost:8080/api/result/',
     ENTITY_SERVICE_API: 'http://localhost:8080/api/entitiesiskadm/',
-    ARTICLE_SERVICE_API: 'http://localhost:8080/api/article/'
+    ARTICLE_SERVICE_API: 'http://localhost:8080/api/article/',
+    VIALATOR_SERVICE_API: 'http://localhost:8080/api/vialator/'
 });
 
 posdApp.config(function ($routeProvider) {
     $routeProvider
         .when('/', {
-            templateUrl: 'listArticle.html',
-            controller: 'ArticleController',
-            controllerAs: 'artC',
+            templateUrl: 'listVialator.html',
+            controller: 'VialatorController',
+            controllerAs: 'viaC',
             resolve: {
-                entityIsk: function ($q, ArticleService) {
+                vialatorFiz: function ($q, VialatorService) {
                     var deferred = $q.defer();
-                    ArticleService.loadAllArticles().then(deferred.resolve, deferred.resolve);
+                    VialatorService.loadAllVialatorsFiz().then(deferred.resolve, deferred.resolve);
+                    return deferred.promise;
+                },
+                vialatorOrg: function ($q, VialatorService) {
+                    var deferred = $q.defer();
+                    VialatorService.loadAllVialatorsOrg().then(deferred.resolve, deferred.resolve);
                     return deferred.promise;
                 }
             }
@@ -55,6 +61,18 @@ posdApp.config(function ($routeProvider) {
                 entityIsk: function ($q, EntityService) {
                     var deferred = $q.defer();
                     EntityService.loadAllEntities().then(deferred.resolve, deferred.resolve);
+                    return deferred.promise;
+                }
+            }
+        })
+        .when('/article', {
+            templateUrl: 'listArticle.html',
+            controller: 'ArticleController',
+            controllerAs: 'artC',
+            resolve: {
+                entityIsk: function ($q, ArticleService) {
+                    var deferred = $q.defer();
+                    ArticleService.loadAllArticles().then(deferred.resolve, deferred.resolve);
                     return deferred.promise;
                 }
             }

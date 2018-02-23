@@ -7,10 +7,9 @@ import java.util.List;
 public interface VialatorService {
 
     Vialator save(Vialator vialator);
+    Vialator update(Vialator vialator);
     void delete (long id);
     List<Vialator> findAll();
     List<Vialator> findByTypeVialator(Integer type);
     Vialator findById(long id);
-
-
 }

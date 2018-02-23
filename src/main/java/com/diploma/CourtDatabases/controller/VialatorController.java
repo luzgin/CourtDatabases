@@ -14,28 +14,57 @@ public class VialatorController {
     @Autowired
     private VialatorService vialatorService;
 
-    @GetMapping("/findAllVialatorsFiz")
+    @GetMapping("/vialator/fiz")
     public List<Vialator> findAllVialatorsFiz() {
         return vialatorService.findByTypeVialator(1);
     }
 
-    @GetMapping("/findAllVialators")
+    @GetMapping("/vialator/")
     public List<Vialator> findAllVialators() {
         return vialatorService.findAll();
     }
 
-    @GetMapping("/findAllVialatorsOrg")
+    @GetMapping("/vialator/org")
     public List<Vialator> findAllVialatorsOrg() {
         return vialatorService.findByTypeVialator(2);
     }
 
-    @PostMapping("/saveVialator")
-    public void saveVialatorFiz(@RequestBody Vialator vialator) {
+    @PostMapping("/vialator/")
+    public void save(@RequestBody Vialator vialator) {
         vialatorService.save(vialator);
     }
-    @PostMapping("/deleteVialator")
-    public void deleteVialator(@RequestBody Vialator vialator) {
-        vialatorService.delete(vialator.getId());
+
+    @DeleteMapping("/vialator/{id}")
+    public void deleteVialator(@PathVariable("id") long id) {
+        vialatorService.delete(id);
     }
+
+
+    @GetMapping("/vialator/{id}")
+    public Vialator findById(@PathVariable("id") long id) {
+        return vialatorService.findById(id);
+    }
+
+    @PutMapping("/vialator/{id}")
+    public void editVialator(@PathVariable("id") long id, @RequestBody Vialator vialator) {
+        Vialator currentVialator = vialatorService.findById(id);
+        if (vialator.getTypeVialator()==1){
+            currentVialator.setFirstName(vialator.getFirstName());
+            currentVialator.setSecondName(vialator.getSecondName());
+            currentVialator.setLastName(vialator.getLastName());
+            currentVialator.setTypeVialator(vialator.getTypeVialator());
+            currentVialator.setPrivateNumber(vialator.getPrivateNumber());
+            vialatorService.update(currentVialator);
+        }else{
+            currentVialator.setFirstName(vialator.getFirstName());
+            currentVialator.setTypeVialator(vialator.getTypeVialator());
+            currentVialator.setPrivateNumber(vialator.getPrivateNumber());
+            vialatorService.update(currentVialator);
+        }
+
+
+    }
+
+
 
 }
