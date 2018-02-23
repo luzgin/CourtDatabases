@@ -7,9 +7,11 @@ import java.util.List;
 public interface EntityIskAdmService {
     EntityIskAdm save(EntityIskAdm entityIskAdm);
 
+    EntityIskAdm update(EntityIskAdm entityIskAdm);
+
     void delete(long id);
 
-    List<EntityIskAdm> getAll();
+    List<EntityIskAdm> findAll();
 
     EntityIskAdm findById(Long id);
 

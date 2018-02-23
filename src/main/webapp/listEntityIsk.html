@@ -1,10 +1,10 @@
 <div class="panel panel-default">
-    <div class="panel-heading div-center h3">Результат рассмотрения</div>
+    <div class="panel-heading div-center h3">Сущжность жалобы</div>
     <div class="panel-body">
         <div class=" mb-3 col row justify-content-end">
             <button type="button" class="btn btn-primary" data-toggle="modal"
                     data-target="#ModalSave"
-                    data-organization="{{}}">Добавить Результат
+                    data-organization="{{}}">Добавить сущность
             </button>
         </div>
         <table class="table table-striped table-bordered table-sm table-hover">
@@ -17,19 +17,17 @@
             </tr>
             </thead>
             <tbody>
-            <tr ng-repeat="item in resC.getAllResults()">
+            <tr ng-repeat="item in entC.getAllEntities()">
                 <td class="div-center">{{item.id}}</td>
                 <td>{{item.name}}</td>
                 <td>
-                    <div ng-if="item.type !='1'" class="div-center">
                         <button type="button"data-toggle="modal"
-                                data-target="#ModalSave" ng-click="resC.editResult(item.id)" class="btn btn-success custom-width">Редактировать</button>
-                    </div>
+                                data-target="#ModalSave" ng-click="entC.editEntity(item.id)" class="btn btn-success custom-width">Редактировать</button>
                 </td>
                 <td>
                     <div class="div-center">
                         <div class="div-center">
-                            <button class="btn btn-danger" ng-click="resC.removeResult(item.id);">Удалить</button>
+                            <button class="btn btn-danger" ng-click="entC.removeEntity(item.id);">Удалить</button>
                         </div>
                     </div>
                 </td>
@@ -42,19 +40,19 @@
     <div class="widht-modal-dialog modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title">Добавление/Редактирование результата</h4>
+                <h4 class="modal-title">Добавление/Редактирование сущности</h4>
             </div>
             <div class="modal-body">
-                <form ng-submit="resC.submit()" class="form-horizontal" role="form">
-                    <input type="hidden" ng-model="resC.result.id" />
+                <form ng-submit="entC.submit()" class="form-horizontal" role="form">
+                    <input type="hidden" ng-model="entC.entity.id" />
                     <div class="form-group row">
                         <label class="col-md-2 control-label" for="nameSave">Название</label>
                         <div class="col-md-10">
-                            <input type="text" class="form-control" id="nameSave" ng-model="resC.result.name"/>
+                            <input type="text" class="form-control" id="nameSave" ng-model="entC.entity.name"/>
                         </div>
                     </div>
                     <div class="modal-footer row mr-0">
-                        <input type="submit"  value="{{!resC.result.id ? 'Добавить' : 'Обновить'}}" class="btn btn-primary btn-sm">
+                        <input type="submit"  value="{{!entC.entity.id ? 'Добавить' : 'Обновить'}}" class="btn btn-primary btn-sm">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
                     </div>
                 </form>

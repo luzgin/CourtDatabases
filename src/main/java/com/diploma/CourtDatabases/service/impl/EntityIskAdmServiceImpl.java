@@ -23,13 +23,18 @@ public class EntityIskAdmServiceImpl implements EntityIskAdmService {
     }
 
     @Override
+    public EntityIskAdm update(EntityIskAdm entityIskAdm) {
+        return  entityIskAdmRepository.save(entityIskAdm);
+    }
+
+    @Override
     public void delete(long id) {
         entityIskAdmRepository.delete(id);
 
     }
 
     @Override
-    public List<EntityIskAdm> getAll() {
+    public List<EntityIskAdm> findAll() {
         return entityIskAdmRepository.findAll();
     }
 

@@ -13,18 +13,32 @@ public class ArticleAdmController {
     @Autowired
     private ArticleAdmService articleAdmService;
 
-    @PostMapping("/saveArticleAdm")
-    public ArticleAdm saveArticleAdm(@RequestBody ArticleAdm articleAdm) {
-        return articleAdmService.save(articleAdm);
-    }
-
-    @GetMapping("/findAllArticleAdm")
-    public List<ArticleAdm> findAllArticleAdm() {
+    @GetMapping(value = "/article/")
+    public List<ArticleAdm> getAllArticles() {
         return articleAdmService.findAll();
     }
 
-    @PostMapping("/deleteArticleAdm")
-    public void deleteArticleAdm(@RequestBody ArticleAdm articleAdm) {
-        articleAdmService.delete(articleAdm.getId());
+    @GetMapping("/article/{id}")
+    public ArticleAdm findArticleById(@PathVariable("id") long id) {
+        return articleAdmService.findById(id);
+    }
+
+    @PostMapping("/article/")
+    public ArticleAdm saveArticle(@RequestBody ArticleAdm articleAdm) {
+        return articleAdmService.save(articleAdm);
+    }
+
+    @PutMapping("/article/{id}")
+    public void editArticle(@PathVariable("id") long id, @RequestBody ArticleAdm articleAdm) {
+        ArticleAdm currentArticleAdm = articleAdmService.findById(id);
+        currentArticleAdm.setArticle(articleAdm.getArticle());
+        currentArticleAdm.setPart(articleAdm.getPart());
+        currentArticleAdm.setNote(articleAdm.getNote());
+        articleAdmService.update(currentArticleAdm);
+    }
+
+    @DeleteMapping("/article/{id}")
+    public void deleteEntity(@PathVariable("id") long id) {
+        articleAdmService.delete(id);
     }
 }

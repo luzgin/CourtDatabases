@@ -3,19 +3,21 @@ var posdApp = angular.module("courtApp", ['ngRoute', 'ngStorage']);
 posdApp.constant('urls', {
     BASE: 'http://localhost:8080/',
     ORGANIZATION_SERVICE_API: 'http://localhost:8080/api/organization/',
-    RESULT_SERVICE_API: 'http://localhost:8080/api/result/'
+    RESULT_SERVICE_API: 'http://localhost:8080/api/result/',
+    ENTITY_SERVICE_API: 'http://localhost:8080/api/entitiesiskadm/',
+    ARTICLE_SERVICE_API: 'http://localhost:8080/api/article/'
 });
 
 posdApp.config(function ($routeProvider) {
     $routeProvider
         .when('/', {
-            templateUrl: 'listResult.html',
-            controller: 'ResController',
-            controllerAs: 'resC',
+            templateUrl: 'listArticle.html',
+            controller: 'ArticleController',
+            controllerAs: 'artC',
             resolve: {
-                results: function ($q, ResService) {
+                entityIsk: function ($q, ArticleService) {
                     var deferred = $q.defer();
-                    ResService.loadAllResults().then(deferred.resolve, deferred.resolve);
+                    ArticleService.loadAllArticles().then(deferred.resolve, deferred.resolve);
                     return deferred.promise;
                 }
             }
@@ -32,6 +34,30 @@ posdApp.config(function ($routeProvider) {
                 }
             }
 
+        })
+        .when('/result', {
+            templateUrl: 'listResult.html',
+            controller: 'ResController',
+            controllerAs: 'resC',
+            resolve: {
+                results: function ($q, ResService) {
+                    var deferred = $q.defer();
+                    ResService.loadAllResults().then(deferred.resolve, deferred.resolve);
+                    return deferred.promise;
+                }
+            }
+        })
+        .when('/entityIsk', {
+            templateUrl: 'listEntityIsk.html',
+            controller: 'EntityController',
+            controllerAs: 'entC',
+            resolve: {
+                entityIsk: function ($q, EntityService) {
+                    var deferred = $q.defer();
+                    EntityService.loadAllEntities().then(deferred.resolve, deferred.resolve);
+                    return deferred.promise;
+                }
+            }
         })
         .otherwise({
             redirectTo: "/"

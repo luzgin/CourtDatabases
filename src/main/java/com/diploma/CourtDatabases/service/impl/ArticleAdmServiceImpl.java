@@ -20,6 +20,11 @@ public class ArticleAdmServiceImpl implements ArticleAdmService {
     }
 
     @Override
+    public ArticleAdm update(ArticleAdm articleAdm) {
+        return articleAdmRepository.save(articleAdm);
+    }
+
+    @Override
     public void delete(long id) {
         articleAdmRepository.delete(id);
     }
