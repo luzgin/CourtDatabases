@@ -3,21 +3,24 @@
 angular.module('courtApp').controller('VialatorController',
     ['VialatorService', '$scope', function (VialatorService, $scope) {
         var self = this;
-        self.vialator = {};
-        self.vialators = [];
         self.vialatorsFiz = [];
         self.vialatorsOrg = [];
+        $scope.radioChecked = {on: '1'};
 
         self.submit = submit;
         self.createVialator = createVialator;
         self.updateVialator = updateVialator;
-        self.getAllVialators = getAllVialatorsFiz;
-        self.getAllVialators = getAllVialatorsOrg;
+        self.getAllVialators = getAllVialators;
+        self.getAllVialatorsFiz = getAllVialatorsFiz;
+        self.getAllVialatorsOrg = getAllVialatorsOrg;
         self.editVialator = editVialator;
         self.removeVialator = removeVialator;
 
         self.done = false;
 
+        function getAllVialators() {
+            return VialatorService.getAllVialators();
+        }
         function getAllVialatorsFiz() {
             return VialatorService.getAllVialatorsFiz();
         }
@@ -28,6 +31,14 @@ angular.module('courtApp').controller('VialatorController',
         function submit() {
             console.log('Submitting');
             if (self.vialator.id === undefined || self.vialator.id === null) {
+                if (self.vialator.secondName !== null){
+                    self.vialator.typeVialator = 1;
+                    console.log("Type fiz");
+                }
+                if (self.vialator.secondName == null){
+                    self.vialator.typeVialator = 2;
+                    console.log("Type org");
+                }
                 console.log('Saving New vialator', self.vialator);
                 createVialator(self.vialator);
             } else {

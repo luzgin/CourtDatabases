@@ -5,14 +5,12 @@
             <div class=" mb-3 col row justify-content-end">
                 <div ng-if="radioChecked.on==='1'?true:false">
                     <button type="button" class="btn btn-primary" data-toggle="modal"
-                            data-target="#vialatorModalSaveFiz"
-                            data-vialator="{{}}">Добавить физ. лицо
+                            data-target="#ModalSaveFiz">Добавить физ. лицо
                     </button>
                 </div>
                 <div ng-if="radioChecked.on==='2'?true:false">
                     <button type="button" class="btn btn-primary" data-toggle="modal"
-                            data-target="#vialatorModalSaveOrg"
-                            data-vialator="{{}}">Добавить юр. лицо
+                            data-target="#ModalSaveOrg">Добавить юр. лицо
                     </button>
                 </div>
             </div>
@@ -50,18 +48,13 @@
                         <td class="div-center">{{item.secondName}}</td>
                         <td class="div-center">{{item.lastName}}</td>
                         <td>
-                            <div ng-if="item.type !='1'" class="div-center">
-                                <button type="button" class="btn btn-primary" data-toggle="modal"
-                                        data-target="#organizationModalEdit"
-                                        data-organization="{{item}}">Редактировать
-                                </button>
-                            </div>
+                            <button type="button"data-toggle="modal"
+                                    data-target="#ModalSaveFiz" ng-click="viaC.editVialator(item.id)" class="btn btn-success custom-width">Редактировать</button>
                         </td>
                         <td>
-                            <div ng-if="item.type !='1'" class="div-center">
-                                <div ng-controller="DeleteVialator" class="div-center">
-                                    <button class="btn btn-danger" ng-click="deleteVialator(item);">Удалить
-                                    </button>
+                            <div class="div-center">
+                                <div class="div-center">
+                                    <button class="btn btn-danger" ng-click="viaC.removeVialator(item.id);">Удалить</button>
                                 </div>
                             </div>
                         </td>
@@ -89,18 +82,13 @@
                         <td class="div-center">{{item.privateNumber}}</td>
                         <td class="div-center">{{item.firstName}}</td>
                         <td>
-                            <div ng-if="item.type !='1'" class="div-center">
-                                <button type="button" class="btn btn-primary" data-toggle="modal"
-                                        data-target="#organizationModalEdit"
-                                        data-organization="{{item}}">Редактировать
-                                </button>
-                            </div>
+                                <button type="button"data-toggle="modal"
+                                        data-target="#ModalSaveFiz" ng-click="viaC.editVialator(item.id)" class="btn btn-success custom-width">Редактировать</button>
                         </td>
                         <td>
-                            <div ng-if="item.type !='1'" class="div-center">
-                                <div ng-controller="DeleteVialator" class="div-center">
-                                    <button class="btn btn-danger" ng-click="deleteVialator(item);">Удалить
-                                    </button>
+                            <div class="div-center">
+                                <div class="div-center">
+                                    <button class="btn btn-danger" ng-click="viaC.removeVialator(item.id);">Удалить</button>
                                 </div>
                             </div>
                         </td>
@@ -111,97 +99,41 @@
         </div>
     </div>
 </div>
-<!--
-<div id="vialatorModalSaveFiz" class="modal fade" role="dialog">
-    <div class="widht-modal-dialog modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title">Добавление правонарушителя</h4>
-            </div>
-            <div class="modal-body" ng-controller="SaveVialatorFiz">
-                <form class="form-horizontal" role="form" ng-submit="saveVialatorFiz()">
-                    <div class="form-group row">
-                        <label class="col-md-2 control-label" for="privateNumberInputSave">Личный номер</label>
-                        <div class="col-md-10">
-                            <input type="text" class="form-control" id="privateNumberInputSave"
-                                   ng-model="privateNumber"/>
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-md-2 control-label" for="firstnameInputSave">Фамилия</label>
-                        <div class="col-md-10">
-                            <input type="text" class="form-control" id="firstnameInputSave" ng-model="firstname"/>
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-md-2 control-label" for="secondnameInputSave">Имя</label>
-                        <div class="col-md-10">
-                            <input type="text" class="form-control" id="secondnameInputSave" ng-model="secondname"/>
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-md-2 control-label" for="lastnameInputSave">Отчество</label>
-                        <div class="col-md-10">
-                            <input type="text" class="form-control" id="lastnameInputSave" ng-model="lastname"/>
-                        </div>
-                    </div>
-                    <div class="modal-footer row mr-0">
-                        <button type="submit" class="btn btn-default">Сохранить</button>
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
-<div id="vialatorModalSaveOrg" class="modal fade" role="dialog">
-    <div class="widht-modal-dialog modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title">Добавление/Редактирвоание правонарушителя</h4>
-            </div>
-            <div class="modal-body">
-                <form class="form-horizontal" role="form" ng-submit="saveVialatorOrg()">
-                    <div class="form-group row">
-                        <label class="col-md-2 control-label" for="UnpOrgInputSave">УНП</label>
-                        <div class="col-md-10">
-                            <input type="text" class="form-control" id="UnpOrgInputSave"
-                                   ng-model="unpNumber"/>
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-md-2 control-label" for="firstnameOrgInputSave">Название</label>
-                        <div class="col-md-10">
-                            <input type="text" class="form-control" id="firstnameOrgInputSave" ng-model="firstname"/>
-                        </div>
-                    </div>
-                    <div class="modal-footer row mr-0">
-                        <button type="submit" class="btn btn-default">Сохранить</button>
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
 <div id="ModalSaveFiz" class="modal fade" role="dialog">
     <div class="widht-modal-dialog modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title">Добавление/Редактирование результата</h4>
+                <h4 class="modal-title">Добавление/Редактирование физ. лица</h4>
             </div>
             <div class="modal-body">
                 <form ng-submit="viaC.submit()" class="form-horizontal" role="form">
-                    <input type="hidden" ng-model="viaC.result.id" />
-                    <input type="hidden" ng-model="viaC.vialator." />
+                    <input type="hidden" ng-model="viaC.vialator.id"/>
                     <div class="form-group row">
-                        <label class="col-md-2 control-label" for="nameSave">Название</label>
+                        <label class="col-md-2 control-label" for="privateNumber">Личный номер</label>
                         <div class="col-md-10">
-                            <input type="text" class="form-control" id="nameSave" ng-model="resC.result.name"/>
+                            <input type="text" class="form-control" id="privateNumber" ng-model="viaC.vialator.privateNumber"/>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-md-2 control-label" for="firstName">Фамилия</label>
+                        <div class="col-md-10">
+                            <input type="text" class="form-control" id="firstName" ng-model="viaC.vialator.firstName"/>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-md-2 control-label" for="secondName">Имя</label>
+                        <div class="col-md-10">
+                            <input type="text" class="form-control" id="secondName" ng-model="viaC.vialator.secondName"/>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-md-2 control-label" for="lastName">Отчество</label>
+                        <div class="col-md-10">
+                            <input type="text" class="form-control" id="lastName" ng-model="viaC.vialator.lastName"/>
                         </div>
                     </div>
                     <div class="modal-footer row mr-0">
-                        <input type="submit"  value="{{!resC.result.id ? 'Добавить' : 'Обновить'}}" class="btn btn-primary btn-sm">
+                        <input type="submit"  value="{{!viaC.vialator.id ? 'Добавить' : 'Обновить'}}" class="btn btn-primary btn-sm">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
                     </div>
                 </form>
@@ -209,4 +141,33 @@
         </div>
     </div>
 </div>
--->
+<div id="ModalSaveOrg" class="modal fade" role="dialog">
+    <div class="widht-modal-dialog modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Добавление/Редактирование юр. лица</h4>
+            </div>
+            <div class="modal-body">
+                <form ng-submit="viaC.submit()" class="form-horizontal" role="form">
+                    <input type="hidden" ng-model="viaC.vialator.id" />
+                    <div class="form-group row">
+                        <label class="col-md-2 control-label" for="UNP">УНП</label>
+                        <div class="col-md-10">
+                            <input type="text" class="form-control" id="UNP" ng-model="viaC.vialator.privateNumber"/>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-md-2 control-label" for="orgName">Название</label>
+                        <div class="col-md-10">
+                            <input type="text" class="form-control" id="orgName" ng-model="viaC.vialator.firstName"/>
+                        </div>
+                    </div>
+                    <div class="modal-footer row mr-0">
+                        <input type="submit"  value="{{!viaC.vialator.id ? 'Добавить' : 'Обновить'}}" class="btn btn-primary btn-sm">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

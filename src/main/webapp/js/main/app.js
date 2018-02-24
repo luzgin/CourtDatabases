@@ -6,24 +6,20 @@ posdApp.constant('urls', {
     RESULT_SERVICE_API: 'http://localhost:8080/api/result/',
     ENTITY_SERVICE_API: 'http://localhost:8080/api/entitiesiskadm/',
     ARTICLE_SERVICE_API: 'http://localhost:8080/api/article/',
-    VIALATOR_SERVICE_API: 'http://localhost:8080/api/vialator/'
+    VIALATOR_SERVICE_API: 'http://localhost:8080/api/vialator/',
+    AUTHOR_SERVICE_API: 'http://localhost:8080/api/author/'
 });
 
 posdApp.config(function ($routeProvider) {
     $routeProvider
         .when('/', {
-            templateUrl: 'listVialator.html',
-            controller: 'VialatorController',
-            controllerAs: 'viaC',
+            templateUrl: 'listAuthor.html',
+            controller: 'AuthorController',
+            controllerAs: 'autC',
             resolve: {
-                vialatorFiz: function ($q, VialatorService) {
+                authors: function ($q, AuthorService) {
                     var deferred = $q.defer();
-                    VialatorService.loadAllVialatorsFiz().then(deferred.resolve, deferred.resolve);
-                    return deferred.promise;
-                },
-                vialatorOrg: function ($q, VialatorService) {
-                    var deferred = $q.defer();
-                    VialatorService.loadAllVialatorsOrg().then(deferred.resolve, deferred.resolve);
+                    AuthorService.loadAllAuthors().then(deferred.resolve, deferred.resolve);
                     return deferred.promise;
                 }
             }
@@ -73,6 +69,23 @@ posdApp.config(function ($routeProvider) {
                 entityIsk: function ($q, ArticleService) {
                     var deferred = $q.defer();
                     ArticleService.loadAllArticles().then(deferred.resolve, deferred.resolve);
+                    return deferred.promise;
+                }
+            }
+        })
+        .when('/vialators', {
+            templateUrl: 'listVialator.html',
+            controller: 'VialatorController',
+            controllerAs: 'viaC',
+            resolve: {
+                vialatorFiz: function ($q, VialatorService) {
+                    var deferred = $q.defer();
+                    VialatorService.loadAllVialatorsFiz().then(deferred.resolve, deferred.resolve);
+                    return deferred.promise;
+                },
+                vialatorOrg: function ($q, VialatorService) {
+                    var deferred = $q.defer();
+                    VialatorService.loadAllVialatorsOrg().then(deferred.resolve, deferred.resolve);
                     return deferred.promise;
                 }
             }

@@ -6,12 +6,13 @@ angular.module('courtApp').factory('VialatorService',
                 loadAllVialators: loadAllVialators,
                 loadAllVialatorsFiz: loadAllVialatorsFiz,
                 loadAllVialatorsOrg: loadAllVialatorsOrg,
+                getAllVialators: getAllVialators,
                 getAllVialatorsFiz: getAllVialatorsFiz,
                 getAllVialatorsOrg: getAllVialatorsOrg,
                 getVialator: getVialator,
                 createVialator: createVialator,
                 updateVialator: updateVialator,
-                removeVialator: removeVialator
+                removeVialator: removeVialator,
             };
             return factory;
 
@@ -19,9 +20,10 @@ angular.module('courtApp').factory('VialatorService',
                 loadAllVialatorsFiz();
                 loadAllVialatorsOrg();
             }
+
             function loadAllVialatorsFiz() {
                 var deferred = $q.defer();
-                $http.get(urls.VIALATOR_SERVICE_API + 'fiz')
+                $http.get(urls.VIALATOR_SERVICE_API + "fiz")
                     .then(
                         function (response) {
                             $localStorage.vialatorsFiz = response.data;
@@ -35,7 +37,7 @@ angular.module('courtApp').factory('VialatorService',
             }
             function loadAllVialatorsOrg() {
                 var deferred = $q.defer();
-                $http.get(urls.VIALATOR_SERVICE_API + 'org')
+                $http.get(urls.VIALATOR_SERVICE_API + "org")
                     .then(
                         function (response) {
                             $localStorage.vialatorsOrg = response.data;
@@ -48,11 +50,15 @@ angular.module('courtApp').factory('VialatorService',
                 return deferred.promise;
             }
 
+            function getAllVialators() {
+                return $localStorage.vialators;
+            }
+
             function getAllVialatorsFiz() {
-                return $localStorage.vialatorsFiz ;
+                return $localStorage.vialatorsFiz;
             }
             function getAllVialatorsOrg() {
-                return $localStorage.vialatorsOrg ;
+                return $localStorage.vialatorsOrg;
             }
 
             function getVialator(id) {

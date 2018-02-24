@@ -12,22 +12,37 @@ import java.util.List;
 public class AuthorDocumentController {
     @Autowired
     private AuthorDocumentService authorDocumentService;
-    @GetMapping("/findAllAuthorDocument")
+
+    @GetMapping(value = "/author/")
     public List<AuthorDocument> findAllAuthorDocument (){
         return  authorDocumentService.getAll();
     }
 
-    @PostMapping("/saveAuthor")
+    @GetMapping("/author/{id}")
+    public AuthorDocument findAuthorById(@PathVariable("id") long id) {
+        return authorDocumentService.findById(id);
+    }
+
+    @PostMapping("/author/")
     public AuthorDocument saveAuthor(@RequestBody AuthorDocument authorDocument) {
         return authorDocumentService.save(authorDocument);
     }
-    @PostMapping("/editAuthor")
-    public AuthorDocument editAuthor(@RequestBody AuthorDocument authorDocument) {
-        return authorDocumentService.update(authorDocument);
+
+    @PutMapping("/author/{id}")
+    public void editAuthor(@PathVariable("id") long id, @RequestBody AuthorDocument authorDocument) {
+        AuthorDocument currentAuthorDocument = authorDocumentService.findById(id);
+        currentAuthorDocument.setName(authorDocument.getName());
+        currentAuthorDocument.setActivWork(authorDocument.isActivWork());
+        currentAuthorDocument.setOrganization(authorDocument.getOrganization());
+        authorDocumentService.update(currentAuthorDocument);
     }
-    @PostMapping("/deleteAuthor")
-    public void deleteAuthor(@RequestBody AuthorDocument authorDocument) {
-        authorDocumentService.delete(authorDocument.getId());
+
+    @DeleteMapping("/author/{id}")
+    public void deleteEntity(@PathVariable("id") long id) {
+        authorDocumentService.delete(id);
     }
+
+
+
 
 }

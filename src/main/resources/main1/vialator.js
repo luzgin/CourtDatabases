@@ -1,5 +1,5 @@
 var vialator = angular.module("Vialator", []);
-/*
+
 vialator.controller("RadioController", function ($scope) {
     $scope.radioChecked = {on: '1'};
 
@@ -35,9 +35,9 @@ vialator.controller("SaveVialatorFiz", ['$scope', '$http', function ($scope, $ht
         });
         location.reload();
         $scope.privateNumber = "",
-        $scope.firstname = "",
-        $scope.secondname = "",
-        $scope.lastname = ""
+            $scope.firstname = "",
+            $scope.secondname = "",
+            $scope.lastname = ""
     }
 }]);
 vialator.controller("SaveVialatorOrg", ['$scope', '$http', function ($scope, $http) {
@@ -72,4 +72,3 @@ vialator.controller("DeleteVialator", ['$scope', '$http', function ($scope, $htt
     }
 }]);
 
-*/

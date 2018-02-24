@@ -1,0 +1,110 @@
+<div class="panel panel-default">
+    <div class="panel-heading div-center h3">Авторы документов</div>
+    <div class="panel-body">
+        <div class=" mb-3 col row justify-content-end">
+            <button type="button" class="btn btn-primary" data-toggle="modal"
+                    data-target="#ModalSave"
+                    data-organization="{{}}">Добавить автора
+            </button>
+        </div>
+        <table class="table table-striped table-bordered table-sm table-hover">
+            <thead>
+            <tr>
+                <th class="div-center" width="5%">id</th>
+                <th class="div-center" width="25%">ФИО</th>
+                <th class="div-center" width="10">Статус</th>
+                <th class="div-center" width="50%">Организация</th>
+                <th class="div-center" width="5%"></th>
+                <th class="div-center" width="5%"></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="item in autC.getAllAuthors()">
+                <td class="div-center">{{item.id}}</td>
+                <td>{{item.name}}</td>
+                <td>{{item.activWork}}</td>
+                <td>{{item.organization.name}}</td>
+                <td>
+                    <div ng-if="item.type !='1'" class="div-center">
+                        <button type="button" data-toggle="modal"
+                                data-target="#ModalSave" ng-click="autC.editAuthor(item.id)"
+                                class="btn btn-success custom-width">Редактировать
+                        </button>
+                    </div>
+                </td>
+                <td>
+                    <div class="div-center">
+                        <div class="div-center">
+                            <button class="btn btn-danger" ng-click="autC.removeAuthor(item.id);">Удалить</button>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+
+        <table class="table table-striped table-bordered table-sm table-hover">
+            <thead>
+            <tr>
+                <th class="div-center" width="5%">id</th>
+                <th class="div-center" width="80%">Название</th>
+                <th class="div-center" width="5%">Тип</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="item in orgC.getAllOrganizations()">
+                <td class="div-center">{{item.id}}</td>
+                <td>{{item.name}}</td>
+                <td class="div-center">{{item.type}}</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<div id="ModalSave" class="modal fade" role="dialog">
+    <div class="widht-modal-dialog modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Добавление/Редактирование автора</h4>
+            </div>
+            <div class="modal-body">
+                <form ng-submit="autC.submit()" class="form-horizontal" role="form">
+                    <input type="hidden" ng-model="autC.author.id"/>
+                    <div class="form-group row">
+                        <label class="col-md-2 control-label" for="nameSave">ФИО</label>
+                        <div class="col-md-10">
+                            <input type="text" class="form-control" id="nameSave" ng-model="autC.author.name"/>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-md-2 control-label" for="nameSave1">ФИО</label>
+                        <div class="col-md-10">
+                            <input type="text" class="form-control" id="nameSave1" ng-model="autC.author.activWork"/>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-md-2 control-label" for="activEdit">Статус</label>
+                        <div class="col-md-10">
+                            <select id="activEdit" ng-model="autC.author.activWork" class="form-control">
+                                <option value="true">Работает</option>
+                                <option value="false">Уволен</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-md-2 control-label">Организация</label>
+                        <div class="col-md-10">
+
+                        </div>
+                    </div>
+                    <div class="modal-footer row mr-0">
+                        <input type="submit" value="{{!resC.result.id ? 'Добавить' : 'Обновить'}}"
+                               class="btn btn-primary btn-sm">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
