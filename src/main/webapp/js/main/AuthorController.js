@@ -5,11 +5,13 @@ angular.module('courtApp').controller('AuthorController',
         var self = this;
         self.author = {};
         self.authors = [];
+        self.organizations = [];
 
         self.submit = submit;
         self.createAuthor = createAuthor;
         self.updateAuthor = updateAuthor;
         self.getAllAuthors = getAllAuthors;
+        self.getAllOrganizations = getAllOrganizations;
         self.editAuthor = editAuthor;
         self.removeAuthor = removeAuthor;
 
@@ -17,6 +19,9 @@ angular.module('courtApp').controller('AuthorController',
 
         function getAllAuthors() {
             return AuthorService.getAllAuthors();
+        }
+        function getAllOrganizations() {
+            return AuthorService.getAllOrganizations();
         }
 
         function submit() {

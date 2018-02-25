@@ -17,8 +17,9 @@ posdApp.config(function ($routeProvider) {
             controller: 'AuthorController',
             controllerAs: 'autC',
             resolve: {
-                authors: function ($q, AuthorService) {
+                authors: function ($q, AuthorService, OrgService) {
                     var deferred = $q.defer();
+                    OrgService.loadAllOrganizations();
                     AuthorService.loadAllAuthors().then(deferred.resolve, deferred.resolve);
                     return deferred.promise;
                 }

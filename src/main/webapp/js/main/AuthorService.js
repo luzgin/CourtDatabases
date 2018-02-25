@@ -5,6 +5,7 @@ angular.module('courtApp').factory('AuthorService',
             var factory = {
                 loadAllAuthors: loadAllAuthors,
                 getAllAuthors: getAllAuthors,
+                getAllOrganizations: getAllOrganizations,
                 getAuthor: getAuthor,
                 createAuthor: createAuthor,
                 updateAuthor: updateAuthor,
@@ -29,6 +30,9 @@ angular.module('courtApp').factory('AuthorService',
 
             function getAllAuthors() {
                 return $localStorage.authors;
+            }
+            function getAllOrganizations() {
+                return $localStorage.organizations;
             }
 
             function getAuthor(id) {
