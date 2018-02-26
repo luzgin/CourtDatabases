@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('courtApp').controller('AuthorController',
-    ['AuthorService', '$scope', function (AuthorService, $scope) {
+    ['AuthorService','OrgService', '$scope', function (AuthorService,OrgService, $scope) {
         var self = this;
         self.author = {};
         self.authors = [];
@@ -11,6 +11,7 @@ angular.module('courtApp').controller('AuthorController',
         self.createAuthor = createAuthor;
         self.updateAuthor = updateAuthor;
         self.getAllAuthors = getAllAuthors;
+        self.getStatus = getStatus;
         self.getAllOrganizations = getAllOrganizations;
         self.editAuthor = editAuthor;
         self.removeAuthor = removeAuthor;
@@ -21,7 +22,10 @@ angular.module('courtApp').controller('AuthorController',
             return AuthorService.getAllAuthors();
         }
         function getAllOrganizations() {
-            return AuthorService.getAllOrganizations();
+            return OrgService.getAllOrganizations();
+        }
+        function getStatus() {
+            return AuthorService.getStatus();
         }
 
         function submit() {
