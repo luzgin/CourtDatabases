@@ -28,14 +28,14 @@
                     <div ng-if="item.type !='1'" class="div-center">
                         <button type="button" data-toggle="modal"
                                 data-target="#ModalSave" ng-click="autC.editAuthor(item.id)"
-                                class="btn btn-success custom-width">Редактировать
+                                class="btn btn-sm btn-success custom-width">Редактировать
                         </button>
                     </div>
                 </td>
                 <td>
                     <div class="div-center">
                         <div class="div-center">
-                            <button class="btn btn-danger" ng-click="autC.removeAuthor(item.id);">Удалить</button>
+                            <button class="btn btn-sm btn-danger" ng-click="autC.removeAuthor(item.id);">Удалить</button>
                         </div>
                     </div>
                 </td>
@@ -44,6 +44,8 @@
         </table>
     </div>
 </div>
+
+
 <div id="ModalSave" class="modal fade" role="dialog">
     <div class="widht-modal-dialog modal-dialog">
         <div class="modal-content">
@@ -60,21 +62,21 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-md-2 control-label" for="activEdit">Статус</label>
+                        <label class="col-md-2 control-label">Статус</label>
                         <div class="col-md-10">
-                            <select id="activEdit" ng-model="autC.author.activWork" class="form-control">
-                                <option value="true">Работает</option>
-                                <option value="false">Уволен</option>
+                            <select ng-value="autC.author.activWork" ng-model="autC.author.activWork"
+                                    class="form-control">
+                                <option value='true'>Работает</option>
+                                <option value='false'>Уволен</option>
                             </select>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-md-2 control-label">Организация</label>
                         <div class="col-md-10">
-                            <select class="form-control" ng-model="autC.author.organization.id">
-                                <option ng-selected="item.id == autC.organizations.id" ng-repeat="item in autC.getAllOrganizations()" value={{item.id}}>
-                                    {{item.name}}
-                                </option>
+                            <select class="form-control"
+                                    ng-options="item.name for item in autC.getAllOrganizations() track by item.id"
+                                    ng-model="autC.author.organization">
                             </select>
                         </div>
                     </div>

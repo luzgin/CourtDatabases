@@ -6,9 +6,13 @@ import java.util.List;
 
 public interface ResultAdmCaseService {
     ResultAdmCase save(ResultAdmCase resultAdmCase);
-    void delete (long id);
+
+    void delete(long id);
+
     List<ResultAdmCase> findAll();
+
     ResultAdmCase findById(long id);
+
     ResultAdmCase update(ResultAdmCase resultAdmCase);
 
 }

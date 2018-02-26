@@ -21,12 +21,17 @@ public class NameEntityDecreeAdmServiceImpl  implements NameEntityDecreeAdmServi
     }
 
     @Override
+    public NameEntityDecreeAdm update(NameEntityDecreeAdm nameEntityDecreeAdm) {
+        return nameEntityDecreeAdmRepository.save(nameEntityDecreeAdm);
+    }
+
+    @Override
     public void delete(long id) {
         nameEntityDecreeAdmRepository.delete(id);
     }
 
     @Override
-    public List<NameEntityDecreeAdm> gelAll() {
+    public List<NameEntityDecreeAdm> findAll() {
         return nameEntityDecreeAdmRepository.findAll();
     }
 

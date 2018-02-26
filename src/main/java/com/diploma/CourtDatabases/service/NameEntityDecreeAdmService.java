@@ -7,8 +7,9 @@ import java.util.List;
 public interface NameEntityDecreeAdmService {
 
     NameEntityDecreeAdm save(NameEntityDecreeAdm nameEntityDecreeAdm);
+    NameEntityDecreeAdm update(NameEntityDecreeAdm nameEntityDecreeAdm);
     void delete(long id);
-    List<NameEntityDecreeAdm> gelAll();
+    List<NameEntityDecreeAdm> findAll();
     NameEntityDecreeAdm findById(long id);
 
 }

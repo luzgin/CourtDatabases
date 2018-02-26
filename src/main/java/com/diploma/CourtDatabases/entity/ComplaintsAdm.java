@@ -29,7 +29,7 @@ public class ComplaintsAdm {
     @JoinColumn(name = "decree_adm_id")
     private DecreeAdm decreeAdm;
 
-    @Column(name = "summ_pishlini")
+    @Column(name = "summ_poshlini")
     private double summPoshlini;
 
     @ManyToOne(optional = false)

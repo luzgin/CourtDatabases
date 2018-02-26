@@ -39,6 +39,4 @@ public class ResultAdmCaseController {
         currentResultAdmCase.setName(resultAdmCase.getName());
         resultAdmCaseService.update(currentResultAdmCase);
     }
-
-
 }

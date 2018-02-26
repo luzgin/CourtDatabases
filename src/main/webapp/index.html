@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <title>ПОСД</title>
-    <link href="../css/reset.css" rel="stylesheet" type="text/css" media="all"/>
-    <link href="../css/bootstrap.min.css" rel="stylesheet" type="text/css" media="all"/>
-    <link href="../css/bootstrap-select.css" rel="stylesheet" type="text/css" media="all"/>
-    <link href="../css/main.css" rel="stylesheet" type="text/css" media="all"/>
+    <link href="css/reset.css" rel="stylesheet" type="text/css" media="all"/>
+    <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css" media="all"/>
+    <link href="css/bootstrap-select.css" rel="stylesheet" type="text/css" media="all"/>
+    <link href="css/main.css" rel="stylesheet" type="text/css" media="all"/>
 </head>
 <body>
 <div class="container">
@@ -16,11 +16,10 @@
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="../index.html">Главная <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="index.html">Главная <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">Link</a>
@@ -36,7 +35,8 @@
                         <a class="dropdown-item" href="index.html#!/article">Статьи</a>
                         <a class="dropdown-item" href="index.html#!/organization">Организации</a>
                         <a class="dropdown-item" href="index.html#!/vialators">Правонарушители</a>
-                        <a class="dropdown-item" href="../html/listAuthorDocument.html">Автор документа</a>
+                        <a class="dropdown-item" href="index.html#!/author">Автор документа</a>
+                        <a class="dropdown-item" href="index.html#!/nameEntityDecree">Сущность постановления</a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="#">Something else here</a>
                     </div>
@@ -44,14 +44,14 @@
             </ul>
         </div>
     </nav>
-        <ng-view></ng-view>
+    <ng-view></ng-view>
 </div>
 <script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
 <script type="text/javascript" src="js/bootstrap.bundle.min.js"></script>
 <script type="text/javascript" src="js/angular.min.js"></script>
+<script type="text/javascript" src="js/bootstrap-select.js"></script>
 <script type="text/javascript" src="js/angular-route.min.js"></script>
 <script type="text/javascript" src="js/ngStorage.min.js"></script>
-<script type="text/javascript" src="js/bootstrap-select.js"></script>
 <script type="text/javascript" src="js/main/app.js"></script>
 <script type="text/javascript" src="js/main/OrgService.js"></script>
 <script type="text/javascript" src="js/main/OrgController.js"></script>
@@ -65,5 +65,7 @@
 <script type="text/javascript" src="js/main/VialatorController.js"></script>
 <script type="text/javascript" src="js/main/AuthorService.js"></script>
 <script type="text/javascript" src="js/main/AuthorController.js"></script>
+<script type="text/javascript" src="js/main/NameEntityDecreeService.js"></script>
+<script type="text/javascript" src="js/main/NameEntityDecreeController.js"></script>
 </body>
 </html>

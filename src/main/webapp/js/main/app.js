@@ -7,20 +7,20 @@ posdApp.constant('urls', {
     ENTITY_SERVICE_API: 'http://localhost:8080/api/entitiesiskadm/',
     ARTICLE_SERVICE_API: 'http://localhost:8080/api/article/',
     VIALATOR_SERVICE_API: 'http://localhost:8080/api/vialator/',
-    AUTHOR_SERVICE_API: 'http://localhost:8080/api/author/'
+    AUTHOR_SERVICE_API: 'http://localhost:8080/api/author/',
+    NAME_ENTITY_DECREE_SERVICE_API: 'http://localhost:8080/api/nameentitydecree/'
 });
 
 posdApp.config(function ($routeProvider) {
     $routeProvider
         .when('/', {
-            templateUrl: 'listAuthor.html',
-            controller: 'AuthorController',
-            controllerAs: 'autC',
+            templateUrl: 'listNameEntityDecree.html',
+            controller: 'NameEntityDecreeController',
+            controllerAs: 'nedC',
             resolve: {
-                authors: function ($q, AuthorService, OrgService) {
+                authors: function ($q, NameEntityDecreeService) {
                     var deferred = $q.defer();
-                    OrgService.loadAllOrganizations();
-                    AuthorService.loadAllAuthors().then(deferred.resolve, deferred.resolve);
+                    NameEntityDecreeService.loadAllNamesEntityDecree().then(deferred.resolve, deferred.resolve);
                     return deferred.promise;
                 }
             }
@@ -87,6 +87,31 @@ posdApp.config(function ($routeProvider) {
                 vialatorOrg: function ($q, VialatorService) {
                     var deferred = $q.defer();
                     VialatorService.loadAllVialatorsOrg().then(deferred.resolve, deferred.resolve);
+                    return deferred.promise;
+                }
+            }
+        })
+        .when('/author', {
+            templateUrl: 'listAuthor.html',
+            controller: 'AuthorController',
+            controllerAs: 'autC',
+            resolve: {
+                authors: function ($q, AuthorService, OrgService) {
+                    var deferred = $q.defer();
+                    OrgService.loadAllOrganizations();
+                    AuthorService.loadAllAuthors().then(deferred.resolve, deferred.resolve);
+                    return deferred.promise;
+                }
+            }
+        })
+        .when('/nameEntityDecree', {
+            templateUrl: 'listNameEntityDecree.html',
+            controller: 'NameEntityDecreeController',
+            controllerAs: 'nedC',
+            resolve: {
+                authors: function ($q, NameEntityDecreeService) {
+                    var deferred = $q.defer();
+                    NameEntityDecreeService.loadAllNamesEntityDecree().then(deferred.resolve, deferred.resolve);
                     return deferred.promise;
                 }
             }

@@ -1,25 +1,23 @@
 'use strict';
-angular.module('courtApp').factory('AuthorService',
+angular.module('courtApp').factory('NameEntityDecreeService',
     ['$localStorage', '$http', '$q', 'urls',
         function ($localStorage, $http, $q, urls) {
             var factory = {
-                loadAllAuthors: loadAllAuthors,
-                getAllAuthors: getAllAuthors,
-                getAllOrganizations: getAllOrganizations,
-                getAuthor: getAuthor,
-                createAuthor: createAuthor,
-                updateAuthor: updateAuthor,
-                removeAuthor: removeAuthor,
-                getStatus: getStatus
+                loadAllNamesEntityDecree: loadAllNamesEntityDecree,
+                getAllNamesEntityDecree: getAllNamesEntityDecree,
+                getNameEntityDecree: getNameEntityDecree,
+                createNameEntityDecree: createNameEntityDecree,
+                updateNameEntityDecree: updateNameEntityDecree,
+                removeNameEntityDecree: removeNameEntityDecree
             };
             return factory;
 
-            function loadAllAuthors() {
+            function loadAllNamesEntityDecree() {
                 var deferred = $q.defer();
-                $http.get(urls.AUTHOR_SERVICE_API)
+                $http.get(urls.NAME_ENTITY_DECREE_SERVICE_API)
                     .then(
                         function (response) {
-                            $localStorage.authors = response.data;
+                            $localStorage.namesEntityDecree = response.data;
                             deferred.resolve(response);
                         },
                         function (errResponse) {
@@ -29,78 +27,72 @@ angular.module('courtApp').factory('AuthorService',
                 return deferred.promise;
             }
 
-            function getStatus() {
-                return $localStorage.status;
-            }
-            function getAllAuthors() {
-                return $localStorage.authors;
-            }
-            function getAllOrganizations() {
-                return $localStorage.organizations;
+            function getAllNamesEntityDecree() {
+                return $localStorage.namesEntityDecree;
             }
 
-            function getAuthor(id) {
-                console.log('Fetching Author with id :' + id);
+            function getNameEntityDecree(id) {
+                console.log('Fetching nameEntityDecree with id :' + id);
                 var deferred = $q.defer();
-                $http.get(urls.AUTHOR_SERVICE_API + id)
+                $http.get(urls.NAME_ENTITY_DECREE_SERVICE_API + id)
                     .then(
                         function (response) {
-                            console.log('Fetched successfully Author with id :' + id);
+                            console.log('Fetched successfully nameEntityDecree with id :' + id);
                             deferred.resolve(response.data);
                         },
                         function (errResponse) {
-                            console.error('Error while loading Author with id :' + id);
+                            console.error('Error while loading nameEntityDecree with id :' + id);
                             deferred.reject(errResponse);
                         }
                     );
                 return deferred.promise;
             }
 
-            function createAuthor(entity) {
-                console.log('Creating entity');
+            function createNameEntityDecree(nameEntityDecree) {
+                console.log('Creating nameEntityDecree');
                 var deferred = $q.defer();
-                $http.post(urls.AUTHOR_SERVICE_API, entity)
+                $http.post(urls.NAME_ENTITY_DECREE_SERVICE_API, nameEntityDecree)
                     .then(
                         function (response) {
-                            loadAllAuthors();
+                            loadAllNamesEntityDecree();
                             deferred.resolve(response.data);
                         },
                         function (errResponse) {
-                            console.error('Error while creating entity : ' + errResponse.data.errorMessage);
+                            console.error('Error while creating nameEntityDecree : ' + errResponse.data.errorMessage);
                             deferred.reject(errResponse);
                         }
                     );
                 return deferred.promise;
             }
 
-            function updateAuthor(entity, id) {
-                console.log('Updating entity with id ' + id);
+            function updateNameEntityDecree(nameEntityDecree, id) {
+                console.log('Updating nameEntityDecree with id ' + id);
                 var deferred = $q.defer();
-                $http.put(urls.AUTHOR_SERVICE_API + id, entity)
+                $http.put(urls.NAME_ENTITY_DECREE_SERVICE_API + id, nameEntityDecree)
                     .then(
                         function (response) {
-                            loadAllAuthors();
+                            loadAllNamesEntityDecree();
                             deferred.resolve(response.data);
                         },
                         function (errResponse) {
-                            console.error('Error while updating entity with id :' + id);
+                            console.error('Error while updating nameEntityDecree with id :' + id);
                             deferred.reject(errResponse);
                         }
                     );
                 return deferred.promise;
             }
 
-            function removeAuthor(id) {
-                console.log('Removing Author with id ' + id);
+            function removeNameEntityDecree(id) {
+                console.log('Removing nameEntityDecree with id ' + id);
                 var deferred = $q.defer();
-                $http.delete(urls.AUTHOR_SERVICE_API + id)
+                $http.delete(urls.NAME_ENTITY_DECREE_SERVICE_API + id)
                     .then(
                         function (response) {
-                            loadAllAuthors();
+                            loadAllNamesEntityDecree();
                             deferred.resolve(response.data);
                         },
                         function (errResponse) {
-                            console.error('Error while removing Author with id :' + id);
+                            console.error('Error while removing nameEntityDecree with id :' + id);
                             deferred.reject(errResponse);
                         }
                     );
