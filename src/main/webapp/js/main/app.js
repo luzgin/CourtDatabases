@@ -16,14 +16,15 @@ posdApp.constant('urls', {
 posdApp.config(function ($routeProvider) {
     $routeProvider
         .when('/', {
-            templateUrl: 'listEntityDecree.html',
-            controller: 'EntityDecreeController',
-            controllerAs: 'endC',
+            templateUrl: 'listSecondInstance.html',
+            controller: 'SecondInstanceController',
+            controllerAs: 'secIC',
             resolve: {
-                authors: function ($q, EntityDecreeService, NameEntityDecreeService) {
+                secondInstance: function ($q, SecondInstanceService, OrgService, AuthorService) {
                     var deferred = $q.defer();
-                    NameEntityDecreeService.loadAllNamesEntityDecree();
-                    EntityDecreeService.loadAllEntitiesDecree().then(deferred.resolve, deferred.resolve);
+                    OrgService.loadAllOrganizations();
+                    AuthorService.loadAllAuthors();
+                    SecondInstanceService.loadAllSecondInstances().then(deferred.resolve, deferred.resolve);
                     return deferred.promise;
                 }
             }
@@ -70,7 +71,7 @@ posdApp.config(function ($routeProvider) {
             controller: 'ArticleController',
             controllerAs: 'artC',
             resolve: {
-                entityIsk: function ($q, ArticleService) {
+                article: function ($q, ArticleService) {
                     var deferred = $q.defer();
                     ArticleService.loadAllArticles().then(deferred.resolve, deferred.resolve);
                     return deferred.promise;
@@ -112,9 +113,22 @@ posdApp.config(function ($routeProvider) {
             controller: 'NameEntityDecreeController',
             controllerAs: 'nedC',
             resolve: {
-                authors: function ($q, NameEntityDecreeService) {
+                nameEntityDecree: function ($q, NameEntityDecreeService) {
                     var deferred = $q.defer();
                     NameEntityDecreeService.loadAllNamesEntityDecree().then(deferred.resolve, deferred.resolve);
+                    return deferred.promise;
+                }
+            }
+        })
+        .when('/entityDecree', {
+            templateUrl: 'listEntityDecree.html',
+            controller: 'EntityDecreeController',
+            controllerAs: 'endC',
+            resolve: {
+                entityDecree: function ($q, EntityDecreeService, NameEntityDecreeService) {
+                    var deferred = $q.defer();
+                    NameEntityDecreeService.loadAllNamesEntityDecree();
+                    EntityDecreeService.loadAllEntitiesDecree().then(deferred.resolve, deferred.resolve);
                     return deferred.promise;
                 }
             }
