@@ -7,8 +7,13 @@ import java.util.List;
 public interface SecondInstanceAdmService {
 
     SecondInstanceAdm save(SecondInstanceAdm secondInstanceAdm);
-    void delete (long id);
+
+    SecondInstanceAdm update(SecondInstanceAdm secondInstanceAdm);
+
+    void delete(long id);
+
     List<SecondInstanceAdm> findAll();
+
     SecondInstanceAdm findById(long id);
 
 }

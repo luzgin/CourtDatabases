@@ -9,7 +9,8 @@ posdApp.constant('urls', {
     VIALATOR_SERVICE_API: 'http://localhost:8080/api/vialator/',
     AUTHOR_SERVICE_API: 'http://localhost:8080/api/author/',
     ENTITY_DECREE_SERVICE_API: 'http://localhost:8080/api/entitydecree/',
-    NAME_ENTITY_DECREE_SERVICE_API: 'http://localhost:8080/api/nameentitydecree/'
+    NAME_ENTITY_DECREE_SERVICE_API: 'http://localhost:8080/api/nameentitydecree/',
+    SECOND_INSTANCE_SERVICE_API: 'http://localhost:8080/api/secondinstance/'
 });
 
 posdApp.config(function ($routeProvider) {

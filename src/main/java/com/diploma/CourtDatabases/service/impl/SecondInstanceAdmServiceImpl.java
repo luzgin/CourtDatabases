@@ -20,6 +20,11 @@ public class SecondInstanceAdmServiceImpl implements SecondInstanceAdmService {
     }
 
     @Override
+    public SecondInstanceAdm update(SecondInstanceAdm secondInstanceAdm) {
+        return secondInstanceAdmRepository.save(secondInstanceAdm);
+    }
+
+    @Override
     public void delete(long id) {
         secondInstanceAdmRepository.delete(id);
     }

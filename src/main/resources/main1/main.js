@@ -1,5 +1,5 @@
 var app = angular.module("courtDatabase", []);
-/*
+
 app.controller("FindAllEntityIskAdm", function ($scope, $http) {
     $scope.entitiesAdmIsk = [];
     $http.get('http://localhost:8080/api/entitiesiskadm').success(function (data) {
@@ -86,4 +86,3 @@ app.controller('deleteResultAdmCase', function ($scope, $http) {
         location.reload();
     }
 });
-*/
