@@ -8,19 +8,21 @@ posdApp.constant('urls', {
     ARTICLE_SERVICE_API: 'http://localhost:8080/api/article/',
     VIALATOR_SERVICE_API: 'http://localhost:8080/api/vialator/',
     AUTHOR_SERVICE_API: 'http://localhost:8080/api/author/',
+    ENTITY_DECREE_SERVICE_API: 'http://localhost:8080/api/entitydecree/',
     NAME_ENTITY_DECREE_SERVICE_API: 'http://localhost:8080/api/nameentitydecree/'
 });
 
 posdApp.config(function ($routeProvider) {
     $routeProvider
         .when('/', {
-            templateUrl: 'listNameEntityDecree.html',
-            controller: 'NameEntityDecreeController',
-            controllerAs: 'nedC',
+            templateUrl: 'listEntityDecree.html',
+            controller: 'EntityDecreeController',
+            controllerAs: 'endC',
             resolve: {
-                authors: function ($q, NameEntityDecreeService) {
+                authors: function ($q, EntityDecreeService, NameEntityDecreeService) {
                     var deferred = $q.defer();
-                    NameEntityDecreeService.loadAllNamesEntityDecree().then(deferred.resolve, deferred.resolve);
+                    NameEntityDecreeService.loadAllNamesEntityDecree();
+                    EntityDecreeService.loadAllEntitiesDecree().then(deferred.resolve, deferred.resolve);
                     return deferred.promise;
                 }
             }

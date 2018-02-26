@@ -17,6 +17,9 @@ public class AuthorDocument {
     @Column(name = "name")
     private String name;
 
+    @Column(name = "position")
+    private String position;
+
     @Column(name = "activ_work")
     private boolean activWork;
 
@@ -30,6 +33,14 @@ public class AuthorDocument {
 
     public AuthorDocument() {
 
+    }
+
+    public String getPosition() {
+        return position;
+    }
+
+    public void setPosition(String position) {
+        this.position = position;
     }
 
     public Set<CardAdm> getCardAdms() {
@@ -77,8 +88,10 @@ public class AuthorDocument {
         return "AuthorDocument{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
+                ", position='" + position + '\'' +
                 ", activWork=" + activWork +
                 ", organization=" + organization +
+                ", cardAdms=" + cardAdms +
                 '}';
     }
 }

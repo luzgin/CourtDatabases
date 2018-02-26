@@ -1,24 +1,24 @@
 'use strict';
-angular.module('courtApp').factory('AuthorService',
+angular.module('courtApp').factory('EntityDecreeService',
     ['$localStorage', '$http', '$q', 'urls',
         function ($localStorage, $http, $q, urls) {
             var factory = {
-                loadAllAuthors: loadAllAuthors,
-                getAllAuthors: getAllAuthors,
-                getAuthor: getAuthor,
-                createAuthor: createAuthor,
-                updateAuthor: updateAuthor,
-                removeAuthor: removeAuthor,
+                loadAllEntitiesDecree: loadAllEntitiesDecree,
+                getAllEntitiesDecree: getAllEntitiesDecree,
+                getEntityDecree: getEntityDecree,
+                createEntityDecree: createEntityDecree,
+                updateEntityDecree: updateEntityDecree,
+                removeEntityDecree: removeEntityDecree,
                 getStatus: getStatus
             };
             return factory;
 
-            function loadAllAuthors() {
+            function loadAllEntitiesDecree() {
                 var deferred = $q.defer();
-                $http.get(urls.AUTHOR_SERVICE_API)
+                $http.get(urls.ENTITY_DECREE_SERVICE_API)
                     .then(
                         function (response) {
-                            $localStorage.authors = response.data;
+                            $localStorage.entitiesDecree = response.data;
                             deferred.resolve(response);
                         },
                         function (errResponse) {
@@ -31,35 +31,34 @@ angular.module('courtApp').factory('AuthorService',
             function getStatus() {
                 return $localStorage.status;
             }
-            function getAllAuthors() {
-                return $localStorage.authors;
+            function getAllEntitiesDecree() {
+                return $localStorage.entitiesDecree;
             }
 
-            function getAuthor(id) {
-                console.log('Fetching Author with id :' + id);
+            function getEntityDecree(id) {
+                console.log('Fetching EntityDecree with id :' + id);
                 var deferred = $q.defer();
-                $http.get(urls.AUTHOR_SERVICE_API + id)
+                $http.get(urls.ENTITY_DECREE_SERVICE_API + id)
                     .then(
                         function (response) {
-                            console.log('Fetched successfully Author with id :' + id);
+                            console.log('Fetched successfully EntityDecree with id :' + id);
                             deferred.resolve(response.data);
                         },
                         function (errResponse) {
-                            console.error('Error while loading Author with id :' + id);
+                            console.error('Error while loading EntityDecree with id :' + id);
                             deferred.reject(errResponse);
                         }
                     );
                 return deferred.promise;
             }
 
-            function createAuthor(entity) {
+            function createEntityDecree(entity) {
                 console.log('Creating entity');
                 var deferred = $q.defer();
-                entity.activWork = 'true';
-                $http.post(urls.AUTHOR_SERVICE_API, entity)
+                $http.post(urls.ENTITY_DECREE_SERVICE_API, entity)
                     .then(
                         function (response) {
-                            loadAllAuthors();
+                            loadAllEntitiesDecree();
                             deferred.resolve(response.data);
                         },
                         function (errResponse) {
@@ -70,13 +69,13 @@ angular.module('courtApp').factory('AuthorService',
                 return deferred.promise;
             }
 
-            function updateAuthor(entity, id) {
+            function updateEntityDecree(entity, id) {
                 console.log('Updating entity with id ' + id);
                 var deferred = $q.defer();
-                $http.put(urls.AUTHOR_SERVICE_API + id, entity)
+                $http.put(urls.ENTITY_DECREE_SERVICE_API + id, entity)
                     .then(
                         function (response) {
-                            loadAllAuthors();
+                            loadAllEntitiesDecree();
                             deferred.resolve(response.data);
                         },
                         function (errResponse) {
@@ -87,17 +86,17 @@ angular.module('courtApp').factory('AuthorService',
                 return deferred.promise;
             }
 
-            function removeAuthor(id) {
-                console.log('Removing Author with id ' + id);
+            function removeEntityDecree(id) {
+                console.log('Removing EntityDecree with id ' + id);
                 var deferred = $q.defer();
-                $http.delete(urls.AUTHOR_SERVICE_API + id)
+                $http.delete(urls.ENTITY_DECREE_SERVICE_API + id)
                     .then(
                         function (response) {
-                            loadAllAuthors();
+                            loadAllEntitiesDecree();
                             deferred.resolve(response.data);
                         },
                         function (errResponse) {
-                            console.error('Error while removing Author with id :' + id);
+                            console.error('Error while removing EntityDecree with id :' + id);
                             deferred.reject(errResponse);
                         }
                     );

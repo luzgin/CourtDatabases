@@ -51,6 +51,7 @@ angular.module('courtApp').factory('OrgService',
             function createOrganization(organization) {
                 console.log('Creating organization');
                 var deferred = $q.defer();
+                organization.type = '2';
                 $http.post(urls.ORGANIZATION_SERVICE_API, organization)
                     .then(
                         function (response) {

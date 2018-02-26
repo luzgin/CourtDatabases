@@ -1,0 +1,81 @@
+<div class="panel panel-default">
+    <div class="panel-heading div-center h3">Итог результат постановления</div>
+    <div class="panel-body">
+        <div class=" mb-3 col row justify-content-end">
+            <button type="button" class="btn btn-primary" data-toggle="modal"
+                    data-target="#ModalSave"
+                    data-organization="{{}}">Добавить результат
+            </button>
+        </div>
+        <table class="table table-striped table-bordered table-sm table-hover">
+            <thead>
+            <tr>
+                <th class="div-center" width="5%">id</th>
+                <th class="div-center" width="25%">Сущность</th>
+                <th class="div-center" width="15%">Примечание</th>
+                <th class="div-center" width="5%"></th>
+                <th class="div-center" width="5%"></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="item in endC.getAllEntitiesDecree()">
+                <td class="div-center">{{item.id}}</td>
+                <td>{{item.nameEntityDecreeAdm.name}}</td>
+                <td>{{item.prim}}</td>
+                <td>
+                    <div ng-if="item.type !='1'" class="div-center">
+                        <button type="button" data-toggle="modal"
+                                data-target="#ModalSave" ng-click="endC.editEntityDecree(item.id)"
+                                class="btn btn-sm btn-success custom-width">Редактировать
+                        </button>
+                    </div>
+                </td>
+                <td>
+                    <div class="div-center">
+                        <div class="div-center">
+                            <button class="btn btn-sm btn-danger" ng-click="endC.removeEntityDecree(item.id);">Удалить</button>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+<div id="ModalSave" class="modal fade" role="dialog">
+    <div class="widht-modal-dialog modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Добавление/Редактирование результата</h4>
+            </div>
+            <div class="modal-body">
+                <form ng-submit="endC.submit()" class="form-horizontal" role="form">
+                    <input type="hidden" ng-model="endC.entityDecree.id"/>
+                    <div class="form-group row">
+                        <label class="col-md-2 control-label">Сущность</label>
+                        <div class="col-md-10">
+                            <select class="form-control"
+                                    ng-options="item.name for item in endC.getAllNameEntitiesDecree() track by item.id"
+                                    ng-model="endC.entityDecree.nameEntityDecreeAdm">
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-md-2 control-label" for="positionSave">Примечание</label>
+                        <div class="col-md-10">
+                            <input type="text" class="form-control" id="positionSave" ng-model="endC.entityDecree.prim"/>
+                        </div>
+                    </div>
+                    <div class="modal-footer row mr-0">
+                        <input type="submit" value="{{!endC.entityDecree.id ? 'Добавить' : 'Обновить'}}"
+                               class="btn btn-primary btn-sm">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+

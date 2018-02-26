@@ -32,6 +32,7 @@ public class AuthorDocumentController {
     public void editAuthor(@PathVariable("id") long id, @RequestBody AuthorDocument authorDocument) {
         AuthorDocument currentAuthorDocument = authorDocumentService.findById(id);
         currentAuthorDocument.setName(authorDocument.getName());
+        currentAuthorDocument.setPosition(authorDocument.getPosition());
         currentAuthorDocument.setActivWork(authorDocument.isActivWork());
         currentAuthorDocument.setOrganization(authorDocument.getOrganization());
         authorDocumentService.update(currentAuthorDocument);

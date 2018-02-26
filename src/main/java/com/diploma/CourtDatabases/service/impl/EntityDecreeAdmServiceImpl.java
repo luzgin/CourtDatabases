@@ -20,12 +20,17 @@ public class EntityDecreeAdmServiceImpl implements EntityDecreeAdmService {
     }
 
     @Override
+    public EntityDecreeAdm update(EntityDecreeAdm entityDecreeAdm) {
+        return entityDecreeAdmRepository.save(entityDecreeAdm);
+    }
+
+    @Override
     public void delete(long id) {
         entityDecreeAdmRepository.delete(id);
     }
 
     @Override
-    public List<EntityDecreeAdm> gelAll() {
+    public List<EntityDecreeAdm> findAll() {
         return entityDecreeAdmRepository.findAll();
     }
 

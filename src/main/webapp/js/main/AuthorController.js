@@ -5,7 +5,6 @@ angular.module('courtApp').controller('AuthorController',
         var self = this;
         self.author = {};
         self.authors = [];
-        self.organizations = [];
 
         self.submit = submit;
         self.createAuthor = createAuthor;

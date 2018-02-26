@@ -18,8 +18,8 @@ public class EntityDecreeAdm {
     @JoinColumn(name = "name_entity_decree_id")
     private NameEntityDecreeAdm nameEntityDecreeAdm;
 
-    @Column(name = "sum")
-    private double sum;
+    @Column(name = "prim")
+    private String prim;
     @JsonIgnoreProperties(value = "entityDecreeAdm", allowSetters = true)
     @OneToMany(mappedBy = "entityDecreeAdm", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<CardAdm> cardAdms = new HashSet<>();
@@ -53,12 +53,12 @@ public class EntityDecreeAdm {
         this.nameEntityDecreeAdm = nameEntityDecreeAdm;
     }
 
-    public double getSum() {
-        return sum;
+    public String getPrim() {
+        return prim;
     }
 
-    public void setSum(double sum) {
-        this.sum = sum;
+    public void setPrim(String prim) {
+        this.prim = prim;
     }
 
     @Override
@@ -66,7 +66,7 @@ public class EntityDecreeAdm {
         return "EntityDecreeAdm{" +
                 "id=" + id +
                 ", nameEntityDecreeAdm=" + nameEntityDecreeAdm +
-                ", sum=" + sum +
+                ", sum=" + prim +
                 '}';
     }
 }

@@ -47,7 +47,7 @@
     <div class="widht-modal-dialog modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title">Добавление организации</h4>
+                <h4 class="modal-title">Добавление/редактирование организации</h4>
             </div>
             <div class="modal-body">
                 <form ng-submit="orgC.submit()" class="form-horizontal" role="form">
@@ -56,12 +56,6 @@
                         <label class="col-md-2 control-label" for="nameInputSave">Название</label>
                         <div class="col-md-10">
                             <input type="text" class="form-control" id="nameInputSave" ng-model="orgC.organization.name"/>
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-md-2 control-label" for="typeSave">тип</label>
-                        <div class="col-md-10">
-                            <input type="text" class="form-control" id="typeSave" ng-model="orgC.organization.type"/>
                         </div>
                     </div>
                     <div class="modal-footer row mr-0">
