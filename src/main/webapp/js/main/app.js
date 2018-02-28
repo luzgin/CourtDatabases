@@ -11,26 +11,24 @@ posdApp.constant('urls', {
     ENTITY_DECREE_SERVICE_API: 'http://localhost:8080/api/entitydecree/',
     NAME_ENTITY_DECREE_SERVICE_API: 'http://localhost:8080/api/nameentitydecree/',
     SECOND_INSTANCE_SERVICE_API: 'http://localhost:8080/api/secondInstance/',
-    DECREE_SERVICE_API: 'http://localhost:8080/api/decree/'
+    DECREE_SERVICE_API: 'http://localhost:8080/api/decree/',
+    CONPLAINT_SERVICE_API: 'http://localhost:8080/api/complaint/'
 });
 
 posdApp.config(function ($routeProvider) {
     $routeProvider
         .when('/', {
-            templateUrl: 'listDecree.html',
-            controller: 'DecreeController',
-            controllerAs: 'decC',
+            templateUrl: 'listComplaint.html',
+            controller: 'ComplaintController',
+            controllerAs: 'comC',
             resolve: {
-                Regulations: function ($q, DecreeService, AuthorService, OrgService, SecondInstanceService) {
+                Complaints: function ($q, ComplaintService, DecreeService) {
                     var deferred = $q.defer();
-                    AuthorService.loadAllAuthors();
-                    OrgService.loadAllOrganizations();
-                    SecondInstanceService.loadAllSecondInstances();
-                    DecreeService.loadAllRegulations().then(deferred.resolve, deferred.resolve);
+                    DecreeService.loadAllRegulations();
+                    ComplaintService.loadAllComplaints().then(deferred.resolve, deferred.resolve);
                     return deferred.promise;
                 }
             }
-
         })
         .when('/organization', {
             templateUrl: 'listOrganization.html',
@@ -146,6 +144,22 @@ posdApp.config(function ($routeProvider) {
                     AuthorService.loadAllAuthors();
                     OrgService.loadAllOrganizations();
                     SecondInstanceService.loadAllSecondInstances().then(deferred.resolve, deferred.resolve);
+                    return deferred.promise;
+                }
+            }
+
+        })
+        .when('/regulations', {
+            templateUrl: 'listDecree.html',
+            controller: 'DecreeController',
+            controllerAs: 'decC',
+            resolve: {
+                Regulations: function ($q, DecreeService, AuthorService, OrgService, SecondInstanceService) {
+                    var deferred = $q.defer();
+                    AuthorService.loadAllAuthors();
+                    OrgService.loadAllOrganizations();
+                    SecondInstanceService.loadAllSecondInstances();
+                    DecreeService.loadAllRegulations().then(deferred.resolve, deferred.resolve);
                     return deferred.promise;
                 }
             }
