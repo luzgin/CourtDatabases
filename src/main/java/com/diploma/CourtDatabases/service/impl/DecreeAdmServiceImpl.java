@@ -20,12 +20,17 @@ public class DecreeAdmServiceImpl implements DecreeAdmService {
     }
 
     @Override
+    public DecreeAdm update(DecreeAdm decreeAdm) {
+        return decreeAdmRepository.save(decreeAdm);
+    }
+
+    @Override
     public void delete(long id) {
         decreeAdmRepository.delete(id);
     }
 
     @Override
-    public List<DecreeAdm> gelAll() {
+    public List<DecreeAdm> findAll() {
         return decreeAdmRepository.findAll();
     }
 

@@ -28,15 +28,17 @@ public class Vialator {
 
     @Column(name = "private_number")
     private String privateNumber;
+
+    /*
     @JsonIgnoreProperties(value = "vialator", allowSetters = true)
     @OneToMany(mappedBy = "vialator", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<CardAdm> cardAdms = new HashSet<>();
-
+*/
     public Vialator() {
 
     }
 
-
+/*
     public Set<CardAdm> getCardAdms() {
         return cardAdms;
     }
@@ -44,7 +46,7 @@ public class Vialator {
     public void setCardAdms(Set<CardAdm> cardAdms) {
         this.cardAdms = cardAdms;
     }
-
+*/
     public long getId() {
         return id;
     }

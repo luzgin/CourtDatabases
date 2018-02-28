@@ -13,32 +13,32 @@ public class SecondInstanceController {
     @Autowired
     private SecondInstanceAdmService secondInstanceAdmService;
 
-    @GetMapping("/secondinstance/")
+    @GetMapping(value = "/secondInstance/")
     public List<SecondInstanceAdm> findAllSecondInstance() {
         return secondInstanceAdmService.findAll();
     }
 
-    @PostMapping("/secondinstance/")
-    private SecondInstanceAdm saveSecondInstanceAdm(@RequestBody SecondInstanceAdm secondInstanceAdm) {
-        return secondInstanceAdmService.save(secondInstanceAdm);
-    }
-
-    @DeleteMapping("/secondinstance/{id}")
-    private void deleteSecondInstanceAdm(@PathVariable("id") long id) {
-        secondInstanceAdmService.delete(id);
-    }
-
-    @GetMapping("/secondinstance/{id}")
+    @GetMapping("/secondInstance/{id}")
     public SecondInstanceAdm findById(@PathVariable("id") long id) {
         return secondInstanceAdmService.findById(id);
     }
 
-    @PutMapping("/secondinstance/{id}")
-    public void editSecondInstanceAdm(@PathVariable("id") long id, @RequestBody SecondInstanceAdm secondInstanceAdm) {
-        SecondInstanceAdm currentSecondInstanceAdm = secondInstanceAdmService.findById(id);
-        currentSecondInstanceAdm.setOrganization(secondInstanceAdm.getOrganization());
-        currentSecondInstanceAdm.setAuthorDocument(secondInstanceAdm.getAuthorDocument());
-        currentSecondInstanceAdm.setDecreeDate(secondInstanceAdm.getDecreeDate());
-        secondInstanceAdmService.update(currentSecondInstanceAdm);
+    @PostMapping("/secondInstance/")
+    public SecondInstanceAdm save(@RequestBody SecondInstanceAdm secondInstanceAdm) {
+        return secondInstanceAdmService.save(secondInstanceAdm);
+    }
+
+    @PutMapping("/secondInstance/{id}")
+    public void edit(@PathVariable("id") long id, @RequestBody SecondInstanceAdm secondInstance) {
+        SecondInstanceAdm currentSecondInstance = secondInstanceAdmService.findById(id);
+        currentSecondInstance.setOrganization(secondInstance.getOrganization());
+        currentSecondInstance.setAuthorDocument(secondInstance.getAuthorDocument());
+        currentSecondInstance.setDecreeDate(secondInstance.getDecreeDate());
+        secondInstanceAdmService.update(currentSecondInstance);
+    }
+
+    @DeleteMapping("/secondInstance/{id}")
+    public void delete(@PathVariable("id") long id) {
+        secondInstanceAdmService.delete(id);
     }
 }

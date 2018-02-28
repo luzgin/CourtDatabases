@@ -26,16 +26,17 @@ public class SecondInstanceAdm {
     @Column(name = "decree_date")
     @Temporal(value = TemporalType.DATE)
     private Date decreeDate;
+/*
     @JsonIgnoreProperties(value = "secondInstanceAdm", allowSetters = true)
     @OneToMany(mappedBy = "secondInstanceAdm", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<DecreeAdm> decreeAdms = new HashSet<>();
-
+*/
 
     public SecondInstanceAdm() {
 
     }
 
-
+/*
     public Set<DecreeAdm> getDecreeAdms() {
         return decreeAdms;
     }
@@ -44,7 +45,7 @@ public class SecondInstanceAdm {
         this.decreeAdms = decreeAdms;
     }
 
-    public long getId() {
+   */ public long getId() {
         return id;
     }
 

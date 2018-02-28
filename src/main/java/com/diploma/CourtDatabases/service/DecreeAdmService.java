@@ -6,8 +6,13 @@ import java.util.List;
 
 public interface DecreeAdmService {
     DecreeAdm save(DecreeAdm decreeAdm);
+
+    DecreeAdm update(DecreeAdm decreeAdm);
+
     void delete(long id);
-    List<DecreeAdm> gelAll();
+
+    List<DecreeAdm> findAll();
+
     DecreeAdm findById(long id);
 
 }

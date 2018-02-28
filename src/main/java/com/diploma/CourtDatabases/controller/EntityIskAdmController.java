@@ -40,11 +40,4 @@ public class EntityIskAdmController {
     public void deleteEntity(@PathVariable("id") long id) {
         entityIskAdmService.delete(id);
     }
-
-
-
-
-
-
-
 }

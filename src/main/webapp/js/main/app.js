@@ -10,24 +10,27 @@ posdApp.constant('urls', {
     AUTHOR_SERVICE_API: 'http://localhost:8080/api/author/',
     ENTITY_DECREE_SERVICE_API: 'http://localhost:8080/api/entitydecree/',
     NAME_ENTITY_DECREE_SERVICE_API: 'http://localhost:8080/api/nameentitydecree/',
-    SECOND_INSTANCE_SERVICE_API: 'http://localhost:8080/api/secondinstance/'
+    SECOND_INSTANCE_SERVICE_API: 'http://localhost:8080/api/secondInstance/',
+    DECREE_SERVICE_API: 'http://localhost:8080/api/decree/'
 });
 
 posdApp.config(function ($routeProvider) {
     $routeProvider
         .when('/', {
-            templateUrl: 'listSecondInstance.html',
-            controller: 'SecondInstanceController',
-            controllerAs: 'secIC',
+            templateUrl: 'listDecree.html',
+            controller: 'DecreeController',
+            controllerAs: 'decC',
             resolve: {
-                secondInstance: function ($q, SecondInstanceService, OrgService, AuthorService) {
+                Regulations: function ($q, DecreeService, AuthorService, OrgService, SecondInstanceService) {
                     var deferred = $q.defer();
-                    OrgService.loadAllOrganizations();
                     AuthorService.loadAllAuthors();
-                    SecondInstanceService.loadAllSecondInstances().then(deferred.resolve, deferred.resolve);
+                    OrgService.loadAllOrganizations();
+                    SecondInstanceService.loadAllSecondInstances();
+                    DecreeService.loadAllRegulations().then(deferred.resolve, deferred.resolve);
                     return deferred.promise;
                 }
             }
+
         })
         .when('/organization', {
             templateUrl: 'listOrganization.html',
@@ -71,7 +74,7 @@ posdApp.config(function ($routeProvider) {
             controller: 'ArticleController',
             controllerAs: 'artC',
             resolve: {
-                article: function ($q, ArticleService) {
+                entityIsk: function ($q, ArticleService) {
                     var deferred = $q.defer();
                     ArticleService.loadAllArticles().then(deferred.resolve, deferred.resolve);
                     return deferred.promise;
@@ -113,7 +116,7 @@ posdApp.config(function ($routeProvider) {
             controller: 'NameEntityDecreeController',
             controllerAs: 'nedC',
             resolve: {
-                nameEntityDecree: function ($q, NameEntityDecreeService) {
+                authors: function ($q, NameEntityDecreeService) {
                     var deferred = $q.defer();
                     NameEntityDecreeService.loadAllNamesEntityDecree().then(deferred.resolve, deferred.resolve);
                     return deferred.promise;
@@ -125,7 +128,7 @@ posdApp.config(function ($routeProvider) {
             controller: 'EntityDecreeController',
             controllerAs: 'endC',
             resolve: {
-                entityDecree: function ($q, EntityDecreeService, NameEntityDecreeService) {
+                authors: function ($q, EntityDecreeService, NameEntityDecreeService) {
                     var deferred = $q.defer();
                     NameEntityDecreeService.loadAllNamesEntityDecree();
                     EntityDecreeService.loadAllEntitiesDecree().then(deferred.resolve, deferred.resolve);
@@ -133,8 +136,23 @@ posdApp.config(function ($routeProvider) {
                 }
             }
         })
+        .when('/secondInstance', {
+            templateUrl: 'listSecondInstance.html',
+            controller: 'SecondInstanceController',
+            controllerAs: 'secIC',
+            resolve: {
+                secondInstance: function ($q, SecondInstanceService, AuthorService, OrgService) {
+                    var deferred = $q.defer();
+                    AuthorService.loadAllAuthors();
+                    OrgService.loadAllOrganizations();
+                    SecondInstanceService.loadAllSecondInstances().then(deferred.resolve, deferred.resolve);
+                    return deferred.promise;
+                }
+            }
+
+        })
         .otherwise({
-            redirectTo: "/"
+            redirectTo: "/nameEntityDecree"
         })
 })
 ;

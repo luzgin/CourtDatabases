@@ -1,162 +1,213 @@
-DROP DATABASE IF EXISTS `court_databases`;
-create database court_databases DEFAULT CHARACTER SET utf8;;
+                                                                                                                 DROP DATABASE IF EXISTS `court_databases`;
+                                                                                                                 create database court_databases DEFAULT CHARACTER SET utf8;;
 
-use court_databases;
- 
-DROP TABLE IF EXISTS `name_entity_decree_adm`;
-CREATE TABLE IF NOT EXISTS name_entity_decree_adm(
-	id INT(10) AUTO_INCREMENT,
-	name VARCHAR(100) NOT NULL,
-	PRIMARY KEY (id)
-)ENGINE=INNODB DEFAULT CHARACTER SET utf8;
+                                                                                                                 use court_databases;
 
-DROP TABLE IF EXISTS `entity_decree_adm`;
-create table entity_decree_adm(
-	id int(10) auto_increment,
-	name_entity_decree_id int(10) not null,
-	prim VARCHAR(250),
-	primary key (id),
-    FOREIGN KEY (name_entity_decree_id) REFERENCES name_entity_decree_adm(id)
-)ENGINE=INNODB DEFAULT CHARACTER SET utf8;
+                                                                                                                 DROP TABLE IF EXISTS `name_entity_decree_adm`;
+                                                                                                                 CREATE TABLE IF NOT EXISTS name_entity_decree_adm(
+                                                                                                                 	id INT(10) AUTO_INCREMENT,
+                                                                                                                 	name VARCHAR(100) NOT NULL,
+                                                                                                                 	PRIMARY KEY (id)
+                                                                                                                 )ENGINE=INNODB DEFAULT CHARACTER SET utf8;
 
-DROP TABLE IF EXISTS `result_adm`;
-CREATE TABLE IF NOT EXISTS result_adm(
-	id INT(10) AUTO_INCREMENT,
-	name VARCHAR(200) NOT NULL,
-	PRIMARY KEY (id)
-)ENGINE=INNODB DEFAULT CHARACTER SET utf8;
+                                                                                                                 DROP TABLE IF EXISTS `entity_decree_adm`;
+                                                                                                                 create table entity_decree_adm(
+                                                                                                                 	id int(10) auto_increment,
+                                                                                                                 	name_entity_decree_id int(10) not null,
+                                                                                                                 	prim VARCHAR(250),
+                                                                                                                 	primary key (id),
+                                                                                                                     FOREIGN KEY (name_entity_decree_id) REFERENCES name_entity_decree_adm(id)
+                                                                                                                 )ENGINE=INNODB DEFAULT CHARACTER SET utf8;
 
-DROP TABLE IF EXISTS `article_adm`;
-CREATE TABLE IF NOT EXISTS article_adm(
-	id INT(10) AUTO_INCREMENT,
-	article varchar(15) NOT NULL,
-	part int(5),
-	note varchar(250) NOT NULL,
-	PRIMARY KEY (id)
-)ENGINE=INNODB DEFAULT CHARACTER SET utf8;
+                                                                                                                 DROP TABLE IF EXISTS `result_adm`;
+                                                                                                                 CREATE TABLE IF NOT EXISTS result_adm(
+                                                                                                                 	id INT(10) AUTO_INCREMENT,
+                                                                                                                 	name VARCHAR(200) NOT NULL,
+                                                                                                                 	PRIMARY KEY (id)
+                                                                                                                 )ENGINE=INNODB DEFAULT CHARACTER SET utf8;
 
-DROP TABLE IF EXISTS `entity_isk_adm`;
-CREATE TABLE IF NOT EXISTS entity_isk_adm(
-	id INT(10) AUTO_INCREMENT,
-	name VARCHAR(100) NOT NULL,
-	PRIMARY KEY (id)
-)ENGINE=INNODB DEFAULT CHARACTER SET utf8;
+                                                                                                                 DROP TABLE IF EXISTS `article_adm`;
+                                                                                                                 CREATE TABLE IF NOT EXISTS article_adm(
+                                                                                                                 	id INT(10) AUTO_INCREMENT,
+                                                                                                                 	article varchar(15) NOT NULL,
+                                                                                                                 	part int(5),
+                                                                                                                 	note varchar(250) NOT NULL,
+                                                                                                                 	PRIMARY KEY (id)
+                                                                                                                 )ENGINE=INNODB DEFAULT CHARACTER SET utf8;
 
-DROP TABLE IF EXISTS `date_request_case`;
-CREATE TABLE IF NOT EXISTS date_request_case(
-	id INT(10) AUTO_INCREMENT,
-	organization VARCHAR(200) NOT NULL,
-	date date NOT NULL,
-	PRIMARY KEY (id)
-)ENGINE=INNODB DEFAULT CHARACTER SET utf8;
+                                                                                                                 DROP TABLE IF EXISTS `entity_isk_adm`;
+                                                                                                                 CREATE TABLE IF NOT EXISTS entity_isk_adm(
+                                                                                                                 	id INT(10) AUTO_INCREMENT,
+                                                                                                                 	name VARCHAR(100) NOT NULL,
+                                                                                                                 	PRIMARY KEY (id)
+                                                                                                                 )ENGINE=INNODB DEFAULT CHARACTER SET utf8;
 
-DROP TABLE IF EXISTS `date_return_case`;
-CREATE TABLE IF NOT EXISTS date_return_case(
-	id INT(10) AUTO_INCREMENT,
-	organization VARCHAR(200) NOT NULL,
-	date date NOT NULL,
-	PRIMARY KEY (id)
-)ENGINE=INNODB DEFAULT CHARACTER SET utf8;
+                                                                                                                 DROP TABLE IF EXISTS `date_request_case`;
+                                                                                                                 CREATE TABLE IF NOT EXISTS date_request_case(
+                                                                                                                 	id INT(10) AUTO_INCREMENT,
+                                                                                                                 	organization VARCHAR(200) NOT NULL,
+                                                                                                                 	date date NOT NULL,
+                                                                                                                 	PRIMARY KEY (id)
+                                                                                                                 )ENGINE=INNODB DEFAULT CHARACTER SET utf8;
 
-DROP TABLE IF EXISTS `organization`;
-CREATE TABLE IF NOT EXISTS organization(
-	id INT(10) AUTO_INCREMENT,
-	name VARCHAR(250) NOT NULL,
-	type int(2) NOT NULL,
-	PRIMARY KEY (id)
-)ENGINE=INNODB DEFAULT CHARACTER SET utf8;
+                                                                                                                 DROP TABLE IF EXISTS `date_return_case`;
+                                                                                                                 CREATE TABLE IF NOT EXISTS date_return_case(
+                                                                                                                 	id INT(10) AUTO_INCREMENT,
+                                                                                                                 	organization VARCHAR(200) NOT NULL,
+                                                                                                                 	date date NOT NULL,
+                                                                                                                 	PRIMARY KEY (id)
+                                                                                                                 )ENGINE=INNODB DEFAULT CHARACTER SET utf8;
 
-DROP TABLE IF EXISTS `author_document`;
-CREATE TABLE IF NOT EXISTS author_document(
-	id INT(10) AUTO_INCREMENT,
-	name VARCHAR(100) NOT NULL,
-	position VARCHAR(200) NOT NULL,
-	activ_work BOOLEAN NOT NULL,
-	organization_id int(2) NOT NULL,
-	PRIMARY KEY (id),
-	FOREIGN KEY (organization_id) REFERENCES organization(id)
-)ENGINE=INNODB DEFAULT CHARACTER SET utf8;
+                                                                                                                 DROP TABLE IF EXISTS `organization`;
+                                                                                                                 CREATE TABLE IF NOT EXISTS organization(
+                                                                                                                 	id INT(10) AUTO_INCREMENT,
+                                                                                                                 	name VARCHAR(250) NOT NULL,
+                                                                                                                 	type int(2) NOT NULL,
+                                                                                                                 	PRIMARY KEY (id)
+                                                                                                                 )ENGINE=INNODB DEFAULT CHARACTER SET utf8;
 
-DROP TABLE IF EXISTS `second_instance_adm`;
-CREATE TABLE IF NOT EXISTS second_instance_adm(
-	id INT(10) AUTO_INCREMENT,
-	organization_id int(10) NOT NULL,
-	author_document_id int(10) NOT NULL,
-	decree_date date NOT NULL,
-	PRIMARY KEY (id),
-	FOREIGN KEY (organization_id) REFERENCES organization(id),
-	FOREIGN KEY (author_document_id) REFERENCES author_document(id)
-)ENGINE=INNODB DEFAULT CHARACTER SET utf8;
+                                                                                                                 DROP TABLE IF EXISTS `author_document`;
+                                                                                                                 CREATE TABLE IF NOT EXISTS author_document(
+                                                                                                                 	id INT(10) AUTO_INCREMENT,
+                                                                                                                 	name VARCHAR(100) NOT NULL,
+                                                                                                                 	position VARCHAR(200) NOT NULL,
+                                                                                                                 	activ_work BOOLEAN NOT NULL,
+                                                                                                                 	organization_id int(2) NOT NULL,
+                                                                                                                 	PRIMARY KEY (id),
+                                                                                                                 	FOREIGN KEY (organization_id) REFERENCES organization(id)
+                                                                                                                 )ENGINE=INNODB DEFAULT CHARACTER SET utf8;
+
+                                                                                                                 DROP TABLE IF EXISTS `second_instance_adm`;
+                                                                                                                 CREATE TABLE IF NOT EXISTS second_instance_adm(
+                                                                                                                 	id INT(10) AUTO_INCREMENT,
+                                                                                                                 	organization_id int(10) NOT NULL,
+                                                                                                                 	author_document_id int(10) NOT NULL,
+                                                                                                                 	decree_date date NOT NULL,
+                                                                                                                 	PRIMARY KEY (id),
+                                                                                                                 	FOREIGN KEY (organization_id) REFERENCES organization(id),
+                                                                                                                 	FOREIGN KEY (author_document_id) REFERENCES author_document(id)
+                                                                                                                 )ENGINE=INNODB DEFAULT CHARACTER SET utf8;
 
 
-DROP TABLE IF EXISTS `decree_adm`;
-CREATE TABLE IF NOT EXISTS decree_adm(
-	id INT(10) AUTO_INCREMENT,
-	author_document_id int(10) NOT NULL,
-	organization_id int(10) NOT NULL,
-	decree_date date NOT NULL,
-	entered_into_force BOOLEAN NOT NULL,
-	second_instance_id int(10),
-	PRIMARY KEY (id),
-	FOREIGN KEY (organization_id) REFERENCES organization(id),
-	FOREIGN KEY (second_instance_id) REFERENCES second_instance_adm(id),
-	FOREIGN KEY (author_document_id) REFERENCES author_document(id)
-)ENGINE=INNODB DEFAULT CHARACTER SET utf8;
+                                                                                                                 DROP TABLE IF EXISTS `decree_adm`;
+                                                                                                                 CREATE TABLE IF NOT EXISTS decree_adm(
+                                                                                                                 	id INT(10) AUTO_INCREMENT,
+                                                                                                                 	author_document_id int(10) NOT NULL,
+                                                                                                                 	organization_id int(10) NOT NULL,
+                                                                                                                 	decree_date date NOT NULL,
+                                                                                                                 	entered_into_force BOOLEAN NOT NULL,
+                                                                                                                 	second_instance_id int(10),
+                                                                                                                 	PRIMARY KEY (id),
+                                                                                                                 	FOREIGN KEY (organization_id) REFERENCES organization(id),
+                                                                                                                 	FOREIGN KEY (second_instance_id) REFERENCES second_instance_adm(id),
+                                                                                                                 	FOREIGN KEY (author_document_id) REFERENCES author_document(id)
+                                                                                                                 )ENGINE=INNODB DEFAULT CHARACTER SET utf8;
 
-DROP TABLE IF EXISTS `vialator`;
-CREATE TABLE IF NOT EXISTS vialator(
-	id INT(10) AUTO_INCREMENT,
-	type_vialator int(2) NOT NULL,
-	firstname VARCHAR(250) NOT NULL,
-	secondname VARCHAR(50),
-	lastname VARCHAR(50),
-	private_number VARCHAR(50),
-	PRIMARY KEY (id)
-)ENGINE=INNODB DEFAULT CHARACTER SET utf8;
+                                                                                                                 DROP TABLE IF EXISTS `vialator`;
+                                                                                                                 CREATE TABLE IF NOT EXISTS vialator(
+                                                                                                                 	id INT(10) AUTO_INCREMENT,
+                                                                                                                 	type_vialator int(2) NOT NULL,
+                                                                                                                 	firstname VARCHAR(250) NOT NULL,
+                                                                                                                 	secondname VARCHAR(50),
+                                                                                                                 	lastname VARCHAR(50),
+                                                                                                                 	private_number VARCHAR(50),
+                                                                                                                 	PRIMARY KEY (id)
+                                                                                                                 )ENGINE=INNODB DEFAULT CHARACTER SET utf8;
 
-DROP TABLE IF EXISTS `card_adm`;
-CREATE TABLE IF NOT EXISTS card_adm(
-	id INT(10) AUTO_INCREMENT,
-	card_number int(10) NOT NULL,
-	card_create_date date NOT NULL,
-	decree_adm_id int(10) NOT NULL,
-	vialator_id int(10) NOT NULL,
-	article_id int(10) NOT NULL,
-	entity_decree_id int(10) NOT NULL,
-	note_article VARCHAR(200) NOT NULL,
-	judge_id int(10) NOT NULL,
-	card_activ BOOLEAN NOT NULL,
-	result_date date,
-	result_id int(2),
-	date_request_delo_id int(10),
-	date_return_delo_id int(10), 
-	note varchar(250),
-	PRIMARY KEY (id),
-	FOREIGN KEY (vialator_id) REFERENCES vialator(id),
-	FOREIGN KEY (decree_adm_id) REFERENCES decree_adm(id),
-	FOREIGN KEY (date_request_delo_id ) REFERENCES date_request_case(id),
-	FOREIGN KEY (date_return_delo_id ) REFERENCES date_return_case(id),
-	FOREIGN KEY (article_id) REFERENCES article_adm(id),
-	FOREIGN KEY (entity_decree_id) REFERENCES entity_decree_adm(id),
-	FOREIGN KEY (judge_id) REFERENCES author_document(id),
-	FOREIGN KEY (result_id) REFERENCES result_adm(id)
-	
-)ENGINE=INNODB DEFAULT CHARACTER SET utf8;
+                                                                                                                 DROP TABLE IF EXISTS `card_adm`;
+                                                                                                                 CREATE TABLE IF NOT EXISTS card_adm(
+                                                                                                                 	id INT(10) AUTO_INCREMENT,
+                                                                                                                 	card_number int(10) NOT NULL,
+                                                                                                                 	card_create_date date NOT NULL,
+                                                                                                                 	decree_adm_id int(10) NOT NULL,
+                                                                                                                 	vialator_id int(10) NOT NULL,
+                                                                                                                 	article_id int(10) NOT NULL,
+                                                                                                                 	entity_decree_id int(10) NOT NULL,
+                                                                                                                 	note_article VARCHAR(200) NOT NULL,
+                                                                                                                 	judge_id int(10) NOT NULL,
+                                                                                                                 	card_activ BOOLEAN NOT NULL,
+                                                                                                                 	result_date date,
+                                                                                                                 	result_id int(2),
+                                                                                                                 	date_request_delo_id int(10),
+                                                                                                                 	date_return_delo_id int(10),
+                                                                                                                 	note varchar(250),
+                                                                                                                 	PRIMARY KEY (id),
+                                                                                                                 	FOREIGN KEY (vialator_id) REFERENCES vialator(id),
+                                                                                                                 	FOREIGN KEY (decree_adm_id) REFERENCES decree_adm(id),
+                                                                                                                 	FOREIGN KEY (date_request_delo_id ) REFERENCES date_request_case(id),
+                                                                                                                 	FOREIGN KEY (date_return_delo_id ) REFERENCES date_return_case(id),
+                                                                                                                 	FOREIGN KEY (article_id) REFERENCES article_adm(id),
+                                                                                                                 	FOREIGN KEY (entity_decree_id) REFERENCES entity_decree_adm(id),
+                                                                                                                 	FOREIGN KEY (judge_id) REFERENCES author_document(id),
+                                                                                                                 	FOREIGN KEY (result_id) REFERENCES result_adm(id)
 
-DROP TABLE IF EXISTS `complaints_adm`;
-CREATE TABLE IF NOT EXISTS complaints_adm(
-	id INT(10) AUTO_INCREMENT,
-	date_complaint date NOT NULL,
-	entity_id int(10) NOT NULL,
-	name_author_complaint VARCHAR(200) NOT NULL,
-	activ BOOLEAN NOT NULL,
-	decree_adm_id int(10) NOT NULL,
-	summ_poshlini decimal(50) NOT NULL,
-	card_adm_id int(10) NOT NULL,
-	PRIMARY KEY (id),
-	FOREIGN KEY (entity_id) REFERENCES entity_isk_adm(id),
-	FOREIGN KEY (card_adm_id) REFERENCES card_adm(id),
-	FOREIGN KEY (decree_adm_id) REFERENCES decree_adm(id)
-)ENGINE=INNODB DEFAULT CHARACTER SET utf8;
+                                                                                                                 )ENGINE=INNODB DEFAULT CHARACTER SET utf8;
 
-INSERT INTO result_adm (name) VALUES ("оставлено без изменения, а жалоба (протест) - без удовлетворения");
+                                                                                                                 DROP TABLE IF EXISTS `complaints_adm`;
+                                                                                                                 CREATE TABLE IF NOT EXISTS complaints_adm(
+                                                                                                                 	id INT(10) AUTO_INCREMENT,
+                                                                                                                 	date_complaint date NOT NULL,
+                                                                                                                 	entity_id int(10) NOT NULL,
+                                                                                                                 	name_author_complaint VARCHAR(200) NOT NULL,
+                                                                                                                 	activ BOOLEAN NOT NULL,
+                                                                                                                 	decree_adm_id int(10) NOT NULL,
+                                                                                                                 	summ_poshlini decimal(50) NOT NULL,
+                                                                                                                 	card_adm_id int(10) NOT NULL,
+                                                                                                                 	PRIMARY KEY (id),
+                                                                                                                 	FOREIGN KEY (entity_id) REFERENCES entity_isk_adm(id),
+                                                                                                                 	FOREIGN KEY (card_adm_id) REFERENCES card_adm(id),
+                                                                                                                 	FOREIGN KEY (decree_adm_id) REFERENCES decree_adm(id)
+                                                                                                                 )ENGINE=INNODB DEFAULT CHARACTER SET utf8;
+
+                                                                                                                 INSERT INTO `article_adm` (`article`, `part`, `note`) VALUES ('1.1', '1', 'opisanie 1');
+                                                                                                                 INSERT INTO `article_adm` (`article`, `part`, `note`) VALUES ('2.1', '2', 'opisanie 2');
+                                                                                                                 INSERT INTO `article_adm` (`article`, `part`, `note`) VALUES ('3.1', '3', 'opisanie 3');
+                                                                                                                 INSERT INTO `article_adm` (`article`, `part`, `note`) VALUES ('4.1', '4', 'opisanie 4');
+                                                                                                                 INSERT INTO `article_adm` (`article`, `part`, `note`) VALUES ('5.1', '5', 'opisanie 5');
+
+                                                                                                                 INSERT INTO `organization` (`name`, `type`) VALUES ('organization 1', '2');
+                                                                                                                 INSERT INTO `organization` (`name`, `type`) VALUES ('organization 2', '2');
+                                                                                                                 INSERT INTO `organization` (`name`, `type`) VALUES ('organization 3', '2');
+                                                                                                                 INSERT INTO `organization` (`name`, `type`) VALUES ('Sud 1', '1');
+                                                                                                                 INSERT INTO `organization` (`name`, `type`) VALUES ('Sud 2', '1');
+
+                                                                                                                 INSERT INTO `author_document` (`name`, `position`, `activ_work`, `organization_id`) VALUES ('Petrov AA', 'pos1', '1', '1');
+                                                                                                                 INSERT INTO `author_document` (`name`, `position`, `activ_work`, `organization_id`) VALUES ('Sidorov AV', 'pos2', '1', '2');
+                                                                                                                 INSERT INTO `author_document` (`name`, `position`, `activ_work`, `organization_id`) VALUES ('Ivanov PA', 'pos3', '1', '3');
+                                                                                                                 INSERT INTO `author_document` (`name`, `position`, `activ_work`, `organization_id`) VALUES ('Kozlov HF', 'pos4', '1', '4');
+                                                                                                                 INSERT INTO `author_document` (`name`, `position`, `activ_work`, `organization_id`) VALUES ('Pechkin DS', 'pos5', '1', '1');
+
+                                                                                                                 INSERT INTO `name_entity_decree_adm` (`name`) VALUES ('name entity decree 1');
+                                                                                                                 INSERT INTO `name_entity_decree_adm` (`name`) VALUES ('name entity decree 2');
+                                                                                                                 INSERT INTO `name_entity_decree_adm` (`name`) VALUES ('name entity decree 3');
+                                                                                                                 INSERT INTO `name_entity_decree_adm` (`name`) VALUES ('name entity decree 4');
+                                                                                                                 INSERT INTO `name_entity_decree_adm` (`name`) VALUES ('name entity decree 5');
+
+                                                                                                                 INSERT INTO `entity_decree_adm` (`name_entity_decree_id`, `prim`) VALUES ('1', 'prim decree 1');
+                                                                                                                 INSERT INTO `entity_decree_adm` (`name_entity_decree_id`, `prim`) VALUES ('2', 'prim decree 2');
+                                                                                                                 INSERT INTO `entity_decree_adm` (`name_entity_decree_id`, `prim`) VALUES ('3', 'prim decree 3');
+                                                                                                                 INSERT INTO `entity_decree_adm` (`name_entity_decree_id`, `prim`) VALUES ('4', 'prim decree 4');
+                                                                                                                 INSERT INTO `entity_decree_adm` (`name_entity_decree_id`, `prim`) VALUES ('5', 'prim decree 5');
+
+                                                                                                                 INSERT INTO `entity_isk_adm` (`name`) VALUES ('entity isk 1');
+                                                                                                                 INSERT INTO `entity_isk_adm` (`name`) VALUES ('entity isk 2');
+                                                                                                                 INSERT INTO `entity_isk_adm` (`name`) VALUES ('entity isk 3');
+                                                                                                                 INSERT INTO `entity_isk_adm` (`name`) VALUES ('entity isk 4');
+                                                                                                                 INSERT INTO `entity_isk_adm` (`name`) VALUES ('entity isk 5');
+
+                                                                                                                 INSERT INTO `result_adm` (`name`) VALUES ('result 1');
+                                                                                                                 INSERT INTO `result_adm` (`name`) VALUES ('result 2');
+                                                                                                                 INSERT INTO `result_adm` (`name`) VALUES ('result 3');
+                                                                                                                 INSERT INTO `result_adm` (`name`) VALUES ('result 4');
+                                                                                                                 INSERT INTO `result_adm` (`name`) VALUES ('result 5');
+
+                                                                                                                 INSERT INTO `vialator` (`type_vialator`, `firstname`, `secondname`, `lastname`, `private_number`) VALUES ('1', 'Name Fiz 1', 'SecondName 1', 'Lastname 1', 'number 1');
+                                                                                                                 INSERT INTO `vialator` (`type_vialator`, `firstname`, `secondname`, `lastname`, `private_number`) VALUES ('1', 'Name Fiz 2', 'SecondName 2', 'Lastname 2', 'number 2');
+                                                                                                                 INSERT INTO `vialator` (`type_vialator`, `firstname`, `secondname`, `lastname`, `private_number`) VALUES ('1', 'Name Fiz 3', 'SecondName 3', 'Lastname 3', 'number 3');
+                                                                                                                 INSERT INTO `vialator` (`type_vialator`, `firstname`, `secondname`, `lastname`, `private_number`) VALUES ('1', 'Name Fiz 4', 'SecondName 4', 'Lastname 4', 'number 4');
+                                                                                                                 INSERT INTO `vialator` (`type_vialator`, `firstname`, `secondname`, `lastname`, `private_number`) VALUES ('1', 'Name Fiz 5', 'SecondName 5', 'Lastname 5', 'number 5');
+                                                                                                                 INSERT INTO `vialator` (`type_vialator`, `firstname`, `private_number`) VALUES ('2', 'Name Ur 1', 'number ur 1');
+                                                                                                                 INSERT INTO `vialator` (`type_vialator`, `firstname`, `private_number`) VALUES ('2', 'Name Ur 2', 'number ur 2');
+                                                                                                                 INSERT INTO `vialator` (`type_vialator`, `firstname`, `private_number`) VALUES ('2', 'Name Ur 3', 'number ur 3');
+                                                                                                                 INSERT INTO `vialator` (`type_vialator`, `firstname`, `private_number`) VALUES ('2', 'Name Ur 4', 'number ur 4');
+                                                                                                                 INSERT INTO `vialator` (`type_vialator`, `firstname`, `private_number`) VALUES ('2', 'Name Ur 5', 'number ur 5');

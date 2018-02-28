@@ -3,7 +3,7 @@
     <div class="panel-body">
         <div class=" mb-3 col row justify-content-end">
             <button type="button" class="btn btn-primary" data-toggle="modal"
-                    data-target="#ModalSave">Добавить вторую инстанцию
+                    data-target="#ModalSave">Добавить интанцию
             </button>
         </div>
         <table class="table table-striped table-bordered table-sm table-hover">
@@ -11,9 +11,8 @@
             <tr>
                 <th class="div-center" width="5%">id</th>
                 <th class="div-center" width="25%">Организация</th>
-                <th class="div-center" width="20%">Должность</th>
-                <th class="div-center" width="20%">Автор</th>
-                <th class="div-center" width="0">Дата</th>
+                <th class="div-center" width="25%">Автор</th>
+                <th class="div-center" width="25%">Дата</th>
                 <th class="div-center" width="5%"></th>
                 <th class="div-center" width="5%"></th>
             </tr>
@@ -22,14 +21,11 @@
             <tr ng-repeat="item in secIC.getAllSecondInstances()">
                 <td class="div-center">{{item.id}}</td>
                 <td>{{item.organization.name}}</td>
-                <td>{{item.authorDocument.position}}</td>
                 <td>{{item.authorDocument.name}}</td>
                 <td>{{item.decreeDate}}</td>
                 <td>
-                        <button type="button" data-toggle="modal"
-                                data-target="#ModalSave" ng-click="secIC.editSecondInstance(item.id)"
-                                class="btn btn-sm btn-success custom-width">Редактировать
-                        </button>
+                    <button type="button"data-toggle="modal"
+                            data-target="#ModalSave" ng-click="secIC.editSecondInstance(item.id)" class="btn btn-sm btn-success custom-width">Редактировать</button>
                 </td>
                 <td>
                     <div class="div-center">
@@ -47,11 +43,11 @@
     <div class="widht-modal-dialog modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title">Добавление/Редактирование второй инстанции</h4>
+                <h4 class="modal-title">Добавление/Редактирование инстанции</h4>
             </div>
             <div class="modal-body">
                 <form ng-submit="secIC.submit()" class="form-horizontal" role="form">
-                    <input type="hidden" ng-model="secIC.secondInstance.id"/>
+                    <input type="hidden" ng-model="secIC.secondInstance.id" />
                     <div class="form-group row">
                         <label class="col-md-2 control-label">Организация</label>
                         <div class="col-md-10">
@@ -71,20 +67,13 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-md-2 control-label">Должность</label>
-                        <div class="col-md-10">
-                            <input type="text" class="form-control" value="{{secIC.secondInstance.authorDocument.position}}" disabled/>
-                        </div>
-                    </div>
-                    <div class="form-group row">
                         <label class="col-md-2 control-label">Дата</label>
                         <div class="col-md-10">
                             <input type="text" class="form-control" ng-model="secIC.secondInstance.decreeDate"/>
                         </div>
                     </div>
                     <div class="modal-footer row mr-0">
-                        <input type="submit" value="{{!secIC.secondInstance.id ? 'Добавить' : 'Обновить'}}"
-                               class="btn btn-primary btn-sm">
+                        <input type="submit"  value="{{!secIC.secondInstance.id ? 'Добавить' : 'Обновить'}}" class="btn btn-primary btn-sm">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
                     </div>
                 </form>
@@ -92,4 +81,3 @@
         </div>
     </div>
 </div>
-

@@ -16,6 +16,7 @@ public class ResultAdmCase {
 
     @Column(name = "name")
     private String name;
+    /*
     @JsonIgnoreProperties(value = "resultAdmCase", allowSetters = true)
     @OneToMany(mappedBy = "resultAdmCase", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<CardAdm> cardAdms = new HashSet<>();
@@ -28,7 +29,7 @@ public class ResultAdmCase {
     public void setCardAdms(Set<CardAdm> cardAdms) {
         this.cardAdms = cardAdms;
     }
-
+*/
     public ResultAdmCase(){
 
     }

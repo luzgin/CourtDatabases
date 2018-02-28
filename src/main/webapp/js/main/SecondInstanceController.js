@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('courtApp').controller('SecondInstanceController',
-    ['SecondInstanceService','AuthorService','OrgService', '$scope', function (SecondInstanceService, AuthorService, OrgService, $scope) {
+    ['SecondInstanceService', 'OrgService', 'AuthorService', '$scope', function (SecondInstanceService, OrgService, AuthorService, $scope) {
         var self = this;
         self.secondInstance = {};
         self.secondInstances = [];
@@ -10,8 +10,8 @@ angular.module('courtApp').controller('SecondInstanceController',
         self.createSecondInstance = createSecondInstance;
         self.updateSecondInstance = updateSecondInstance;
         self.getAllSecondInstances = getAllSecondInstances;
-        self.getAllAuthors = getAllAuthors;
         self.getAllOrganizations = getAllOrganizations;
+        self.getAllAuthors = getAllAuthors;
         self.editSecondInstance = editSecondInstance;
         self.removeSecondInstance = removeSecondInstance;
 
@@ -20,11 +20,11 @@ angular.module('courtApp').controller('SecondInstanceController',
         function getAllSecondInstances() {
             return SecondInstanceService.getAllSecondInstances();
         }
-        function getAllAuthors() {
-            return AuthorService.getAllAuthors();
-        }
         function getAllOrganizations() {
             return OrgService.getAllOrganizations();
+        }
+        function getAllAuthors() {
+            return AuthorService.getAllAuthors();
         }
 
         function submit() {

@@ -21,6 +21,8 @@ public class DateRequestCase {
     @Column(name = "date")
     @Temporal(value = TemporalType.DATE)
     private Date date;
+
+    /*
     @JsonIgnoreProperties(value = "dateRequestCase", allowSetters = true)
     @OneToMany(mappedBy = "dateRequestCase", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<CardAdm> cardAdms = new HashSet<>();
@@ -33,7 +35,7 @@ public class DateRequestCase {
     public void setCardAdms(Set<CardAdm> cardAdms) {
         this.cardAdms = cardAdms;
     }
-
+*/
     public DateRequestCase(){
 
     }

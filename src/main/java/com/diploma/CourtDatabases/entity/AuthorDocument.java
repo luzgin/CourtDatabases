@@ -26,11 +26,11 @@ public class AuthorDocument {
     @ManyToOne(optional = false)
     @JoinColumn(name = "organization_id")
     private Organization organization;
-
+/*
     @JsonIgnoreProperties(value = "judge", allowSetters = true)
     @OneToMany(mappedBy = "judge", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private  Set<CardAdm> cardAdms = new HashSet<>();
-
+*/
     public AuthorDocument() {
 
     }
@@ -42,7 +42,7 @@ public class AuthorDocument {
     public void setPosition(String position) {
         this.position = position;
     }
-
+/*
     public Set<CardAdm> getCardAdms() {
         return cardAdms;
     }
@@ -50,7 +50,7 @@ public class AuthorDocument {
     public void setCardAdms(Set<CardAdm> cardAdms) {
         this.cardAdms = cardAdms;
     }
-
+*/
     public long getId() {
         return id;
     }
@@ -91,7 +91,6 @@ public class AuthorDocument {
                 ", position='" + position + '\'' +
                 ", activWork=" + activWork +
                 ", organization=" + organization +
-                ", cardAdms=" + cardAdms +
                 '}';
     }
 }

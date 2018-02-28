@@ -1,23 +1,23 @@
 'use strict';
-angular.module('courtApp').factory('SecondInstanceService',
+angular.module('courtApp').factory('DecreeService',
     ['$localStorage', '$http', '$q', 'urls',
         function ($localStorage, $http, $q, urls) {
             var factory = {
-                loadAllSecondInstances: loadAllSecondInstances,
-                getAllSecondInstances: getAllSecondInstances,
-                getSecondInstance: getSecondInstance,
-                createSecondInstance: createSecondInstance,
-                updateSecondInstance: updateSecondInstance,
-                removeSecondInstance: removeSecondInstance
+                loadAllRegulations: loadAllRegulations,
+                getAllRegulations: getAllRegulations,
+                getDecree: getDecree,
+                createDecree: createDecree,
+                updateDecree: updateDecree,
+                removeDecree: removeDecree,
             };
             return factory;
 
-            function loadAllSecondInstances() {
+            function loadAllRegulations() {
                 var deferred = $q.defer();
-                $http.get(urls.SECOND_INSTANCE_SERVICE_API)
+                $http.get(urls.DECREE_SERVICE_API)
                     .then(
                         function (response) {
-                            $localStorage.secondInstances = response.data;
+                            $localStorage.regulations = response.data;
                             deferred.resolve(response);
                         },
                         function (errResponse) {
@@ -27,76 +27,76 @@ angular.module('courtApp').factory('SecondInstanceService',
                 return deferred.promise;
             }
 
-            function getAllSecondInstances() {
-                return $localStorage.secondInstances;
+            function getAllRegulations() {
+                return $localStorage.regulations;
             }
 
-            function getSecondInstance(id) {
-                console.log('Fetching SecondInstance with id :' + id);
+            function getDecree(id) {
+                console.log('Fetching Decree with id :' + id);
                 var deferred = $q.defer();
-                $http.get(urls.SECOND_INSTANCE_SERVICE_API + id)
+                $http.get(urls.DECREE_SERVICE_API + id)
                     .then(
                         function (response) {
-                            console.log('Fetched successfully SecondInstance with id :' + id);
+                            console.log('Fetched successfully Decree with id :' + id + " " + JSON.stringify(response));
                             deferred.resolve(response.data);
                         },
                         function (errResponse) {
-                            console.error('Error while loading SecondInstance with id :' + id);
+                            console.error('Error while loading Decree with id :' + id);
                             deferred.reject(errResponse);
                         }
                     );
                 return deferred.promise;
             }
 
-            function createSecondInstance(secondInstance) {
-                console.log('Creating secondInstance');
+            function createDecree(entity) {
+                console.log('Creating entity');
                 var deferred = $q.defer();
-                $http.post(urls.SECOND_INSTANCE_SERVICE_API, secondInstance)
+                $http.post(urls.DECREE_SERVICE_API, entity)
                     .then(
                         function (response) {
-                            loadAllSecondInstances();
+                            loadAllRegulations();
                             deferred.resolve(response.data);
                         },
                         function (errResponse) {
-                            console.error('Error while creating secondInstance : ' + errResponse.data.errorMessage);
+                            console.error('Error while creating entity : ' + errResponse.data.errorMessage);
                             deferred.reject(errResponse);
                         }
                     );
                 return deferred.promise;
             }
 
-            function updateSecondInstance(secondInstance, id) {
-                console.log('Updating secondInstance with id ' + id);
+            function updateDecree(entity, id) {
+                console.log('Updating entity with id ' + id);
                 var deferred = $q.defer();
-                $http.put(urls.SECOND_INSTANCE_SERVICE_API + id, secondInstance)
+                $http.put(urls.DECREE_SERVICE_API + id, entity)
                     .then(
                         function (response) {
-                            loadAllSecondInstances();
+                            loadAllRegulations();
                             deferred.resolve(response.data);
                         },
                         function (errResponse) {
-                            console.error('Error while updating secondInstance with id :' + id);
+                            console.error('Error while updating entity with id :' + id);
                             deferred.reject(errResponse);
                         }
                     );
                 return deferred.promise;
             }
 
-            function removeSecondInstance(id) {
-                console.log('Removing SecondInstance with id ' + id);
+            function removeDecree(id) {
+                console.log('Removing Decree with id ' + id);
                 var deferred = $q.defer();
-                $http.delete(urls.SECOND_INSTANCE_SERVICE_API + id)
+                $http.delete(urls.DECREE_SERVICE_API + id)
                     .then(
                         function (response) {
-                            loadAllSecondInstances();
+                            loadAllRegulations();
                             deferred.resolve(response.data);
                         },
                         function (errResponse) {
-                            console.error('Error while removing SecondInstance with id :' + id);
+                            console.error('Error while removing Decree with id :' + id);
                             deferred.reject(errResponse);
                         }
                     );
                 return deferred.promise;
             }
         }
-]);
+    ]);

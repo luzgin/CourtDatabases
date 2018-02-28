@@ -19,12 +19,15 @@ public class Organization {
 
     @Column(name = "type")
     private Integer type;
+/*
     @JsonIgnoreProperties(value = "organization", allowSetters = true)
     @OneToMany(mappedBy = "organization", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<DecreeAdm> decreeAdms = new HashSet<>();
+
     @JsonIgnoreProperties(value = "organization", allowSetters = true)
     @OneToMany(mappedBy = "organization", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<AuthorDocument> authorDocuments = new HashSet<>();
+
     @JsonIgnoreProperties(value = "organization", allowSetters = true)
     @OneToMany(mappedBy = "organization", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<SecondInstanceAdm> secondInstanceAdms = new HashSet<>();
@@ -55,7 +58,7 @@ public class Organization {
     public void setSecondInstanceAdms(Set<SecondInstanceAdm> secondInstanceAdms) {
         this.secondInstanceAdms = secondInstanceAdms;
     }
-
+*/
     public Organization() {
 
     }

@@ -62,16 +62,16 @@ public class CardAdm {
 
     @Column(name = "note")
     private String note;
-
+/*
     @JsonIgnoreProperties(value = "cardAdm", allowSetters = true)
     @OneToMany(mappedBy = "cardAdm", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<ComplaintsAdm> complaintsAdms = new HashSet<>();
 
-
+*/
     public CardAdm (){
 
     }
-
+/*
     public Set<ComplaintsAdm> getComplaintsAdms() {
         return complaintsAdms;
     }
@@ -79,7 +79,7 @@ public class CardAdm {
     public void setComplaintsAdms(Set<ComplaintsAdm> complaintsAdms) {
         this.complaintsAdms = complaintsAdms;
     }
-
+*/
     public long getId() {
         return id;
     }

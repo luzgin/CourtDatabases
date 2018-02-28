@@ -33,18 +33,21 @@ public class DecreeAdm {
     @ManyToOne(optional = false)
     @JoinColumn(name = "second_instance_id")
     private SecondInstanceAdm secondInstanceAdm;
+
+    /*
     @JsonIgnoreProperties(value = "decreeAdm", allowSetters = true)
     @OneToMany(mappedBy = "decreeAdm", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<ComplaintsAdm> complaintsAdms = new HashSet<>();
+
     @JsonIgnoreProperties(value = "decreeAdm", allowSetters = true)
     @OneToMany(mappedBy = "decreeAdm", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<CardAdm> cardAdms = new HashSet<>();
-
+*/
     public DecreeAdm() {
 
     }
 
-
+/*
     public Set<ComplaintsAdm> getComplaintsAdms() {
         return complaintsAdms;
     }
@@ -61,7 +64,7 @@ public class DecreeAdm {
     public void setCardAdms(Set<CardAdm> cardAdms) {
         this.cardAdms = cardAdms;
     }
-
+*/
     public long getId() {
         return id;
     }
