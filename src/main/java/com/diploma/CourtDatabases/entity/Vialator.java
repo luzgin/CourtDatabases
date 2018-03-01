@@ -1,5 +1,6 @@
 package com.diploma.CourtDatabases.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
@@ -29,16 +30,16 @@ public class Vialator {
     @Column(name = "private_number")
     private String privateNumber;
 
-    /*
-    @JsonIgnoreProperties(value = "vialator", allowSetters = true)
+
+    @JsonIgnore
     @OneToMany(mappedBy = "vialator", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<CardAdm> cardAdms = new HashSet<>();
-*/
+
     public Vialator() {
 
     }
 
-/*
+
     public Set<CardAdm> getCardAdms() {
         return cardAdms;
     }
@@ -46,7 +47,7 @@ public class Vialator {
     public void setCardAdms(Set<CardAdm> cardAdms) {
         this.cardAdms = cardAdms;
     }
-*/
+
     public long getId() {
         return id;
     }

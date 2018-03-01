@@ -1,23 +1,23 @@
 'use strict';
-angular.module('courtApp').factory('DecreeService',
+angular.module('courtApp').factory('ComplaintService',
     ['$localStorage', '$http', '$q', 'urls',
         function ($localStorage, $http, $q, urls) {
             var factory = {
-                loadAllRegulations: loadAllRegulations,
-                getAllRegulations: getAllRegulations,
-                getDecree: getDecree,
-                createDecree: createDecree,
-                updateDecree: updateDecree,
-                removeDecree: removeDecree,
+                loadAllComplaints: loadAllComplaints,
+                getAllComplaints: getAllComplaints,
+                getComplaint: getComplaint,
+                createComplaint: createComplaint,
+                updateComplaint: updateComplaint,
+                removeComplaint: removeComplaint
             };
             return factory;
 
-            function loadAllRegulations() {
+            function loadAllComplaints() {
                 var deferred = $q.defer();
-                $http.get(urls.DECREE_SERVICE_API)
+                $http.get(urls.CONPLAINT_SERVICE_API)
                     .then(
                         function (response) {
-                            $localStorage.regulations = response.data;
+                            $localStorage.complaints = response.data;
                             deferred.resolve(response);
                         },
                         function (errResponse) {
@@ -27,34 +27,34 @@ angular.module('courtApp').factory('DecreeService',
                 return deferred.promise;
             }
 
-            function getAllRegulations() {
-                return $localStorage.regulations;
+            function getAllComplaints() {
+                return $localStorage.complaints;
             }
 
-            function getDecree(id) {
-                console.log('Fetching Decree with id :' + id);
+            function getComplaint(id) {
+                console.log('Fetching Complaint with id :' + id);
                 var deferred = $q.defer();
-                $http.get(urls.DECREE_SERVICE_API + id)
+                $http.get(urls.CONPLAINT_SERVICE_API + id)
                     .then(
                         function (response) {
-                            console.log('Fetched successfully Decree with id :' + id);
+                            console.log('Fetched successfully Complaint with id :' + id);
                             deferred.resolve(response.data);
                         },
                         function (errResponse) {
-                            console.error('Error while loading Decree with id :' + id);
+                            console.error('Error while loading Complaint with id :' + id);
                             deferred.reject(errResponse);
                         }
                     );
                 return deferred.promise;
             }
 
-            function createDecree(entity) {
+            function createComplaint(entity) {
                 console.log('Creating entity');
                 var deferred = $q.defer();
-                $http.post(urls.DECREE_SERVICE_API, entity)
+                $http.post(urls.CONPLAINT_SERVICE_API, entity)
                     .then(
                         function (response) {
-                            loadAllRegulations();
+                            loadAllComplaints();
                             deferred.resolve(response.data);
                         },
                         function (errResponse) {
@@ -65,13 +65,13 @@ angular.module('courtApp').factory('DecreeService',
                 return deferred.promise;
             }
 
-            function updateDecree(entity, id) {
+            function updateComplaint(entity, id) {
                 console.log('Updating entity with id ' + id);
                 var deferred = $q.defer();
-                $http.put(urls.DECREE_SERVICE_API + id, entity)
+                $http.put(urls.CONPLAINT_SERVICE_API + id, entity)
                     .then(
                         function (response) {
-                            loadAllRegulations();
+                            loadAllComplaints();
                             deferred.resolve(response.data);
                         },
                         function (errResponse) {
@@ -82,17 +82,17 @@ angular.module('courtApp').factory('DecreeService',
                 return deferred.promise;
             }
 
-            function removeDecree(id) {
-                console.log('Removing Decree with id ' + id);
+            function removeComplaint(id) {
+                console.log('Removing Complaint with id ' + id);
                 var deferred = $q.defer();
-                $http.delete(urls.DECREE_SERVICE_API + id)
+                $http.delete(urls.CONPLAINT_SERVICE_API + id)
                     .then(
                         function (response) {
-                            loadAllRegulations();
+                            loadAllComplaints();
                             deferred.resolve(response.data);
                         },
                         function (errResponse) {
-                            console.error('Error while removing Decree with id :' + id);
+                            console.error('Error while removing Complaint with id :' + id);
                             deferred.reject(errResponse);
                         }
                     );

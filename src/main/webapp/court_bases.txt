@@ -152,7 +152,7 @@
                                                                                                                  	activ BOOLEAN NOT NULL,
                                                                                                                  	decree_adm_id int(10) NOT NULL,
                                                                                                                  	summ_poshlini decimal(50) NOT NULL,
-                                                                                                                 	card_adm_id int(10) NOT NULL,
+                                                                                                                 	card_adm_id int(10),
                                                                                                                  	PRIMARY KEY (id),
                                                                                                                  	FOREIGN KEY (entity_id) REFERENCES entity_isk_adm(id),
                                                                                                                  	FOREIGN KEY (card_adm_id) REFERENCES card_adm(id),

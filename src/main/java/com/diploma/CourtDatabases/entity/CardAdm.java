@@ -1,5 +1,6 @@
 package com.diploma.CourtDatabases.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
@@ -62,16 +63,16 @@ public class CardAdm {
 
     @Column(name = "note")
     private String note;
-/*
-    @JsonIgnoreProperties(value = "cardAdm", allowSetters = true)
+
+    @JsonIgnore
     @OneToMany(mappedBy = "cardAdm", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<ComplaintsAdm> complaintsAdms = new HashSet<>();
 
-*/
+
     public CardAdm (){
 
     }
-/*
+
     public Set<ComplaintsAdm> getComplaintsAdms() {
         return complaintsAdms;
     }
@@ -79,7 +80,7 @@ public class CardAdm {
     public void setComplaintsAdms(Set<ComplaintsAdm> complaintsAdms) {
         this.complaintsAdms = complaintsAdms;
     }
-*/
+
     public long getId() {
         return id;
     }

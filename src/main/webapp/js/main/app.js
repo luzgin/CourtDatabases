@@ -22,8 +22,9 @@ posdApp.config(function ($routeProvider) {
             controller: 'ComplaintController',
             controllerAs: 'comC',
             resolve: {
-                Complaints: function ($q, ComplaintService, DecreeService) {
+                Complaints: function ($q, ComplaintService, DecreeService, EntityService) {
                     var deferred = $q.defer();
+                    EntityService.loadAllEntities();
                     DecreeService.loadAllRegulations();
                     ComplaintService.loadAllComplaints().then(deferred.resolve, deferred.resolve);
                     return deferred.promise;

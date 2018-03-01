@@ -21,12 +21,16 @@ public class ComplaintsAdmServiceImpl implements ComplaintsAdmService {
     }
 
     @Override
+    public ComplaintsAdm update(ComplaintsAdm complaintsAdm) {
+        return complaintsAdmRepository.save(complaintsAdm);
+    }
+    @Override
     public void delete(long id) {
         complaintsAdmRepository.delete(id);
     }
 
     @Override
-    public List<ComplaintsAdm> gelAll() {
+    public List<ComplaintsAdm> findAll() {
         return complaintsAdmRepository.findAll();
     }
 

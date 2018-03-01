@@ -1,5 +1,6 @@
 package com.diploma.CourtDatabases.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
@@ -26,11 +27,11 @@ public class AuthorDocument {
     @ManyToOne(optional = false)
     @JoinColumn(name = "organization_id")
     private Organization organization;
-/*
-    @JsonIgnoreProperties(value = "judge", allowSetters = true)
+
+    @JsonIgnore
     @OneToMany(mappedBy = "judge", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private  Set<CardAdm> cardAdms = new HashSet<>();
-*/
+
     public AuthorDocument() {
 
     }
@@ -42,7 +43,7 @@ public class AuthorDocument {
     public void setPosition(String position) {
         this.position = position;
     }
-/*
+
     public Set<CardAdm> getCardAdms() {
         return cardAdms;
     }
@@ -50,7 +51,7 @@ public class AuthorDocument {
     public void setCardAdms(Set<CardAdm> cardAdms) {
         this.cardAdms = cardAdms;
     }
-*/
+
     public long getId() {
         return id;
     }
