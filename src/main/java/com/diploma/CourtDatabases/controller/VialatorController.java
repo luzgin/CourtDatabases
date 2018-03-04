@@ -61,10 +61,5 @@ public class VialatorController {
             currentVialator.setPrivateNumber(vialator.getPrivateNumber());
             vialatorService.update(currentVialator);
         }
-
-
     }
-
-
-
 }

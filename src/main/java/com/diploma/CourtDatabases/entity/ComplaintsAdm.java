@@ -15,8 +15,8 @@ public class ComplaintsAdm {
     @Temporal(value = TemporalType.DATE)
     private Date complainDate;
 
-    @ManyToOne(optional = false)
-    @JoinColumn(name = "entity_id")
+    @ManyToOne
+    @JoinColumn(name = "entity_id", nullable = false)
     private EntityIskAdm entityIskAdm;
 
     @Column(name = "name_author_complaint")
@@ -25,15 +25,15 @@ public class ComplaintsAdm {
     @Column(name = "activ")
     private boolean activ;
 
-    @ManyToOne(optional = false)
-    @JoinColumn(name = "decree_adm_id")
+    @ManyToOne
+    @JoinColumn(name = "decree_adm_id", nullable = false)
     private DecreeAdm decreeAdm;
 
     @Column(name = "summ_poshlini")
     private double summPoshlini;
 
-    @ManyToOne(optional = false)
-    @JoinColumn(name = "card_adm_id")
+    @ManyToOne
+    @JoinColumn(name = "card_adm_id", nullable = true)
     private CardAdm cardAdm;
 
     public ComplaintsAdm(){

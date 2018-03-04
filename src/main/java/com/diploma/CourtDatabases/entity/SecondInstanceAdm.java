@@ -16,12 +16,12 @@ public class SecondInstanceAdm {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @ManyToOne(optional = false)
-    @JoinColumn(name = "organization_id")
+    @ManyToOne
+    @JoinColumn(name = "organization_id", nullable = false)
     private Organization organization;
 
-    @ManyToOne(optional = false)
-    @JoinColumn(name = "author_document_id")
+    @ManyToOne
+    @JoinColumn(name = "author_document_id", nullable = false)
     private AuthorDocument authorDocument;
 
     @Column(name = "decree_date")

@@ -19,27 +19,27 @@ public class CardAdm {
     @Column(name = "card_number")
     private Integer cardNumber;
 
-    @ManyToOne(optional = false)
-    @JoinColumn(name = "decree_adm_id")
+    @ManyToOne
+    @JoinColumn(name = "decree_adm_id", nullable = false)
     private DecreeAdm decreeAdm;
 
-    @ManyToOne(optional = false)
-    @JoinColumn(name = "vialator_id")
+    @ManyToOne
+    @JoinColumn(name = "vialator_id", nullable = false)
     private Vialator vialator;
 
-    @ManyToOne(optional = false)
-    @JoinColumn(name = "article_id")
+    @ManyToOne
+    @JoinColumn(name = "article_id", nullable = false)
     private ArticleAdm articleAdm;
 
-    @ManyToOne(optional = false)
-    @JoinColumn(name = "entity_decree_id")
+    @ManyToOne
+    @JoinColumn(name = "entity_decree_id", nullable = false)
     private EntityDecreeAdm entityDecreeAdm;
 
     @Column(name = "note_article")
     private String noteArticle;
 
-    @ManyToOne(optional = false)
-    @JoinColumn(name = "judge_id")
+    @ManyToOne
+    @JoinColumn(name = "judge_id", nullable = false)
     private AuthorDocument judge;
 
     @Column(name = "card_activ")
@@ -50,15 +50,15 @@ public class CardAdm {
     private Date resultDate;
 
     @ManyToOne(optional = false)
-    @JoinColumn(name = "result_id")
+    @JoinColumn(name = "result_id", nullable = true)
     private ResultAdmCase resultAdmCase;
 
-    @ManyToOne(optional = false)
-    @JoinColumn(name = "date_request_delo_id")
+    @ManyToOne
+    @JoinColumn(name = "date_request_delo_id", nullable = true)
     private DateRequestCase dateRequestCase;
 
-    @ManyToOne(optional = false)
-    @JoinColumn(name = "date_return_delo_id")
+    @ManyToOne
+    @JoinColumn(name = "date_return_delo_id", nullable = true)
     private DateReturnCase dateReturnCase;
 
     @Column(name = "note")

@@ -18,19 +18,6 @@ public class EntityIskAdm {
     @Column(name = "name")
     private String name;
 
-    @JsonIgnore
-    @OneToMany(mappedBy = "entityIskAdm", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Set<ComplaintsAdm> complaintsAdms = new HashSet<>();
-
-
-    public Set<ComplaintsAdm> getComplaintsAdm() {
-        return complaintsAdms;
-    }
-
-    public void setComplaintsAdm(Set<ComplaintsAdm> complaintsAdms) {
-        this.complaintsAdms = complaintsAdms;
-    }
-
     public EntityIskAdm(){
 
     }

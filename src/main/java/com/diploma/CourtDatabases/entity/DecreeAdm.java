@@ -16,12 +16,12 @@ public class DecreeAdm {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @ManyToOne(optional = false)
-    @JoinColumn(name = "author_document_id")
+    @ManyToOne
+    @JoinColumn(name = "author_document_id", nullable = false)
     private AuthorDocument authorDocument;
 
-    @ManyToOne(optional = false)
-    @JoinColumn(name = "organization_id")
+    @ManyToOne
+    @JoinColumn(name = "organization_id", nullable = false)
     private Organization organization;
 
     @Column(name = "decree_date")
@@ -31,8 +31,8 @@ public class DecreeAdm {
     @Column(name = "entered_into_force")
     private boolean enteredIntoForce;
 
-    @ManyToOne(optional = false)
-    @JoinColumn(name = "second_instance_id")
+    @ManyToOne
+    @JoinColumn(name = "second_instance_id", nullable = true)
     private SecondInstanceAdm secondInstanceAdm;
 
     @JsonIgnore

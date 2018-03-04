@@ -15,8 +15,8 @@ public class EntityDecreeAdm {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @ManyToOne(optional = false)
-    @JoinColumn(name = "name_entity_decree_id")
+    @ManyToOne
+    @JoinColumn(name = "name_entity_decree_id", nullable = false)
     private NameEntityDecreeAdm nameEntityDecreeAdm;
 
     @Column(name = "prim")

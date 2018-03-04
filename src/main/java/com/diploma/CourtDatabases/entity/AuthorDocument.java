@@ -24,13 +24,21 @@ public class AuthorDocument {
     @Column(name = "activ_work")
     private boolean activWork;
 
-    @ManyToOne(optional = false)
-    @JoinColumn(name = "organization_id")
+    @ManyToOne
+    @JoinColumn(name = "organization_id", nullable = false)
     private Organization organization;
 
     @JsonIgnore
     @OneToMany(mappedBy = "judge", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private  Set<CardAdm> cardAdms = new HashSet<>();
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "authorDocument", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private  Set<SecondInstanceAdm> secondInstanceAdms = new HashSet<>();
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "authorDocument", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private  Set<DecreeAdm> decreeAdms = new HashSet<>();
 
     public AuthorDocument() {
 
@@ -50,6 +58,22 @@ public class AuthorDocument {
 
     public void setCardAdms(Set<CardAdm> cardAdms) {
         this.cardAdms = cardAdms;
+    }
+
+    public Set<SecondInstanceAdm> getSecondInstanceAdms() {
+        return secondInstanceAdms;
+    }
+
+    public void setSecondInstanceAdms(Set<SecondInstanceAdm> secondInstanceAdms) {
+        this.secondInstanceAdms = secondInstanceAdms;
+    }
+
+    public Set<DecreeAdm> getDecreeAdms() {
+        return decreeAdms;
+    }
+
+    public void setDecreeAdms(Set<DecreeAdm> decreeAdms) {
+        this.decreeAdms = decreeAdms;
     }
 
     public long getId() {
