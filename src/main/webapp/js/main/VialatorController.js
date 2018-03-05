@@ -60,7 +60,6 @@ angular.module('courtApp').controller('VialatorController',
                 }
             );
         }
-
         function updateVialator(vialator, id) {
             console.log('About to update vialator');
             VialatorService.updateVialator(vialator, id)

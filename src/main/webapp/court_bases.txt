@@ -1,5 +1,5 @@
                                                                                                                  DROP DATABASE IF EXISTS `court_databases`;
-                                                                                                                 create database court_databases DEFAULT CHARACTER SET utf8;;
+                                                                                                                 create database court_databases DEFAULT CHARACTER SET utf8;
 
                                                                                                                  use court_databases;
 
