@@ -159,55 +159,70 @@
                                                                                                                  	FOREIGN KEY (decree_adm_id) REFERENCES decree_adm(id)
                                                                                                                  )ENGINE=INNODB DEFAULT CHARACTER SET utf8;
 
-                                                                                                                 INSERT INTO `article_adm` (`article`, `part`, `note`) VALUES ('1.1', '1', 'opisanie 1');
-                                                                                                                 INSERT INTO `article_adm` (`article`, `part`, `note`) VALUES ('2.1', '2', 'opisanie 2');
-                                                                                                                 INSERT INTO `article_adm` (`article`, `part`, `note`) VALUES ('3.1', '3', 'opisanie 3');
-                                                                                                                 INSERT INTO `article_adm` (`article`, `part`, `note`) VALUES ('4.1', '4', 'opisanie 4');
-                                                                                                                 INSERT INTO `article_adm` (`article`, `part`, `note`) VALUES ('5.1', '5', 'opisanie 5');
+                                                                                                                 INSERT INTO `article_adm` (`article`, `part`, `note`) VALUES ('1.1', '1', 'описание 1'),
+                                                                                                                                                                              ('2.1', '2', 'описание 2'),
+                                                                                                                                                                              ('3.1', '3', 'описание 3'),
+                                                                                                                                                                              ('4.1', '4', 'описание 4'),
+                                                                                                                                                                              ('5.1', '5', 'описание 5');
 
-                                                                                                                 INSERT INTO `organization` (`name`, `type`) VALUES ('organization 1', '2');
-                                                                                                                 INSERT INTO `organization` (`name`, `type`) VALUES ('organization 2', '2');
-                                                                                                                 INSERT INTO `organization` (`name`, `type`) VALUES ('organization 3', '2');
-                                                                                                                 INSERT INTO `organization` (`name`, `type`) VALUES ('Sud 1', '1');
-                                                                                                                 INSERT INTO `organization` (`name`, `type`) VALUES ('Sud 2', '1');
 
-                                                                                                                 INSERT INTO `author_document` (`name`, `position`, `activ_work`, `organization_id`) VALUES ('Petrov AA', 'pos1', '1', '1');
-                                                                                                                 INSERT INTO `author_document` (`name`, `position`, `activ_work`, `organization_id`) VALUES ('Sidorov AV', 'pos2', '1', '2');
-                                                                                                                 INSERT INTO `author_document` (`name`, `position`, `activ_work`, `organization_id`) VALUES ('Ivanov PA', 'pos3', '1', '3');
-                                                                                                                 INSERT INTO `author_document` (`name`, `position`, `activ_work`, `organization_id`) VALUES ('Kozlov HF', 'pos4', '1', '4');
-                                                                                                                 INSERT INTO `author_document` (`name`, `position`, `activ_work`, `organization_id`) VALUES ('Pechkin DS', 'pos5', '1', '1');
 
-                                                                                                                 INSERT INTO `name_entity_decree_adm` (`name`) VALUES ('name entity decree 1');
-                                                                                                                 INSERT INTO `name_entity_decree_adm` (`name`) VALUES ('name entity decree 2');
-                                                                                                                 INSERT INTO `name_entity_decree_adm` (`name`) VALUES ('name entity decree 3');
-                                                                                                                 INSERT INTO `name_entity_decree_adm` (`name`) VALUES ('name entity decree 4');
-                                                                                                                 INSERT INTO `name_entity_decree_adm` (`name`) VALUES ('name entity decree 5');
+                                                                                                                 INSERT INTO `organization` (`name`, `type`) VALUES ('Организация 1', '2'),
+                                                                                                                                                                    ('Организация 2', '2'),
+                                                                                                                                                                    ('Организация 3', '2'),
+                                                                                                                                                                    ('Суд 1', '1'),
+                                                                                                                                                                    ('Суд 2', '1');
 
-                                                                                                                 INSERT INTO `entity_decree_adm` (`name_entity_decree_id`, `prim`) VALUES ('1', 'prim decree 1');
-                                                                                                                 INSERT INTO `entity_decree_adm` (`name_entity_decree_id`, `prim`) VALUES ('2', 'prim decree 2');
-                                                                                                                 INSERT INTO `entity_decree_adm` (`name_entity_decree_id`, `prim`) VALUES ('3', 'prim decree 3');
-                                                                                                                 INSERT INTO `entity_decree_adm` (`name_entity_decree_id`, `prim`) VALUES ('4', 'prim decree 4');
-                                                                                                                 INSERT INTO `entity_decree_adm` (`name_entity_decree_id`, `prim`) VALUES ('5', 'prim decree 5');
+                                                                                                                 INSERT INTO `author_document` (`name`, `position`, `activ_work`, `organization_id`) VALUES ('Петров П.П.', 'Начальник', '1', '1'),
+                                                                                                                                                                                                            ('Сидоров В.Д.', 'Председатель', '1', '2'),
+                                                                                                                                                                                                            ('Иванов У.Ю.', 'заместитель председателя', '1', '3'),
+                                                                                                                                                                                                            ('Пышкина Д.В.', 'дизйнер ландшафта', '1', '4'),
+                                                                                                                                                                                                            ('Печкин А.П.', 'Самый главный', '1', '1');
 
-                                                                                                                 INSERT INTO `entity_isk_adm` (`name`) VALUES ('entity isk 1');
-                                                                                                                 INSERT INTO `entity_isk_adm` (`name`) VALUES ('entity isk 2');
-                                                                                                                 INSERT INTO `entity_isk_adm` (`name`) VALUES ('entity isk 3');
-                                                                                                                 INSERT INTO `entity_isk_adm` (`name`) VALUES ('entity isk 4');
-                                                                                                                 INSERT INTO `entity_isk_adm` (`name`) VALUES ('entity isk 5');
 
-                                                                                                                 INSERT INTO `result_adm` (`name`) VALUES ('result 1');
-                                                                                                                 INSERT INTO `result_adm` (`name`) VALUES ('result 2');
-                                                                                                                 INSERT INTO `result_adm` (`name`) VALUES ('result 3');
-                                                                                                                 INSERT INTO `result_adm` (`name`) VALUES ('result 4');
-                                                                                                                 INSERT INTO `result_adm` (`name`) VALUES ('result 5');
+                                                                                                                 INSERT INTO `name_entity_decree_adm` (`name`) VALUES ('Название сущности постановления 1'),
+                                                                                                                                                                      ('Название сущности постановления 2'),
+                                                                                                                                                                      ('Название сущности постановления 3'),
+                                                                                                                                                                      ('Название сущности постановления 4'),
+                                                                                                                                                                      ('Название сущности постановления 5');
 
-                                                                                                                 INSERT INTO `vialator` (`type_vialator`, `firstname`, `secondname`, `lastname`, `private_number`) VALUES ('1', 'Name Fiz 1', 'SecondName 1', 'Lastname 1', 'number 1');
-                                                                                                                 INSERT INTO `vialator` (`type_vialator`, `firstname`, `secondname`, `lastname`, `private_number`) VALUES ('1', 'Name Fiz 2', 'SecondName 2', 'Lastname 2', 'number 2');
-                                                                                                                 INSERT INTO `vialator` (`type_vialator`, `firstname`, `secondname`, `lastname`, `private_number`) VALUES ('1', 'Name Fiz 3', 'SecondName 3', 'Lastname 3', 'number 3');
-                                                                                                                 INSERT INTO `vialator` (`type_vialator`, `firstname`, `secondname`, `lastname`, `private_number`) VALUES ('1', 'Name Fiz 4', 'SecondName 4', 'Lastname 4', 'number 4');
-                                                                                                                 INSERT INTO `vialator` (`type_vialator`, `firstname`, `secondname`, `lastname`, `private_number`) VALUES ('1', 'Name Fiz 5', 'SecondName 5', 'Lastname 5', 'number 5');
-                                                                                                                 INSERT INTO `vialator` (`type_vialator`, `firstname`, `private_number`) VALUES ('2', 'Name Ur 1', 'number ur 1');
-                                                                                                                 INSERT INTO `vialator` (`type_vialator`, `firstname`, `private_number`) VALUES ('2', 'Name Ur 2', 'number ur 2');
-                                                                                                                 INSERT INTO `vialator` (`type_vialator`, `firstname`, `private_number`) VALUES ('2', 'Name Ur 3', 'number ur 3');
-                                                                                                                 INSERT INTO `vialator` (`type_vialator`, `firstname`, `private_number`) VALUES ('2', 'Name Ur 4', 'number ur 4');
-                                                                                                                 INSERT INTO `vialator` (`type_vialator`, `firstname`, `private_number`) VALUES ('2', 'Name Ur 5', 'number ur 5');
+                                                                                                                 INSERT INTO `entity_decree_adm` (`name_entity_decree_id`, `prim`) VALUES ('1', 'Примечание по постановлению 1'),
+                                                                                                                                                                                          ('2', 'Примечание по постановлению 2'),
+                                                                                                                                                                                          ('3', 'Примечание по постановлению 3'),
+                                                                                                                                                                                          ('4', 'Примечание по постановлению 4'),
+                                                                                                                                                                                          ('5', 'Примечание по постановлению 5');
+
+                                                                                                                 INSERT INTO `entity_isk_adm` (`name`) VALUES ('Сущность жалобы 1'),
+                                                                                                                                                              ('Сущность жалобы 2'),
+                                                                                                                                                              ('Сущность жалобы 3'),
+                                                                                                                                                              ('Сущность жалобы 4'),
+                                                                                                                                                              ('Сущность жалобы 5');
+
+                                                                                                                 INSERT INTO `result_adm` (`name`) VALUES ('Результат решения 1'),
+                                                                                                                                                          ('Результат решения 2'),
+                                                                                                                                                          ('Результат решения 3'),
+                                                                                                                                                          ('Результат решения 4'),
+                                                                                                                                                          ('Результат решения 5');
+
+                                                                                                                 INSERT INTO `vialator` (`type_vialator`, `firstname`, `secondname`, `lastname`, `private_number`) VALUES ('1', 'Архипов', 'Никита', 'Сергеевич', '3101290E001PB3'),
+                                                                                                                                                                                                                          ('1', 'Семенова', 'Екатерина', 'Эдуардовна', '3101080E001PB4'),
+                                                                                                                                                                                                                          ('1', 'Сапелка', 'Антон', 'Федорович', 'number 3'),
+                                                                                                                                                                                                                          ('1', 'Закревский', 'Дмитрий', 'Сергеевич', 'number 4'),
+                                                                                                                                                                                                                          ('1', 'Микульская', 'Виктория', 'Александровна', 'number 5'),
+                                                                                                                                                                                                                          ('2', 'РАЙПО', 'number ur 1'),
+                                                                                                                                                                                                                          ('2', 'Магазин СОЛНЫШКО', 'number ur 2'),
+                                                                                                                                                                                                                          ('2', 'ОАО Марко', 'number ur 3'),
+                                                                                                                                                                                                                          ('2', 'ОДО ВИСЕМ', 'number ur 4'),
+                                                                                                                                                                                                                          ('2', 'ИП Иванов АА', 'number ur 5');
+
+
+                                                                                                                 INSERT INTO `second_instance_adm` (`organization_id`, `author_document_id`, `decree_date`) VALUES
+                                                                                                                                                                                                                        (2, 2, '2017-01-02'),
+                                                                                                                                                                                                                        (4, 2, '2012-12-12');
+
+                                                                                                                 INSERT INTO `decree_adm` (`author_document_id`, `organization_id`, `decree_date`, `entered_into_force`, `second_instance_id`) VALUES
+                                                                                                                                                                                                                                                     (3, 1, '2016-02-25', 1, NULL),
+                                                                                                                                                                                                                                                     (2, 5, '2015-12-20', 1, 1);
+                                                                                                                 INSERT INTO `complaints_adm` (date_complaint`, `entity_id`, `name_author_complaint`, `activ`, `decree_adm_id`, `summ_poshlini`, `card_adm_id`) VALUES
+                                                                                                                                                                                                                                                                      ('2018-03-05', 2, 'Пупкин В.В.', 0, 1, '10', NULL);
+                                                                                                                                                                                                                                                                      

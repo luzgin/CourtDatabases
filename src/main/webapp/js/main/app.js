@@ -166,6 +166,20 @@ posdApp.config(function ($routeProvider) {
             }
 
         })
+        .when('/complaints', {
+            templateUrl: 'listComplaint.html',
+            controller: 'ComplaintController',
+            controllerAs: 'comC',
+            resolve: {
+                Complaints: function ($q, ComplaintService, DecreeService, EntityService) {
+                    var deferred = $q.defer();
+                    EntityService.loadAllEntities();
+                    DecreeService.loadAllRegulations();
+                    ComplaintService.loadAllComplaints().then(deferred.resolve, deferred.resolve);
+                    return deferred.promise;
+                }
+            }
+        })
         .otherwise({
             redirectTo: "/nameEntityDecree"
         })
