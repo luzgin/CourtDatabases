@@ -27,7 +27,7 @@ public class DateReturnCase {
 
     @JsonIgnore
     @OneToMany(mappedBy = "dateReturnCase", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Set<CardAdm> cardAdms = new HashSet<>();
+    private Set<CardAdm> cardAdms = new HashSet<CardAdm>();
 
 
     public Set<CardAdm> getCardAdms() {

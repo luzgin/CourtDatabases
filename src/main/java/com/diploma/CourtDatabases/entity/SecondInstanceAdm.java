@@ -30,7 +30,7 @@ public class SecondInstanceAdm {
 
     @JsonIgnore
     @OneToMany(mappedBy = "secondInstanceAdm", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Set<DecreeAdm> decreeAdms = new HashSet<>();
+    private Set<DecreeAdm> decreeAdms = new HashSet<DecreeAdm>();
 
 
     public SecondInstanceAdm() {

@@ -66,7 +66,7 @@ public class CardAdm {
 
     @JsonIgnore
     @OneToMany(mappedBy = "cardAdm", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Set<ComplaintsAdm> complaintsAdms = new HashSet<>();
+    private Set<ComplaintsAdm> complaintsAdms = new HashSet<ComplaintsAdm>();
 
 
     public CardAdm (){

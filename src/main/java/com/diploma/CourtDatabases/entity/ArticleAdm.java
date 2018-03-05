@@ -26,7 +26,7 @@ public class ArticleAdm {
 
     @JsonIgnore
     @OneToMany(mappedBy = "articleAdm", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Set<CardAdm> cardAdms = new HashSet<>();
+    private Set<CardAdm> cardAdms = new HashSet<CardAdm>();
 
     public Set<CardAdm> getCardAdms() {
         return cardAdms;

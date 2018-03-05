@@ -30,15 +30,15 @@ public class AuthorDocument {
 
     @JsonIgnore
     @OneToMany(mappedBy = "judge", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private  Set<CardAdm> cardAdms = new HashSet<>();
+    private  Set<CardAdm> cardAdms = new HashSet<CardAdm>();
 
     @JsonIgnore
     @OneToMany(mappedBy = "authorDocument", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private  Set<SecondInstanceAdm> secondInstanceAdms = new HashSet<>();
+    private  Set<SecondInstanceAdm> secondInstanceAdms = new HashSet<SecondInstanceAdm>();
 
     @JsonIgnore
     @OneToMany(mappedBy = "authorDocument", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private  Set<DecreeAdm> decreeAdms = new HashSet<>();
+    private  Set<DecreeAdm> decreeAdms = new HashSet<DecreeAdm>();
 
     public AuthorDocument() {
 

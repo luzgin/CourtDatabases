@@ -37,11 +37,11 @@ public class DecreeAdm {
 
     @JsonIgnore
     @OneToMany(mappedBy = "decreeAdm", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Set<ComplaintsAdm> complaintsAdms = new HashSet<>();
+    private Set<ComplaintsAdm> complaintsAdms = new HashSet<ComplaintsAdm>();
 
     @JsonIgnore
     @OneToMany(mappedBy = "decreeAdm", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Set<CardAdm> cardAdms = new HashSet<>();
+    private Set<CardAdm> cardAdms = new HashSet<CardAdm>();
 
     public DecreeAdm() {
 

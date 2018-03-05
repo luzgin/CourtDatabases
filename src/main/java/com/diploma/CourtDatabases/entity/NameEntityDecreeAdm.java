@@ -21,7 +21,7 @@ public class NameEntityDecreeAdm {
 
     @JsonIgnore
     @OneToMany(mappedBy = "nameEntityDecreeAdm", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Set<EntityDecreeAdm> entityDecreeAdms = new HashSet<>();
+    private Set<EntityDecreeAdm> entityDecreeAdms = new HashSet<EntityDecreeAdm>();
 
     public NameEntityDecreeAdm() {
 

@@ -23,15 +23,15 @@ public class Organization {
 
     @JsonIgnore
     @OneToMany(mappedBy = "organization", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Set<DecreeAdm> decreeAdms = new HashSet<>();
+    private Set<DecreeAdm> decreeAdms = new HashSet<DecreeAdm>();
 
     @JsonIgnore
     @OneToMany(mappedBy = "organization", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Set<AuthorDocument> authorDocuments = new HashSet<>();
+    private Set<AuthorDocument> authorDocuments = new HashSet<AuthorDocument>();
 
     @JsonIgnore
     @OneToMany(mappedBy = "organization", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Set<SecondInstanceAdm> secondInstanceAdms = new HashSet<>();
+    private Set<SecondInstanceAdm> secondInstanceAdms = new HashSet<SecondInstanceAdm>();
 
 
     public Set<DecreeAdm> getDecreeAdms() {
