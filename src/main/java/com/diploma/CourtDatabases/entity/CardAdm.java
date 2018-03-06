@@ -19,6 +19,10 @@ public class CardAdm {
     @Column(name = "card_number")
     private Integer cardNumber;
 
+    @Column(name = "card_create_date")
+    @Temporal(value = TemporalType.DATE)
+    private Date createDate;
+
     @ManyToOne
     @JoinColumn(name = "decree_adm_id", nullable = false)
     private DecreeAdm decreeAdm;
@@ -71,6 +75,14 @@ public class CardAdm {
 
     public CardAdm (){
 
+    }
+
+    public Date getCreateDate() {
+        return createDate;
+    }
+
+    public void setCreateDate(Date createDate) {
+        this.createDate = createDate;
     }
 
     public Set<ComplaintsAdm> getComplaintsAdms() {
@@ -198,6 +210,7 @@ public class CardAdm {
         return "CardAdm{" +
                 "id=" + id +
                 ", cardNumber=" + cardNumber +
+                ", createDate=" + createDate +
                 ", decreeAdm=" + decreeAdm +
                 ", vialator=" + vialator +
                 ", articleAdm=" + articleAdm +

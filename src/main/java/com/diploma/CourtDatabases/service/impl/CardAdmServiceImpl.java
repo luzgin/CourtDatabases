@@ -20,12 +20,17 @@ public class CardAdmServiceImpl implements CardAdmService {
     }
 
     @Override
+    public CardAdm update(CardAdm cardAdm) {
+        return cardAdmRepository.save(cardAdm);
+    }
+
+    @Override
     public void delete(long id) {
         cardAdmRepository.delete(id);
     }
 
     @Override
-    public List<CardAdm> getAll() {
+    public List<CardAdm> findAll() {
         return cardAdmRepository.findAll();
     }
 

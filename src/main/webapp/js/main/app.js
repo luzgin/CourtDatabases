@@ -12,24 +12,37 @@ posdApp.constant('urls', {
     NAME_ENTITY_DECREE_SERVICE_API: 'http://localhost:8080/api/nameentitydecree/',
     SECOND_INSTANCE_SERVICE_API: 'http://localhost:8080/api/secondInstance/',
     DECREE_SERVICE_API: 'http://localhost:8080/api/decree/',
-    CONPLAINT_SERVICE_API: 'http://localhost:8080/api/complaint/'
+    CONPLAINT_SERVICE_API: 'http://localhost:8080/api/complaint/',
+    CARD_SERVICE_API: 'http://localhost:8080/api/cardAdm/'
 });
 
 posdApp.config(function ($routeProvider) {
     $routeProvider
         .when('/', {
-            templateUrl: 'listComplaint.html',
-            controller: 'ComplaintController',
-            controllerAs: 'comC',
+            templateUrl: 'listCard.html',
+            controller: 'CardViewController',
+            controllerAs: 'cdviewC',
             resolve: {
-                Complaints: function ($q, ComplaintService, DecreeService, EntityService) {
+                Complaints: function ($q, CardViewService) {
                     var deferred = $q.defer();
-                    EntityService.loadAllEntities();
-                    DecreeService.loadAllRegulations();
-                    ComplaintService.loadAllComplaints().then(deferred.resolve, deferred.resolve);
+
+                    CardViewService.loadAllCards().then(deferred.resolve, deferred.resolve);
                     return deferred.promise;
                 }
             }
+        })
+        .when('/card', {
+            templateUrl: 'card.html',
+           /* controller: 'CardViewController',
+            controllerAs: 'cdviewC',
+            resolve: {
+                Complaints: function ($q, CardViewService) {
+                    var deferred = $q.defer();
+
+                    CardViewService.loadAllCards().then(deferred.resolve, deferred.resolve);
+                    return deferred.promise;
+                }
+            }  */
         })
         .when('/organization', {
             templateUrl: 'listOrganization.html',

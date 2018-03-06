@@ -5,9 +5,15 @@ import com.diploma.CourtDatabases.entity.CardAdm;
 import java.util.List;
 
 public interface CardAdmService {
-    CardAdm save (CardAdm cardAdm);
+    CardAdm save(CardAdm cardAdm);
+
+    CardAdm update(CardAdm cardAdm);
+
     void delete(long id);
-    List<CardAdm> getAll();
+
+    List<CardAdm> findAll();
+
     CardAdm findById(long id);
+
     CardAdm findByCardNumber(Integer cardNumber);
 }
