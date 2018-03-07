@@ -53,26 +53,6 @@ CREATE TABLE IF NOT EXISTS entity_isk_adm (
   ENGINE = INNODB
   DEFAULT CHARACTER SET utf8;
 
-DROP TABLE IF EXISTS `date_request_case`;
-CREATE TABLE IF NOT EXISTS date_request_case (
-  id           INT(10) AUTO_INCREMENT,
-  organization VARCHAR(200) NOT NULL,
-  date         DATE         NOT NULL,
-  PRIMARY KEY (id)
-)
-  ENGINE = INNODB
-  DEFAULT CHARACTER SET utf8;
-
-DROP TABLE IF EXISTS `date_return_case`;
-CREATE TABLE IF NOT EXISTS date_return_case (
-  id           INT(10) AUTO_INCREMENT,
-  organization VARCHAR(200) NOT NULL,
-  date         DATE         NOT NULL,
-  PRIMARY KEY (id)
-)
-  ENGINE = INNODB
-  DEFAULT CHARACTER SET utf8;
-
 DROP TABLE IF EXISTS `organization`;
 CREATE TABLE IF NOT EXISTS organization (
   id   INT(10) AUTO_INCREMENT,
@@ -141,34 +121,54 @@ CREATE TABLE IF NOT EXISTS vialator (
 
 DROP TABLE IF EXISTS `card_adm`;
 CREATE TABLE IF NOT EXISTS card_adm (
-  id                   INT(10) AUTO_INCREMENT,
-  card_number          INT(10)      NOT NULL,
-  card_create_date     DATE         NOT NULL,
-  decree_adm_id        INT(10)      NOT NULL,
-  vialator_id          INT(10)      NOT NULL,
-  article_id           INT(10)      NOT NULL,
-  entity_decree_id     INT(10)      NOT NULL,
-  note_article         VARCHAR(200),
-  judge_id             INT(10),
-  card_activ           BOOLEAN      NOT NULL,
-  result_date          DATE,
-  result_id            INT(2),
-  date_request_delo_id INT(10),
-  date_return_delo_id  INT(10),
-  note                 VARCHAR(250),
+  id               INT(10) AUTO_INCREMENT,
+  card_number      INT(10) NOT NULL,
+  card_create_date DATE    NOT NULL,
+  decree_adm_id    INT(10) NOT NULL,
+  vialator_id      INT(10) NOT NULL,
+  article_id       INT(10) NOT NULL,
+  entity_decree_id INT(10) NOT NULL,
+  note_article     VARCHAR(200),
+  judge_id         INT(10),
+  card_activ       BOOLEAN NOT NULL,
+  result_date      DATE,
+  result_id        INT(2),
+  note             VARCHAR(250),
   PRIMARY KEY (id),
   FOREIGN KEY (vialator_id) REFERENCES vialator (id),
   FOREIGN KEY (decree_adm_id) REFERENCES decree_adm (id),
-  FOREIGN KEY (date_request_delo_id) REFERENCES date_request_case (id),
-  FOREIGN KEY (date_return_delo_id) REFERENCES date_return_case (id),
   FOREIGN KEY (article_id) REFERENCES article_adm (id),
   FOREIGN KEY (entity_decree_id) REFERENCES entity_decree_adm (id),
   FOREIGN KEY (judge_id) REFERENCES author_document (id),
   FOREIGN KEY (result_id) REFERENCES result_adm (id)
-
 )
   ENGINE = INNODB
   DEFAULT CHARACTER SET utf8;
+
+DROP TABLE IF EXISTS `date_request_case`;
+CREATE TABLE IF NOT EXISTS date_request_case (
+  id           INT(10) AUTO_INCREMENT,
+  organization VARCHAR(200) NOT NULL,
+  date         DATE         NOT NULL,
+  card_id      INT(10)      NOT NULL,
+  PRIMARY KEY (id),
+  FOREIGN KEY (card_id) REFERENCES card_adm (id)
+)
+  ENGINE = INNODB
+  DEFAULT CHARACTER SET utf8;
+
+DROP TABLE IF EXISTS `date_return_case`;
+CREATE TABLE IF NOT EXISTS date_return_case (
+  id           INT(10) AUTO_INCREMENT,
+  organization VARCHAR(200) NOT NULL,
+  date         DATE         NOT NULL,
+  card_id      INT(10)      NOT NULL,
+  PRIMARY KEY (id),
+  FOREIGN KEY (card_id) REFERENCES card_adm (id)
+)
+  ENGINE = INNODB
+  DEFAULT CHARACTER SET utf8;
+
 
 DROP TABLE IF EXISTS `complaints_adm`;
 CREATE TABLE IF NOT EXISTS complaints_adm (
@@ -212,11 +212,15 @@ VALUES ('Пышкина Д.В.', 'дизйнер ландшафта', '1', '4');
 INSERT INTO `author_document` (`name`, `position`, `activ_work`, `organization_id`)
 VALUES ('Печкин А.П.', 'Самый главный', '1', '1');
 
-INSERT INTO `name_entity_decree_adm` (`name`) VALUES ('Название сущности постановления 1');
-INSERT INTO `name_entity_decree_adm` (`name`) VALUES ('Название сущности постановления 2');
-INSERT INTO `name_entity_decree_adm` (`name`) VALUES ('Название сущности постановления 3');
-INSERT INTO `name_entity_decree_adm` (`name`) VALUES ('Название сущности постановления 4');
-INSERT INTO `name_entity_decree_adm` (`name`) VALUES ('Название сущности постановления 5');
+INSERT INTO `name_entity_decree_adm` (`name`) VALUES ('Предупреждение');
+INSERT INTO `name_entity_decree_adm` (`name`) VALUES ('Штраф');
+INSERT INTO `name_entity_decree_adm` (`name`) VALUES ('Исправительные рабты');
+INSERT INTO `name_entity_decree_adm` (`name`) VALUES ('Административный арест');
+INSERT INTO `name_entity_decree_adm` (`name`) VALUES ('Лишение специального права');
+INSERT INTO `name_entity_decree_adm` (`name`) VALUES ('Лишение права заниматься определенной деятельностью');
+INSERT INTO `name_entity_decree_adm` (`name`) VALUES ('Конфискация');
+INSERT INTO `name_entity_decree_adm` (`name`) VALUES ('Депортация');
+INSERT INTO `name_entity_decree_adm` (`name`) VALUES ('Взыскание стоимости');
 
 INSERT INTO `entity_decree_adm` (`name_entity_decree_id`, `prim`) VALUES ('1', 'Примечание по постановлению 1');
 INSERT INTO `entity_decree_adm` (`name_entity_decree_id`, `prim`) VALUES ('2', 'Примечание по постановлению 2');
@@ -224,17 +228,19 @@ INSERT INTO `entity_decree_adm` (`name_entity_decree_id`, `prim`) VALUES ('3', '
 INSERT INTO `entity_decree_adm` (`name_entity_decree_id`, `prim`) VALUES ('4', 'Примечание по постановлению 4');
 INSERT INTO `entity_decree_adm` (`name_entity_decree_id`, `prim`) VALUES ('5', 'Примечание по постановлению 5');
 
-INSERT INTO `entity_isk_adm` (`name`) VALUES ('Сущность жалобы 1');
-INSERT INTO `entity_isk_adm` (`name`) VALUES ('Сущность жалобы 2');
-INSERT INTO `entity_isk_adm` (`name`) VALUES ('Сущность жалобы 3');
-INSERT INTO `entity_isk_adm` (`name`) VALUES ('Сущность жалобы 4');
-INSERT INTO `entity_isk_adm` (`name`) VALUES ('Сущность жалобы 5');
+INSERT INTO `entity_isk_adm` (`name`) VALUES ('По жалобе лица, в отношении которого вынесено постановление');
+INSERT INTO `entity_isk_adm` (`name`) VALUES ('По жалобе потепревшего');
+INSERT INTO `entity_isk_adm` (`name`) VALUES ('По жалобе представителя потерпевшего');
+INSERT INTO `entity_isk_adm` (`name`) VALUES ('По жалобе представителя юридического лица');
+INSERT INTO `entity_isk_adm` (`name`) VALUES ('По жалобе защитника');
+INSERT INTO `entity_isk_adm` (`name`) VALUES ('По жалобе руководителя органа, направившего дело в суд');
+INSERT INTO `entity_isk_adm` (`name`) VALUES ('По протесту прокурора');
 
-INSERT INTO `result_adm` (`name`) VALUES ('Результат решения 1');
-INSERT INTO `result_adm` (`name`) VALUES ('Результат решения 2');
-INSERT INTO `result_adm` (`name`) VALUES ('Результат решения 3');
-INSERT INTO `result_adm` (`name`) VALUES ('Результат решения 4');
-INSERT INTO `result_adm` (`name`) VALUES ('Результат решения 5');
+INSERT INTO `result_adm` (`name`) VALUES ('Оставлено без изменения, а жалоба (протест) - без удовлетворения');
+INSERT INTO `result_adm` (`name`) VALUES ('Отменено полностью или в части и направлено на новое рассмотрение');
+INSERT INTO `result_adm` (`name`) VALUES ('Отменено полностью или в части и прекращено дело');
+INSERT INTO `result_adm` (`name`) VALUES ('Отменено последнее по времени постановление, и оставлено в силе одно из ранее вынесенных постановлений');
+INSERT INTO `result_adm` (`name`) VALUES ('Изменено постановление');
 
 INSERT INTO `vialator` (`type_vialator`, `firstname`, `secondname`, `lastname`, `private_number`)
 VALUES ('1', 'Архипов', 'Никита', 'Сергеевич', '3101290E001PB3');

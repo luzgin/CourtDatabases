@@ -23,22 +23,20 @@ public class DateRequestCase {
     @Temporal(value = TemporalType.DATE)
     private Date date;
 
-
-    @JsonIgnore
-    @OneToMany(mappedBy = "dateRequestCase", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Set<CardAdm> cardAdms = new HashSet<CardAdm>();
-
-
-    public Set<CardAdm> getCardAdms() {
-        return cardAdms;
-    }
-
-    public void setCardAdms(Set<CardAdm> cardAdms) {
-        this.cardAdms = cardAdms;
-    }
+    @ManyToOne
+    @JoinColumn(name = "card_id", nullable = false)
+    private CardAdm cardAdm;
 
     public DateRequestCase(){
 
+    }
+
+    public CardAdm getCardAdm() {
+        return cardAdm;
+    }
+
+    public void setCardAdm(CardAdm cardAdm) {
+        this.cardAdm = cardAdm;
     }
 
     public long getId() {

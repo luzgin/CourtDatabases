@@ -57,16 +57,17 @@ public class CardAdm {
     @JoinColumn(name = "result_id", nullable = true)
     private ResultAdmCase resultAdmCase;
 
-    @ManyToOne
-    @JoinColumn(name = "date_request_delo_id", nullable = true)
-    private DateRequestCase dateRequestCase;
-
-    @ManyToOne
-    @JoinColumn(name = "date_return_delo_id", nullable = true)
-    private DateReturnCase dateReturnCase;
-
     @Column(name = "note")
     private String note;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "cardAdm", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private  Set<DateRequestCase> dateRequestCases = new HashSet<DateRequestCase>();
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "cardAdm", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private  Set<DateReturnCase> dateReturnCases = new HashSet<DateReturnCase>();
+
 
     @JsonIgnore
     @OneToMany(mappedBy = "cardAdm", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
@@ -181,22 +182,6 @@ public class CardAdm {
         this.resultAdmCase = resultAdmCase;
     }
 
-    public DateRequestCase getDateRequestCase() {
-        return dateRequestCase;
-    }
-
-    public void setDateRequestCase(DateRequestCase dateRequestCase) {
-        this.dateRequestCase = dateRequestCase;
-    }
-
-    public DateReturnCase getDateReturnCase() {
-        return dateReturnCase;
-    }
-
-    public void setDateReturnCase(DateReturnCase dateReturnCase) {
-        this.dateReturnCase = dateReturnCase;
-    }
-
     public String getNote() {
         return note;
     }
@@ -220,8 +205,6 @@ public class CardAdm {
                 ", cardActiv=" + cardActiv +
                 ", resultDate=" + resultDate +
                 ", resultAdmCase=" + resultAdmCase +
-                ", dateRequestCase=" + dateRequestCase +
-                ", dateReturnCase=" + dateReturnCase +
                 ", note='" + note + '\'' +
                 '}';
     }

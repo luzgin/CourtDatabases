@@ -42,8 +42,6 @@ public class CardController {
         currentCardAdm.setCardActiv(cardAdm.isCardActiv());
         currentCardAdm.setResultDate(cardAdm.getResultDate());
         currentCardAdm.setResultAdmCase(cardAdm.getResultAdmCase());
-        currentCardAdm.setDateRequestCase(cardAdm.getDateRequestCase());
-        currentCardAdm.setDateReturnCase(cardAdm.getDateReturnCase());
         currentCardAdm.setNote(cardAdm.getNote());
         cardAdmService.update(currentCardAdm);
     }

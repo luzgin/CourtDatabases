@@ -34,13 +34,16 @@
                 <td>{{item.summPoshlini}}</td>
                 <td>{{item.activ== 1 ? 'Да' : 'Нет' }}</td>
                 <td>
-                    <button type="button"data-toggle="modal"
-                            data-target="#ModalSave" ng-click="comC.editComplaint(item.id)" class="btn btn-success btn-sm custom-width">Редактировать</button>
+                    <button type="button" data-toggle="modal"
+                            data-target="#ModalSave" ng-click="comC.editComplaint(item.id)"
+                            class="btn btn-success btn-sm custom-width">Редактировать
+                    </button>
                 </td>
                 <td>
                     <div class="div-center">
                         <div class="div-center">
-                            <button class="btn btn-danger btn-sm" ng-click="comC.removeComplaint(item.id);">Удалить</button>
+                            <button class="btn btn-danger btn-sm" ng-click="comC.removeComplaint(item.id);">Удалить
+                            </button>
                         </div>
                     </div>
                 </td>
@@ -57,17 +60,11 @@
             </div>
             <div class="modal-body">
                 <form ng-submit="comC.submit()" class="form-horizontal" role="form">
-                    <input type="hidden" ng-model="comC.complaint.id" />
+                    <input type="hidden" ng-model="comC.complaint.id"/>
                     <div class="form-group row">
                         <label class="col-md-2 control-label">Дата</label>
                         <div class="col-md-10">
                             <input type="text" class="form-control" ng-model="comC.complaint.complainDate"/>
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-md-2 control-label">Автор</label>
-                        <div class="col-md-10">
-                            <input type="text" class="form-control" ng-model="comC.complaint.nameAuthorComplaint"/>
                         </div>
                     </div>
                     <div class="form-group row">
@@ -77,6 +74,12 @@
                                     ng-options="item.name for item in comC.getAllEntities() track by item.id"
                                     ng-model="comC.complaint.entityIskAdm">
                             </select>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-md-2 control-label">Автор</label>
+                        <div class="col-md-10">
+                            <input type="text" class="form-control" ng-model="comC.complaint.nameAuthorComplaint"/>
                         </div>
                     </div>
                     <div class="form-group row">
@@ -105,7 +108,8 @@
                         </div>
                     </div>
                     <div class="modal-footer row mr-0">
-                        <input type="submit"  value="{{!comC.complaint.id ? 'Добавить' : 'Обновить'}}" class="btn btn-primary btn-sm">
+                        <input type="submit" value="{{!comC.complaint.id ? 'Добавить' : 'Обновить'}}"
+                               class="btn btn-primary btn-sm">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
                     </div>
                 </form>

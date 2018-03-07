@@ -33,16 +33,28 @@ posdApp.config(function ($routeProvider) {
         })
         .when('/card', {
             templateUrl: 'card.html',
-           /* controller: 'CardViewController',
-            controllerAs: 'cdviewC',
+            controller: 'CardController',
+            controllerAs: 'cardC',
             resolve: {
-                Complaints: function ($q, CardViewService) {
+                Complaints: function ($q, CardService, ArticleService, AuthorService, ComplaintService, OrgService,
+                                      DecreeService, SecondInstanceService, EntityDecreeService, EntityService,
+                                      NameEntityDecreeService, ResService, VialatorService) {
                     var deferred = $q.defer();
-
-                    CardViewService.loadAllCards().then(deferred.resolve, deferred.resolve);
+                    ArticleService.loadAllArticles();
+                    AuthorService.loadAllAuthors();
+                    ComplaintService.loadAllComplaints();
+                    OrgService.loadAllOrganizations();
+                    DecreeService.loadAllRegulations();
+                    SecondInstanceService.loadAllSecondInstances();
+                    EntityDecreeService.loadAllEntitiesDecree();
+                    EntityService.loadAllEntities();
+                    NameEntityDecreeService.loadAllNamesEntityDecree();
+                    ResService.loadAllResults();
+                    VialatorService.loadAllVialatorsFiz();
+                    VialatorService.loadAllVialatorsOrg().then(deferred.resolve, deferred.resolve);
                     return deferred.promise;
                 }
-            }  */
+            }
         })
         .when('/organization', {
             templateUrl: 'listOrganization.html',

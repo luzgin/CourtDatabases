@@ -2,123 +2,286 @@
     <div class="card-header py-2">
         Карточка
     </div>
-    <div class="card-body">
-        <div class="p-0 row">
-            <div class="col-md-4">
-                <div class="form-group row">
-                    <label class="col-md-5" for="numberCard">Номер карточки</label>
-                    <div class="col-md-4">
-                        <input type="text" class="form-control btn-sm" id="numberCard"/>
+    <form ng-submit="cardC.submit()" class="form-horizontal" role="form">
+        <input type="hidden" ng-model="cardC.card.id"/>
+        <div class="card-body">
+            <div class="p-0 row">
+                <div class="col-md-4">
+                    <div class="form-group row">
+                        <label class="col-md-5" for="numberCard">Номер карточки</label>
+                        <div class="col-md-4">
+                            <input type="text" class="form-control btn-sm" id="numberCard"
+                                   ng-model="cardC.card.cardNumber"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-7">
+                    <div class="form-group row">
+                        <label class="col-md-3" for="createCard">Дата создания</label>
+                        <div class="col-md-4">
+                            <input type="text" class="form-control btn-sm" id="createCard"
+                                   ng-model="cardC.card.createDate"/>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="col-md-7">
-                <div class="form-group row">
-                    <label class="col-md-3" for="createCard">Дата создания</label>
-                    <div class="col-md-4">
-                        <input type="text" class="form-control btn-sm" id="createCard"/>
-                    </div>
+            <div class="card">
+                <div class="card-header p-1 text-center">
+                    Постановление
                 </div>
-            </div>
-        </div>
+                <div class="card-body p-3">
+                    <div class="form-group row mb-2">
+                        <div class="col-md-4 pr-0">
+                            <input type="text" class="form-control btn-sm" placeholder="Поиск по дате вынесения постановления"/>
+                        </div>
+                        <div class="col-md-auto">
+                            <input type="button" class="btn btn-outline-success btn-sm" value="Добавить"/>
+                        </div>
+                        <div class="custom-control custom-checkbox">
+                            <label for="secondInstance">Вторая инстанция</label>
+                            <input type="checkbox" ng-model="secondInstanceCheck" id="secondInstance">
+                        </div>
+                    </div>
+                    <div class="form-group row mb-0">
+                        <div class="col-md-4 pr-0">
+                            <label for="organization">Организация</label>
+                            <input type="text" class="form-control btn-sm" id="organization" readonly/>
+                        </div>
+                        <div class="col-md-4 px-1">
+                            <label for="position">Должность</label>
+                            <input type="text" class="form-control btn-sm" id="position" readonly/>
+                        </div>
+                        <div class="col-md-2 px-1">
+                            <label for="authorDocument">Фамилия И.О.</label>
+                            <input type="text" class="form-control btn-sm" id="authorDocument" readonly/>
+                        </div>
+                        <div class="col-md-2 pl-0">
+                            <label for="dateDecree">Дата</label>
+                            <input type="text" class="form-control btn-sm" id="dateDecree" readonly/>
+                        </div>
+                    </div>
 
-        <div class="card">
-            <div class="card-header p-1 text-center">
-                Постановление
-            </div>
-            <div class="card-body">
-                <p class="card-text">Информация о постановлении</p>
-            </div>
-        </div>
-        <div class="card mt-2">
-            <div class="card-header p-1  text-center">
-                Вторая инстанция
-            </div>
-            <div class="card-body">
-                <p class="card-text">Информация о второй инстанции</p>
-            </div>
-        </div>
-        <div class="card mt-2">
-            <div class="card-header p-1  text-center">
-                Жалобы
-            </div>
-            <div class="card-body">
-                <p class="card-text">Информация о жалобах</p>
-            </div>
-        </div>
-        <div class="card mt-2 mb-4">
-            <div class="card-header p-1 text-center">
-                Нарушитель
-            </div>
-            <div class="card-body">
-                <p class="card-text">Информация о нарушителе</p>
-            </div>
-        </div>
-        <div class="p-0 row">
-            <div class="col-md-4 align-items-center">
-                <div class="form-group row">
-                    <label class="col-md-4 pr-0" for="articleNumber">Статья</label>
-                    <div class="col-md-8 p-0">
-                        <input type="text" class="form-control" id="articleNumber"/>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-8 align-items-center">
-                <div class="form-group row">
-                    <label class="col-md-4" for="entityDecree">Сущность постановления</label>
-                    <div class="col-md-8">
-                        <input type="text" class="form-control btn-sm" id="entityDecree"/>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="form-group">
-            <label for="noteEntityDecree">Примечание к постановлению</label>
-            <textarea class="form-control btn-sm" id="noteEntityDecree" rows="2"></textarea>
-        </div>
-        <div class="card mb-3">
-            <div class="card-header p-1  text-center">
-                Поступление дел при истребовании
-            </div>
-            <div class="card-body">
-                <p class="card-text">Информация о поступивших делах</p>
-            </div>
-        </div>
-        <div class="form-group row">
-            <div class="col-md-3">
-                <label for="judge">Судья</label>
-                <input type="text" class="form-control btn-sm" id="judge"/>
-            </div>
-            <div class="col-md-2">
-                <label for="resultDate">Дата рассмотрения</label>
-                <input type="text" class="form-control btn-sm" id="resultDate"/>
-            </div>
-            <div class="col-md-7">
-                <label for="result">Результат рассмотрения</label>
-                <input type="text" class="form-control btn-sm" id="result"/>
-            </div>
-        </div>
-        <div class="card mb-3">
-            <div class="card-header p-1  text-center">
-                Возвращение дел
-            </div>
-            <div class="card-body">
-                <p class="card-text">Информация о делах которые вернули</p>
-            </div>
-        </div>
-        <div class="form-group">
-            <label for="note">Примечание</label>
-            <textarea class="form-control btn-sm" id="note" rows="2"></textarea>
-        </div>
-        <div class="row justify-content-md-center">
-            <div class="col col-md-2">
-                <input type="submit" class="btn btn-primary" onclick="location.href = 'index.html#!/'" value="Назад"/>
-            </div>
-            <div class="col col-md-2">
-                <input type="submit" class="btn btn-success" value="Сохранить"/>
-            </div>
-        </div>
 
-    </div>
+                </div>
+            </div>
+            <div class="card mt-2" ng-show="secondInstanceCheck">
+                <div class="card-header p-1  text-center">
+                    Вторая инстанция
+                </div>
+                <div class="card-body p-3">
+                    <div class="form-group row mb-2">
+                        <div class="col-md-4 pr-0">
+                            <input type="text" class="form-control btn-sm" placeholder="Поиск по дате вынесения постановления"/>
+                        </div>
+                        <div class="col-md-auto">
+                            <input type="button" class="btn btn-outline-success btn-sm" value="Добавить"/>
+                        </div>
+                        <div class="col-md-auto">
+                            <input type="button" class="btn btn-outline-primary btn-sm" value="Изменить"/>
+                        </div>
+                    </div>
+                    <div class="form-group row mb-0">
+                        <div class="col-md-4 pr-0">
+                            <label for="organizationSecondInstance">Организация</label>
+                            <input type="text" class="form-control btn-sm" id="organizationSecondInstance" readonly/>
+                        </div>
+                        <div class="col-md-4 px-1">
+                            <label for="positionSecondInstance">Должность</label>
+                            <input type="text" class="form-control btn-sm" id="positionSecondInstance" readonly/>
+                        </div>
+                        <div class="col-md-2 px-1">
+                            <label for="authorDocumentSecondInstance">Фамилия И.О.</label>
+                            <input type="text" class="form-control btn-sm" id="authorDocumentSecondInstance" readonly/>
+                        </div>
+                        <div class="col-md-2 pl-0">
+                            <label for="dateDecreeSecondInstance">Дата</label>
+                            <input type="text" class="form-control btn-sm" id="dateDecreeSecondInstance" readonly/>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="card mt-2">
+                <div class="card-header p-1  text-center">
+                    <label>Жалобы</label>
+                </div>
+                <div class="card-body py-2 px-3">
+                    <table class="table table-striped table-bordered table-sm table-hover mb-0">
+                        <div class="row justify-content-end pr-3 pb-2">
+                            <input type="button" class="btn btn-outline-success btn-sm" value="Добавить"/>
+                            <input type="button" class="btn btn-outline-primary btn-sm" value="Изменить"/>
+                            <input type="button" class="btn btn-outline-danger btn-sm" value="Удалить"/>
+                        </div>
+                        <thead>
+                        <tr>
+                            <th class="div-center" width="15%">Дата</th>
+                            <th class="div-center" width="40%">Сужность жалобы</th>
+                            <th class="div-center" width="20%">Автор</th>
+                            <th class="div-center" width="15%">Сумма госпошлины</th>
+                            <th class="div-center" width="10%">Дан ответ</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>{{item.complainDate}}</td>
+                            <td>{{item.entityIskAdm.name}}</td>
+                            <td>{{item.nameAuthorComplaint}}</td>
+                            <td>{{item.summPoshlini}}</td>
+                            <td>{{item.activ== 1 ? 'Да' : 'Нет' }}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="card mt-2 mb-4">
+                <div class="card-header p-1 text-center">
+                    <label>Нарушитель</label>
+                </div>
+                <div class="card-body py-2 px-3">
+                    <div class="form-group row mb-2">
+                        <div class="col-md-3 pr-0">
+                            <input type="text" class="form-control btn-sm" placeholder="Личный номер / УНП"/>
+                        </div>
+                        <div class="col-md-auto">
+                            <input type="button" class="btn btn-outline-success btn-sm" value="Добавить"/>
+                        </div>
+                        <div class="col-md-auto">
+                            <input type="button" class="btn btn-outline-primary btn-sm" value="Изменить"/>
+                        </div>
+                    </div>
+                    <div class="form-group row mb-0">
+                        <div class="col-md-3 pr-0">
+                            <label for="privateNumberFiz">Личный номер</label>
+                            <input type="text" class="form-control btn-sm" id="privateNumberFiz" readonly/>
+                        </div>
+                        <div class="col-md-3 px-1">
+                            <label for="firstnameFiz">Фамилия</label>
+                            <input type="text" class="form-control btn-sm" id="firstnameFiz" readonly/>
+                        </div>
+                        <div class="col-md-3 px-1">
+                            <label for="secondname">Имя</label>
+                            <input type="text" class="form-control btn-sm" id="secondname" readonly/>
+                        </div>
+                        <div class="col-md-3 pl-0">
+                            <label for="lastname">Отчество</label>
+                            <input type="text" class="form-control btn-sm" id="lastname" readonly/>
+                        </div>
+                    </div>
+                    <div class="form-group row mb-0">
+                        <div class="col-md-3 pr-1">
+                            <label for="privateNumberOrg">УНП</label>
+                            <input type="text" class="form-control btn-sm" id="privateNumberOrg" readonly/>
+                        </div>
+                        <div class="col-md-9 pl-0">
+                            <label for="firstnameOrg">Название</label>
+                            <input type="text" class="form-control btn-sm" id="firstnameOrg" readonly/>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="p-0 row">
+                <div class="col-md-4 align-items-center">
+                    <div class="form-group row">
+                        <label class="col-md-4 pr-0" for="articleNumber">Статья</label>
+                        <div class="col-md-8 p-0">
+                            <input type="text" class="form-control" id="articleNumber"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-8 align-items-center">
+                    <div class="form-group row">
+                        <label class="col-md-4" for="entityDecree">Сущность постановления</label>
+                        <div class="col-md-8">
+                            <input type="text" class="form-control btn-sm" id="entityDecree"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="noteEntityDecree">Примечание к постановлению</label>
+                <textarea class="form-control btn-sm" id="noteEntityDecree" rows="2"></textarea>
+            </div>
+            <div class="card mb-3">
+                <div class="card-header p-1  text-center">
+                    Поступление дел при истребовании
+                </div>
+                <div class="card-body py-2 px-3">
+                    <table class="table table-striped table-bordered table-sm table-hover mb-0">
+                        <div class="row justify-content-end pr-3 pb-2">
+                            <input type="button" class="btn btn-outline-success btn-sm" value="Добавить"/>
+                            <input type="button" class="btn btn-outline-primary btn-sm" value="Изменить"/>
+                            <input type="button" class="btn btn-outline-danger btn-sm" value="Удалить"/>
+                        </div>
+                        <thead>
+                        <tr>
+                            <th class="div-center" width="15%">Дата</th>
+                            <th class="div-center" width="85%">Организация</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>1</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-md-3">
+                    <label for="judge">Судья</label>
+                    <input type="text" class="form-control btn-sm" id="judge"/>
+                </div>
+                <div class="col-md-2">
+                    <label for="resultDate">Дата рассмотрения</label>
+                    <input type="text" class="form-control btn-sm" id="resultDate"/>
+                </div>
+                <div class="col-md-7">
+                    <label for="result">Результат рассмотрения</label>
+                    <input type="text" class="form-control btn-sm" id="result"/>
+                </div>
+            </div>
+            <div class="card mb-3">
+                <div class="card-header p-1  text-center">
+                    Возвращение дел
+                </div>
+                <div class="card-body py-2 px-3">
+                    <table class="table table-striped table-bordered table-sm table-hover mb-0">
+                        <div class="row justify-content-end pr-3 pb-2">
+                            <input type="button" class="btn btn-outline-success btn-sm" value="Добавить"/>
+                            <input type="button" class="btn btn-outline-primary btn-sm" value="Изменить"/>
+                            <input type="button" class="btn btn-outline-danger btn-sm" value="Удалить"/>
+                        </div>
+                        <thead>
+                        <tr>
+                            <th class="div-center" width="15%">Дата</th>
+                            <th class="div-center" width="85%">Организация</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>1</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="note">Примечание</label>
+                <textarea class="form-control btn-sm" id="note" rows="2"></textarea>
+            </div>
+            <div class="row justify-content-md-center">
+                <div class="col col-md-2">
+                    <input type="submit" class="btn btn-primary" onclick="location.href = 'index.html#!/'"
+                           value="Назад"/>
+                </div>
+                <div class="col col-md-2">
+                    <input type="submit" class="btn btn-success" value="{{!cardC.card.id ? 'Добавить' : 'Обновить'}}"/>
+                </div>
+            </div>
+        </div>
+    </form>
 </div>
 
