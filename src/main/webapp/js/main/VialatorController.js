@@ -5,6 +5,8 @@ angular.module('courtApp').controller('VialatorController',
         var self = this;
         self.vialatorsFiz = [];
         self.vialatorsOrg = [];
+        self.vialators = [];
+        self.vialator = {};
         $scope.radioChecked = {on: '1'};
 
         self.submit = submit;

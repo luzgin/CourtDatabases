@@ -50,8 +50,7 @@ posdApp.config(function ($routeProvider) {
                     EntityService.loadAllEntities();
                     NameEntityDecreeService.loadAllNamesEntityDecree();
                     ResService.loadAllResults();
-                    VialatorService.loadAllVialatorsFiz();
-                    VialatorService.loadAllVialatorsOrg().then(deferred.resolve, deferred.resolve);
+                    VialatorService.loadAllVialators().then(deferred.resolve, deferred.resolve);
                     return deferred.promise;
                 }
             }

@@ -8,12 +8,46 @@ angular.module('courtApp').controller('CardController',
                                         NameEntityDecreeService, ResService, VialatorService, $scope) {
         var self = this;
         self.card = {};
+        self.entityDecree = {};
         self.submit = submit;
         self.createCard = createCard;
         self.updateCard = updateCard;
         self.editCard = editCard;
         self.removeCard = removeCard;
         self.getAllArticles = getAllArticles;
+        self.getAllNamesEntityDecree = getAllNamesEntityDecree;
+        self.getAllEntitiesDecree = getAllEntitiesDecree;
+        self.getAllResults = getAllResults;
+        self.getAllRegulations = getAllRegulations;
+        self.getAllSecondInstances = getAllSecondInstances;
+        self.getAllAuthors = getAllAuthors;
+        self.getAllVialators = getAllVialators;
+
+        function getAllArticles() {
+            return ArticleService.getAllArticles();
+        }
+        function getAllNamesEntityDecree() {
+            return NameEntityDecreeService.getAllNamesEntityDecree();
+        }
+        //пересмотреть и удалить
+        function getAllEntitiesDecree() {
+            return EntityDecreeService.getAllEntitiesDecree();
+        }
+        function getAllResults() {
+            return ResService.getAllResults();
+        }
+        function getAllRegulations() {
+            return DecreeService.getAllRegulations();
+        }
+        function getAllSecondInstances() {
+            return SecondInstanceService.getAllSecondInstances();
+        }
+        function getAllAuthors() {
+            return AuthorService.getAllAuthors();
+        }
+        function getAllVialators() {
+            return VialatorService.getAllVialators();
+        }
 
         function submit() {
             console.log('Submitting');

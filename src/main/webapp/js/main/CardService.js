@@ -30,6 +30,7 @@ angular.module('courtApp').factory('CardService',
             function createCard(entity) {
                 console.log('Creating entity');
                 var deferred = $q.defer();
+                entity.cardActiv = true;
                 $http.post(urls.CARD_SERVICE_API, entity)
                     .then(
                         function (response) {

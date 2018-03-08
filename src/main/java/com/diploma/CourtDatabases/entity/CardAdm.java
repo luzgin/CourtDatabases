@@ -36,7 +36,7 @@ public class CardAdm {
     private ArticleAdm articleAdm;
 
     @ManyToOne
-    @JoinColumn(name = "entity_decree_id", nullable = false)
+    @JoinColumn(name = "entity_decree_id", nullable = true)
     private EntityDecreeAdm entityDecreeAdm;
 
     @Column(name = "note_article")

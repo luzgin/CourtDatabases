@@ -12,13 +12,23 @@ angular.module('courtApp').factory('VialatorService',
                 getVialator: getVialator,
                 createVialator: createVialator,
                 updateVialator: updateVialator,
-                removeVialator: removeVialator,
+                removeVialator: removeVialator
             };
             return factory;
 
             function loadAllVialators() {
-                loadAllVialatorsFiz();
-                loadAllVialatorsOrg();
+                var deferred = $q.defer();
+                $http.get(urls.VIALATOR_SERVICE_API)
+                    .then(
+                        function (response) {
+                            $localStorage.vialators = response.data;
+                            deferred.resolve(response);
+                        },
+                        function (errResponse) {
+                            deferred.reject(errResponse);
+                        }
+                    );
+                return deferred.promise;
             }
 
             function loadAllVialatorsFiz() {
@@ -84,7 +94,8 @@ angular.module('courtApp').factory('VialatorService',
                 $http.post(urls.VIALATOR_SERVICE_API, entity)
                     .then(
                         function (response) {
-                            loadAllVialators();
+                            loadAllVialatorsFiz();
+                            loadAllVialatorsOrg();
                             deferred.resolve(response.data);
                         },
                         function (errResponse) {
@@ -101,7 +112,8 @@ angular.module('courtApp').factory('VialatorService',
                 $http.put(urls.VIALATOR_SERVICE_API + id, entity)
                     .then(
                         function (response) {
-                            loadAllVialators();
+                            loadAllVialatorsFiz();
+                            loadAllVialatorsOrg();
                             deferred.resolve(response.data);
                         },
                         function (errResponse) {
@@ -118,7 +130,8 @@ angular.module('courtApp').factory('VialatorService',
                 $http.delete(urls.VIALATOR_SERVICE_API + id)
                     .then(
                         function (response) {
-                            loadAllVialators();
+                            loadAllVialatorsFiz();
+                            loadAllVialatorsOrg();
                             deferred.resolve(response.data);
                         },
                         function (errResponse) {
