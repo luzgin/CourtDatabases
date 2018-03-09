@@ -17,7 +17,7 @@ public class CardAdm {
     private long id;
 
     @Column(name = "card_number")
-    private Integer cardNumber;
+    private String cardNumber;
 
     @Column(name = "card_create_date")
     @Temporal(value = TemporalType.DATE)
@@ -102,11 +102,11 @@ public class CardAdm {
         this.id = id;
     }
 
-    public Integer getCardNumber() {
+    public String getCardNumber() {
         return cardNumber;
     }
 
-    public void setCardNumber(Integer cardNumber) {
+    public void setCardNumber(String cardNumber) {
         this.cardNumber = cardNumber;
     }
 

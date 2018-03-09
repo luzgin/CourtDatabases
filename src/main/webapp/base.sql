@@ -122,7 +122,7 @@ CREATE TABLE IF NOT EXISTS vialator (
 DROP TABLE IF EXISTS `card_adm`;
 CREATE TABLE IF NOT EXISTS card_adm (
   id               INT(10) AUTO_INCREMENT,
-  card_number      INT(10) NOT NULL,
+  card_number      VARCHAR(15) NOT NULL,
   card_create_date DATE    NOT NULL,
   decree_adm_id    INT(10) NOT NULL,
   vialator_id      INT(10) NOT NULL,
