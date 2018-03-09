@@ -16,3 +16,9 @@
     max-width: 70%;
     margin: 1.75rem auto;
 }
+
+/*
+table tr.marked{
+    background-color: tomato; /.здесь нужный цвет
+}
+*/

@@ -7,13 +7,20 @@ angular.module('courtApp').factory('CardViewService',
                 getAllCards: getAllCards,
                 removeCard: removeCard,
                 loadCard: loadCard,
+                loadCardForRemove: loadCardForRemove,
                 setCard: setCard,
+                setCardForRemove: setCardForRemove
             };
             return factory;
 
             function loadCard() {
-                $localStorage.card ={};
+                $localStorage.card = {};
             }
+
+            function loadCardForRemove() {
+                $localStorage.cardForRemove = {};
+            }
+
             function loadAllCards() {
                 var deferred = $q.defer();
                 $http.get(urls.CARD_SERVICE_API)
@@ -32,21 +39,30 @@ angular.module('courtApp').factory('CardViewService',
             function getAllCards() {
                 return $localStorage.cards;
             }
+
             function setCard(item) {
                 $localStorage.card = item;
             }
 
-            function removeCard(id) {
-                console.log('Removing Card with id ' + id);
+            function setCardForRemove(item) {
+                if ($localStorage.cardForRemove == item) {
+                    $localStorage.cardForRemove = {};
+                } else {
+                    $localStorage.cardForRemove = item;
+                }
+            }
+
+            function removeCard() {
+                console.log('Removing Card with id ' + $localStorage.cardForRemove.id);
                 var deferred = $q.defer();
-                $http.delete(urls.CARD_SERVICE_API + id)
+                $http.delete(urls.CARD_SERVICE_API + $localStorage.cardForRemove.id)
                     .then(
                         function (response) {
                             loadAllCards();
                             deferred.resolve(response.data);
                         },
                         function (errResponse) {
-                            console.error('Error while removing Card with id :' + id);
+                            console.error('Error while removing Card with id :' + $localStorage.cardForRemove.id);
                             deferred.reject(errResponse);
                         }
                     );

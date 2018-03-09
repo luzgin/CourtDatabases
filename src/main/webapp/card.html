@@ -24,7 +24,6 @@
                                    ng-model="cardC.card.createDate"/>
                         </div>
                     </div>
-                    <button class="btn btn-danger btn-sm" ng-click="cardC.setCard();">Удалить</button>
                 </div>
             </div>
             <div class="card">
@@ -145,7 +144,7 @@
                         <div class="col-md-3 pr-0">
                             <input type="text" class="form-control btn-sm" placeholder="Личный номер / УНП"/>
                         </div>
-                        <div class="col-md-2 pr-0">
+                        <div class="col-md-3 pr-0">
                             <select id="vialatorPrivateNumber" class="form-control"
                                     ng-options="item.privateNumber for item in cardC.getAllVialators() track by item.id"
                                     ng-model="cardC.card.vialator">

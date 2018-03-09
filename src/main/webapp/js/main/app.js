@@ -26,6 +26,7 @@ posdApp.config(function ($routeProvider) {
                 Complaints: function ($q, CardViewService, CardService) {
                     var deferred = $q.defer();
                     CardViewService.loadCard();
+                    CardViewService.loadCardForRemove();
                     CardViewService.loadAllCards().then(deferred.resolve, deferred.resolve);
                     return deferred.promise;
                 }
