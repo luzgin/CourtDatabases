@@ -24,6 +24,7 @@
                                    ng-model="cardC.card.createDate"/>
                         </div>
                     </div>
+                    <button class="btn btn-danger btn-sm" ng-click="cardC.setCard();">Удалить</button>
                 </div>
             </div>
             <div class="card">
@@ -33,7 +34,8 @@
                 <div class="card-body p-3">
                     <div class="form-group row mb-2">
                         <div class="col-md-4 pr-0">
-                            <input type="text" class="form-control btn-sm" placeholder="Поиск по дате вынесения постановления"/>
+                            <input type="text" class="form-control btn-sm"
+                                   placeholder="Поиск по дате вынесения постановления"/>
                         </div>
                         <div class="col-md-2 pr-0">
                             <select id="decreeDate" class="form-control"
@@ -44,27 +46,30 @@
                         <div class="col-md-auto">
                             <input type="button" class="btn btn-outline-success btn-sm" value="Добавить"/>
                         </div>
-                        <div class="custom-control custom-checkbox">
-                            <label for="secondInstance">Вторая инстанция</label>
-                            <input type="checkbox" ng-model="secondInstanceAdm" id="secondInstance">
+                        <div class="col-md-auto">
+                            <input type="button" class="btn btn-outline-primary btn-sm" value="Редактировать"/>
                         </div>
                     </div>
                     <div class="form-group row mb-0">
                         <div class="col-md-4 pr-0">
                             <label for="organization">Организация</label>
-                            <input type="text" class="form-control btn-sm" id="organization" ng-model="cardC.card.decreeAdm.organization.name" readonly/>
+                            <input type="text" class="form-control btn-sm" id="organization"
+                                   ng-model="cardC.card.decreeAdm.organization.name" readonly/>
                         </div>
                         <div class="col-md-4 px-1">
                             <label for="position">Должность</label>
-                            <input type="text" class="form-control btn-sm" id="position" ng-model="cardC.card.decreeAdm.authorDocument.position" readonly/>
+                            <input type="text" class="form-control btn-sm" id="position"
+                                   ng-model="cardC.card.decreeAdm.authorDocument.position" readonly/>
                         </div>
                         <div class="col-md-2 px-1">
                             <label for="authorDocument">Фамилия И.О.</label>
-                            <input type="text" class="form-control btn-sm" id="authorDocument" ng-model="cardC.card.decreeAdm.authorDocument.name" readonly/>
+                            <input type="text" class="form-control btn-sm" id="authorDocument"
+                                   ng-model="cardC.card.decreeAdm.authorDocument.name" readonly/>
                         </div>
                         <div class="col-md-2 pl-0">
                             <label for="dateDecree">Дата</label>
-                            <input type="text" class="form-control btn-sm" id="dateDecree" ng-model="cardC.card.decreeAdm.decreeDate" readonly/>
+                            <input type="text" class="form-control btn-sm" id="dateDecree"
+                                   ng-model="cardC.card.decreeAdm.decreeDate" readonly/>
                         </div>
                     </div>
                 </div>
@@ -73,40 +78,27 @@
                 <div class="card-header p-1  text-center">
                     Вторая инстанция
                 </div>
-                <div class="card-body p-3">
-                    <div class="form-group row mb-2">
-                        <div class="col-md-4 pr-0">
-                            <input type="text" class="form-control btn-sm" placeholder="Поиск по дате вынесения постановления"/>
-                        </div>
-                        <div class="col-md-2 pr-0">
-                            <select id="secondInstanceDate" class="form-control"
-                                    ng-options="item.decreeDate for item in cardC.getAllSecondInstances() track by item.id"
-                                    ng-model="cardC.card.decreeAdm.secondInstanceAdm">
-                            </select>
-                        </div>
-                        <div class="col-md-auto">
-                            <input type="button" class="btn btn-outline-success btn-sm" value="Добавить"/>
-                        </div>
-                        <div class="col-md-auto">
-                            <input type="button" class="btn btn-outline-primary btn-sm" value="Изменить"/>
-                        </div>
-                    </div>
+                <div class="card-body px-3 py-2">
                     <div class="form-group row mb-0">
                         <div class="col-md-4 pr-0">
                             <label for="organizationSecondInstance">Организация</label>
-                            <input type="text" class="form-control btn-sm" id="organizationSecondInstance" ng-model="cardC.card.decreeAdm.secondInstanceAdm.organization.name" readonly/>
+                            <input type="text" class="form-control btn-sm" id="organizationSecondInstance"
+                                   ng-model="cardC.card.decreeAdm.secondInstanceAdm.organization.name" readonly/>
                         </div>
                         <div class="col-md-4 px-1">
                             <label for="positionSecondInstance">Должность</label>
-                            <input type="text" class="form-control btn-sm" id="positionSecondInstance" ng-model="cardC.card.decreeAdm.secondInstanceAdm.authorDocument.position" readonly/>
+                            <input type="text" class="form-control btn-sm" id="positionSecondInstance"
+                                   ng-model="cardC.card.decreeAdm.secondInstanceAdm.authorDocument.position" readonly/>
                         </div>
                         <div class="col-md-2 px-1">
                             <label for="authorDocumentSecondInstance">Фамилия И.О.</label>
-                            <input type="text" class="form-control btn-sm" id="authorDocumentSecondInstance" ng-model="cardC.card.decreeAdm.secondInstanceAdm.authorDocument.name" readonly/>
+                            <input type="text" class="form-control btn-sm" id="authorDocumentSecondInstance"
+                                   ng-model="cardC.card.decreeAdm.secondInstanceAdm.authorDocument.name" readonly/>
                         </div>
                         <div class="col-md-2 pl-0">
                             <label for="dateDecreeSecondInstance">Дата</label>
-                            <input type="text" class="form-control btn-sm" id="dateDecreeSecondInstance" ng-model="cardC.card.decreeAdm.secondInstanceAdm.decreeDate" readonly/>
+                            <input type="text" class="form-control btn-sm" id="dateDecreeSecondInstance"
+                                   ng-model="cardC.card.decreeAdm.secondInstanceAdm.decreeDate" readonly/>
                         </div>
                     </div>
 
@@ -169,61 +161,84 @@
                     <div class="form-group row mb-0" ng-show="cardC.card.vialator.typeVialator ==1">
                         <div class="col-md-3 pr-0">
                             <label for="privateNumberFiz">Личный номер</label>
-                            <input type="text" class="form-control btn-sm" id="privateNumberFiz" ng-model="cardC.card.vialator.privateNumber" readonly/>
+                            <input type="text" class="form-control btn-sm" id="privateNumberFiz"
+                                   ng-model="cardC.card.vialator.privateNumber" readonly/>
                         </div>
                         <div class="col-md-3 px-1">
                             <label for="firstnameFiz">Фамилия</label>
-                            <input type="text" class="form-control btn-sm" id="firstnameFiz" ng-model="cardC.card.vialator.firstName" readonly/>
+                            <input type="text" class="form-control btn-sm" id="firstnameFiz"
+                                   ng-model="cardC.card.vialator.firstName" readonly/>
                         </div>
                         <div class="col-md-3 px-1">
                             <label for="secondname">Имя</label>
-                            <input type="text" class="form-control btn-sm" id="secondname" ng-model="cardC.card.vialator.secondName" readonly/>
+                            <input type="text" class="form-control btn-sm" id="secondname"
+                                   ng-model="cardC.card.vialator.secondName" readonly/>
                         </div>
                         <div class="col-md-3 pl-0">
                             <label for="lastname">Отчество</label>
-                            <input type="text" class="form-control btn-sm" id="lastname" ng-model="cardC.card.vialator.lastName" readonly/>
+                            <input type="text" class="form-control btn-sm" id="lastname"
+                                   ng-model="cardC.card.vialator.lastName" readonly/>
                         </div>
                     </div>
-                    <div class="form-group row mb-0"  ng-show="cardC.card.vialator.typeVialator ==2">
+                    <div class="form-group row mb-0" ng-show="cardC.card.vialator.typeVialator ==2">
                         <div class="col-md-3 pr-1">
                             <label for="privateNumberOrg">УНП</label>
-                            <input type="text" class="form-control btn-sm" id="privateNumberOrg" ng-model="cardC.card.vialator.privateNumber" readonly/>
+                            <input type="text" class="form-control btn-sm" id="privateNumberOrg"
+                                   ng-model="cardC.card.vialator.privateNumber" readonly/>
                         </div>
                         <div class="col-md-9 pl-0">
                             <label for="firstnameOrg">Название</label>
-                            <input type="text" class="form-control btn-sm" id="firstnameOrg" ng-model="cardC.card.vialator.firstName" readonly/>
+                            <input type="text" class="form-control btn-sm" id="firstnameOrg"
+                                   ng-model="cardC.card.vialator.firstName" readonly/>
                         </div>
 
                     </div>
                 </div>
             </div>
             <div class="p-0 row">
-                <div class="col-md-4 align-items-center">
-                    <div class="form-group row">
-                        <label class="col-md-4 pr-0" for="articleNumber">Статья</label>
-                        <div class="col-md-8 p-0">
-                            <select id="articleNumber" class="form-control"
-                                    ng-options="item.article for item in cardC.getAllArticles() track by item.id"
-                                    ng-model="cardC.card.articleAdm">
-                            </select>
+                <div class="row col-md-12 pr-0">
+                    <div class="col-md-4">
+                        <div class="form-group row">
+                            <label class="col-md-4 pr-0" for="articleNumber">Статья</label>
+                            <div class="col-md-8 p-0">
+                                <select id="articleNumber" class="form-control"
+                                        ng-options="item.article for item in cardC.getAllArticles() track by item.id"
+                                        ng-model="cardC.card.articleAdm">
+                                </select>
+                            </div>
                         </div>
                     </div>
+                    <div class="col-md-8 pr-0">
+                        <div class="form-group row">
+                            <label class="col-md-4" for="entityDecree">Сущность постановления</label>
+                            <div class="col-md-8">
+                                <select id="entityDecree" class="form-control"
+                                        ng-options="item.name for item in cardC.getAllNamesEntityDecree() track by item.id"
+                                        ng-model="cardC.card.entityDecreeAdm.nameEntityDecreeAdm">
+                                </select>
+                            </div>
+                        </div>
+                        <input type="hidden" ng-model="cardC.card.entityDecreeAdm.id"/>
+                    </div>
                 </div>
-                <div class="col-md-8 align-items-center">
-                    <div class="form-group row">
-                        <label class="col-md-4" for="entityDecree">Сущность постановления</label>
-                        <div class="col-md-8">
-                            <select id="entityDecree" class="form-control"
-                                    ng-options="item.nameEntityDecreeAdm.name for item in cardC.getAllEntitiesDecree() track by item.id"
-                                    ng-model="cardC.card.entityDecreeAdm">
-                            </select>
+                <div class="row col-md-12 pr-0">
+                    <div class="col-md-4">
+                    </div>
+                    <div class="col-md-8 pr-0">
+                        <div class="form-group row">
+                            <label class="col-md-4" for="entityDecree">Дополнительная информация</label>
+                            <div class="col-md-8">
+                                <input type="text" class="form-control btn-sm" id="infoEntityDecree"
+                                       ng-model="cardC.card.entityDecreeAdm.prim"/>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="form-group">
                 <label for="noteEntityDecree">Примечание к постановлению</label>
-                <textarea class="form-control btn-sm" id="noteEntityDecree" rows="2" ng-model="cardC.card.entityDecreeAdm.prim"></textarea>
+                <textarea class="form-control btn-sm" id="noteEntityDecree" rows="2"
+                          ng-model="cardC.card.noteArticle"></textarea>
             </div>
             <div class="card mb-3">
                 <div class="card-header p-1  text-center">
@@ -299,7 +314,7 @@
             </div>
             <div class="form-group">
                 <label for="note">Примечание</label>
-                <textarea class="form-control btn-sm" id="note" rows="2"></textarea>
+                <textarea class="form-control btn-sm" id="note" rows="2" ng-model="cardC.card.note"></textarea>
             </div>
             <div class="row justify-content-md-center">
                 <div class="col col-md-2">

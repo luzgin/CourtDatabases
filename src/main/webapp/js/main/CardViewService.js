@@ -5,10 +5,15 @@ angular.module('courtApp').factory('CardViewService',
             var factory = {
                 loadAllCards: loadAllCards,
                 getAllCards: getAllCards,
-                removeCard: removeCard
+                removeCard: removeCard,
+                loadCard: loadCard,
+                setCard: setCard,
             };
             return factory;
 
+            function loadCard() {
+                $localStorage.card ={};
+            }
             function loadAllCards() {
                 var deferred = $q.defer();
                 $http.get(urls.CARD_SERVICE_API)
@@ -26,6 +31,9 @@ angular.module('courtApp').factory('CardViewService',
 
             function getAllCards() {
                 return $localStorage.cards;
+            }
+            function setCard(item) {
+                $localStorage.card = item;
             }
 
             function removeCard(id) {

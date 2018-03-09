@@ -23,9 +23,9 @@ posdApp.config(function ($routeProvider) {
             controller: 'CardViewController',
             controllerAs: 'cdviewC',
             resolve: {
-                Complaints: function ($q, CardViewService) {
+                Complaints: function ($q, CardViewService, CardService) {
                     var deferred = $q.defer();
-
+                    CardViewService.loadCard();
                     CardViewService.loadAllCards().then(deferred.resolve, deferred.resolve);
                     return deferred.promise;
                 }

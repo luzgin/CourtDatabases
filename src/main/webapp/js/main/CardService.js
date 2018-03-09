@@ -1,9 +1,10 @@
 'use strict';
 angular.module('courtApp').factory('CardService',
-    ['$localStorage', '$http', '$q', 'urls', 'CardViewService',
-        function ($localStorage, $http, $q, urls, CardViewService) {
+    ['$localStorage', '$http', '$q', 'urls', 'CardViewService', 'EntityDecreeService',
+        function ($localStorage, $http, $q, urls, CardViewService, EntityDecreeService) {
             var factory = {
                 getCard: getCard,
+                getCardLocal: getCardLocal,
                 createCard: createCard,
                 updateCard: updateCard,
                 removeCard: removeCard
@@ -27,21 +28,37 @@ angular.module('courtApp').factory('CardService',
                 return deferred.promise;
             }
 
+            function getCardLocal() {
+                return $localStorage.card;
+            }
+
             function createCard(entity) {
-                console.log('Creating entity');
+                var entityDecree = {};
+                entityDecree = {
+                    nameEntityDecreeAdm: entity.entityDecreeAdm.nameEntityDecreeAdm,
+                    prim: entity.entityDecreeAdm.prim
+                };
                 var deferred = $q.defer();
-                entity.cardActiv = true;
-                $http.post(urls.CARD_SERVICE_API, entity)
-                    .then(
-                        function (response) {
-                            CardViewService.loadAllCards();
-                            deferred.resolve(response.data);
-                        },
-                        function (errResponse) {
-                            console.error('Error while creating entity : ' + errResponse.data.errorMessage);
-                            deferred.reject(errResponse);
-                        }
-                    );
+                EntityDecreeService.createEntityDecree(entityDecree).then(
+                    function (response) {
+                        entityDecree = response;
+                        entity.entityDecreeAdm = entityDecree;
+                        console.log('Creating entity');
+                        entity.cardActiv = true;
+                        $http.post(urls.CARD_SERVICE_API, entity)
+                            .then(
+                                function (response) {
+                                    CardViewService.loadAllCards();
+                                    deferred.resolve(response.data);
+                                },
+                                function (errResponse) {
+                                    EntityDecreeService.removeEntityDecree(entity.entityDecreeAdm.id);
+                                    console.error('Error while creating entity : ' + errResponse.data.errorMessage);
+                                    deferred.reject(errResponse);
+                                }
+                            );
+                    }
+                );
                 return deferred.promise;
             }
 

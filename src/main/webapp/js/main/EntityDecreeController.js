@@ -42,6 +42,7 @@ angular.module('courtApp').controller('EntityDecreeController',
             console.log('About to create entityDecree');
             EntityDecreeService.createEntityDecree(entityDecree).then(
                 function (response) {
+                    alert(JSON.stringify(response));
                     console.log('entityDecree created successfully');
                     self.done = true;
                     self.entityDecree = {};

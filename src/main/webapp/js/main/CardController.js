@@ -1,14 +1,13 @@
 'use strict';
 
 angular.module('courtApp').controller('CardController',
-    ['CardService', 'ArticleService', 'AuthorService', 'ComplaintService', 'OrgService',
+    ['$localStorage','CardService', 'ArticleService', 'AuthorService', 'ComplaintService', 'OrgService',
         'DecreeService', 'SecondInstanceService', 'EntityDecreeService', 'EntityService',
-        'NameEntityDecreeService', 'ResService', 'VialatorService', '$scope', function (CardService, ArticleService, AuthorService, ComplaintService, OrgService,
+        'NameEntityDecreeService', 'ResService', 'VialatorService', '$scope', function ($localStorage, CardService, ArticleService, AuthorService, ComplaintService, OrgService,
                                         DecreeService, SecondInstanceService, EntityDecreeService, EntityService,
                                         NameEntityDecreeService, ResService, VialatorService, $scope) {
         var self = this;
-        self.card = {};
-        self.entityDecree = {};
+        self.card = CardService.getCardLocal();
         self.submit = submit;
         self.createCard = createCard;
         self.updateCard = updateCard;

@@ -3,13 +3,16 @@
 angular.module('courtApp').controller('CardViewController',
     ['CardViewService', '$scope', function (CardViewService) {
         var self = this;
-        self.card = {};
         self.cards = [];
         self.getAllCards = getAllCards;
         self.removeCard = removeCard;
+        self.setCard = setCard;
 
         function getAllCards() {
             return CardViewService.getAllCards();
+        }
+        function setCard(item) {
+            CardViewService.setCard(item);
         }
 
         function removeCard(id) {
