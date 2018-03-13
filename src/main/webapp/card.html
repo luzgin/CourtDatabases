@@ -41,11 +41,12 @@
                                     ng-options="item.decreeDate for item in cardC.getAllRegulations() track by item.id"
                                     ng-model="cardC.card.decreeAdm">
                             </select>
+                            <input type="hidden" ng-model="cardC.card.decreeAdm">
                         </div>
                         <div class="col-md-2 pr-0">
-                            <select class="form-control" ng-model="cardC.dec">
-                                <option ng-repeat="item in cardC.getAllRegulations()" value="{{item}}">
-                                    {{item.decreeDate}} | {{item.organization.name}}
+                            <select class="form-control" ng-model="cardC.card.decreeAdm">
+                                <option ng-repeat="item in cardC.getAllRegulations()" ng-value="{{item}}">
+                                    {{item.decreeDate}} | {{item.organization.name}} | {{item.authorDocument.position}} {{item.authorDocument.name}}
                                 </option>
                             </select>
                         </div>

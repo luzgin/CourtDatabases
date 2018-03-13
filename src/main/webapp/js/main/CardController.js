@@ -5,7 +5,7 @@ angular.module('courtApp').controller('CardController',
         'DecreeService', 'SecondInstanceService', 'EntityDecreeService', 'EntityService',
         'NameEntityDecreeService', 'ResService', 'VialatorService', '$scope', function ($localStorage, CardService, ArticleService, AuthorService, ComplaintService, OrgService,
                                         DecreeService, SecondInstanceService, EntityDecreeService, EntityService,
-                                        NameEntityDecreeService, ResService, VialatorService, $scope, DecreeController) {
+                                        NameEntityDecreeService, ResService, VialatorService, $scope) {
         var self = this;
         self.card = CardService.getCardLocal();
         self.submit = submit;
