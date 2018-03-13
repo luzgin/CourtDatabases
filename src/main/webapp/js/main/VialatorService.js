@@ -94,6 +94,7 @@ angular.module('courtApp').factory('VialatorService',
                 $http.post(urls.VIALATOR_SERVICE_API, entity)
                     .then(
                         function (response) {
+                            loadAllVialators();
                             loadAllVialatorsFiz();
                             loadAllVialatorsOrg();
                             deferred.resolve(response.data);

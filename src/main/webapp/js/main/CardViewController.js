@@ -13,9 +13,11 @@ angular.module('courtApp').controller('CardViewController',
         function getAllCards() {
             return CardViewService.getAllCards();
         }
+
         function setCard(item) {
             CardViewService.setCard(item);
         }
+
         function setCardForRemove(item) {
             CardViewService.setCardForRemove(item);
 

@@ -46,7 +46,8 @@
                         <div class="col-md-2 pr-0">
                             <select class="form-control" ng-model="cardC.card.decreeAdm">
                                 <option ng-repeat="item in cardC.getAllRegulations()" ng-value="{{item}}">
-                                    {{item.decreeDate}} | {{item.organization.name}} | {{item.authorDocument.position}} {{item.authorDocument.name}}
+                                    {{cardC.convertToDate(item.decreeDate)}} | {{item.organization.name}} | {{item.authorDocument.position}}
+                                    {{item.authorDocument.name}}
                                 </option>
                             </select>
                         </div>
@@ -85,7 +86,8 @@
                     </div>
                 </div>
             </div>
-            <div class="card mt-2 border-dark" ng-show="cardC.card.decreeAdm.secondInstanceAdm != null || secondInstanceAdm">
+            <div class="card mt-2 border-dark"
+                 ng-show="cardC.card.decreeAdm.secondInstanceAdm != null || secondInstanceAdm">
                 <div class="card-header p-1  text-center color-form-title">
                     Вторая инстанция
                 </div>
@@ -130,7 +132,9 @@
                             </select>
                         </div>
                         <div class="col-md-auto">
-                            <input type="button" class="btn btn-outline-success btn-sm" value="Добавить"/>
+                            <input type="button" class="btn btn-outline-success btn-sm" value="Добавить"
+                                   data-toggle="modal"
+                                   data-target="#ModalSaveVialators"/>
                         </div>
                         <div class="col-md-auto">
                             <input type="button" class="btn btn-outline-primary btn-sm" value="Изменить"/>
@@ -399,7 +403,8 @@
                                     <label class="control-label">Вступило в силу</label>
                                 </div>
                                 <div class="col-md-3 px-0">
-                                    <select ng-value="decC.decree.enteredIntoForce" ng-model="decC.decree.enteredIntoForce"
+                                    <select ng-value="decC.decree.enteredIntoForce"
+                                            ng-model="decC.decree.enteredIntoForce"
                                             class="form-control">
                                         <option value='true'>Да</option>
                                         <option value='false'>Нет</option>
@@ -462,7 +467,6 @@
         </div>
     </div>
 </div>
-
 <div ng-controller="AuthorController as autC">
     <div id="ModalSaveAuthor" class="modal fade" role="dialog">
         <div class="widht-modal-dialog modal-dialog">
@@ -516,7 +520,6 @@
         </div>
     </div>
 </div>
-
 <div ng-controller="SecondInstanceController as secIC">
     <div id="ModalSaveSecondInstance" class="modal fade" role="dialog">
         <div class="widht-modal-dialog modal-dialog">
@@ -572,4 +575,87 @@
         </div>
     </div>
 </div>
-
+<div ng-controller="VialatorController as viaC">
+    <div id="ModalSaveVialators" class="modal fade" role="dialog">
+        <div class="widht-modal-dialog modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" ng-if="radioChecked.on==='1'?true:false">Добавление/Редактирование физ. лица</h4>
+                    <h4 class="modal-title" ng-if="radioChecked.on==='2'?true:false">Добавление/Редактирование юр. лица</h4>
+                </div>
+                <div class="modal-body">
+                    <div class=" mb-3 col row justify-content-center">
+                        <div class="form-check form-check-inline">
+                            <input type="radio" ng-model="radioChecked.on" value="1">
+                            <label class="form-check-label h4">Физические лица</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input type="radio" ng-model="radioChecked.on" value="2">
+                            <label class="form-check-label h4">Юридические лица</label>
+                        </div>
+                    </div>
+                    <div  ng-if="radioChecked.on==='1'?true:false">
+                        <form ng-submit="viaC.submit()" class="form-horizontal" role="form">
+                            <input type="hidden" ng-model="viaC.vialator.id"/>
+                            <div class="form-group row">
+                                <label class="col-md-2 control-label" for="privateNumber">Личный номер</label>
+                                <div class="col-md-10">
+                                    <input type="text" class="form-control" id="privateNumber"
+                                           ng-model="viaC.vialator.privateNumber"/>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-md-2 control-label" for="firstName">Фамилия</label>
+                                <div class="col-md-10">
+                                    <input type="text" class="form-control" id="firstName"
+                                           ng-model="viaC.vialator.firstName"/>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-md-2 control-label" for="secondName">Имя</label>
+                                <div class="col-md-10">
+                                    <input type="text" class="form-control" ng-model="viaC.vialator.secondName"/>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-md-2 control-label" for="lastName">Отчество</label>
+                                <div class="col-md-10">
+                                    <input type="text" class="form-control" ng-model="viaC.vialator.lastName"/>
+                                </div>
+                            </div>
+                            <div class="modal-footer row mr-0">
+                                <input type="submit" value="{{!viaC.vialator.id ? 'Добавить' : 'Обновить'}}"
+                                       class="btn btn-primary btn-sm">
+                                <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Закрыть</button>
+                            </div>
+                        </form>
+                    </div>
+                    <div  ng-if="radioChecked.on==='2'?true:false">
+                        <form ng-submit="viaC.submit()" class="form-horizontal" role="form">
+                            <input type="hidden" ng-model="viaC.vialator.id"/>
+                            <div class="form-group row">
+                                <label class="col-md-2 control-label" for="privateNumber">УНП</label>
+                                <div class="col-md-10">
+                                    <input type="text" class="form-control"
+                                           ng-model="viaC.vialator.privateNumber"/>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-md-2 control-label" for="firstName">Название</label>
+                                <div class="col-md-10">
+                                    <input type="text" class="form-control"
+                                           ng-model="viaC.vialator.firstName"/>
+                                </div>
+                            </div>
+                            <div class="modal-footer row mr-0">
+                                <input type="submit" value="{{!viaC.vialator.id ? 'Добавить' : 'Обновить'}}"
+                                       class="btn btn-primary btn-sm">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
