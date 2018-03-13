@@ -34,8 +34,10 @@ posdApp.config(function ($routeProvider) {
         })
         .when('/card', {
             templateUrl: 'card.html',
-            controller: 'CardController',
-            controllerAs: 'cardC',
+
+            controller: 'CardController as cardC',
+            //controller: 'DecreeController as decC',
+
             resolve: {
                 Complaints: function ($q, CardService, ArticleService, AuthorService, ComplaintService, OrgService,
                                       DecreeService, SecondInstanceService, EntityDecreeService, EntityService,

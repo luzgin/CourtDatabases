@@ -16,10 +16,10 @@ public class CardAdm {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(name = "card_number")
+    @Column(name = "card_number", nullable = false)
     private String cardNumber;
 
-    @Column(name = "card_create_date")
+    @Column(name = "card_create_date", nullable = false)
     @Temporal(value = TemporalType.DATE)
     private Date createDate;
 
@@ -36,25 +36,25 @@ public class CardAdm {
     private ArticleAdm articleAdm;
 
     @ManyToOne
-    @JoinColumn(name = "entity_decree_id", nullable = true)
+    @JoinColumn(name = "entity_decree_id", nullable = false)
     private EntityDecreeAdm entityDecreeAdm;
 
     @Column(name = "note_article")
     private String noteArticle;
 
     @ManyToOne
-    @JoinColumn(name = "judge_id", nullable = false)
+    @JoinColumn(name = "judge_id")
     private AuthorDocument judge;
 
-    @Column(name = "card_activ")
+    @Column(name = "card_activ", nullable = false)
     private boolean cardActiv;
 
     @Column(name = "result_date")
     @Temporal(value = TemporalType.DATE)
     private Date resultDate;
 
-    @ManyToOne(optional = false)
-    @JoinColumn(name = "result_id", nullable = true)
+    @ManyToOne
+    @JoinColumn(name = "result_id")
     private ResultAdmCase resultAdmCase;
 
     @Column(name = "note")

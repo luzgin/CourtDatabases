@@ -43,7 +43,8 @@
                             </select>
                         </div>
                         <div class="col-md-auto">
-                            <input type="button" class="btn btn-outline-success btn-sm" value="Добавить"/>
+                            <input type="button" class="btn btn-outline-success btn-sm" value="Добавить" data-toggle="modal"
+                                   data-target="#ModalSaveDecree"/>
                         </div>
                         <div class="col-md-auto">
                             <input type="button" class="btn btn-outline-primary btn-sm" value="Редактировать"/>
@@ -100,39 +101,6 @@
                                    ng-model="cardC.card.decreeAdm.secondInstanceAdm.decreeDate" readonly/>
                         </div>
                     </div>
-
-                </div>
-            </div>
-            <div class="card mt-2">
-                <div class="card-header p-1  text-center">
-                    <label>Жалобы</label>
-                </div>
-                <div class="card-body py-2 px-3">
-                    <table class="table table-striped table-bordered table-sm table-hover mb-0">
-                        <div class="row justify-content-end pr-3 pb-2">
-                            <input type="button" class="btn btn-outline-success btn-sm" value="Добавить"/>
-                            <input type="button" class="btn btn-outline-primary btn-sm" value="Изменить"/>
-                            <input type="button" class="btn btn-outline-danger btn-sm" value="Удалить"/>
-                        </div>
-                        <thead>
-                        <tr>
-                            <th class="div-center" width="15%">Дата</th>
-                            <th class="div-center" width="40%">Сужность жалобы</th>
-                            <th class="div-center" width="20%">Автор</th>
-                            <th class="div-center" width="15%">Сумма госпошлины</th>
-                            <th class="div-center" width="10%">Дан ответ</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-                            <td>{{item.complainDate}}</td>
-                            <td>{{item.entityIskAdm.name}}</td>
-                            <td>{{item.nameAuthorComplaint}}</td>
-                            <td>{{item.summPoshlini}}</td>
-                            <td>{{item.activ== 1 ? 'Да' : 'Нет' }}</td>
-                        </tr>
-                        </tbody>
-                    </table>
                 </div>
             </div>
             <div class="card mt-2 mb-4">
@@ -239,6 +207,40 @@
                 <textarea class="form-control btn-sm" id="noteEntityDecree" rows="2"
                           ng-model="cardC.card.noteArticle"></textarea>
             </div>
+<div ng-show="cardC.card.id != null">
+            <div class="card mt-2">
+                <div class="card-header p-1  text-center">
+                    <label>Жалобы</label>
+                </div>
+                <div class="card-body py-2 px-3">
+                    <table class="table table-striped table-bordered table-sm table-hover mb-0">
+                        <div class="row justify-content-end pr-3 pb-2">
+                            <input type="button" class="btn btn-outline-success btn-sm" value="Добавить"/>
+                            <input type="button" class="btn btn-outline-primary btn-sm" value="Изменить"/>
+                            <input type="button" class="btn btn-outline-danger btn-sm" value="Удалить"/>
+                        </div>
+                        <thead>
+                        <tr>
+                            <th class="div-center" width="15%">Дата</th>
+                            <th class="div-center" width="40%">Сужность жалобы</th>
+                            <th class="div-center" width="20%">Автор</th>
+                            <th class="div-center" width="15%">Сумма госпошлины</th>
+                            <th class="div-center" width="10%">Дан ответ</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>{{item.complainDate}}</td>
+                            <td>{{item.entityIskAdm.name}}</td>
+                            <td>{{item.nameAuthorComplaint}}</td>
+                            <td>{{item.summPoshlini}}</td>
+                            <td>{{item.activ== 1 ? 'Да' : 'Нет' }}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
             <div class="card mb-3">
                 <div class="card-header p-1  text-center">
                     Поступление дел при истребовании
@@ -315,16 +317,226 @@
                 <label for="note">Примечание</label>
                 <textarea class="form-control btn-sm" id="note" rows="2" ng-model="cardC.card.note"></textarea>
             </div>
+</div>
             <div class="row justify-content-md-center">
                 <div class="col col-md-2">
-                    <input type="submit" class="btn btn-primary" onclick="location.href = 'index.html#!/'"
+                    <input type="button" class="btn btn-primary" onclick="location.href = 'index.html#!/'"
                            value="Назад"/>
                 </div>
                 <div class="col col-md-2">
-                    <input type="submit" class="btn btn-success" value="{{!cardC.card.id ? 'Добавить' : 'Обновить'}}"/>
+                    <input type="submit" class="btn btn-success" value="{{!cardC.card.id ? 'Добавить' : 'Редактирвоать'}}" onclick="location.href = 'index.html#!/'"/>
                 </div>
             </div>
         </div>
     </form>
+</div>
+<!-- -------------------------------------   Modal windows --------------------------------------------------- -->
+
+<div id="ModalSaveDecree" class="modal fade" role="dialog">
+    <div class="widht-modal-dialog modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Добавление/Редактирование постановления</h4>
+            </div>
+            <div class="modal-body">
+                <form ng-submit="decC.submit()" class="form-horizontal" role="form">
+                    <input type="hidden" ng-model="decC.decree.id"/>
+
+                    <div class="form-group row">
+                        <label class="col-md-3 control-label">Организация</label>
+                        <div class="col-md-7">
+                            <select class="form-control"
+                                    ng-options="item.name for item in decC.getAllOrganizations() track by item.id"
+                                    ng-model="decC.decree.organization">
+                            </select>
+                        </div>
+                        <div class="col-md-2 row justify-content-md-end">
+                            <input type="button" class="btn btn-outline-success btn-sm" value="Добавить" data-toggle="modal"
+                                   data-target="#ModalSaveOrganization"/>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-md-3 control-label">Автор</label>
+                        <div class="col-md-7">
+                            <select class="form-control"
+                                    ng-options="item.name for item in decC.getAllAuthors() track by item.id"
+                                    ng-model="decC.decree.authorDocument">
+                            </select>
+                        </div>
+                        <div class="col-md-2 row justify-content-md-end">
+                            <input type="button" class="btn btn-outline-success btn-sm" value="Добавить" data-toggle="modal"
+                                   data-target="#ModalSaveAuthor"/>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-md-3 control-label">Должность</label>
+                        <div class="col-md-7">
+                            <input type="text" class="form-control" ng-model="decC.decree.authorDocument.position"
+                                   disabled/>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-md-3 control-label">Дата</label>
+                        <div class="col-md-7">
+                            <input type="text" class="form-control" ng-model="decC.decree.decreeDate"/>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-md-3 control-label">Вступило в силу</label>
+                        <div class="col-md-7">
+                            <select ng-value="decC.decree.enteredIntoForce" ng-model="decC.decree.enteredIntoForce"
+                                    class="form-control">
+                                <option value='true'>Да</option>
+                                <option value='false'>Нет</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-md-3 control-label">Вторая инстанция</label>
+                        <div class="col-md-7">
+                            <select class="form-control"
+                                    ng-options="item.id for item in decC.getAllSecondInstance() track by item.id"
+                                    ng-model="decC.decree.secondInstanceAdm">
+                                <option value=""></option>
+                            </select>
+                        </div>
+                        <div class="col-md-2 row justify-content-md-end">
+                            <input type="button" class="btn btn-outline-success btn-sm" value="Добавить" data-toggle="modal"
+                                   data-target="#ModalSaveSecondInstance"/>
+                        </div>
+                    </div>
+                    <div class="modal-footer row mr-0">
+                        <input type="submit" value="{{!decC.decree.id ? 'Добавить' : 'Обновить'}}"
+                               class="btn btn-primary btn-sm">
+                        <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Закрыть</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="ModalSaveOrganization" class="modal fade" role="dialog">
+    <div class="widht-modal-dialog modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Добавление/редактирование организации</h4>
+            </div>
+            <div class="modal-body">
+                <form ng-submit="orgC.submit()" class="form-horizontal" role="form">
+                    <input type="hidden" ng-model="orgC.organization.id" />
+                    <div class="form-group row">
+                        <label class="col-md-2 control-label" for="nameInputSave">Название</label>
+                        <div class="col-md-10">
+                            <input type="text" class="form-control" id="nameInputSave" ng-model="orgC.organization.name"/>
+                        </div>
+                    </div>
+                    <div class="modal-footer row mr-0">
+                        <input type="submit"  value="{{!orgC.organization.id ? 'Добавить' : 'Обновить'}}" class="btn btn-primary btn-sm">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="ModalSaveAuthor" class="modal fade" role="dialog">
+    <div class="widht-modal-dialog modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Добавление/Редактирование автора</h4>
+            </div>
+            <div class="modal-body">
+                <form ng-submit="autC.submit()" class="form-horizontal" role="form">
+                    <input type="hidden" ng-model="autC.author.id"/>
+                    <div class="form-group row">
+                        <label class="col-md-2 control-label" for="nameSave">ФИО</label>
+                        <div class="col-md-10">
+                            <input type="text" class="form-control" id="nameSave" ng-model="autC.author.name"/>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-md-2 control-label" for="positionSave">Должность</label>
+                        <div class="col-md-10">
+                            <input type="text" class="form-control" id="positionSave" ng-model="autC.author.position"/>
+                        </div>
+                    </div>
+                    <div ng-show="autC.author.id != null" class="form-group row">
+                        <label class="col-md-2 control-label">Статус</label>
+                        <div class="col-md-10">
+                            <select ng-value="autC.author.activWork" ng-model="autC.author.activWork"
+                                    class="form-control">
+                                <option value='true'>Работает</option>
+                                <option value='false'>Уволен</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-md-2 control-label">Организация</label>
+                        <div class="col-md-10">
+                            <select class="form-control"
+                                    ng-options="item.name for item in autC.getAllOrganizations() track by item.id"
+                                    ng-model="autC.author.organization">
+                            </select>
+                        </div>
+                    </div>
+                    <div class="modal-footer row mr-0">
+                        <input type="submit" value="{{!autC.author.id ? 'Добавить' : 'Обновить'}}"
+                               class="btn btn-primary btn-sm">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="ModalSaveSecondInstance" class="modal fade" role="dialog">
+    <div class="widht-modal-dialog modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Добавление/Редактирование инстанции</h4>
+            </div>
+            <div class="modal-body">
+                <form ng-submit="secIC.submit()" class="form-horizontal" role="form">
+                    <input type="hidden" ng-model="secIC.secondInstance.id" />
+                    <div class="form-group row">
+                        <label class="col-md-3 control-label">Организация</label>
+                        <div class="col-md-7">
+                            <select class="form-control"
+                                    ng-options="item.name for item in secIC.getAllOrganizations() track by item.id"
+                                    ng-model="secIC.secondInstance.organization">
+                            </select>
+                        </div>
+                        <div class="col-md-2 row justify-content-md-end">
+                            <input type="button" class="btn btn-outline-success btn-sm" value="Добавить" data-toggle="modal"
+                                   data-target="#ModalSaveOrganization"/>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-md-3 control-label">Автор</label>
+                        <div class="col-md-7">
+                            <select class="form-control"
+                                    ng-options="item.name for item in secIC.getAllAuthors() track by item.id"
+                                    ng-model="secIC.secondInstance.authorDocument">
+                            </select>
+                        </div>
+                        <div class="col-md-2 row justify-content-md-end">
+                            <input type="button" class="btn btn-outline-success btn-sm" value="Добавить" data-toggle="modal"
+                                   data-target="#ModalSaveAuthor"/>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-md-3 control-label">Дата</label>
+                        <div class="col-md-7">
+                            <input type="text" class="form-control" ng-model="secIC.secondInstance.decreeDate"/>
+                        </div>
+                    </div>
+                    <div class="modal-footer row mr-0">
+                        <input type="submit"  value="{{!secIC.secondInstance.id ? 'Добавить' : 'Обновить'}}" class="btn btn-primary btn-sm">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 </div>
 

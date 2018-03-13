@@ -22,12 +22,17 @@ angular.module('courtApp').controller('CardController',
         self.getAllAuthors = getAllAuthors;
         self.getAllVialators = getAllVialators;
 
+
         self.card.createDate = new Date(self.card.createDate);
-        self.card.decreeAdm.decreeDate = new Date(self.card.decreeAdm.decreeDate);
-        self.card.resultDate = new Date(self.card.resultDate);
-        if (self.card.decreeAdm.secondInstanceAdm != null){self.card.decreeAdm.secondInstanceAdm.decreeDate = new Date(self.card.decreeAdm.secondInstanceAdm.decreeDate);}
-
-
+        if (self.card.resultDate != null){
+            self.card.resultDate = new Date((self.card.resultDate));
+        }
+        if (self.card.decreeAdm != null){
+            self.card.decreeAdm.decreeDate = new Date(self.card.decreeAdm.decreeDate);
+            if (self.card.decreeAdm.secondInstanceAdm != null){
+                self.card.decreeAdm.secondInstanceAdm.decreeDate = new Date(self.card.decreeAdm.secondInstanceAdm.decreeDate);
+            }
+        }
 
         function getAllArticles() {
             return ArticleService.getAllArticles();
