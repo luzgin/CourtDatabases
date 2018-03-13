@@ -5,7 +5,7 @@ angular.module('courtApp').controller('CardController',
         'DecreeService', 'SecondInstanceService', 'EntityDecreeService', 'EntityService',
         'NameEntityDecreeService', 'ResService', 'VialatorService', '$scope', function ($localStorage, CardService, ArticleService, AuthorService, ComplaintService, OrgService,
                                         DecreeService, SecondInstanceService, EntityDecreeService, EntityService,
-                                        NameEntityDecreeService, ResService, VialatorService, $scope) {
+                                        NameEntityDecreeService, ResService, VialatorService, $scope, DecreeController) {
         var self = this;
         self.card = CardService.getCardLocal();
         self.submit = submit;
@@ -21,7 +21,7 @@ angular.module('courtApp').controller('CardController',
         self.getAllSecondInstances = getAllSecondInstances;
         self.getAllAuthors = getAllAuthors;
         self.getAllVialators = getAllVialators;
-
+        // редактирование посталовления self.editDecree = editDecree;
 
         self.card.createDate = new Date(self.card.createDate);
         if (self.card.resultDate != null){
@@ -33,7 +33,12 @@ angular.module('courtApp').controller('CardController',
                 self.card.decreeAdm.secondInstanceAdm.decreeDate = new Date(self.card.decreeAdm.secondInstanceAdm.decreeDate);
             }
         }
-
+        /* редактирвоание постановления
+        function editDecree(id) {
+            console.log('decree set');
+            DecreeController.editDecree(id);
+        }
+        */
         function getAllArticles() {
             return ArticleService.getAllArticles();
         }
@@ -75,9 +80,8 @@ angular.module('courtApp').controller('CardController',
             console.log('About to create card');
             CardService.createCard(card).then(
                 function (response) {
+                    self.card.id = response.id;
                     console.log('card created successfully');
-                    self.done = true;
-                    self.card = {};
                 },
                 function (errResponse) {
                     console.error('Error while creating card');
@@ -91,7 +95,6 @@ angular.module('courtApp').controller('CardController',
                 .then(
                     function (response) {
                         console.log('card updated successfully'+ self.card);
-                        self.done = true;
                     },
                     function (errResponse) {
                         console.error('Error while updating card');

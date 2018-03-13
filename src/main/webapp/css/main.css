@@ -13,12 +13,15 @@
 
 /* Ширина модального окна */
 .widht-modal-dialog {
-    max-width: 70%;
+    max-width: 50%;
     margin: 1.75rem auto;
 }
 
-/*
-table tr.marked{
-    background-color: tomato; /.здесь нужный цвет
+/* Цвет фона карточки */
+.color-form{
+    background-color: #e0e0e0;
 }
-*/
+/* Цвет фона заголовка карточки */
+.color-form-title{
+    background-color: #9cc3e0;
+}

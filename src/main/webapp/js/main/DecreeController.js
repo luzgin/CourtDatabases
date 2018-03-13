@@ -5,7 +5,6 @@ angular.module('courtApp').controller('DecreeController',
         var self = this;
         self.decree = {};
         self.regulations = [];
-
         self.submit = submit;
         self.createDecree = createDecree;
         self.updateDecree = updateDecree;
@@ -16,7 +15,7 @@ angular.module('courtApp').controller('DecreeController',
         self.editDecree = editDecree;
         self.removeDecree = removeDecree;
 
-        self.done = false;
+        self.decree.decreeDate = new Date(self.decree.decreeDate);
 
         function getAllRegulations() {
             return DecreeService.getAllRegulations();
