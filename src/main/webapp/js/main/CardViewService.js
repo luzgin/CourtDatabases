@@ -15,6 +15,7 @@ angular.module('courtApp').factory('CardViewService',
 
             function loadCard() {
                 $localStorage.card = {};
+                $localStorage.complaintsForDecree = {};
             }
 
             function loadCardForRemove() {

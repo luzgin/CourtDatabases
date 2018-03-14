@@ -233,7 +233,7 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <tr >
+                            <tr ng-repeat="item in cardC.getComplaintsForDecree()">
                                 <td>{{item.complainDate}}</td>
                                 <td>{{item.entityIskAdm.name}}</td>
                                 <td>{{item.nameAuthorComplaint}}</td>

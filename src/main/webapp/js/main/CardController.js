@@ -47,7 +47,7 @@ angular.module('courtApp').controller('CardController',
             return ArticleService.getAllArticles();
         }
         function getComplaintsForDecree() {
-            return ComplaintService.getComplaintsForDecree(self.card.decreeAdm.id);
+            return ComplaintService.getComplaintsForDecree();
         }
 
         function parseToDate(date) {
@@ -117,6 +117,7 @@ angular.module('courtApp').controller('CardController',
             CardService.createCard(card).then(
                 function (response) {
                     self.card.id = response.id;
+                    ComplaintService.loadComplaintsForDecree(self.card.decreeAdm.id);
                     console.log('card created successfully');
                 },
                 function (errResponse) {
