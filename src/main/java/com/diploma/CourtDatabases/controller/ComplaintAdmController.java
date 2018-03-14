@@ -2,6 +2,7 @@ package com.diploma.CourtDatabases.controller;
 
 import com.diploma.CourtDatabases.entity.ComplaintsAdm;
 import com.diploma.CourtDatabases.service.ComplaintsAdmService;
+import com.diploma.CourtDatabases.service.DecreeAdmService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,6 +17,11 @@ public class ComplaintAdmController {
     @GetMapping(value = "/complaint/")
     public List<ComplaintsAdm> getAllComplaints() {
         return complaintsAdmService.findAll();
+    }
+
+    @GetMapping(value = "/complaint/dec/{id}")
+    public List<ComplaintsAdm> getComplaintsForDecree(@PathVariable("id") long id) {
+        return complaintsAdmService.findByDecreeAdm(id);
     }
 
     @GetMapping("/complaint/{id}")

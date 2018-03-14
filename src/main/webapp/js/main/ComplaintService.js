@@ -8,7 +8,8 @@ angular.module('courtApp').factory('ComplaintService',
                 getComplaint: getComplaint,
                 createComplaint: createComplaint,
                 updateComplaint: updateComplaint,
-                removeComplaint: removeComplaint
+                removeComplaint: removeComplaint,
+                getComplaintsForDecree: getComplaintsForDecree
             };
             return factory;
 
@@ -47,6 +48,23 @@ angular.module('courtApp').factory('ComplaintService',
                     );
                 return deferred.promise;
             }
+            function getComplaintsForDecree(id) {
+                console.log('Fetching Complaints for decree with id :' + id);
+                var deferred = $q.defer();
+                $http.get(urls.CONPLAINT_SERVICE_API + "dec/" + id)
+                    .then(
+                        function (response) {
+                            console.log('Fetched successfully Complaints for decree with id :' + id);
+                            deferred.resolve(response.data);
+                        },
+                        function (errResponse) {
+                            console.error('Error while loading Complaints for decree with id :' + id);
+                            deferred.reject(errResponse);
+                        }
+                    );
+                return deferred.promise;
+            }
+
 
             function createComplaint(entity) {
                 console.log('Creating entity');

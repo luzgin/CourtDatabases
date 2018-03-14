@@ -23,6 +23,7 @@ angular.module('courtApp').controller('CardController',
         self.getAllVialators = getAllVialators;
         self.parseToDate = parseToDate;
         self.convertToDate = convertToDate;
+        self.getComplaintsForDecree = getComplaintsForDecree;
         // редактирование посталовления self.editDecree = editDecree;
 
         self.card.createDate = parseToDate(self.card.createDate);
@@ -44,6 +45,9 @@ angular.module('courtApp').controller('CardController',
         */
         function getAllArticles() {
             return ArticleService.getAllArticles();
+        }
+        function getComplaintsForDecree() {
+            return ComplaintService.getComplaintsForDecree(self.card.decreeAdm.id);
         }
 
         function parseToDate(date) {

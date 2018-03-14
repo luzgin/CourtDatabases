@@ -1,6 +1,7 @@
 package com.diploma.CourtDatabases.service.impl;
 
 import com.diploma.CourtDatabases.entity.ComplaintsAdm;
+import com.diploma.CourtDatabases.entity.DecreeAdm;
 import com.diploma.CourtDatabases.repository.ComplaintsAdmRepository;
 import com.diploma.CourtDatabases.service.ComplaintsAdmService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +33,11 @@ public class ComplaintsAdmServiceImpl implements ComplaintsAdmService {
     @Override
     public List<ComplaintsAdm> findAll() {
         return complaintsAdmRepository.findAll();
+    }
+
+    @Override
+    public List<ComplaintsAdm> findByDecreeAdm(Long id) {
+        return complaintsAdmRepository.findByDecreeAdm(id);
     }
 
     @Override
