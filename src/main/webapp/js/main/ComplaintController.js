@@ -64,15 +64,23 @@ angular.module('courtApp').controller('ComplaintController',
             CardService.getCard(document.getElementById("cardId").value).then(
                 function (response) {
                     complaint.cardAdm = response;
-                    ComplaintService.createComplaint(complaint).then(
+                    DecreeService.getDecree(document.getElementById("decreeId").value).then(
                         function (response) {
-                            console.log('complaint created successfully');
-                            self.complaint = {};
+                            complaint.decreeAdm = response;
+                            ComplaintService.createComplaint(complaint).then(
+                                function (response) {
+                                    console.log('complaint created successfully');
+                                    self.complaint = {};
+                                },
+                                function (errResponse) {
+                                    console.error('Error while creating complaint');
+                                }
+                            );
                         },
                         function (errResponse) {
                             console.error('Error while creating complaint');
                         }
-                    );
+                    )
                 },
                 function (errResponse) {
                     console.error('Error while creating complaint');

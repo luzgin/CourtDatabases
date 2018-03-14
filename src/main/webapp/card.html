@@ -52,6 +52,7 @@
                                    data-target="#ModalSaveDecree" ng-click="cardC.editDecree(cardC.card.decreeAdm.id)"/>
                         </div>
                     </div>
+                    <input type="hidden" id="decreeId" ng-model="cardC.card.decreeAdm.id" ng-value="cardC.card.decreeAdm.id">
                     <div class="form-group row mb-0">
                         <div class="col-md-4 pr-0">
                             <label for="organization">Организация</label>
@@ -680,18 +681,6 @@
                             <label class="col-md-2 control-label">Автор</label>
                             <div class="col-md-10">
                                 <input type="text" class="form-control" ng-model="comC.complaint.nameAuthorComplaint"/>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-md-2 control-label">Постановление</label>
-                            <div class="col-md-10">
-                                <select class="form-control" ng-model="comC.complaint.decreeAdm">
-                                    <option ng-repeat="item in comC.getAllRegulations()" ng-value="{{item}}">
-                                        {{comC.convertToDate(item.decreeDate)}} | {{item.organization.name}} |
-                                        {{item.authorDocument.position}}
-                                        {{item.authorDocument.name}}
-                                    </option>
-                                </select>
                             </div>
                         </div>
                         <div class="form-group row">
