@@ -15,11 +15,11 @@ angular.module('courtApp').factory('CardViewService',
 
             function loadCard() {
                 $localStorage.card = {};
-                $localStorage.complaintsForDecree = {};
+               // $localStorage.complaintsForDecree = {};
             }
 
             function loadCardForRemove() {
-                $localStorage.cardForRemove = {};
+               // $localStorage.cardForRemove = {};
             }
 
             function loadAllCards() {

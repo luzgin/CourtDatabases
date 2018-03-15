@@ -10,7 +10,7 @@ angular.module('courtApp').factory('ComplaintService',
                 getComplaint: getComplaint,
                 createComplaint: createComplaint,
                 updateComplaint: updateComplaint,
-                removeComplaint: removeComplaint,
+                removeComplaint: removeComplaint
             };
             return factory;
 
@@ -51,17 +51,17 @@ angular.module('courtApp').factory('ComplaintService',
                 return $localStorage.complaintsForDecree;
             }
 
-            function getComplaint(id) {
-                console.log('Fetching Complaint with id :' + id);
+            function getComplaint() {
+                console.log('Fetching Complaint');
                 var deferred = $q.defer();
-                $http.get(urls.CONPLAINT_SERVICE_API + id)
+                $http.get(urls.CONPLAINT_SERVICE_API + $localStorage.complaintForEdit.id)
                     .then(
                         function (response) {
-                            console.log('Fetched successfully Complaint with id :' + id);
+                            console.log('Fetched successfully Complaint with id :' + $localStorage.complaintForEdit.id);
                             deferred.resolve(response.data);
                         },
                         function (errResponse) {
-                            console.error('Error while loading Complaint with id :' + id);
+                            console.error('Error while loading Complaint with id :' + $localStorage.complaintForEdit.id);
                             deferred.reject(errResponse);
                         }
                     );
@@ -75,7 +75,6 @@ angular.module('courtApp').factory('ComplaintService',
                 $http.post(urls.CONPLAINT_SERVICE_API, entity)
                     .then(
                         function (response) {
-                            loadAllComplaints();
                             loadComplaintsForDecree(entity.decreeAdm.id);
                             deferred.resolve(response.data);
                         },
@@ -93,7 +92,6 @@ angular.module('courtApp').factory('ComplaintService',
                 $http.put(urls.CONPLAINT_SERVICE_API + id, entity)
                     .then(
                         function (response) {
-                            loadAllComplaints();
                             loadComplaintsForDecree(entity.cardAdm.id);
                             deferred.resolve(response.data);
                         },
@@ -105,17 +103,17 @@ angular.module('courtApp').factory('ComplaintService',
                 return deferred.promise;
             }
 
-            function removeComplaint(id) {
-                console.log('Removing Complaint with id ' + id);
+            function removeComplaint() {
+                console.log('Removing Complaint with id ' + $localStorage.complaintForEdit.id);
                 var deferred = $q.defer();
-                $http.delete(urls.CONPLAINT_SERVICE_API + id)
+                $http.delete(urls.CONPLAINT_SERVICE_API + $localStorage.complaintForEdit.id)
                     .then(
                         function (response) {
-                            loadAllComplaints();
+                            loadComplaintsForDecree($localStorage.card.decreeAdm.id);
                             deferred.resolve(response.data);
                         },
                         function (errResponse) {
-                            console.error('Error while removing Complaint with id :' + id);
+                            console.error('Error while removing Complaint with id :' + $localStorage.complaintForEdit.id);
                             deferred.reject(errResponse);
                         }
                     );

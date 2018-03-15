@@ -102,9 +102,9 @@ angular.module('courtApp').controller('ComplaintController',
                 );
         }
 
-        function editComplaint(id) {
+        function editComplaint() {
             console.log('complaint get');
-            ComplaintService.getComplaint(id).then(
+            ComplaintService.getComplaint().then(
                 function (complaint) {
                     self.complaint = complaint;
                     console.log('complaint get' + self.complaint);

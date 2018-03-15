@@ -39,6 +39,7 @@ posdApp.config(function ($routeProvider) {
                                       DecreeService, SecondInstanceService, EntityDecreeService, EntityService,
                                       NameEntityDecreeService, ResService, VialatorService) {
                     var deferred = $q.defer();
+                    CardService.loadComplaintForEdit();
                     ArticleService.loadAllArticles();
                     AuthorService.loadAllAuthors();
                     ComplaintService.loadAllComplaints();

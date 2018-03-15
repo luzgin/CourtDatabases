@@ -221,11 +221,12 @@
                             <div class="row justify-content-end pr-3 pb-2">
                                 <input type="button" class="btn btn-outline-success btn-sm" value="Добавить"  data-toggle="modal"
                                        data-target="#ModalSaveComplaint"/>
-                                <input type="button" class="btn btn-outline-primary btn-sm" value="Изменить"/>
-                                <input type="button" class="btn btn-outline-danger btn-sm" value="Удалить"/>
+                                <input type="button" class="btn btn-outline-primary btn-sm" ng-click="cardC.editComplaint()" value="Изменить"data-toggle="modal"
+                                       data-target="#ModalSaveComplaint"/>
+                                <input type="button" class="btn btn-outline-danger btn-sm"  ng-click="cardC.removeComplaint();" value="Удалить"/>
                             </div>
                             <thead>
-                            <tr>
+                            <tr >
                                 <th class="div-center" width="15%">Дата</th>
                                 <th class="div-center" width="40%">Сужность жалобы</th>
                                 <th class="div-center" width="20%">Автор</th>
@@ -234,8 +235,8 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <tr ng-repeat="item in cardC.getComplaintsForDecree()">
-                                <td>{{item.complainDate}}</td>
+                            <tr ng-click="cardC.setComplaintForEdit(item)" ng-repeat="item in cardC.getComplaintsForDecree()">
+                                <td>{{cardC.convertToDate(item.complainDate)}}</td>
                                 <td>{{item.entityIskAdm.name}}</td>
                                 <td>{{item.nameAuthorComplaint}}</td>
                                 <td>{{item.summPoshlini}}</td>
@@ -593,26 +594,26 @@
                                 <label class="col-md-2 control-label" for="privateNumber">Личный номер</label>
                                 <div class="col-md-10">
                                     <input type="text" class="form-control" id="privateNumber"
-                                           ng-model="viaC.vialator.privateNumber"/>
+                                           ng-model="viaC.vialator.privateNumber" required/>
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label class="col-md-2 control-label" for="firstName">Фамилия</label>
                                 <div class="col-md-10">
                                     <input type="text" class="form-control" id="firstName"
-                                           ng-model="viaC.vialator.firstName"/>
+                                           ng-model="viaC.vialator.firstName" required/>
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label class="col-md-2 control-label" for="secondName">Имя</label>
                                 <div class="col-md-10">
-                                    <input type="text" class="form-control" ng-model="viaC.vialator.secondName"/>
+                                    <input type="text" class="form-control" ng-model="viaC.vialator.secondName" required/>
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label class="col-md-2 control-label" for="lastName">Отчество</label>
                                 <div class="col-md-10">
-                                    <input type="text" class="form-control" ng-model="viaC.vialator.lastName"/>
+                                    <input type="text" class="form-control" ng-model="viaC.vialator.lastName" required/>
                                 </div>
                             </div>
                             <div class="modal-footer row mr-0">
@@ -630,14 +631,14 @@
                                 <label class="col-md-2 control-label" for="privateNumber">УНП</label>
                                 <div class="col-md-10">
                                     <input type="text" class="form-control"
-                                           ng-model="viaC.vialator.privateNumber"/>
+                                           ng-model="viaC.vialator.privateNumber" required/>
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label class="col-md-2 control-label" for="firstName">Название</label>
                                 <div class="col-md-10">
                                     <input type="text" class="form-control"
-                                           ng-model="viaC.vialator.firstName"/>
+                                           ng-model="viaC.vialator.firstName" required/>
                                 </div>
                             </div>
                             <div class="modal-footer row mr-0">
@@ -665,7 +666,7 @@
                         <div class="form-group row">
                             <label class="col-md-2 control-label">Дата</label>
                             <div class="col-md-10">
-                                <input type="date" class="form-control" ng-model="comC.complaint.complainDate"/>
+                                <input type="date" class="form-control" ng-model="comC.complaint.complainDate" required/>
                             </div>
                         </div>
                         <div class="form-group row">
@@ -673,20 +674,20 @@
                             <div class="col-md-10">
                                 <select class="form-control"
                                         ng-options="item.name for item in comC.getAllEntities() track by item.id"
-                                        ng-model="comC.complaint.entityIskAdm">
+                                        ng-model="comC.complaint.entityIskAdm" required>
                                 </select>
                             </div>
                         </div>
                         <div class="form-group row">
                             <label class="col-md-2 control-label">Автор</label>
                             <div class="col-md-10">
-                                <input type="text" class="form-control" ng-model="comC.complaint.nameAuthorComplaint"/>
+                                <input type="text" class="form-control" ng-model="comC.complaint.nameAuthorComplaint" required/>
                             </div>
                         </div>
                         <div class="form-group row">
                             <label class="col-md-2 control-label">Сумма госпошлины</label>
                             <div class="col-md-10">
-                                <input type="text" class="form-control" ng-model="comC.complaint.summPoshlini"/>
+                                <input type="text" class="form-control" ng-model="comC.complaint.summPoshlini" required/>
                             </div>
                         </div>
                         <div class="form-group row">
