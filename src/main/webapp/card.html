@@ -41,7 +41,7 @@
                                 <ui-select-choices repeat="item in cardC.getAllRegulations() | filter: $select.search">
                                     <div ng-bind-html="item.decreeDate | highlight: $select.search"></div>
                                     <small ng-bind-html="item.organization.name | highlight: $select.search"></small>
-                                    <small ng-bind-html="item.authorDocument.position | highlight: $select.search"></small>
+                                    <small ng-bind-html="' | ' + item.authorDocument.position | highlight: $select.search"></small>
                                     <small ng-bind-html="item.authorDocument.name | highlight: $select.search"></small>
                                 </ui-select-choices>
                             </ui-select>
@@ -182,28 +182,29 @@
             </div>
             <div class="p-0 row">
                 <div class="row col-md-12 pr-0">
-                    <div class="col-md-4">
+                    <div class="col-md-6">
                         <div class="form-group row">
-                            <label class="col-md-4 pr-0">Статья</label>
-                            <div class="col-md-8 p-0">
+                            <label class="col-md-2 pr-0">Статья</label>
+                            <div class="col-md-10 p-0">
                                 <ui-select ng-model="cardC.card.articleAdm" theme="selectize"
                                            title="Введите для поиска...">
                                     <ui-select-match placeholder="Введите для поиска...">Ст.
-                                        {{$select.selected.article}} <div ng-if="$select.selected.part != 0">ч. {{$select.selected.part}}</div>
+                                        {{$select.selected.article}} <span ng-if="$select.selected.part != 0">ч. {{$select.selected.part}}</span>
                                     </ui-select-match>
                                     <ui-select-choices repeat="item in cardC.getAllArticles() | filter: $select.search">
                                         <small ng-bind-html="'Ст. '+ item.article | highlight: $select.search"></small>
                                         <small ng-if="item.part != 0"
                                                ng-bind-html="'ч. '+ item.part | highlight: $select.search"></small>
+                                        <small ng-bind-html="' | '+ item.note | highlight: $select.search"></small>
                                     </ui-select-choices>
                                 </ui-select>
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-8 pr-0">
+                    <div class="col-md-6 pr-0">
                         <div class="form-group row">
-                            <label class="col-md-4">Сущность постановления</label>
-                            <div class="col-md-8">
+                            <label class="col-md-3 pr-0">Сущность постановления</label>
+                            <div class="col-md-9">
                                 <ui-select ng-model="cardC.card.entityDecreeAdm.nameEntityDecreeAdm" theme="selectize"
                                            title="Введите для поиска...">
                                     <ui-select-match placeholder="Введите для поиска...">{{$select.selected.name}}
@@ -219,12 +220,12 @@
                     </div>
                 </div>
                 <div class="row col-md-12 pr-0">
-                    <div class="col-md-4">
+                    <div class="col-md-6">
                     </div>
-                    <div class="col-md-8 pr-0">
+                    <div class="col-md-6 pr-0">
                         <div class="form-group row">
-                            <label class="col-md-4">Дополнительная информация</label>
-                            <div class="col-md-8">
+                            <label class="col-md-3 pr-0">Дополнительная информация</label>
+                            <div class="col-md-9">
                                 <input type="text" class="form-control btn-sm" id="infoEntityDecree"
                                        ng-model="cardC.card.entityDecreeAdm.prim"/>
                             </div>

@@ -296,9 +296,9 @@
     background: #ffffff;
 }
 
-.selectize-dropdown .active {
-    color: #495c68;
-    background-color: #f5fafd;
+.selectize-dropdown .active { /*        Цвет выделения активной строки в select         */
+    color: #000000;
+    background-color: #9cc3e0;
 }
 
 .selectize-dropdown .active.create {

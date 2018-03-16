@@ -36,7 +36,7 @@ CREATE TABLE IF NOT EXISTS result_adm (
 DROP TABLE IF EXISTS `article_adm`;
 CREATE TABLE IF NOT EXISTS article_adm (
   id      INT(10) AUTO_INCREMENT,
-  article VARCHAR(15)  NOT NULL,
+  article VARCHAR(30)  NOT NULL,
   part    INT(5),
   note    VARCHAR(250) NOT NULL,
   PRIMARY KEY (id)
@@ -1122,37 +1122,37 @@ INSERT INTO `article_adm` (`article`, `part`, `note`) VALUES ('25.4', '1', 'Не
 INSERT INTO `article_adm` (`article`, `part`, `note`) VALUES ('25.4', '2', 'Несвоевременное представление документов, необходимых для ведения воинского учета призывников и военнообязанных');
 INSERT INTO `article_adm` (`article`, `part`, `note`) VALUES ('25.8', '1', 'Нарушение обязанностей по воинскому учету');
 INSERT INTO `article_adm` (`article`, `part`, `note`) VALUES ('25.8', '2', 'Нарушение обязанностей по воинскому учету');
-INSERT INTO `article_adm` (`article`, `part`, `note`) VALUES ('31.1', '9', 'Декрет № 1 п.9 (утратил силу с 23.02.2015)');
-INSERT INTO `article_adm` (`article`, `part`, `note`) VALUES ('31.1', '10', 'Декрет № 1 п.10 (утратил силу с 23.02.2015)');
-INSERT INTO `article_adm` (`article`, `part`, `note`) VALUES ('31.11', '0', 'Декрет № 11 (утратил силу с 16.01.2014)');
-INSERT INTO `article_adm` (`article`, `part`, `note`) VALUES ('31.24', '0', 'Декрет № 24 (утратил силу с 02.04.2007)');
-INSERT INTO `article_adm` (`article`, `part`, `note`) VALUES ('31.28', '0', 'Декрет № 28 (утратил силу с 02.04.2007)');
-INSERT INTO `article_adm` (`article`, `part`, `note`) VALUES ('32.114', '0', 'Указ № 114');
-INSERT INTO `article_adm` (`article`, `part`, `note`) VALUES ('32.222', '0', 'Указ № 222');
-INSERT INTO `article_adm` (`article`, `part`, `note`) VALUES ('32.368', '0', 'Указ № 368 (утратил силу с 08.01.2008)');
-INSERT INTO `article_adm` (`article`, `part`, `note`) VALUES ('32.26', '4', 'Указ № 26');
-INSERT INTO `article_adm` (`article`, `part`, `note`) VALUES ('32.26', '5', 'Указ № 26');
-INSERT INTO `article_adm` (`article`, `part`, `note`) VALUES ('32.26', '6', 'Указ № 26');
-INSERT INTO `article_adm` (`article`, `part`, `note`) VALUES ('32.26', '7', 'Указ № 26');
-INSERT INTO `article_adm` (`article`, `part`, `note`) VALUES ('32.26', '8', 'Указ № 26');
-INSERT INTO `article_adm` (`article`, `part`, `note`) VALUES ('32.26', '9', 'Указ № 26');
-INSERT INTO `article_adm` (`article`, `part`, `note`) VALUES ('32.26', '10', 'Указ № 26');
-INSERT INTO `article_adm` (`article`, `part`, `note`) VALUES ('32.26', '11', 'Указ № 26');
-INSERT INTO `article_adm` (`article`, `part`, `note`) VALUES ('32.26', '12', 'Указ № 26');
-INSERT INTO `article_adm` (`article`, `part`, `note`) VALUES ('32.26', '13', 'Указ № 26');
-INSERT INTO `article_adm` (`article`, `part`, `note`) VALUES ('32.26', '14', 'Указ № 26');
-INSERT INTO `article_adm` (`article`, `part`, `note`) VALUES ('31.6', '111', 'Декрет № 6');
-INSERT INTO `article_adm` (`article`, `part`, `note`) VALUES ('31.6', '112', 'Декрет № 6');
-INSERT INTO `article_adm` (`article`, `part`, `note`) VALUES ('31.6', '113', 'Декрет № 6');
-INSERT INTO `article_adm` (`article`, `part`, `note`) VALUES ('31.6', '114', 'Декрет № 6');
-INSERT INTO `article_adm` (`article`, `part`, `note`) VALUES ('31.6', '115', 'Декрет № 6');
-INSERT INTO `article_adm` (`article`, `part`, `note`) VALUES ('31.6', '116', 'Декрет № 6');
-INSERT INTO `article_adm` (`article`, `part`, `note`) VALUES ('31.5', '2', 'Декрет №5');
-INSERT INTO `article_adm` (`article`, `part`, `note`) VALUES ('31.3', '0', 'Декрет №3');
-INSERT INTO `article_adm` (`article`, `part`, `note`) VALUES ('32.48', '0', 'Указ №48');
-INSERT INTO `article_adm` (`article`, `part`, `note`) VALUES ('32.49', '0', 'Указ №49');
+INSERT INTO `article_adm` (`article`, `part`, `note`) VALUES ('Декрет № 1', '9', 'Декрет № 1 п.9 (утратил силу с 23.02.2015)');
+INSERT INTO `article_adm` (`article`, `part`, `note`) VALUES ('Декрет № 1', '10', 'Декрет № 1 п.10 (утратил силу с 23.02.2015)');
+INSERT INTO `article_adm` (`article`, `part`, `note`) VALUES ('Декрет № 11', '0', 'Декрет № 11 (утратил силу с 16.01.2014)');
+INSERT INTO `article_adm` (`article`, `part`, `note`) VALUES ('Декрет № 24', '0', 'Декрет № 24 (утратил силу с 02.04.2007)');
+INSERT INTO `article_adm` (`article`, `part`, `note`) VALUES ('Декрет № 28', '0', 'Декрет № 28 (утратил силу с 02.04.2007)');
+INSERT INTO `article_adm` (`article`, `part`, `note`) VALUES ('Указ № 114', '0', 'Указ № 114');
+INSERT INTO `article_adm` (`article`, `part`, `note`) VALUES ('Указ № 222', '0', 'Указ № 222');
+INSERT INTO `article_adm` (`article`, `part`, `note`) VALUES ('Указ № 368', '0', 'Указ № 368 (утратил силу с 08.01.2008)');
+INSERT INTO `article_adm` (`article`, `part`, `note`) VALUES ('Указ № 26', '4', 'Указ № 26');
+INSERT INTO `article_adm` (`article`, `part`, `note`) VALUES ('Указ № 26', '5', 'Указ № 26');
+INSERT INTO `article_adm` (`article`, `part`, `note`) VALUES ('Указ № 26', '6', 'Указ № 26');
+INSERT INTO `article_adm` (`article`, `part`, `note`) VALUES ('Указ № 26', '7', 'Указ № 26');
+INSERT INTO `article_adm` (`article`, `part`, `note`) VALUES ('Указ № 26', '8', 'Указ № 26');
+INSERT INTO `article_adm` (`article`, `part`, `note`) VALUES ('Указ № 26', '9', 'Указ № 26');
+INSERT INTO `article_adm` (`article`, `part`, `note`) VALUES ('Указ № 26', '10', 'Указ № 26');
+INSERT INTO `article_adm` (`article`, `part`, `note`) VALUES ('Указ № 26', '11', 'Указ № 26');
+INSERT INTO `article_adm` (`article`, `part`, `note`) VALUES ('Указ № 26', '12', 'Указ № 26');
+INSERT INTO `article_adm` (`article`, `part`, `note`) VALUES ('Указ № 26', '13', 'Указ № 26');
+INSERT INTO `article_adm` (`article`, `part`, `note`) VALUES ('Указ № 26', '14', 'Указ № 26');
+INSERT INTO `article_adm` (`article`, `part`, `note`) VALUES ('Декрет № 6', '111', 'Декрет № 6');
+INSERT INTO `article_adm` (`article`, `part`, `note`) VALUES ('Декрет № 6', '112', 'Декрет № 6');
+INSERT INTO `article_adm` (`article`, `part`, `note`) VALUES ('Декрет № 6', '113', 'Декрет № 6');
+INSERT INTO `article_adm` (`article`, `part`, `note`) VALUES ('Декрет № 6', '114', 'Декрет № 6');
+INSERT INTO `article_adm` (`article`, `part`, `note`) VALUES ('Декрет № 6', '115', 'Декрет № 6');
+INSERT INTO `article_adm` (`article`, `part`, `note`) VALUES ('Декрет № 6', '116', 'Декрет № 6');
+INSERT INTO `article_adm` (`article`, `part`, `note`) VALUES ('Декрет №5', '2', 'Декрет №5');
+INSERT INTO `article_adm` (`article`, `part`, `note`) VALUES ('Декрет №3', '0', 'Декрет №3');
+INSERT INTO `article_adm` (`article`, `part`, `note`) VALUES ('Указ №48', '0', 'Указ №48');
+INSERT INTO `article_adm` (`article`, `part`, `note`) VALUES ('Указ №49', '0', 'Указ №49');
 INSERT INTO `article_adm` (`article`, `part`, `note`) VALUES ('86.1', '0', 'Освобождение от уголовной ответственности с привлечением лица к административной ответственности');
-INSERT INTO `article_adm` (`article`, `part`, `note`) VALUES ('99.99', '9', 'Прочие');
+INSERT INTO `article_adm` (`article`, `part`, `note`) VALUES ('Прочие', '9', 'Прочие');
 
 
 
