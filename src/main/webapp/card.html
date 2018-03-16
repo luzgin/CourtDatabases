@@ -59,7 +59,7 @@
                     </div>
                     <input type="hidden" id="decreeId" ng-model="cardC.card.decreeAdm.id"
                            ng-value="cardC.card.decreeAdm.id">
-                    <div class="form-group row mb-0">
+                    <div class="form-group row mb-0" ng-if="cardC.card.decreeAdm != null">
                         <div class="col-md-4 pr-0">
                             <label for="organization">Организация</label>
                             <input type="text" class="form-control btn-sm" id="organization"
@@ -196,23 +196,21 @@
                                         <small ng-bind-html="item.note | highlight: $select.search"></small>
                                     </ui-select-choices>
                                 </ui-select>
-                                <!--
-                                    <select id="articleNumber" class="form-control"
-                                            ng-options="item.article for item in cardC.getAllArticles() track by item.id"
-                                            ng-model="cardC.card.articleAdm">
-                                    </select>
-                                -->
                             </div>
                         </div>
                     </div>
                     <div class="col-md-8 pr-0">
                         <div class="form-group row">
-                            <label class="col-md-4" for="entityDecree">Сущность постановления</label>
+                            <label class="col-md-4">Сущность постановления</label>
                             <div class="col-md-8">
-                                <select id="entityDecree" class="form-control"
-                                        ng-options="item.name for item in cardC.getAllNamesEntityDecree() track by item.id"
-                                        ng-model="cardC.card.entityDecreeAdm.nameEntityDecreeAdm">
-                                </select>
+                                <ui-select ng-model="cardC.card.entityDecreeAdm.nameEntityDecreeAdm" theme="selectize"
+                                           title="Введите для поиска...">
+                                    <ui-select-match placeholder="Введите для поиска...">{{$select.selected.name}}
+                                    </ui-select-match>
+                                    <ui-select-choices repeat="item in cardC.getAllNamesEntityDecree() | filter: $select.search">
+                                        <div ng-bind-html="item.name | highlight: $select.search"></div>
+                                    </ui-select-choices>
+                                </ui-select>
                             </div>
                         </div>
                         <input type="hidden" ng-model="cardC.card.entityDecreeAdm.id"/>
@@ -223,7 +221,7 @@
                     </div>
                     <div class="col-md-8 pr-0">
                         <div class="form-group row">
-                            <label class="col-md-4" for="entityDecree">Дополнительная информация</label>
+                            <label class="col-md-4">Дополнительная информация</label>
                             <div class="col-md-8">
                                 <input type="text" class="form-control btn-sm" id="infoEntityDecree"
                                        ng-model="cardC.card.entityDecreeAdm.prim"/>
@@ -305,11 +303,14 @@
                 </div>
                 <div class="form-group row">
                     <div class="col-md-3">
-                        <label for="judge">Судья</label>
-                        <select id="judge" class="form-control"
-                                ng-options="item.name for item in cardC.getAllAuthors() track by item.id"
-                                ng-model="cardC.card.judge">
-                        </select>
+                        <label>Судья</label>
+                        <ui-select ng-model="cardC.card.judge" theme="selectize" title="Введите для поиска...">
+                            <ui-select-match placeholder="Введите для поиска...">{{$select.selected.name}}
+                            </ui-select-match>
+                            <ui-select-choices repeat="item in cardC.getAllAuthors() | filter: $select.search">
+                                <div ng-bind-html="item.name | highlight: $select.search"></div>
+                            </ui-select-choices>
+                        </ui-select>
                     </div>
                     <div class="col-md-2">
                         <label for="resultDate">Дата рассмотрения</label>
@@ -317,11 +318,15 @@
                                ng-model="cardC.card.resultDate"/>
                     </div>
                     <div class="col-md-7">
-                        <label for="result">Результат рассмотрения</label>
-                        <select id="result" class="form-control"
-                                ng-options="item.name for item in cardC.getAllResults() track by item.id"
-                                ng-model="cardC.card.resultAdmCase">
-                        </select>
+                        <label>Результат рассмотрения</label>
+                        <ui-select ng-model="cardC.card.resultAdmCase" theme="selectize" title="Введите для поиска...">
+                            <ui-select-match placeholder="Введите для поиска...">{{$select.selected.name}}
+                            </ui-select-match>
+                            <ui-select-choices repeat="item in cardC.getAllResults() | filter: $select.search">
+                                <div ng-bind-html="item.name | highlight: $select.search"></div>
+                            </ui-select-choices>
+                        </ui-select>
+
                     </div>
                 </div>
                 <div class="card border-dark mb-3">
@@ -382,10 +387,13 @@
                         <div class="form-group row">
                             <label class="col-md-3 control-label">Организация</label>
                             <div class="col-md-7">
-                                <select class="form-control"
-                                        ng-options="item.name for item in decC.getAllOrganizations() track by item.id"
-                                        ng-model="decC.decree.organization">
-                                </select>
+                                <ui-select ng-model="decC.decree.organization" theme="selectize" title="Введите для поиска...">
+                                    <ui-select-match placeholder="Введите для поиска...">{{$select.selected.name}}
+                                    </ui-select-match>
+                                    <ui-select-choices repeat="item in decC.getAllOrganizations() | filter: $select.search">
+                                        <div ng-bind-html="item.name | highlight: $select.search"></div>
+                                    </ui-select-choices>
+                                </ui-select>
                             </div>
                             <div class="col-md-2 row justify-content-md-end">
                                 <input type="button" class="btn btn-outline-success btn-sm" value="Добавить"
@@ -396,10 +404,13 @@
                         <div class="form-group row">
                             <label class="col-md-3 control-label">Автор</label>
                             <div class="col-md-7">
-                                <select class="form-control"
-                                        ng-options="item.name for item in decC.getAllAuthors() track by item.id"
-                                        ng-model="decC.decree.authorDocument">
-                                </select>
+                                <ui-select ng-model="decC.decree.authorDocument" theme="selectize" title="Введите для поиска...">
+                                    <ui-select-match placeholder="Введите для поиска...">{{$select.selected.name}}
+                                    </ui-select-match>
+                                    <ui-select-choices repeat="item in decC.getAllAuthors() | filter: $select.search">
+                                        <div ng-bind-html="item.name | highlight: $select.search"></div>
+                                    </ui-select-choices>
+                                </ui-select>
                             </div>
                             <div class="col-md-2 row justify-content-md-end">
                                 <input type="button" class="btn btn-outline-success btn-sm" value="Добавить"
@@ -437,11 +448,17 @@
                         <div class="form-group row">
                             <label class="col-md-3 control-label">Вторая инстанция</label>
                             <div class="col-md-7">
-                                <select class="form-control"
-                                        ng-options="item.id for item in decC.getAllSecondInstance() track by item.id"
-                                        ng-model="decC.decree.secondInstanceAdm">
-                                    <option value=""></option>
-                                </select>
+
+                                <ui-select ng-model="decC.decree.secondInstanceAdm" theme="selectize" title="Введите для поиска...">
+                                    <ui-select-match placeholder="Введите для поиска...">{{$select.selected.decreeDate}}
+                                    </ui-select-match>
+                                    <ui-select-choices repeat="item in decC.getAllSecondInstance() | filter: $select.search">
+                                        <div ng-bind-html="item.decreeDate | highlight: $select.search"></div>
+                                        <small ng-bind-html="item.organization.name | highlight: $select.search"></small>
+                                        <small ng-bind-html="item.authorDocument.position | highlight: $select.search"></small>
+                                        <small ng-bind-html="item.authorDocument.name | highlight: $select.search"></small>
+                                    </ui-select-choices>
+                                </ui-select>
                             </div>
                             <div class="col-md-2 row justify-content-md-end">
                                 <input type="button" class="btn btn-outline-success btn-sm" value="Добавить"
@@ -704,10 +721,13 @@
                         <div class="form-group row">
                             <label class="col-md-2 control-label">Сущность жалобы</label>
                             <div class="col-md-10">
-                                <select class="form-control"
-                                        ng-options="item.name for item in comC.getAllEntities() track by item.id"
-                                        ng-model="comC.complaint.entityIskAdm" required>
-                                </select>
+                                <ui-select ng-model="comC.complaint.entityIskAdm" theme="selectize" title="Введите для поиска...">
+                                    <ui-select-match placeholder="Введите для поиска...">{{$select.selected.name}}
+                                    </ui-select-match>
+                                    <ui-select-choices repeat="item in comC.getAllEntities() | filter: $select.search">
+                                        <div ng-bind-html="item.name | highlight: $select.search"></div>
+                                    </ui-select-choices>
+                                </ui-select>
                             </div>
                         </div>
                         <div class="form-group row">
