@@ -7,7 +7,6 @@ angular.module('courtApp').factory('CardViewService',
                 getAllCards: getAllCards,
                 removeCard: removeCard,
                 loadCard: loadCard,
-                loadCardForRemove: loadCardForRemove,
                 setCard: setCard,
                 setCardForRemove: setCardForRemove
             };
@@ -15,11 +14,6 @@ angular.module('courtApp').factory('CardViewService',
 
             function loadCard() {
                 $localStorage.card = {};
-               // $localStorage.complaintsForDecree = {};
-            }
-
-            function loadCardForRemove() {
-               // $localStorage.cardForRemove = {};
             }
 
             function loadAllCards() {

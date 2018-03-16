@@ -1,4 +1,4 @@
-var posdApp = angular.module("courtApp", ['ngRoute', 'ngStorage']);
+var posdApp = angular.module("courtApp", ['ngSanitize', 'ngRoute', 'ngStorage','ui.select']);
 
 posdApp.constant('urls', {
     BASE: 'http://localhost:8080/',
@@ -23,10 +23,9 @@ posdApp.config(function ($routeProvider) {
             controller: 'CardViewController',
             controllerAs: 'cdviewC',
             resolve: {
-                Complaints: function ($q, CardViewService, CardService) {
+                Complaints: function ($q, CardViewService) {
                     var deferred = $q.defer();
                     CardViewService.loadCard();
-                    CardViewService.loadCardForRemove();
                     CardViewService.loadAllCards().then(deferred.resolve, deferred.resolve);
                     return deferred.promise;
                 }
@@ -207,5 +206,36 @@ posdApp.config(function ($routeProvider) {
         .otherwise({
             redirectTo: "/nameEntityDecree"
         })
-})
-;
+});
+
+posdApp.filter('propsFilter', function() {
+    return function(items, props) {
+        var out = [];
+
+        if (angular.isArray(items)) {
+            var keys = Object.keys(props);
+
+            items.forEach(function(item) {
+                var itemMatches = false;
+
+                for (var i = 0; i < keys.length; i++) {
+                    var prop = keys[i];
+                    var text = props[prop].toLowerCase();
+                    if (item[prop].toString().toLowerCase().indexOf(text) !== -1) {
+                        itemMatches = true;
+                        break;
+                    }
+                }
+
+                if (itemMatches) {
+                    out.push(item);
+                }
+            });
+        } else {
+            // Let the output be the input untouched
+            out = items;
+        }
+
+        return out;
+    };
+});

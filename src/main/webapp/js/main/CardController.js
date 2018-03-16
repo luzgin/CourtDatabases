@@ -34,12 +34,7 @@ angular.module('courtApp').controller('CardController',
             if (self.card.resultDate != null) {
                 self.card.resultDate = parseToDate(self.card.resultDate);
             }
-            if (self.card.decreeAdm != null) {
-                self.card.decreeAdm.decreeDate = parseToDate(self.card.decreeAdm.decreeDate);
-                if (self.card.decreeAdm.secondInstanceAdm != null) {
-                    self.card.decreeAdm.secondInstanceAdm.decreeDate = parseToDate(self.card.decreeAdm.secondInstanceAdm.decreeDate);
-                }
-            }
+
 
             function setComplaintForEdit(item) {
                 CardService.setComplaintForEdit(item);
@@ -169,6 +164,7 @@ angular.module('courtApp').controller('CardController',
             }
 
             function editComplaint() {
+
 
             }
         }
