@@ -188,12 +188,13 @@
                             <div class="col-md-8 p-0">
                                 <ui-select ng-model="cardC.card.articleAdm" theme="selectize"
                                            title="Введите для поиска...">
-                                    <ui-select-match placeholder="Введите для поиска...">{{$select.selected.article}}
+                                    <ui-select-match placeholder="Введите для поиска...">Ст.
+                                        {{$select.selected.article}} <div ng-if="$select.selected.part != 0">ч. {{$select.selected.part}}</div>
                                     </ui-select-match>
                                     <ui-select-choices repeat="item in cardC.getAllArticles() | filter: $select.search">
-                                        <div ng-bind-html="item.article | highlight: $select.search"></div>
-                                        <small ng-bind-html="item.part | highlight: $select.search"></small>
-                                        <small ng-bind-html="item.note | highlight: $select.search"></small>
+                                        <small ng-bind-html="'Ст. '+ item.article | highlight: $select.search"></small>
+                                        <small ng-if="item.part != 0"
+                                               ng-bind-html="'ч. '+ item.part | highlight: $select.search"></small>
                                     </ui-select-choices>
                                 </ui-select>
                             </div>
@@ -207,7 +208,8 @@
                                            title="Введите для поиска...">
                                     <ui-select-match placeholder="Введите для поиска...">{{$select.selected.name}}
                                     </ui-select-match>
-                                    <ui-select-choices repeat="item in cardC.getAllNamesEntityDecree() | filter: $select.search">
+                                    <ui-select-choices
+                                            repeat="item in cardC.getAllNamesEntityDecree() | filter: $select.search">
                                         <div ng-bind-html="item.name | highlight: $select.search"></div>
                                     </ui-select-choices>
                                 </ui-select>
@@ -387,10 +389,12 @@
                         <div class="form-group row">
                             <label class="col-md-3 control-label">Организация</label>
                             <div class="col-md-7">
-                                <ui-select ng-model="decC.decree.organization" theme="selectize" title="Введите для поиска...">
+                                <ui-select ng-model="decC.decree.organization" theme="selectize"
+                                           title="Введите для поиска...">
                                     <ui-select-match placeholder="Введите для поиска...">{{$select.selected.name}}
                                     </ui-select-match>
-                                    <ui-select-choices repeat="item in decC.getAllOrganizations() | filter: $select.search">
+                                    <ui-select-choices
+                                            repeat="item in decC.getAllOrganizations() | filter: $select.search">
                                         <div ng-bind-html="item.name | highlight: $select.search"></div>
                                     </ui-select-choices>
                                 </ui-select>
@@ -404,7 +408,8 @@
                         <div class="form-group row">
                             <label class="col-md-3 control-label">Автор</label>
                             <div class="col-md-7">
-                                <ui-select ng-model="decC.decree.authorDocument" theme="selectize" title="Введите для поиска...">
+                                <ui-select ng-model="decC.decree.authorDocument" theme="selectize"
+                                           title="Введите для поиска...">
                                     <ui-select-match placeholder="Введите для поиска...">{{$select.selected.name}}
                                     </ui-select-match>
                                     <ui-select-choices repeat="item in decC.getAllAuthors() | filter: $select.search">
@@ -449,10 +454,12 @@
                             <label class="col-md-3 control-label">Вторая инстанция</label>
                             <div class="col-md-7">
 
-                                <ui-select ng-model="decC.decree.secondInstanceAdm" theme="selectize" title="Введите для поиска...">
+                                <ui-select ng-model="decC.decree.secondInstanceAdm" theme="selectize"
+                                           title="Введите для поиска...">
                                     <ui-select-match placeholder="Введите для поиска...">{{$select.selected.decreeDate}}
                                     </ui-select-match>
-                                    <ui-select-choices repeat="item in decC.getAllSecondInstance() | filter: $select.search">
+                                    <ui-select-choices
+                                            repeat="item in decC.getAllSecondInstance() | filter: $select.search">
                                         <div ng-bind-html="item.decreeDate | highlight: $select.search"></div>
                                         <small ng-bind-html="item.organization.name | highlight: $select.search"></small>
                                         <small ng-bind-html="item.authorDocument.position | highlight: $select.search"></small>
@@ -721,7 +728,8 @@
                         <div class="form-group row">
                             <label class="col-md-2 control-label">Сущность жалобы</label>
                             <div class="col-md-10">
-                                <ui-select ng-model="comC.complaint.entityIskAdm" theme="selectize" title="Введите для поиска...">
+                                <ui-select ng-model="comC.complaint.entityIskAdm" theme="selectize"
+                                           title="Введите для поиска...">
                                     <ui-select-match placeholder="Введите для поиска...">{{$select.selected.name}}
                                     </ui-select-match>
                                     <ui-select-choices repeat="item in comC.getAllEntities() | filter: $select.search">
