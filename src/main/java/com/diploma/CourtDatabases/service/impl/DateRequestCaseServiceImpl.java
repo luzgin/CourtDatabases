@@ -21,17 +21,22 @@ public class DateRequestCaseServiceImpl implements DateRequestCaseService {
     }
 
     @Override
+    public DateRequestCase update(DateRequestCase dateRequestCase) {
+        return dateRequestCaseRepository.save(dateRequestCase);
+    }
+
+    @Override
     public void delete(long id) {
         dateRequestCaseRepository.delete(id);
     }
 
     @Override
-    public List<DateRequestCase> gelAll() {
-        return dateRequestCaseRepository.findAll();
+    public DateRequestCase findById(long id) {
+        return dateRequestCaseRepository.findOne(id);
     }
 
     @Override
-    public DateRequestCase findById(long id) {
-        return dateRequestCaseRepository.findOne(id);
+    public List<DateRequestCase> findByCardAdm_Id(Long id) {
+        return dateRequestCaseRepository.findByCardAdm_Id(id);
     }
 }

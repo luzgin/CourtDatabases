@@ -6,9 +6,14 @@ import java.util.List;
 
 public interface DateReturnCaseService {
     DateReturnCase save(DateReturnCase dateReturnCase);
+
+    DateReturnCase update(DateReturnCase dateReturnCase);
+
     void delete(long id);
-    List<DateReturnCase> gelAll();
+
     DateReturnCase findById(long id);
+
+    List<DateReturnCase> findByCardAdm_Id(Long id);
 
 
 }

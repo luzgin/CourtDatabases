@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+
 @Service("DateReturnCaseService")
 @Transactional
 public class DateReturnCaseServiceImpl implements DateReturnCaseService {
@@ -20,17 +21,22 @@ public class DateReturnCaseServiceImpl implements DateReturnCaseService {
     }
 
     @Override
+    public DateReturnCase update(DateReturnCase dateReturnCase) {
+        return dateReturnCaseRepository.save(dateReturnCase);
+    }
+
+    @Override
     public void delete(long id) {
         dateReturnCaseRepository.delete(id);
     }
 
     @Override
-    public List<DateReturnCase> gelAll() {
-        return dateReturnCaseRepository.findAll();
+    public DateReturnCase findById(long id) {
+        return dateReturnCaseRepository.findOne(id);
     }
 
     @Override
-    public DateReturnCase findById(long id) {
-        return dateReturnCaseRepository.findOne(id);
+    public List<DateReturnCase> findByCardAdm_Id(Long id) {
+        return dateReturnCaseRepository.findByCardAdm_Id(id);
     }
 }
