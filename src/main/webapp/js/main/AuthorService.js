@@ -5,6 +5,8 @@ angular.module('courtApp').factory('AuthorService',
             var factory = {
                 loadAllAuthors: loadAllAuthors,
                 getAllAuthors: getAllAuthors,
+                loadAllAuthorsForOrganization: loadAllAuthorsForOrganization,
+                getAllAuthorsForOrganization: getAllAuthorsForOrganization,
                 getAuthor: getAuthor,
                 createAuthor: createAuthor,
                 updateAuthor: updateAuthor,
@@ -31,8 +33,13 @@ angular.module('courtApp').factory('AuthorService',
             function getStatus() {
                 return $localStorage.status;
             }
+
             function getAllAuthors() {
                 return $localStorage.authors;
+            }
+
+            function getAllAuthorsForOrganization() {
+                return $localStorage.authorsRegionalCourt;
             }
 
             function getAuthor(id) {
@@ -51,6 +58,24 @@ angular.module('courtApp').factory('AuthorService',
                     );
                 return deferred.promise;
             }
+
+            function loadAllAuthorsForOrganization() {
+                var c = decodeURI("Витебский областной суд");
+                var deferred = $q.defer();
+                $http.get(urls.AUTHOR_SERVICE_API + "forOrganization/" + encodeURIComponent(c) + "/" + 1)
+                    .then(
+                        function (response) {
+                            $localStorage.authorsRegionalCourt = response.data;
+                            deferred.resolve(response);
+                        },
+                        function (errResponse) {
+                            console.error('Error while loading Author with id :' + id);
+                            deferred.reject(errResponse);
+                        }
+                    );
+                return deferred.promise;
+            }
+
 
             function createAuthor(entity) {
                 console.log('Creating entity');

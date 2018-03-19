@@ -11,5 +11,6 @@ public interface AuthorDocumentService {
     List<AuthorDocument> getAll();
     AuthorDocument findById(long id);
     AuthorDocument findByName(String name);
+    List<AuthorDocument> findByOrganization_NameAndOrganization_TypeAndActivWork(String organizationName, int organizationType);
 
 }

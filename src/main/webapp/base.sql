@@ -1155,12 +1155,36 @@ INSERT INTO `article_adm` (`article`, `part`, `note`) VALUES ('86.1', '0', 'Ос
 INSERT INTO `article_adm` (`article`, `part`, `note`) VALUES ('Прочие', '9', 'Прочие');
 
 
-
+INSERT INTO `organization` (`name`, `type`) VALUES ('Витебский областной суд', '1');
+INSERT INTO `organization` (`name`, `type`) VALUES ('Суд Бешенковичского района', '1');
+INSERT INTO `organization` (`name`, `type`) VALUES ('Суд Браславского района', '1');
+INSERT INTO `organization` (`name`, `type`) VALUES ('Суд Верхнедвинского района', '1');
+INSERT INTO `organization` (`name`, `type`) VALUES ('Суд Витебского района', '1');
+INSERT INTO `organization` (`name`, `type`) VALUES ('Суд Глубокского района', '1');
+INSERT INTO `organization` (`name`, `type`) VALUES ('Суд Городокского района', '1');
+INSERT INTO `organization` (`name`, `type`) VALUES ('Суд Докшицкого района', '1');
+INSERT INTO `organization` (`name`, `type`) VALUES ('Суд Дубровенского района', '1');
+INSERT INTO `organization` (`name`, `type`) VALUES ('Суд Железнодорожного района г. Витебска', '1');
+INSERT INTO `organization` (`name`, `type`) VALUES ('Суд Лепельского района', '1');
+INSERT INTO `organization` (`name`, `type`) VALUES ('Суд Лиозненского района', '1');
+INSERT INTO `organization` (`name`, `type`) VALUES ('Суд Миорского района', '1');
+INSERT INTO `organization` (`name`, `type`) VALUES ('Суд Октябрьского района г. Витебска', '1');
+INSERT INTO `organization` (`name`, `type`) VALUES ('Суд Оршанского района и г. Орши', '1');
+INSERT INTO `organization` (`name`, `type`) VALUES ('Суд Первомайского района г. Витебска', '1');
+INSERT INTO `organization` (`name`, `type`) VALUES ('Суд Полоцкого района и г. Полоцка', '1');
+INSERT INTO `organization` (`name`, `type`) VALUES ('Суд Поставского района', '1');
+INSERT INTO `organization` (`name`, `type`) VALUES ('Суд Россонского района', '1');
+INSERT INTO `organization` (`name`, `type`) VALUES ('Суд Сенненского района', '1');
+INSERT INTO `organization` (`name`, `type`) VALUES ('Суд Толочинского района', '1');
+INSERT INTO `organization` (`name`, `type`) VALUES ('Суд Ушачского района', '1');
+INSERT INTO `organization` (`name`, `type`) VALUES ('Суд Чашникского района', '1');
+INSERT INTO `organization` (`name`, `type`) VALUES ('Суд Шарковщинского района', '1');
+INSERT INTO `organization` (`name`, `type`) VALUES ('Суд Шумилинского района', '1');
+INSERT INTO `organization` (`name`, `type`) VALUES ('Суд г. Новополоцка', '1');
 INSERT INTO `organization` (`name`, `type`) VALUES ('Организация 1', '2');
 INSERT INTO `organization` (`name`, `type`) VALUES ('Организация 2', '2');
 INSERT INTO `organization` (`name`, `type`) VALUES ('Организация 3', '2');
-INSERT INTO `organization` (`name`, `type`) VALUES ('Суд 1', '1');
-INSERT INTO `organization` (`name`, `type`) VALUES ('Суд 2', '1');
+
 
 INSERT INTO `author_document` (`name`, `position`, `activ_work`, `organization_id`)
 VALUES ('Петров П.П.', 'Начальник', '1', '1');

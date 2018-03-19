@@ -41,6 +41,7 @@ posdApp.config(function ($routeProvider) {
                     CardService.loadComplaintForEdit();
                     ArticleService.loadAllArticles();
                     AuthorService.loadAllAuthors();
+                    AuthorService.loadAllAuthorsForOrganization();
                     ComplaintService.loadAllComplaints();
                     OrgService.loadAllOrganizations();
                     DecreeService.loadAllRegulations();

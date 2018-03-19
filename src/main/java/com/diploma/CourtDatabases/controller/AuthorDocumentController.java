@@ -14,8 +14,13 @@ public class AuthorDocumentController {
     private AuthorDocumentService authorDocumentService;
 
     @GetMapping(value = "/author/")
-    public List<AuthorDocument> findAllAuthorDocument (){
-        return  authorDocumentService.getAll();
+    public List<AuthorDocument> findAllAuthorDocument() {
+        return authorDocumentService.getAll();
+    }
+
+    @GetMapping(value = "/author/forOrganization/{name}/{type}")
+    public List<AuthorDocument> findAuthorForOrganization(@PathVariable("name") String organizationName, @PathVariable("type") int type) {
+        return authorDocumentService.findByOrganization_NameAndOrganization_Type(organizationName, type);
     }
 
     @GetMapping("/author/{id}")
@@ -42,8 +47,6 @@ public class AuthorDocumentController {
     public void deleteEntity(@PathVariable("id") long id) {
         authorDocumentService.delete(id);
     }
-
-
 
 
 }

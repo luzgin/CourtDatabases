@@ -53,8 +53,7 @@
                         </div>
                         <div class="col-md-auto">
                             <input type="button" class="btn btn-outline-primary btn-sm" value="Редактировать"
-                                   data-toggle="modal"
-                                   data-target="#ModalSaveDecree" ng-click="cardC.editDecree(cardC.card.decreeAdm.id)"/>
+                                    ng-click="cardC.getAuthorsForRegionalCourt()"/>
                         </div>
                     </div>
                     <input type="hidden" id="decreeId" ng-model="cardC.card.decreeAdm.id"
@@ -310,7 +309,7 @@
                         <ui-select ng-model="cardC.card.judge" theme="selectize" title="Введите для поиска...">
                             <ui-select-match placeholder="Введите для поиска...">{{$select.selected.name}}
                             </ui-select-match>
-                            <ui-select-choices repeat="item in cardC.getAllAuthors() | filter: $select.search">
+                            <ui-select-choices repeat="item in cardC.getAuthorsForRegionalCourt() | filter: $select.search">
                                 <div ng-bind-html="item.name | highlight: $select.search"></div>
                             </ui-select-choices>
                         </ui-select>

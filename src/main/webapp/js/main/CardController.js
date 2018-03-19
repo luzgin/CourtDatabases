@@ -29,6 +29,7 @@ angular.module('courtApp').controller('CardController',
             self.setComplaintForEdit = setComplaintForEdit;
             self.removeComplaint = removeComplaint;
             self.editComplaint = editComplaint;
+            self.getAuthorsForRegionalCourt = getAuthorsForRegionalCourt;
 
             self.card.createDate = parseToDate(self.card.createDate);
             if (self.card.resultDate != null) {
@@ -81,6 +82,10 @@ angular.module('courtApp').controller('CardController',
 
             function getAllResults() {
                 return ResService.getAllResults();
+            }
+
+            function getAuthorsForRegionalCourt() {
+                return AuthorService.getAllAuthorsForOrganization();
             }
 
             function getAllRegulations() {

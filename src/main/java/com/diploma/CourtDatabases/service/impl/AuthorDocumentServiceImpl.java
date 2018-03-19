@@ -46,4 +46,10 @@ public class AuthorDocumentServiceImpl implements AuthorDocumentService {
     public AuthorDocument findByName(String name) {
         return authorDocumentRepository.findByName(name);
     }
+
+    @Override
+    public List<AuthorDocument> findByOrganization_NameAndOrganization_TypeAndActivWork(String organizationName, int organizationType) {
+        return authorDocumentRepository.findByOrganization_NameAndOrganization_TypeAndActivWork(organizationName,organizationType,true);
+    }
+
 }
