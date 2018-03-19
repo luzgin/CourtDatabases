@@ -25,7 +25,7 @@ public class DateReturnCase {
     private Date date;
 
     @ManyToOne
-    @JoinColumn(name = "card_id", nullable = false)
+    @JoinColumn(name = "card_id")
     private CardAdm cardAdm;
 
     public DateReturnCase(){

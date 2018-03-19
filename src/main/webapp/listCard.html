@@ -10,11 +10,10 @@
             <thead>
             <tr>
 
-                <th class="div-center" width="10%">Номер</th>
+                <th class="div-center" width="5%">Номер</th>
                 <th class="div-center" width="10%">Дата</th>
-                <th class="div-center" width="30%">Постановление</th>
-                <th class="div-center" width="20%">Правонарушитель</th>
-                <th class="div-center" width="20%">Жалоба</th>
+                <th class="div-center" width="55%">Постановление</th>
+                <th class="div-center" width="30%">Правонарушитель</th>
             </tr>
             </thead>
             <tbody>
@@ -42,17 +41,12 @@
                 <td>
                     <div ng-show="item.vialator.typeVialator != 2">
                         Л.Н.: {{item.vialator.privateNumber}}<br>
-                        Фамилия: {{item.vialator.firstName}}<br>
-                        Имя: {{item.vialator.secondName}}<br>
-                        Отчество: {{item.vialator.lastName}}<br>
+                        Ф.И.О: {{item.vialator.firstName}} {{item.vialator.secondName}} {{item.vialator.lastName}}<br>
                     </div>
                     <div ng-show="item.vialator.typeVialator != 1">
                         УНП: {{item.vialator.privateNumber}}<br>
                         Название: {{item.vialator.firstName}}<br>
                     </div>
-                </td>
-                <td>
-                    {{item.cardNumber}}
                 </td>
             </tr>
             </tbody>

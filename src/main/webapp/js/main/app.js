@@ -13,7 +13,9 @@ posdApp.constant('urls', {
     SECOND_INSTANCE_SERVICE_API: 'http://localhost:8080/api/secondInstance/',
     DECREE_SERVICE_API: 'http://localhost:8080/api/decree/',
     CONPLAINT_SERVICE_API: 'http://localhost:8080/api/complaint/',
-    CARD_SERVICE_API: 'http://localhost:8080/api/cardAdm/'
+    CARD_SERVICE_API: 'http://localhost:8080/api/cardAdm/',
+    DATE_RETURN_SERVICE_API: 'http://localhost:8080/api/returnCase/',
+    DATE_REQUEST_SERVICE_API: 'http://localhost:8080/api/requestCase/'
 });
 
 posdApp.config(function ($routeProvider) {
@@ -36,11 +38,12 @@ posdApp.config(function ($routeProvider) {
             resolve: {
                 Complaints: function ($q, CardService, ArticleService, AuthorService, ComplaintService, OrgService,
                                       DecreeService, SecondInstanceService, EntityDecreeService, EntityService,
-                                      NameEntityDecreeService, ResService, VialatorService) {
+                                      NameEntityDecreeService, ResService, VialatorService, DateReturnService) {
                     var deferred = $q.defer();
                     CardService.loadComplaintForEdit();
                     ArticleService.loadAllArticles();
                     AuthorService.loadAllAuthors();
+                  //  DateReturnService.loadAllDateReturns();
                     AuthorService.loadAllAuthorsForOrganization();
                     ComplaintService.loadAllComplaints();
                     OrgService.loadAllOrganizations();

@@ -1186,16 +1186,33 @@ INSERT INTO `organization` (`name`, `type`) VALUES ('Организация 2', 
 INSERT INTO `organization` (`name`, `type`) VALUES ('Организация 3', '2');
 
 
-INSERT INTO `author_document` (`name`, `position`, `activ_work`, `organization_id`)
-VALUES ('Петров П.П.', 'Начальник', '1', '1');
-INSERT INTO `author_document` (`name`, `position`, `activ_work`, `organization_id`)
-VALUES ('Сидоров В.Д.', 'Председатель', '1', '2');
-INSERT INTO `author_document` (`name`, `position`, `activ_work`, `organization_id`)
-VALUES ('Иванов У.Ю.', 'заместитель председателя', '1', '3');
-INSERT INTO `author_document` (`name`, `position`, `activ_work`, `organization_id`)
-VALUES ('Пышкина Д.В.', 'дизйнер ландшафта', '1', '4');
-INSERT INTO `author_document` (`name`, `position`, `activ_work`, `organization_id`)
-VALUES ('Печкин А.П.', 'Самый главный', '1', '1');
+INSERT INTO `author_document` (`name`, `position`, `activ_work`, `organization_id`) VALUES ('Хамиченок Н.Н.', 'Председатель', '1', '1');
+INSERT INTO `author_document` (`name`, `position`, `activ_work`, `organization_id`) VALUES ('Фоменко А.Г.', 'Первый заместитель председателя', '1', '1');
+INSERT INTO `author_document` (`name`, `position`, `activ_work`, `organization_id`) VALUES ('Бондарев С.А.', 'Заместитель председателя', '1', '1');
+INSERT INTO `author_document` (`name`, `position`, `activ_work`, `organization_id`) VALUES ('Федюкевич А.И.', 'Заместитель председателя', '1', '1');
+INSERT INTO `author_document` (`name`, `position`, `activ_work`, `organization_id`) VALUES ('Абашин А.В.', 'Судья', '1', '1');
+INSERT INTO `author_document` (`name`, `position`, `activ_work`, `organization_id`) VALUES ('Бондал Г.В.', 'Судья', '1', '1');
+INSERT INTO `author_document` (`name`, `position`, `activ_work`, `organization_id`) VALUES ('Буева В.М.', 'Судья', '1', '1');
+INSERT INTO `author_document` (`name`, `position`, `activ_work`, `organization_id`) VALUES ('Бурунов Е.И.', 'Судья', '1', '1');
+INSERT INTO `author_document` (`name`, `position`, `activ_work`, `organization_id`) VALUES ('Губанов Д.М.', 'Судья', '1', '1');
+INSERT INTO `author_document` (`name`, `position`, `activ_work`, `organization_id`) VALUES ('Давлюд Е.В.', 'Судья', '1', '1');
+INSERT INTO `author_document` (`name`, `position`, `activ_work`, `organization_id`) VALUES ('Дашкевич Т.А.', 'Судья', '1', '1');
+INSERT INTO `author_document` (`name`, `position`, `activ_work`, `organization_id`) VALUES ('Дроздов А.В,', 'Судья', '1', '1');
+INSERT INTO `author_document` (`name`, `position`, `activ_work`, `organization_id`) VALUES ('Иванова С.П.', 'Судья', '1', '1');
+INSERT INTO `author_document` (`name`, `position`, `activ_work`, `organization_id`) VALUES ('Ларина Л.С.', 'Судья', '1', '1');
+INSERT INTO `author_document` (`name`, `position`, `activ_work`, `organization_id`) VALUES ('Мартиросян Э.С.', 'Судья', '1', '1');
+INSERT INTO `author_document` (`name`, `position`, `activ_work`, `organization_id`) VALUES ('Прейс А.В.', 'Судья', '1', '1');
+INSERT INTO `author_document` (`name`, `position`, `activ_work`, `organization_id`) VALUES ('Синицына Л.И.', 'Судья', '1', '1');
+INSERT INTO `author_document` (`name`, `position`, `activ_work`, `organization_id`) VALUES ('Смолякова И.В.', 'Судья', '1', '1');
+INSERT INTO `author_document` (`name`, `position`, `activ_work`, `organization_id`) VALUES ('Урбанович Г.Н.', 'Судья', '1', '1');
+INSERT INTO `author_document` (`name`, `position`, `activ_work`, `organization_id`) VALUES ('Колесник И.В.', 'Судья', '1', '1');
+INSERT INTO `author_document` (`name`, `position`, `activ_work`, `organization_id`) VALUES ('Лях Н.В.', 'Судья', '1', '1');
+INSERT INTO `author_document` (`name`, `position`, `activ_work`, `organization_id`) VALUES ('Острикова М.В.', 'Судья', '1', '1');
+INSERT INTO `author_document` (`name`, `position`, `activ_work`, `organization_id`) VALUES ('Сазонова Н.М.', 'Судья', '1', '1');
+INSERT INTO `author_document` (`name`, `position`, `activ_work`, `organization_id`) VALUES ('Федоров О.С.', 'Судья', '1', '1');
+INSERT INTO `author_document` (`name`, `position`, `activ_work`, `organization_id`) VALUES ('Быстров В.В.', 'Судья', '1', '1');
+INSERT INTO `author_document` (`name`, `position`, `activ_work`, `organization_id`) VALUES ('Хилькевич Н.Ф.', 'Судья', '1', '1');
+
 
 INSERT INTO `name_entity_decree_adm` (`name`) VALUES ('Предупреждение');
 INSERT INTO `name_entity_decree_adm` (`name`) VALUES ('Штраф');

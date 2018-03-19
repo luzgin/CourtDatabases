@@ -20,7 +20,7 @@ public class AuthorDocumentController {
 
     @GetMapping(value = "/author/forOrganization/{name}/{type}")
     public List<AuthorDocument> findAuthorForOrganization(@PathVariable("name") String organizationName, @PathVariable("type") int type) {
-        return authorDocumentService.findByOrganization_NameAndOrganization_Type(organizationName, type);
+        return authorDocumentService.findByOrganization_NameAndOrganization_TypeAndActivWork(organizationName, type);
     }
 
     @GetMapping("/author/{id}")

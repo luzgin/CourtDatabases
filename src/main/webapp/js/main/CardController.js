@@ -3,10 +3,10 @@
 angular.module('courtApp').controller('CardController',
     ['$localStorage', 'CardService', 'ArticleService', 'AuthorService', 'ComplaintService', 'OrgService',
         'DecreeService', 'SecondInstanceService', 'EntityDecreeService', 'EntityService',
-        'NameEntityDecreeService', 'ResService', 'VialatorService', '$scope',
+        'NameEntityDecreeService', 'ResService', 'VialatorService', 'DateReturnService', '$scope',
         function ($localStorage, CardService, ArticleService, AuthorService, ComplaintService, OrgService,
                   DecreeService, SecondInstanceService, EntityDecreeService, EntityService,
-                  NameEntityDecreeService, ResService, VialatorService, $scope) {
+                  NameEntityDecreeService, ResService, VialatorService, DateReturnService, $scope) {
 
             var self = this;
             self.card = CardService.getCardLocal();
@@ -30,6 +30,7 @@ angular.module('courtApp').controller('CardController',
             self.removeComplaint = removeComplaint;
             self.editComplaint = editComplaint;
             self.getAuthorsForRegionalCourt = getAuthorsForRegionalCourt;
+            self.getDateReturnCaseForCard = getDateReturnCaseForCard;
 
             self.card.createDate = parseToDate(self.card.createDate);
             if (self.card.resultDate != null) {
@@ -104,6 +105,11 @@ angular.module('courtApp').controller('CardController',
                 return VialatorService.getAllVialators();
             }
 
+            function getDateReturnCaseForCard() {
+                return DateReturnService.getDateReturnForCard();
+
+            }
+
             function submit() {
                 console.log('Submitting');
                 if (self.card.id === undefined || self.card.id === null) {
@@ -169,7 +175,6 @@ angular.module('courtApp').controller('CardController',
             }
 
             function editComplaint() {
-
 
             }
         }
