@@ -38,12 +38,11 @@ posdApp.config(function ($routeProvider) {
             resolve: {
                 Complaints: function ($q, CardService, ArticleService, AuthorService, ComplaintService, OrgService,
                                       DecreeService, SecondInstanceService, EntityDecreeService, EntityService,
-                                      NameEntityDecreeService, ResService, VialatorService, DateReturnService) {
+                                      NameEntityDecreeService, ResService, VialatorService) {
                     var deferred = $q.defer();
                     CardService.loadComplaintForEdit();
                     ArticleService.loadAllArticles();
                     AuthorService.loadAllAuthors();
-                  //  DateReturnService.loadAllDateReturns();
                     AuthorService.loadAllAuthorsForOrganization();
                     ComplaintService.loadAllComplaints();
                     OrgService.loadAllOrganizations();
