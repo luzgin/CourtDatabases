@@ -133,7 +133,8 @@
                     <div class="form-group row mb-2">
                         <div class="col-md-6 pr-0">
                             <ui-select ng-model="cardC.card.vialator" theme="selectize" title="Введите для поиска...">
-                                <ui-select-match placeholder="Введите для поиска...">{{$select.selected.privateNumber}}
+                                <ui-select-match placeholder="Введите для поиска...">
+                                    {{$select.selected.privateNumber}} {{$select.selected.firstName}} {{$select.selected.secondName}} {{$select.selected.lastName}}
                                 </ui-select-match>
                                 <ui-select-choices repeat="item in cardC.getAllVialators() | filter: $select.search">
                                     <div ng-bind-html="item.privateNumber | highlight: $select.search"></div>

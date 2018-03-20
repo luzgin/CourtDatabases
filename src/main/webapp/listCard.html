@@ -12,32 +12,16 @@
 
                 <th class="div-center" width="5%">Номер</th>
                 <th class="div-center" width="10%">Дата</th>
-                <th class="div-center" width="55%">Постановление</th>
+
                 <th class="div-center" width="30%">Правонарушитель</th>
+                <th class="div-center" width="55%">Постановление</th>
             </tr>
             </thead>
             <tbody>
             <tr ng-click="cdviewC.setCardForRemove(item)" ng-dblclick="cdviewC.setCard(item)" ondblclick="location.href = 'index.html#!/card'" ng-repeat="item in cdviewC.getAllCards()">
                 <td >{{item.cardNumber}}</td>
                 <td>{{item.createDate}}</td>
-                <td>
 
-                        <div class="row p-0 m-0">
-                            <div class="md-4">Организация:</div>
-                            <div class="md-6 pl-1"> {{item.decreeAdm.organization.name}}</div>
-                        </div>
-                        <div class="row p-0 m-0">
-                            <div class="md-4">Автор:</div>
-                            <div class="md-6 pl-1"> {{item.decreeAdm.authorDocument.position}}
-                                {{item.decreeAdm.authorDocument.name}}
-                            </div>
-                        </div>
-                        <div class="row p-0 m-0">
-                            <div class="md-4">От:</div>
-                            <div class="md-6 pl-1"> {{item.decreeAdm.decreeDate}}</div>
-                        </div>
-
-                </td>
                 <td>
                     <div ng-show="item.vialator.typeVialator != 2">
                         Л.Н.: {{item.vialator.privateNumber}}<br>
@@ -47,6 +31,24 @@
                         УНП: {{item.vialator.privateNumber}}<br>
                         Название: {{item.vialator.firstName}}<br>
                     </div>
+                </td>
+                <td>
+
+                    <div class="row p-0 m-0">
+                        <div class="md-4">Организация:</div>
+                        <div class="md-6 pl-1"> {{item.decreeAdm.organization.name}}</div>
+                    </div>
+                    <div class="row p-0 m-0">
+                        <div class="md-4">Автор:</div>
+                        <div class="md-6 pl-1"> {{item.decreeAdm.authorDocument.position}}
+                            {{item.decreeAdm.authorDocument.name}}
+                        </div>
+                    </div>
+                    <div class="row p-0 m-0">
+                        <div class="md-4">От:</div>
+                        <div class="md-6 pl-1"> {{item.decreeAdm.decreeDate}}</div>
+                    </div>
+
                 </td>
             </tr>
             </tbody>
