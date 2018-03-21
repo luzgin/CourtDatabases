@@ -18,7 +18,17 @@ angular.module('courtApp').controller('VialatorController',
         self.editVialator = editVialator;
         self.removeVialator = removeVialator;
 
-        self.done = false;
+        $("#ModalSaveVialators").on('show.bs.modal', function () {
+            if(document.getElementById("vialatorId").value != null) {
+                $scope.$apply(function () {
+                    self.vialator = document.getElementById("uiVialator").value;
+                    if(self.vialator.typeVialator === '2') {
+                        $scope.radioChecked = {on: '2'};
+                    }
+                })
+
+            }
+        });
 
         function getAllVialators() {
             return VialatorService.getAllVialators();
@@ -43,9 +53,11 @@ angular.module('courtApp').controller('VialatorController',
                 }
                 console.log('Saving New vialator', self.vialator);
                 createVialator(self.vialator);
+                $('#ModalSaveVialators').modal('toggle');
             } else {
                 updateVialator(self.vialator, self.vialator.id);
                 console.log('vialator updated with id ', self.vialator.id);
+                $('#ModalSaveVialators').modal('toggle');
             }
         }
 

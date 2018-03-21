@@ -53,9 +53,11 @@ angular.module('courtApp').controller('ComplaintController',
             if (self.complaint.id === undefined || self.complaint.id === null) {
                 console.log('Saving New complaint', self.complaint);
                 createComplaint(self.complaint);
+                $('#ModalSaveComplaint').modal('toggle');
             } else {
                 updateComplaint(self.complaint, self.complaint.id);
                 console.log('complaint updated with id ', self.complaint.id);
+                $('#ModalSaveComplaint').modal('toggle');
             }
         }
 

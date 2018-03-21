@@ -33,9 +33,13 @@
                 <div class="card-body p-3">
                     <div class="form-group row mb-2">
                         <div class="col-md-6 pr-0">
-                            <ui-select ng-model="cardC.card.decreeAdm" theme="selectize" title="Введите для поиска...">
+                            <ui-select id="uiDecree"
+                                       ng-model="cardC.card.decreeAdm"
+                                       ng-value="cardC.card.decreeAdm"
+                                       theme="selectize"
+                                       title="Введите для поиска...">
                                 <ui-select-match placeholder="Введите для поиска...">
-                                    {{$select.selected.decreeDate}} {{$select.selected.organization.name}} {{$select.selected.authorDocument.name}}
+                                    {{$select.selected.decreeDate.toLocaleDateString()}} {{$select.selected.organization.name}} {{$select.selected.authorDocument.name}}
                                 </ui-select-match>
                                 <ui-select-choices repeat="item in cardC.getAllRegulations() | filter: $select.search">
                                     <div ng-bind-html="item.decreeDate | highlight: $select.search"></div>
@@ -46,7 +50,8 @@
                             </ui-select>
                         </div>
                         <div class="col-md-auto">
-                            <input type="button"
+                            <input id="addDecree"
+                                   type="button"
                                    class="btn btn-outline-success btn-sm"
                                    value="Добавить"
                                    data-toggle="modal"
@@ -56,7 +61,8 @@
                             <input type="button"
                                    class="btn btn-outline-primary btn-sm"
                                    value="Редактировать"
-                                   ng-click="cardC.getAuthorsForRegionalCourt()"/>
+                                   data-toggle="modal"
+                                   data-target="#ModalSaveDecree"/>
                         </div>
                     </div>
                     <input type="hidden"
@@ -88,7 +94,7 @@
                             <label for="dateDecree">Дата</label>
                             <input type="text" class="form-control btn-sm" id="dateDecree"
                                    ng-model="cardC.card.decreeAdm.decreeDate"
-                                   ng-value="cardC.convertToDate(cardC.card.decreeAdm.decreeDate)" readonly/>
+                                   ng-value="cardC.card.decreeAdm.decreeDate.toLocaleDateString()" readonly/>
                         </div>
                     </div>
                 </div>
@@ -132,7 +138,11 @@
                 <div class="card-body py-2 px-3">
                     <div class="form-group row mb-2">
                         <div class="col-md-6 pr-0">
-                            <ui-select ng-model="cardC.card.vialator" theme="selectize" title="Введите для поиска...">
+                            <ui-select id="uiVialator"
+                                       ng-model="cardC.card.vialator"
+                                       ng-value="cardC.card.vialator"
+                                       theme="selectize"
+                                       title="Введите для поиска...">
                                 <ui-select-match placeholder="Введите для поиска...">
                                     {{$select.selected.privateNumber}} {{$select.selected.firstName}} {{$select.selected.secondName}} {{$select.selected.lastName}}
                                 </ui-select-match>
@@ -145,19 +155,34 @@
                             </ui-select>
                         </div>
                         <div class="col-md-auto">
-                            <input type="button" class="btn btn-outline-success btn-sm" value="Добавить"
+                            <input id="addVialator"
+                                   type="button"
+                                   class="btn btn-outline-success btn-sm"
+                                   value="Добавить"
                                    data-toggle="modal"
                                    data-target="#ModalSaveVialators"/>
                         </div>
                         <div class="col-md-auto">
-                            <input type="button" class="btn btn-outline-primary btn-sm" value="Редактировать"/>
+                            <input type="button"
+                                   class="btn btn-outline-primary btn-sm"
+                                   value="Редактировать"
+                                   data-toggle="modal"
+                                   data-target="#ModalSaveVialators"/>
                         </div>
                     </div>
+                    <input type="hidden"
+                           id="vialatorId"
+                           ng-model="cardC.card.vialator.id"
+                           ng-value="cardC.card.vialator.id">
                     <div class="form-group row mb-0" ng-show="cardC.card.vialator.typeVialator ==1">
                         <div class="col-md-3 pr-0">
                             <label for="privateNumberFiz">Личный номер</label>
-                            <input type="text" class="form-control btn-sm" id="privateNumberFiz"
-                                   ng-model="cardC.card.vialator.privateNumber" readonly/>
+                            <input type="text"
+                                   class="form-control btn-sm"
+                                   id="privateNumberFiz"
+                                   ng-model="cardC.card.vialator.privateNumber"
+                                   ng-value="cardC.card.vialator.privateNumber"
+                                   readonly/>
                         </div>
                         <div class="col-md-3 px-1">
                             <label for="firstnameFiz">Фамилия</label>
@@ -407,7 +432,10 @@
                         <div class="form-group row">
                             <label class="col-md-3 control-label">Организация</label>
                             <div class="col-md-7">
-                                <ui-select ng-model="decC.decree.organization" theme="selectize"
+                                <ui-select
+                                        ng-model="decC.decree.organization"
+                                        ng-value="decC.decree.organization"
+                                        theme="selectize"
                                            title="Введите для поиска...">
                                     <ui-select-match placeholder="Введите для поиска...">{{$select.selected.name}}
                                     </ui-select-match>
@@ -662,13 +690,13 @@
                 </div>
                 <div class="modal-body">
                     <div class=" mb-3 col row justify-content-center">
-                        <div class="form-check form-check-inline">
+                        <div class="form-check form-check-inline" ng-if="viaC.vialator.typeVialator == 1 || viaC.vialator.typeVialator == null">
                             <input type="radio" ng-model="radioChecked.on" value="1">
-                            <label class="form-check-label h4">Физические лица</label>
+                            <label class="form-check-label h4">Физическое лицо</label>
                         </div>
-                        <div class="form-check form-check-inline">
-                            <input type="radio" ng-model="radioChecked.on" value="2">
-                            <label class="form-check-label h4">Юридические лица</label>
+                        <div class="form-check form-check-inline" ng-if="viaC.vialator.typeVialator == 2 || viaC.vialator.typeVialator == null">
+                            <input type="radio" ng-model="radioChecked.on"  value="2">
+                            <label class="form-check-label h4">Юридическое лицо</label>
                         </div>
                     </div>
                     <div ng-if="radioChecked.on==='1'?true:false">

@@ -24,9 +24,11 @@ angular.module('courtApp').controller('DateReturnController',
             if (self.dateReturn.id === undefined || self.dateReturn.id === null) {
                 console.log('Saving New dateReturn', self.dateReturn);
                 createDateReturn(self.dateReturn);
+                $('#ModalSaveDateReturn').modal('toggle');
             } else {
                 updateDateReturn(self.dateReturn, self.dateReturn.id);
                 console.log('dateReturn updated with id ', self.dateReturn.id);
+                $('#ModalSaveDateReturn').modal('toggle');
             }
         }
 

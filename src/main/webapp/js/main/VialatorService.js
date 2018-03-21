@@ -45,6 +45,7 @@ angular.module('courtApp').factory('VialatorService',
                     );
                 return deferred.promise;
             }
+
             function loadAllVialatorsOrg() {
                 var deferred = $q.defer();
                 $http.get(urls.VIALATOR_SERVICE_API + "org")
@@ -67,6 +68,7 @@ angular.module('courtApp').factory('VialatorService',
             function getAllVialatorsFiz() {
                 return $localStorage.vialatorsFiz;
             }
+
             function getAllVialatorsOrg() {
                 return $localStorage.vialatorsOrg;
             }

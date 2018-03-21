@@ -48,9 +48,11 @@ organization.controller("EditOrganization", ['$scope', '$http', function ($scope
             name: $scope.name1,
             type: $scope.type1
         };
-        $http.post(url, organization, config).then(function (response) {
+        $http.post(url, organization, config).then(
+            function (response) {
             $scope.postResultMessage = response.organization;
-        }, function error(response) {
+        },
+            function error(response) {
             $scope.postResultMessage = "Error with status: " + response.statusText;
         });
        location.reload();

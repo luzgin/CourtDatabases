@@ -24,9 +24,11 @@ angular.module('courtApp').controller('OrgController',
             if (self.organization.id === undefined || self.organization.id === null) {
                 console.log('Saving New organization', self.organization);
                 createOrganization(self.organization);
+                $('#ModalSaveOrganization').modal('toggle');
             } else {
                 updateOrganization(self.organization, self.organization.id);
                 console.log('organization updated with id ', self.organization.id);
+                $('#ModalSaveOrganization').modal('toggle');
             }
         }
 

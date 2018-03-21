@@ -17,6 +17,14 @@ angular.module('courtApp').controller('DecreeController',
 
         self.decree.decreeDate = new Date(self.decree.decreeDate);
 
+        $("#ModalSaveDecree").on('show.bs.modal', function (e) {
+           if(document.getElementById("decreeId").value != null) {
+               $scope.$apply(function () {
+                   self.decree = document.getElementById("uiDecree").value;
+               })
+           }
+        });
+
         function getAllRegulations() {
             return DecreeService.getAllRegulations();
         }
@@ -34,9 +42,11 @@ angular.module('courtApp').controller('DecreeController',
             if (self.decree.id === undefined || self.decree.id === null) {
                 console.log('Saving New decree', self.decree);
                 createDecree(self.decree);
+                $('#ModalSaveDecree').modal('toggle');
             } else {
                 updateDecree(self.decree, self.decree.id);
                 console.log('decree updated with id ', self.decree.id);
+                $('#ModalSaveDecree').modal('toggle');
             }
         }
 

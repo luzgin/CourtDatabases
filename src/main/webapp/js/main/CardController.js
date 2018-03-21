@@ -33,9 +33,16 @@ angular.module('courtApp').controller('CardController',
             self.getDateReturnCaseForCard = getDateReturnCaseForCard;
             self.getDateRequestCaseForCard = getDateRequestCaseForCard;
 
-            self.card.createDate = parseToDate(self.card.createDate);
+            self.card.createDate = new Date(self.card.createDate);
             if (self.card.resultDate != null) {
-                self.card.resultDate = parseToDate(self.card.resultDate);
+                self.card.resultDate = new Date(self.card.resultDate);
+            }
+            if(self.card.decreeAdm != null){
+                document.getElementById("addDecree").setAttribute('disabled', 'disabled');
+                self.card.decreeAdm.decreeDate = new Date(self.card.decreeAdm.decreeDate);
+            }
+            if(self.card.vialator != null){
+                document.getElementById("addVialator").setAttribute('disabled', 'disabled');
             }
 
 

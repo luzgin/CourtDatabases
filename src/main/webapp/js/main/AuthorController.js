@@ -32,9 +32,11 @@ angular.module('courtApp').controller('AuthorController',
             if (self.author.id === undefined || self.author.id === null) {
                 console.log('Saving New author', self.author);
                 createAuthor(self.author);
+                $('#ModalSaveAuthor').modal('toggle');
             } else {
                 updateAuthor(self.author, self.author.id);
                 console.log('author updated with id ', self.author.id);
+                $('#ModalSaveAuthor').modal('toggle');
             }
         }
 

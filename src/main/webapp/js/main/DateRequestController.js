@@ -23,9 +23,11 @@ angular.module('courtApp').controller('DateRequestController',
             if (self.dateRequest.id === undefined || self.dateRequest.id === null) {
                 console.log('Saving New dateRequest', self.dateRequest);
                 createDateRequest(self.dateRequest);
+                $('#ModalSaveDateRequest').modal('toggle');
             } else {
                 updateDateRequest(self.dateRequest, self.dateRequest.id);
                 console.log('dateRequest updated with id ', self.dateRequest.id);
+                $('#ModalSaveDateRequest').modal('toggle');
             }
         }
 

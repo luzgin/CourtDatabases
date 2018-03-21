@@ -32,9 +32,11 @@ angular.module('courtApp').controller('SecondInstanceController',
             if (self.secondInstance.id === undefined || self.secondInstance.id === null) {
                 console.log('Saving New secondInstance', self.secondInstance);
                 createSecondInstance(self.secondInstance);
+                $('#ModalSaveSecondInstance').modal('toggle');
             } else {
                 updateSecondInstance(self.secondInstance, self.secondInstance.id);
                 console.log('secondInstance updated with id ', self.secondInstance.id);
+                $('#ModalSaveSecondInstance').modal('toggle');
             }
         }
 
