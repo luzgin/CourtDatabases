@@ -89,7 +89,7 @@ angular.module('courtApp').factory('DateRequestService',
                 $http.delete(urls.DATE_REQUEST_SERVICE_API + id)
                     .then(
                         function (response) {
-                            loadDateRequestForCard(entity.cardAdm.id);
+                            loadDateRequestForCard($localStorage.card.id);
                             deferred.resolve(response.data);
                         },
                         function (errResponse) {

@@ -1,57 +1,65 @@
 <div class="panel panel-default">
     <div class="panel-heading div-center h3">Карточки</div>
     <div class="panel-body">
+        <div class="m-0 row">
+        <div class="col-4 mb-3 col row justify-content-start">
+            <input type="text" class="form-control" ng-model="search.cardNumber" placeholder="Введите номер карточки для поиска..."/>
+        </div>
         <div class=" mb-3 col row justify-content-end">
-            <button type="button" class="btn btn-primary btn-sm mr-3" onclick="location.href = 'index.html#!/card'">Добавить карточку
+            <button type="button" class="btn btn-primary btn-sm mr-3" onclick="location.href = 'index.html#!/card'">
+                Добавить карточку
             </button>
             <button class="btn btn-danger btn-sm" ng-click="cdviewC.removeCard();">Удалить</button>
         </div>
-        <table id="myTable" class="table table-bordered table-sm table-hover">
-            <thead>
-            <tr>
+        </div>
+        <div class="scroll-table">
+            <table id="myTable" class="tab-scroll table table-bordered table-sm table-hover ">
+                <thead>
+                <tr>
+                    <th class="div-center" width="5%">Номер</th>
+                    <th class="div-center" width="10%">Дата</th>
+                    <th class="div-center" width="30%">Правонарушитель</th>
+                    <th class="div-center" width="55%">Постановление</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-click="cdviewC.setCardForRemove(item)" ng-dblclick="cdviewC.setCard(item)"
+                    ondblclick="location.href = 'index.html#!/card'" ng-repeat="item in cdviewC.getAllCards() | filter:search">
+                    <td>{{item.cardNumber}}</td>
+                    <td>{{item.createDate}}</td>
 
-                <th class="div-center" width="5%">Номер</th>
-                <th class="div-center" width="10%">Дата</th>
-
-                <th class="div-center" width="30%">Правонарушитель</th>
-                <th class="div-center" width="55%">Постановление</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr ng-click="cdviewC.setCardForRemove(item)" ng-dblclick="cdviewC.setCard(item)" ondblclick="location.href = 'index.html#!/card'" ng-repeat="item in cdviewC.getAllCards()">
-                <td >{{item.cardNumber}}</td>
-                <td>{{item.createDate}}</td>
-
-                <td>
-                    <div ng-show="item.vialator.typeVialator != 2">
-                        Л.Н.: {{item.vialator.privateNumber}}<br>
-                        Ф.И.О: {{item.vialator.firstName}} {{item.vialator.secondName}} {{item.vialator.lastName}}<br>
-                    </div>
-                    <div ng-show="item.vialator.typeVialator != 1">
-                        УНП: {{item.vialator.privateNumber}}<br>
-                        Название: {{item.vialator.firstName}}<br>
-                    </div>
-                </td>
-                <td>
-
-                    <div class="row p-0 m-0">
-                        <div class="md-4">Организация:</div>
-                        <div class="md-6 pl-1"> {{item.decreeAdm.organization.name}}</div>
-                    </div>
-                    <div class="row p-0 m-0">
-                        <div class="md-4">Автор:</div>
-                        <div class="md-6 pl-1"> {{item.decreeAdm.authorDocument.position}}
-                            {{item.decreeAdm.authorDocument.name}}
+                    <td>
+                        <div ng-show="item.vialator.typeVialator != 2">
+                            Л.Н.: {{item.vialator.privateNumber}}<br>
+                            Ф.И.О: {{item.vialator.firstName}} {{item.vialator.secondName}}
+                            {{item.vialator.lastName}}<br>
                         </div>
-                    </div>
-                    <div class="row p-0 m-0">
-                        <div class="md-4">От:</div>
-                        <div class="md-6 pl-1"> {{item.decreeAdm.decreeDate}}</div>
-                    </div>
+                        <div ng-show="item.vialator.typeVialator != 1">
+                            УНП: {{item.vialator.privateNumber}}<br>
+                            Название: {{item.vialator.firstName}}<br>
+                        </div>
+                    </td>
+                    <td>
 
-                </td>
-            </tr>
-            </tbody>
-        </table>
+                        <div class="row p-0 m-0">
+                            <div class="md-4">Организация:</div>
+                            <div class="md-6 pl-1"> {{item.decreeAdm.organization.name}}</div>
+                        </div>
+                        <div class="row p-0 m-0">
+                            <div class="md-4">Автор:</div>
+                            <div class="md-6 pl-1"> {{item.decreeAdm.authorDocument.position}}
+                                {{item.decreeAdm.authorDocument.name}}
+                            </div>
+                        </div>
+                        <div class="row p-0 m-0">
+                            <div class="md-4">От:</div>
+                            <div class="md-6 pl-1"> {{item.decreeAdm.decreeDate}}</div>
+                        </div>
+
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>

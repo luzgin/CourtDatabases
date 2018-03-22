@@ -22,7 +22,7 @@ angular.module('courtApp').controller('VialatorController',
             if(document.getElementById("vialatorId").value != null) {
                 $scope.$apply(function () {
                     self.vialator = document.getElementById("uiVialator").value;
-                    if(self.vialator.typeVialator === '2') {
+                    if(self.vialator.typeVialator == '2') {
                         $scope.radioChecked = {on: '2'};
                     }
                 })

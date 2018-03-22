@@ -3,7 +3,7 @@
 angular.module('courtApp').controller('CardController',
     ['$localStorage', 'CardService', 'ArticleService', 'AuthorService', 'ComplaintService', 'OrgService',
         'DecreeService', 'SecondInstanceService', 'EntityDecreeService', 'EntityService',
-        'NameEntityDecreeService', 'ResService', 'VialatorService', 'DateReturnService','DateRequestService', '$scope',
+        'NameEntityDecreeService', 'ResService', 'VialatorService', 'DateReturnService', 'DateRequestService', '$scope',
         function ($localStorage, CardService, ArticleService, AuthorService, ComplaintService, OrgService,
                   DecreeService, SecondInstanceService, EntityDecreeService, EntityService,
                   NameEntityDecreeService, ResService, VialatorService, DateReturnService, DateRequestService, $scope) {
@@ -11,6 +11,8 @@ angular.module('courtApp').controller('CardController',
             var self = this;
             self.card = CardService.getCardLocal();
             self.complaintForEdit = {};
+            self.returnCase = {};
+            self.requestCase = {};
             self.submit = submit;
             self.createCard = createCard;
             self.updateCard = updateCard;
@@ -32,19 +34,70 @@ angular.module('courtApp').controller('CardController',
             self.getAuthorsForRegionalCourt = getAuthorsForRegionalCourt;
             self.getDateReturnCaseForCard = getDateReturnCaseForCard;
             self.getDateRequestCaseForCard = getDateRequestCaseForCard;
+            self.setReturnCase = setReturnCase;
+            self.removeReturnCase = removeReturnCase;
+            self.setRequestCase = setRequestCase;
+            self.removeRequestCase = removeRequestCase;
 
             self.card.createDate = new Date(self.card.createDate);
             if (self.card.resultDate != null) {
                 self.card.resultDate = new Date(self.card.resultDate);
             }
-            if(self.card.decreeAdm != null){
+            if (self.card.decreeAdm != null) {
                 document.getElementById("addDecree").setAttribute('disabled', 'disabled');
                 self.card.decreeAdm.decreeDate = new Date(self.card.decreeAdm.decreeDate);
             }
-            if(self.card.vialator != null){
+            if (self.card.vialator != null) {
                 document.getElementById("addVialator").setAttribute('disabled', 'disabled');
             }
 
+            function setReturnCase(item) {
+                if (self.returnCase == item) {
+                    self.returnCase = {};
+                    console.log('set return case', self.returnCase);
+                } else {
+                    self.returnCase = item;
+                    console.log('set return case', self.returnCase);
+                }
+            }
+
+            function removeReturnCase() {
+                if (self.returnCase != null) {
+                    console.log('remove return case', self.returnCase);
+                    DateReturnService.removeDateReturn(self.returnCase.id).then(
+                        function () {
+                            console.log('return case  removed successfully');
+                        },
+                        function (errResponse) {
+                            console.error('Error while removing return case, Error :' + errResponse.data);
+                        }
+                    );
+                    ;
+                }
+            }
+            function setRequestCase(item) {
+                if (self.requestCase == item) {
+                    self.requestCase = {};
+                    console.log('set return case', self.requestCase);
+                } else {
+                    self.requestCase = item;
+                    console.log('set request case', self.requestCase);
+                }
+            }
+            function removeRequestCase() {
+                if (self.requestCase != null) {
+                    console.log('remove request case', self.requestCase);
+                    DateRequestService.removeDateRequest(self.requestCase.id).then(
+                        function () {
+                            console.log('request case  removed successfully');
+                        },
+                        function (errResponse) {
+                            console.error('Error while removing request case, Error :' + errResponse.data);
+                        }
+                    );
+                    ;
+                }
+            }
 
             function setComplaintForEdit(item) {
                 CardService.setComplaintForEdit(item);
@@ -117,6 +170,7 @@ angular.module('courtApp').controller('CardController',
                 return DateReturnService.getDateReturnForCard();
 
             }
+
             function getDateRequestCaseForCard() {
                 return DateRequestService.getDateRequestForCard();
 

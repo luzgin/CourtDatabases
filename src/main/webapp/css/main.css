@@ -5,12 +5,10 @@
 .div-center{
     text-align: center;
 }
-/*Удаление отступов*/
-.nopadding {
-    padding: 0 !important;
-    margin: 0 !important;
+.scroll-table {
+    overflow: auto;
+    height: 80vh;
 }
-
 /* Ширина модального окна */
 .widht-modal-dialog {
     max-width: 50%;

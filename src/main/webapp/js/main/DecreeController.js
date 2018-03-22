@@ -16,11 +16,11 @@ angular.module('courtApp').controller('DecreeController',
         self.removeDecree = removeDecree;
 
         self.decree.decreeDate = new Date(self.decree.decreeDate);
-
         $("#ModalSaveDecree").on('show.bs.modal', function (e) {
            if(document.getElementById("decreeId").value != null) {
                $scope.$apply(function () {
                    self.decree = document.getElementById("uiDecree").value;
+                   self.decree.decreeDate = new Date(self.decree.decreeDate);
                })
            }
         });

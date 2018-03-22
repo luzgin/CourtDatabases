@@ -94,7 +94,7 @@
                             <label for="dateDecree">Дата</label>
                             <input type="text" class="form-control btn-sm" id="dateDecree"
                                    ng-model="cardC.card.decreeAdm.decreeDate"
-                                   ng-value="cardC.card.decreeAdm.decreeDate.toLocaleDateString()" readonly/>
+                                   ng-value="cardC.convertToDate(cardC.card.decreeAdm.decreeDate)" readonly/>
                         </div>
                     </div>
                 </div>
@@ -324,7 +324,7 @@
                                        data-toggle="modal"
                                        data-target="#ModalSaveDateRequest"/>
                                 <input type="button" class="btn btn-outline-primary btn-sm" value="Изменить"/>
-                                <input type="button" class="btn btn-outline-danger btn-sm" value="Удалить"/>
+                                <input type="button" class="btn btn-outline-danger btn-sm" value="Удалить" ng-click="cardC.removeRequestCase()"/>
                             </div>
                             <thead>
                             <tr>
@@ -333,7 +333,7 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <tr ng-repeat="item in cardC.getDateRequestCaseForCard()">
+                            <tr ng-click="cardC.setRequestCase(item)" ng-repeat="item in cardC.getDateRequestCaseForCard()">
                                 <td>{{cardC.convertToDate(item.date)}}</td>
                                 <td>{{item.organization}}</td>
                             </tr>
@@ -383,7 +383,7 @@
                                        data-toggle="modal"
                                        data-target="#ModalSaveDateReturn"/>
                                 <input type="button" class="btn btn-outline-primary btn-sm" value="Изменить"/>
-                                <input type="button" class="btn btn-outline-danger btn-sm" value="Удалить"/>
+                                <input type="button" class="btn btn-outline-danger btn-sm" value="Удалить" ng-click="cardC.removeReturnCase()"/>
                             </div>
                             <thead>
                             <tr>
@@ -392,8 +392,8 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <tr ng-repeat="item in cardC.getDateReturnCaseForCard()">
-                                <td>{{cardC.convertToDate(item.date)}}</td>
+                            <tr ng-click="cardC.setReturnCase(item)" ng-repeat="item in cardC.getDateReturnCaseForCard()">
+                                <td >{{cardC.convertToDate(item.date)}}</td>
                                 <td>{{item.organization}}</td>
                             </tr>
                             </tbody>
