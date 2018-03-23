@@ -39,7 +39,6 @@ public class Vialator {
 
     }
 
-
     public Set<CardAdm> getCardAdms() {
         return cardAdms;
     }

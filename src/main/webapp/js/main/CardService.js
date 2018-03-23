@@ -7,9 +7,7 @@ angular.module('courtApp').factory('CardService',
                 getCardLocal: getCardLocal,
                 createCard: createCard,
                 updateCard: updateCard,
-                removeCard: removeCard,
-                loadComplaintForEdit: loadComplaintForEdit,
-                setComplaintForEdit: setComplaintForEdit
+                removeCard: removeCard
 
             };
             return factory;
@@ -29,16 +27,6 @@ angular.module('courtApp').factory('CardService',
                         }
                     );
                 return deferred.promise;
-            }
-            function loadComplaintForEdit() {
-                $localStorage.complaintForEdit = {};
-            }
-            function setComplaintForEdit(item) {
-                if ($localStorage.complaintForEdit == item) {
-                    $localStorage.complaintForEdit = {};
-                } else {
-                    $localStorage.complaintForEdit = item;
-                }
             }
 
             function getCardLocal() {

@@ -39,7 +39,8 @@
                                        theme="selectize"
                                        title="Введите для поиска...">
                                 <ui-select-match placeholder="Введите для поиска...">
-                                    {{$select.selected.decreeDate.toLocaleDateString()}} {{$select.selected.organization.name}} {{$select.selected.authorDocument.name}}
+                                    {{$select.selected.decreeDate.toLocaleDateString()}}
+                                    {{$select.selected.organization.name}} {{$select.selected.authorDocument.name}}
                                 </ui-select-match>
                                 <ui-select-choices repeat="item in cardC.getAllRegulations() | filter: $select.search">
                                     <div ng-bind-html="item.decreeDate | highlight: $select.search"></div>
@@ -144,7 +145,8 @@
                                        theme="selectize"
                                        title="Введите для поиска...">
                                 <ui-select-match placeholder="Введите для поиска...">
-                                    {{$select.selected.privateNumber}} {{$select.selected.firstName}} {{$select.selected.secondName}} {{$select.selected.lastName}}
+                                    {{$select.selected.privateNumber}} {{$select.selected.firstName}}
+                                    {{$select.selected.secondName}} {{$select.selected.lastName}}
                                 </ui-select-match>
                                 <ui-select-choices repeat="item in cardC.getAllVialators() | filter: $select.search">
                                     <div ng-bind-html="item.privateNumber | highlight: $select.search"></div>
@@ -281,11 +283,17 @@
                     <div class="card-body py-2 px-3">
                         <table class="table table-striped table-bordered table-sm table-hover mb-0">
                             <div class="row justify-content-end pr-3 pb-2">
-                                <input type="button" class="btn btn-outline-success btn-sm" value="Добавить"
+                                <input type="button"
+                                       class="btn btn-outline-success btn-sm"
+                                       value="Добавить"
+                                       ng-click="cardC.createComplaint()"
                                        data-toggle="modal"
                                        data-target="#ModalSaveComplaint"/>
-                                <input type="button" class="btn btn-outline-primary btn-sm"
-                                       ng-click="cardC.editComplaint()" value="Изменить" data-toggle="modal"
+                                <input type="button"
+                                       class="btn btn-outline-primary btn-sm"
+                                       ng-click="cardC.editComplaint()"
+                                       value="Изменить"
+                                       data-toggle="modal"
                                        data-target="#ModalSaveComplaint"/>
                                 <input type="button" class="btn btn-outline-danger btn-sm"
                                        ng-click="cardC.removeComplaint();" value="Удалить"/>
@@ -320,11 +328,19 @@
                     <div class="card-body py-2 px-3">
                         <table class="table table-striped table-bordered table-sm table-hover mb-0">
                             <div class="row justify-content-end pr-3 pb-2">
-                                <input type="button" class="btn btn-outline-success btn-sm" value="Добавить"
+                                <input type="button"
+                                       class="btn btn-outline-success btn-sm"
+                                       value="Добавить"
+                                       ng-click="cardC.createRequestCase()"
                                        data-toggle="modal"
                                        data-target="#ModalSaveDateRequest"/>
-                                <input type="button" class="btn btn-outline-primary btn-sm" value="Изменить"/>
-                                <input type="button" class="btn btn-outline-danger btn-sm" value="Удалить" ng-click="cardC.removeRequestCase()"/>
+                                <input type="button" class="btn btn-outline-primary btn-sm"
+                                       value="Изменить"
+                                       ng-click="cardC.editRequestCase()"
+                                       data-toggle="modal"
+                                       data-target="#ModalSaveDateRequest"/>
+                                <input type="button" class="btn btn-outline-danger btn-sm" value="Удалить"
+                                       ng-click="cardC.removeRequestCase()"/>
                             </div>
                             <thead>
                             <tr>
@@ -333,7 +349,8 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <tr ng-click="cardC.setRequestCase(item)" ng-repeat="item in cardC.getDateRequestCaseForCard()">
+                            <tr ng-click="cardC.setRequestCase(item)"
+                                ng-repeat="item in cardC.getDateRequestCaseForCard()">
                                 <td>{{cardC.convertToDate(item.date)}}</td>
                                 <td>{{item.organization}}</td>
                             </tr>
@@ -380,10 +397,19 @@
                                 <input type="button"
                                        class="btn btn-outline-success btn-sm"
                                        value="Добавить"
+                                       ng-click="cardC.createReturnCase()"
                                        data-toggle="modal"
                                        data-target="#ModalSaveDateReturn"/>
-                                <input type="button" class="btn btn-outline-primary btn-sm" value="Изменить"/>
-                                <input type="button" class="btn btn-outline-danger btn-sm" value="Удалить" ng-click="cardC.removeReturnCase()"/>
+                                <input type="button"
+                                       class="btn btn-outline-primary btn-sm"
+                                       ng-click="cardC.editReturnCase()"
+                                       value="Изменить"
+                                       data-toggle="modal"
+                                       data-target="#ModalSaveDateReturn"/>
+                                <input type="button"
+                                       class="btn btn-outline-danger btn-sm"
+                                       value="Удалить"
+                                       ng-click="cardC.removeReturnCase()"/>
                             </div>
                             <thead>
                             <tr>
@@ -392,8 +418,9 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <tr ng-click="cardC.setReturnCase(item)" ng-repeat="item in cardC.getDateReturnCaseForCard()">
-                                <td >{{cardC.convertToDate(item.date)}}</td>
+                            <tr ng-click="cardC.setReturnCase(item)"
+                                ng-repeat="item in cardC.getDateReturnCaseForCard()">
+                                <td>{{cardC.convertToDate(item.date)}}</td>
                                 <td>{{item.organization}}</td>
                             </tr>
                             </tbody>
@@ -436,7 +463,7 @@
                                         ng-model="decC.decree.organization"
                                         ng-value="decC.decree.organization"
                                         theme="selectize"
-                                           title="Введите для поиска...">
+                                        title="Введите для поиска...">
                                     <ui-select-match placeholder="Введите для поиска...">{{$select.selected.name}}
                                     </ui-select-match>
                                     <ui-select-choices
@@ -495,7 +522,6 @@
                                 </div>
                             </div>
                         </div>
-
                         <div class="form-group row">
                             <label class="col-md-3 control-label">Вторая инстанция</label>
                             <div class="col-md-7">
@@ -503,7 +529,8 @@
                                 <ui-select ng-model="decC.decree.secondInstanceAdm" theme="selectize"
                                            title="Введите для поиска...">
                                     <ui-select-match placeholder="Введите для поиска...">
-                                        {{$select.selected.decreeDate}} {{$select.selected.organization.name}} {{$select.selected.authorDocument.name}}
+                                        {{$select.selected.decreeDate}} {{$select.selected.organization.name}}
+                                        {{$select.selected.authorDocument.name}}
                                     </ui-select-match>
                                     <ui-select-choices
                                             repeat="item in decC.getAllSecondInstance() | filter: $select.search">
@@ -521,7 +548,7 @@
                             </div>
                         </div>
                         <div class="modal-footer row mr-0">
-                            <input type="submit" value="{{!decC.decree.id ? 'Добавить' : 'Обновить'}}"
+                            <input type="submit" value="{{!decC.decree.id ? 'Добавить' : 'Сохранить'}}"
                                    class="btn btn-primary btn-sm">
                             <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Закрыть</button>
                         </div>
@@ -549,9 +576,9 @@
                             </div>
                         </div>
                         <div class="modal-footer row mr-0">
-                            <input type="submit" value="{{!orgC.organization.id ? 'Добавить' : 'Обновить'}}"
+                            <input type="submit" value="{{!orgC.organization.id ? 'Добавить' : 'Сохранить'}}"
                                    class="btn btn-primary btn-sm">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
+                            <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Закрыть</button>
                         </div>
                     </form>
                 </div>
@@ -607,9 +634,9 @@
                             </div>
                         </div>
                         <div class="modal-footer row mr-0">
-                            <input type="submit" value="{{!autC.author.id ? 'Добавить' : 'Обновить'}}"
+                            <input type="submit" value="{{!autC.author.id ? 'Добавить' : 'Сохранить'}}"
                                    class="btn btn-primary btn-sm">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
+                            <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Закрыть</button>
                         </div>
                     </form>
                 </div>
@@ -630,10 +657,12 @@
                         <div class="form-group row">
                             <label class="col-md-3 control-label">Организация</label>
                             <div class="col-md-7">
-                                <ui-select ng-model="secIC.secondInstance.organization" theme="selectize" title="Введите для поиска...">
+                                <ui-select ng-model="secIC.secondInstance.organization" theme="selectize"
+                                           title="Введите для поиска...">
                                     <ui-select-match placeholder="Введите для поиска...">{{$select.selected.name}}
                                     </ui-select-match>
-                                    <ui-select-choices repeat="item in secIC.getAllOrganizations() | filter: $select.search">
+                                    <ui-select-choices
+                                            repeat="item in secIC.getAllOrganizations() | filter: $select.search">
                                         <div ng-bind-html="item.name | highlight: $select.search"></div>
                                     </ui-select-choices>
                                 </ui-select>
@@ -647,7 +676,8 @@
                         <div class="form-group row">
                             <label class="col-md-3 control-label">Автор</label>
                             <div class="col-md-7">
-                                <ui-select ng-model="secIC.secondInstance.authorDocument" theme="selectize" title="Введите для поиска...">
+                                <ui-select ng-model="secIC.secondInstance.authorDocument" theme="selectize"
+                                           title="Введите для поиска...">
                                     <ui-select-match placeholder="Введите для поиска...">{{$select.selected.name}}
                                     </ui-select-match>
                                     <ui-select-choices repeat="item in secIC.getAllAuthors() | filter: $select.search">
@@ -668,9 +698,9 @@
                             </div>
                         </div>
                         <div class="modal-footer row mr-0">
-                            <input type="submit" value="{{!secIC.secondInstance.id ? 'Добавить' : 'Обновить'}}"
+                            <input type="submit" value="{{!secIC.secondInstance.id ? 'Добавить' : 'Сохранить'}}"
                                    class="btn btn-primary btn-sm">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
+                            <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Закрыть</button>
                         </div>
                     </form>
                 </div>
@@ -690,12 +720,14 @@
                 </div>
                 <div class="modal-body">
                     <div class=" mb-3 col row justify-content-center">
-                        <div class="form-check form-check-inline" ng-if="viaC.vialator.typeVialator == 1 || viaC.vialator.typeVialator == null">
+                        <div class="form-check form-check-inline"
+                             ng-if="viaC.vialator.typeVialator == 1 || viaC.vialator.typeVialator == null">
                             <input type="radio" ng-model="radioChecked.on" value="1">
                             <label class="form-check-label h4">Физическое лицо</label>
                         </div>
-                        <div class="form-check form-check-inline" ng-if="viaC.vialator.typeVialator == 2 || viaC.vialator.typeVialator == null">
-                            <input type="radio" ng-model="radioChecked.on"  value="2">
+                        <div class="form-check form-check-inline"
+                             ng-if="viaC.vialator.typeVialator == 2 || viaC.vialator.typeVialator == null">
+                            <input type="radio" ng-model="radioChecked.on" value="2">
                             <label class="form-check-label h4">Юридическое лицо</label>
                         </div>
                     </div>
@@ -755,9 +787,9 @@
                                 </div>
                             </div>
                             <div class="modal-footer row mr-0">
-                                <input type="submit" value="{{!viaC.vialator.id ? 'Добавить' : 'Обновить'}}"
+                                <input type="submit" value="{{!viaC.vialator.id ? 'Добавить' : 'Сохранить'}}"
                                        class="btn btn-primary btn-sm">
-                                <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
+                                <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Закрыть</button>
                             </div>
                         </form>
                     </div>
@@ -821,9 +853,9 @@
                             </div>
                         </div>
                         <div class="modal-footer row mr-0">
-                            <input type="submit" value="{{!comC.complaint.id ? 'Добавить' : 'Обновить'}}"
+                            <input type="submit" value="{{!comC.complaint.id ? 'Добавить' : 'Сохранить'}}"
                                    class="btn btn-primary btn-sm">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
+                            <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Закрыть</button>
                         </div>
                     </form>
                 </div>
@@ -855,9 +887,9 @@
                             </div>
                         </div>
                         <div class="modal-footer row mr-0">
-                            <input type="submit" value="{{!dretC.dateReturn.id ? 'Добавить' : 'Обновить'}}"
+                            <input type="submit" value="{{!dretC.dateReturn.id ? 'Добавить' : 'Сохранить'}}"
                                    class="btn btn-primary btn-sm">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
+                            <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Закрыть</button>
                         </div>
                     </form>
                 </div>
@@ -892,9 +924,9 @@
                             </div>
                         </div>
                         <div class="modal-footer row mr-0">
-                            <input type="submit" value="{{!dreqC.dateRequest.id ? 'Добавить' : 'Обновить'}}"
+                            <input type="submit" value="{{!dreqC.dateRequest.id ? 'Добавить' : 'Сохранить'}}"
                                    class="btn btn-primary btn-sm">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
+                            <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Закрыть</button>
                         </div>
                     </form>
                 </div>

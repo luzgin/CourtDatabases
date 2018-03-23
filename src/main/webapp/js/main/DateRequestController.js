@@ -90,6 +90,12 @@ angular.module('courtApp').controller('DateRequestController',
                     }
                 );
         }
-
+        $scope.$on('editRequestCase', function (editRequestCase, item) {
+            self.dateRequest = item.c;
+            self.dateRequest.date = new Date(self.dateRequest.date);
+        })
+        $scope.$on('createRequestCase', function () {
+            self.dateRequest = {};
+        })
     }
     ]);

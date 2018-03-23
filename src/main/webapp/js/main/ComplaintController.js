@@ -106,7 +106,7 @@ angular.module('courtApp').controller('ComplaintController',
 
         function editComplaint() {
             console.log('complaint get');
-            ComplaintService.getComplaint().then(
+            ComplaintService.getComplaint(self.complaint).then(
                 function (complaint) {
                     self.complaint = complaint;
                     console.log('complaint get' + self.complaint);
@@ -130,5 +130,12 @@ angular.module('courtApp').controller('ComplaintController',
                 );
         }
 
+        $scope.$on('editComplaint', function (editComplaint, item) {
+            self.complaint = item.a;
+            self.complaint.complainDate = new Date(self.complaint.complainDate);
+        })
+        $scope.$on('createComplaint', function () {
+            self.complaint = {};
+        })
     }
     ]);

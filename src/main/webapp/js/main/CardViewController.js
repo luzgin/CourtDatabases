@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('courtApp').controller('CardViewController',
-    ['CardViewService','ComplaintService','DateReturnService','DateRequestService', '$scope',
-        function (CardViewService,ComplaintService,DateReturnService, DateRequestService) {
+    ['CardViewService','ComplaintService','DateReturnService','DateRequestService','CardService', '$scope',
+        function (CardViewService,ComplaintService,DateReturnService, DateRequestService, CardService) {
         var self = this;
         self.cardForRemove = {};
         self.cards = [];
@@ -23,8 +23,11 @@ angular.module('courtApp').controller('CardViewController',
         }
 
         function setCardForRemove(item) {
-            CardViewService.setCardForRemove(item);
-
+            if (self.cardForRemove != item){
+                self.cardForRemove = item;
+            }else {
+                self.cardForRemove = {};
+            }
             /*   закрашивание строки таблицы при наведении, раскоментить main.css
             $(document).ready(function(){
                 $('table tr').on('click', function(e) {
@@ -37,7 +40,7 @@ angular.module('courtApp').controller('CardViewController',
 
         function removeCard() {
             console.log('About to remove card with id ');
-            CardViewService.removeCard()
+            CardService.removeCard( self.cardForRemove.id)
                 .then(
                     function () {
                         console.log('card  removed successfully');

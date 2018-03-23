@@ -91,6 +91,13 @@ angular.module('courtApp').controller('DateReturnController',
                     }
                 );
         }
+        $scope.$on('editReturnCase', function (editReturnCase, item) {
+            self.dateReturn = item.b;
+            self.dateReturn.date = new Date(self.dateReturn.date);
+        })
+        $scope.$on('createReturnCase', function () {
+            self.dateReturn = {};
+        })
 
     }
     ]);

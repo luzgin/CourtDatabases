@@ -51,17 +51,17 @@ angular.module('courtApp').factory('ComplaintService',
                 return $localStorage.complaintsForDecree;
             }
 
-            function getComplaint() {
+            function getComplaint(item) {
                 console.log('Fetching Complaint');
                 var deferred = $q.defer();
-                $http.get(urls.CONPLAINT_SERVICE_API + $localStorage.complaintForEdit.id)
+                $http.get(urls.CONPLAINT_SERVICE_API + item.id)
                     .then(
                         function (response) {
-                            console.log('Fetched successfully Complaint with id :' + $localStorage.complaintForEdit.id);
+                            console.log('Fetched successfully Complaint with id :' + item.id);
                             deferred.resolve(response.data);
                         },
                         function (errResponse) {
-                            console.error('Error while loading Complaint with id :' + $localStorage.complaintForEdit.id);
+                            console.error('Error while loading Complaint with id :' + item.id);
                             deferred.reject(errResponse);
                         }
                     );
@@ -92,7 +92,7 @@ angular.module('courtApp').factory('ComplaintService',
                 $http.put(urls.CONPLAINT_SERVICE_API + id, entity)
                     .then(
                         function (response) {
-                            loadComplaintsForDecree(entity.cardAdm.id);
+                            loadComplaintsForDecree(entity.decreeAdm.id);
                             deferred.resolve(response.data);
                         },
                         function (errResponse) {
@@ -103,17 +103,17 @@ angular.module('courtApp').factory('ComplaintService',
                 return deferred.promise;
             }
 
-            function removeComplaint() {
-                console.log('Removing Complaint with id ' + $localStorage.complaintForEdit.id);
+            function removeComplaint(item) {
+                console.log('Removing Complaint with id ' + item.id);
                 var deferred = $q.defer();
-                $http.delete(urls.CONPLAINT_SERVICE_API + $localStorage.complaintForEdit.id)
+                $http.delete(urls.CONPLAINT_SERVICE_API + item.id)
                     .then(
                         function (response) {
                             loadComplaintsForDecree($localStorage.card.decreeAdm.id);
                             deferred.resolve(response.data);
                         },
                         function (errResponse) {
-                            console.error('Error while removing Complaint with id :' + $localStorage.complaintForEdit.id);
+                            console.error('Error while removing Complaint with id :' + item.id);
                             deferred.reject(errResponse);
                         }
                     );

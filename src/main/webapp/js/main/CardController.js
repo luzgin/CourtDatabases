@@ -3,10 +3,10 @@
 angular.module('courtApp').controller('CardController',
     ['$localStorage', 'CardService', 'ArticleService', 'AuthorService', 'ComplaintService', 'OrgService',
         'DecreeService', 'SecondInstanceService', 'EntityDecreeService', 'EntityService',
-        'NameEntityDecreeService', 'ResService', 'VialatorService', 'DateReturnService', 'DateRequestService', '$scope',
+        'NameEntityDecreeService', 'ResService', 'VialatorService', 'DateReturnService', 'DateRequestService', '$scope','$rootScope',
         function ($localStorage, CardService, ArticleService, AuthorService, ComplaintService, OrgService,
                   DecreeService, SecondInstanceService, EntityDecreeService, EntityService,
-                  NameEntityDecreeService, ResService, VialatorService, DateReturnService, DateRequestService, $scope) {
+                  NameEntityDecreeService, ResService, VialatorService, DateReturnService, DateRequestService, $scope, $rootScope) {
 
             var self = this;
             self.card = CardService.getCardLocal();
@@ -38,6 +38,12 @@ angular.module('courtApp').controller('CardController',
             self.removeReturnCase = removeReturnCase;
             self.setRequestCase = setRequestCase;
             self.removeRequestCase = removeRequestCase;
+            self.editReturnCase = editReturnCase;
+            self.editRequestCase = editRequestCase;
+
+            self.createComplaint = createComplaint;
+            self.createReturnCase = createReturnCase;
+            self.createRequestCase = createRequestCase;
 
             self.card.createDate = new Date(self.card.createDate);
             if (self.card.resultDate != null) {
@@ -54,13 +60,24 @@ angular.module('courtApp').controller('CardController',
             function setReturnCase(item) {
                 if (self.returnCase == item) {
                     self.returnCase = {};
-                    console.log('set return case', self.returnCase);
                 } else {
                     self.returnCase = item;
-                    console.log('set return case', self.returnCase);
                 }
             }
-
+            function setRequestCase(item) {
+                if (self.requestCase == item) {
+                    self.requestCase = {};
+                } else {
+                    self.requestCase = item;
+                }
+            }
+            function setComplaintForEdit(item) {
+                if( self.complaintForEdit != item){
+                    self.complaintForEdit = item;
+                }else {
+                    self.complaintForEdit = {};
+                }
+            }
             function removeReturnCase() {
                 if (self.returnCase != null) {
                     console.log('remove return case', self.returnCase);
@@ -75,15 +92,7 @@ angular.module('courtApp').controller('CardController',
                     ;
                 }
             }
-            function setRequestCase(item) {
-                if (self.requestCase == item) {
-                    self.requestCase = {};
-                    console.log('set return case', self.requestCase);
-                } else {
-                    self.requestCase = item;
-                    console.log('set request case', self.requestCase);
-                }
-            }
+
             function removeRequestCase() {
                 if (self.requestCase != null) {
                     console.log('remove request case', self.requestCase);
@@ -99,9 +108,7 @@ angular.module('courtApp').controller('CardController',
                 }
             }
 
-            function setComplaintForEdit(item) {
-                CardService.setComplaintForEdit(item);
-            }
+
 
             function getAllArticles() {
                 return ArticleService.getAllArticles();
@@ -229,7 +236,7 @@ angular.module('courtApp').controller('CardController',
 
             function removeComplaint() {
                 console.log('About to remove complaint ');
-                ComplaintService.removeComplaint()
+                ComplaintService.removeComplaint(self.complaintForEdit)
                     .then(
                         function () {
                             console.log('complaint  removed successfully');
@@ -240,8 +247,23 @@ angular.module('courtApp').controller('CardController',
                     );
             }
 
+            function createComplaint() {
+                $rootScope.$broadcast('createComplaint');
+            }
+            function createReturnCase() {
+                $rootScope.$broadcast('createReturnCase');
+            }
+            function createRequestCase() {
+                $rootScope.$broadcast('createRequestCase');
+            }
             function editComplaint() {
-
+                $rootScope.$broadcast('editComplaint', {a :self.complaintForEdit});
+            }
+            function editReturnCase() {
+                $rootScope.$broadcast('editReturnCase', {b :self.returnCase});
+            }
+            function editRequestCase() {
+                $rootScope.$broadcast('editRequestCase', {c :self.requestCase});
             }
         }
     ]);

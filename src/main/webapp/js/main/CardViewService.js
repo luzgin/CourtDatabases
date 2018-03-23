@@ -5,10 +5,8 @@ angular.module('courtApp').factory('CardViewService',
             var factory = {
                 loadAllCards: loadAllCards,
                 getAllCards: getAllCards,
-                removeCard: removeCard,
                 loadCard: loadCard,
-                setCard: setCard,
-                setCardForRemove: setCardForRemove
+                setCard: setCard
             };
             return factory;
 
@@ -37,31 +35,6 @@ angular.module('courtApp').factory('CardViewService',
 
             function setCard(item) {
                 $localStorage.card = item;
-            }
-
-            function setCardForRemove(item) {
-                if ($localStorage.cardForRemove == item) {
-                    $localStorage.cardForRemove = {};
-                } else {
-                    $localStorage.cardForRemove = item;
-                }
-            }
-
-            function removeCard() {
-                console.log('Removing Card with id ' + $localStorage.cardForRemove.id);
-                var deferred = $q.defer();
-                $http.delete(urls.CARD_SERVICE_API + $localStorage.cardForRemove.id)
-                    .then(
-                        function (response) {
-                            loadAllCards();
-                            deferred.resolve(response.data);
-                        },
-                        function (errResponse) {
-                            console.error('Error while removing Card with id :' + $localStorage.cardForRemove.id);
-                            deferred.reject(errResponse);
-                        }
-                    );
-                return deferred.promise;
             }
         }
     ]);
