@@ -177,6 +177,7 @@ CREATE TABLE IF NOT EXISTS complaints_adm (
   entity_id             INT(10)      NOT NULL,
   name_author_complaint VARCHAR(200) NOT NULL,
   activ                 BOOLEAN      NOT NULL,
+  reinstatement_of_term BOOLEAN      NOT NULL,
   decree_adm_id         INT(10)      NOT NULL,
   summ_poshlini         DECIMAL(50)  NOT NULL,
   card_adm_id           INT(10),

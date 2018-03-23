@@ -41,6 +41,7 @@ public class ComplaintAdmController {
         currentComplaintsAdm.setEntityIskAdm(complaintsAdm.getEntityIskAdm());
         currentComplaintsAdm.setNameAuthorComplaint(complaintsAdm.getNameAuthorComplaint());
         currentComplaintsAdm.setActiv(complaintsAdm.isActiv());
+        currentComplaintsAdm.setReinstatementOfTerm(complaintsAdm.isReinstatementOfTerm());
         currentComplaintsAdm.setDecreeAdm(complaintsAdm.getDecreeAdm());
         currentComplaintsAdm.setSummPoshlini(complaintsAdm.getSummPoshlini());
         currentComplaintsAdm.setCardAdm(complaintsAdm.getCardAdm());

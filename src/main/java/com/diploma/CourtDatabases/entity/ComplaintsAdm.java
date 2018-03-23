@@ -25,6 +25,9 @@ public class ComplaintsAdm {
     @Column(name = "activ")
     private boolean activ;
 
+    @Column(name = "reinstatement_of_term")
+    private boolean reinstatementOfTerm;
+
     @ManyToOne
     @JoinColumn(name = "decree_adm_id", nullable = false)
     private DecreeAdm decreeAdm;
@@ -104,6 +107,14 @@ public class ComplaintsAdm {
         this.cardAdm = cardAdm;
     }
 
+    public boolean isReinstatementOfTerm() {
+        return reinstatementOfTerm;
+    }
+
+    public void setReinstatementOfTerm(boolean reinstatementOfTerm) {
+        this.reinstatementOfTerm = reinstatementOfTerm;
+    }
+
     @Override
     public String toString() {
         return "ComplaintsAdm{" +
@@ -112,6 +123,7 @@ public class ComplaintsAdm {
                 ", entityIskAdm=" + entityIskAdm +
                 ", nameAuthorComplaint='" + nameAuthorComplaint + '\'' +
                 ", activ=" + activ +
+                ", reinstatementOfTerm=" + reinstatementOfTerm +
                 ", decreeAdm=" + decreeAdm +
                 ", summPoshlini=" + summPoshlini +
                 ", cardAdm=" + cardAdm +

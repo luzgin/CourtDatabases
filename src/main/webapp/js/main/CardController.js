@@ -57,25 +57,45 @@ angular.module('courtApp').controller('CardController',
                 document.getElementById("addVialator").setAttribute('disabled', 'disabled');
             }
 
+            document.getElementById("editComplaint").setAttribute('disabled', 'disabled');
+            document.getElementById("removeComplaint").setAttribute('disabled', 'disabled');
+            document.getElementById("editDateReturn").setAttribute('disabled', 'disabled');
+            document.getElementById("removeDateReturn").setAttribute('disabled', 'disabled');
+            document.getElementById("editDateRequest").setAttribute('disabled', 'disabled');
+            document.getElementById("removeDateRequest").setAttribute('disabled', 'disabled');
+
             function setReturnCase(item) {
                 if (self.returnCase == item) {
                     self.returnCase = {};
+                    document.getElementById("editDateReturn").setAttribute('disabled', 'disabled');
+                    document.getElementById("removeDateReturn").setAttribute('disabled', 'disabled');
                 } else {
                     self.returnCase = item;
+                    document.getElementById("editDateReturn").removeAttribute('disabled');
+                    document.getElementById("removeDateReturn").removeAttribute('disabled');
                 }
             }
             function setRequestCase(item) {
                 if (self.requestCase == item) {
                     self.requestCase = {};
+                    document.getElementById("editDateRequest").setAttribute('disabled', 'disabled');
+                    document.getElementById("removeDateRequest").setAttribute('disabled', 'disabled');
                 } else {
                     self.requestCase = item;
+                    document.getElementById("editDateRequest").removeAttribute('disabled');
+                    document.getElementById("removeDateRequest").removeAttribute('disabled');
+
                 }
             }
             function setComplaintForEdit(item) {
                 if( self.complaintForEdit != item){
                     self.complaintForEdit = item;
+                    document.getElementById("editComplaint").removeAttribute('disabled');
+                    document.getElementById("removeComplaint").removeAttribute('disabled');
                 }else {
                     self.complaintForEdit = {};
+                    document.getElementById("editComplaint").setAttribute('disabled', 'disabled');
+                    document.getElementById("removeComplaint").setAttribute('disabled', 'disabled');
                 }
             }
             function removeReturnCase() {
