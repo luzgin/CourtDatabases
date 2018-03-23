@@ -530,6 +530,19 @@
                                         <option value='true'>Да</option>
                                         <option value='false'>Нет</option>
                                     </select>
+
+                                    <!--    выбор по radiobutton
+                                    <input class="form-check-input"
+                                           type="radio"
+                                           ng-value="true"
+                                           ng-model="decC.decree.enteredIntoForce">
+                                    <label class="form-check-label">Да</label>
+                                    <input class="form-check-input"
+                                           type="radio"
+                                           ng-value="false"
+                                           ng-model="decC.decree.enteredIntoForce">
+                                    <label class="form-check-label">Нет</label>
+                                    -->
                                 </div>
                             </div>
                         </div>
@@ -800,7 +813,8 @@
                             <div class="modal-footer row mr-0">
                                 <input type="submit" value="{{!viaC.vialator.id ? 'Добавить' : 'Сохранить'}}"
                                        class="btn btn-primary btn-sm">
-                                <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Закрыть</button>
+                                <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Закрыть
+                                </button>
                             </div>
                         </form>
                     </div>
@@ -823,14 +837,15 @@
                             <label class="col-md-2 control-label">Дата</label>
                             <div class="col-md-10 row">
                                 <div class="col-md-5">
-                                <input type="date" class="form-control" ng-model="comC.complaint.complainDate"
-                                       required/>
+                                    <input type="date" class="form-control" ng-model="comC.complaint.complainDate"
+                                           required/>
                                 </div>
                                 <div class="col-md-auto row align-self-center pr-4">
-                                    <label >Восстановление срока</label>
+                                    <label>Восстановление срока</label>
                                 </div>
                                 <div class="col-md-1 row align-self-center">
-                                    <input type="checkbox" class="form-control" style="transform: scale(2)" ng-model="comC.complaint.reinstatementOfTerm"
+                                    <input type="checkbox" class="form-control" style="transform: scale(2)"
+                                           ng-model="comC.complaint.reinstatementOfTerm"
                                            ng-value="comC.complaint.reinstatementOfTerm"/>
                                 </div>
                             </div>
