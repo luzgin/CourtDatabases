@@ -1270,6 +1270,4 @@ VALUES (3, 1, '2016-02-25', 1, NULL);
 INSERT INTO `decree_adm` (`author_document_id`, `organization_id`, `decree_date`, `entered_into_force`, `second_instance_id`)
 VALUES (2, 5, '2015-12-20', 1, 1);
 
-INSERT INTO `complaints_adm` (`date_complaint`, `entity_id`, `name_author_complaint`, `activ`, `decree_adm_id`, `summ_poshlini`, `card_adm_id`)
-VALUES ('2018-03-05', 2, 'Пупкин В.В.', 0, 1, '10', NULL);
 

@@ -3,7 +3,7 @@
 angular.module('courtApp').controller('CardController',
     ['$localStorage', 'CardService', 'ArticleService', 'AuthorService', 'ComplaintService', 'OrgService',
         'DecreeService', 'SecondInstanceService', 'EntityDecreeService', 'EntityService',
-        'NameEntityDecreeService', 'ResService', 'VialatorService', 'DateReturnService', 'DateRequestService', '$scope','$rootScope',
+        'NameEntityDecreeService', 'ResService', 'VialatorService', 'DateReturnService', 'DateRequestService', '$scope', '$rootScope',
         function ($localStorage, CardService, ArticleService, AuthorService, ComplaintService, OrgService,
                   DecreeService, SecondInstanceService, EntityDecreeService, EntityService,
                   NameEntityDecreeService, ResService, VialatorService, DateReturnService, DateRequestService, $scope, $rootScope) {
@@ -27,23 +27,26 @@ angular.module('courtApp').controller('CardController',
             self.getAllVialators = getAllVialators;
             self.parseToDate = parseToDate;
             self.convertToDate = convertToDate;
-            self.getComplaintsForDecree = getComplaintsForDecree;
-            self.setComplaintForEdit = setComplaintForEdit;
-            self.removeComplaint = removeComplaint;
-            self.editComplaint = editComplaint;
             self.getAuthorsForRegionalCourt = getAuthorsForRegionalCourt;
-            self.getDateReturnCaseForCard = getDateReturnCaseForCard;
-            self.getDateRequestCaseForCard = getDateRequestCaseForCard;
-            self.setReturnCase = setReturnCase;
-            self.removeReturnCase = removeReturnCase;
-            self.setRequestCase = setRequestCase;
-            self.removeRequestCase = removeRequestCase;
-            self.editReturnCase = editReturnCase;
-            self.editRequestCase = editRequestCase;
+            self.paintTable = paintTable;
 
             self.createComplaint = createComplaint;
+            self.setComplaintForEdit = setComplaintForEdit;
+            self.getComplaintsForDecree = getComplaintsForDecree;
+            self.editComplaint = editComplaint;
+            self.removeComplaint = removeComplaint;
+
             self.createReturnCase = createReturnCase;
+            self.editReturnCase = editReturnCase;
+            self.setReturnCase = setReturnCase;
+            self.removeReturnCase = removeReturnCase;
+            self.getDateReturnCaseForCard = getDateReturnCaseForCard;
+
             self.createRequestCase = createRequestCase;
+            self.setRequestCase = setRequestCase;
+            self.editRequestCase = editRequestCase;
+            self.removeRequestCase = removeRequestCase;
+            self.getDateRequestCaseForCard = getDateRequestCaseForCard;
 
             self.card.createDate = new Date(self.card.createDate);
             if (self.card.resultDate != null) {
@@ -75,6 +78,7 @@ angular.module('courtApp').controller('CardController',
                     document.getElementById("removeDateReturn").removeAttribute('disabled');
                 }
             }
+
             function setRequestCase(item) {
                 if (self.requestCase == item) {
                     self.requestCase = {};
@@ -87,17 +91,22 @@ angular.module('courtApp').controller('CardController',
 
                 }
             }
+
             function setComplaintForEdit(item) {
-                if( self.complaintForEdit != item){
-                    self.complaintForEdit = item;
-                    document.getElementById("editComplaint").removeAttribute('disabled');
-                    document.getElementById("removeComplaint").removeAttribute('disabled');
-                }else {
-                    self.complaintForEdit = {};
-                    document.getElementById("editComplaint").setAttribute('disabled', 'disabled');
-                    document.getElementById("removeComplaint").setAttribute('disabled', 'disabled');
+                if (item.cardAdm.cardNumber === document.getElementById("numberCard").value) {
+                    if (self.complaintForEdit != item) {
+                        self.complaintForEdit = item;
+                        document.getElementById("editComplaint").removeAttribute('disabled');
+                        document.getElementById("removeComplaint").removeAttribute('disabled');
+                    } else {
+                        self.complaintForEdit = {};
+                        document.getElementById("editComplaint").setAttribute('disabled', 'disabled');
+                        document.getElementById("removeComplaint").setAttribute('disabled', 'disabled');
+                    }
                 }
+
             }
+
             function removeReturnCase() {
                 if (self.returnCase != null) {
                     console.log('remove return case', self.returnCase);
@@ -127,7 +136,6 @@ angular.module('courtApp').controller('CardController',
                     ;
                 }
             }
-
 
 
             function getAllArticles() {
@@ -269,21 +277,43 @@ angular.module('courtApp').controller('CardController',
 
             function createComplaint() {
                 $rootScope.$broadcast('createComplaint');
+
+
             }
+
             function createReturnCase() {
                 $rootScope.$broadcast('createReturnCase');
             }
+
             function createRequestCase() {
                 $rootScope.$broadcast('createRequestCase');
+
             }
+
             function editComplaint() {
-                $rootScope.$broadcast('editComplaint', {a :self.complaintForEdit});
+                $rootScope.$broadcast('editComplaint', {a: self.complaintForEdit});
+
+            }
+
+            function paintTable() {
+
             }
             function editReturnCase() {
-                $rootScope.$broadcast('editReturnCase', {b :self.returnCase});
+                $rootScope.$broadcast('editReturnCase', {b: self.returnCase});
             }
+
             function editRequestCase() {
-                $rootScope.$broadcast('editRequestCase', {c :self.requestCase});
+                $rootScope.$broadcast('editRequestCase', {c: self.requestCase});
             }
+
+
+            $scope.$on('printTable', function (editRequestCase, item) {
+                var table = document.getElementById("complaintsTable");
+                for (var i = 1; i < table.rows.length; i++) {
+                    if (table.rows[i].cells[0].innerHTML === document.getElementById("numberCard").value) {
+                        table.rows[i].style.backgroundColor = '#ceffc3';
+                    }
+                }
+            })
         }
     ]);

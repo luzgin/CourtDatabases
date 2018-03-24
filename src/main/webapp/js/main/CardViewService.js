@@ -5,13 +5,15 @@ angular.module('courtApp').factory('CardViewService',
             var factory = {
                 loadAllCards: loadAllCards,
                 getAllCards: getAllCards,
-                loadCard: loadCard,
+                clearLocal: clearLocal,
                 setCard: setCard
             };
             return factory;
 
-            function loadCard() {
+            function clearLocal() {
                 $localStorage.card = {};
+                $localStorage.dateRequestCaseForCard = {};
+                $localStorage.dateReturnCaseForCard = {};
             }
 
             function loadAllCards() {

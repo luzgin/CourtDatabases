@@ -1,4 +1,4 @@
-var posdApp = angular.module("courtApp", ['ngSanitize', 'ngRoute', 'ngStorage','ui.select']);
+var posdApp = angular.module("courtApp", ['ngSanitize', 'ngRoute', 'ngStorage', 'ui.select']);
 
 posdApp.constant('urls', {
     BASE: 'http://localhost:8080/',
@@ -27,7 +27,7 @@ posdApp.config(function ($routeProvider) {
             resolve: {
                 Complaints: function ($q, CardViewService) {
                     var deferred = $q.defer();
-                    CardViewService.loadCard();
+                    CardViewService.clearLocal();
                     CardViewService.loadAllCards().then(deferred.resolve, deferred.resolve);
                     return deferred.promise;
                 }
@@ -210,14 +210,14 @@ posdApp.config(function ($routeProvider) {
         })
 });
 
-posdApp.filter('propsFilter', function() {
-    return function(items, props) {
+posdApp.filter('propsFilter', function () {
+    return function (items, props) {
         var out = [];
 
         if (angular.isArray(items)) {
             var keys = Object.keys(props);
 
-            items.forEach(function(item) {
+            items.forEach(function (item) {
                 var itemMatches = false;
 
                 for (var i = 0; i < keys.length; i++) {
@@ -240,4 +240,16 @@ posdApp.filter('propsFilter', function() {
 
         return out;
     };
+});
+posdApp.directive('ngLoad', function ($timeout,  $rootScope) {
+    return {
+        restrict: 'A',
+        link: function (scope, element, attr) {
+            if (scope.$last === true) {
+                $timeout(function () {
+                    $rootScope.$broadcast('printTable');
+                });
+            }
+        }
+    }
 });

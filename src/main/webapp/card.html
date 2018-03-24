@@ -39,7 +39,7 @@
                                        theme="selectize"
                                        title="Введите для поиска...">
                                 <ui-select-match placeholder="Введите для поиска...">
-                                    {{$select.selected.decreeDate.toLocaleDateString()}}
+                                    {{$select.selected.decreeDate | date: 'dd.MM.yyyy'}}
                                     {{$select.selected.organization.name}} {{$select.selected.authorDocument.name}}
                                 </ui-select-match>
                                 <ui-select-choices repeat="item in cardC.getAllRegulations() | filter: $select.search">
@@ -281,7 +281,7 @@
                         <label>Жалобы</label>
                     </div>
                     <div class="card-body py-2 px-3">
-                        <table class="table table-bordered table-sm table-hover mb-0">
+                        <table id="complaintsTable" class="table table-bordered table-sm table-hover mb-0">
                             <div class="row justify-content-end pr-3 pb-2">
                                 <input type="button"
                                        class="btn btn-outline-success btn-sm"
@@ -303,9 +303,10 @@
                             </div>
                             <thead>
                             <tr>
-                                <th class="div-center" width="10%">Дата</th>
+                                <th class="div-center" width="7.5%">№ карточки</th>
+                                <th class="div-center" width="7.5%">Дата</th>
                                 <th class="div-center" width="40%">Сужность жалобы</th>
-                                <th class="div-center" width="20%">Автор</th>
+                                <th class="div-center" width="15%">Автор</th>
                                 <th class="div-center" width="10%">Сумма госпошлины</th>
                                 <th class="div-center" width="10%">Восстановление срока</th>
                                 <th class="div-center" width="10%">Дан ответ</th>
@@ -313,8 +314,10 @@
                             </thead>
                             <tbody>
                             <tr ng-click="cardC.setComplaintForEdit(item)"
-                                ng-repeat="item in cardC.getComplaintsForDecree()">
-                                <td>{{cardC.convertToDate(item.complainDate)}}</td>
+                                ng-repeat="item in cardC.getComplaintsForDecree()"
+                                ng-load="ngRepeatFinished">
+                                <td>{{item.cardAdm.cardNumber}}</td>
+                                <td>{{item.complainDate | date: 'dd.MM.yyyy'}}</td>
                                 <td>{{item.entityIskAdm.name}}</td>
                                 <td>{{item.nameAuthorComplaint}}</td>
                                 <td>{{item.summPoshlini}}</td>
@@ -360,7 +363,7 @@
                             <tbody>
                             <tr ng-click="cardC.setRequestCase(item)"
                                 ng-repeat="item in cardC.getDateRequestCaseForCard()">
-                                <td>{{cardC.convertToDate(item.date)}}</td>
+                                <td>{{item.date | date: 'dd.MM.yyyy'}}</td>
                                 <td>{{item.organization}}</td>
                             </tr>
                             </tbody>
@@ -431,7 +434,7 @@
                             <tbody>
                             <tr ng-click="cardC.setReturnCase(item)"
                                 ng-repeat="item in cardC.getDateReturnCaseForCard()">
-                                <td>{{cardC.convertToDate(item.date)}}</td>
+                                <td>{{item.date | date: 'dd.MM.yyyy'}}</td>
                                 <td>{{item.organization}}</td>
                             </tr>
                             </tbody>
@@ -969,3 +972,4 @@
         </div>
     </div>
 </div>
+
