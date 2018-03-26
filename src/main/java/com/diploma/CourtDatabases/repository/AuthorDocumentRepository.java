@@ -10,4 +10,5 @@ import java.util.List;
 public interface AuthorDocumentRepository extends JpaRepository<AuthorDocument, Long> {
     AuthorDocument findByName(String name);
     List<AuthorDocument> findByOrganization_NameAndOrganization_TypeAndActivWork(String organizationName, int organizationType, boolean activ);
+    List<AuthorDocument> findByOrganization_IdAndActivWork(long id, boolean activ);
 }

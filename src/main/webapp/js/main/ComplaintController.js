@@ -14,30 +14,11 @@ angular.module('courtApp').controller('ComplaintController',
         self.getAllEntities = getAllEntities;
         self.editComplaint = editComplaint;
         self.removeComplaint = removeComplaint;
-        self.convertToDate = convertToDate;
 
         self.complaint.complainDate = new Date(self.complaint.complainDate);
 
         function getAllComplaints() {
             return ComplaintService.getAllComplaints();
-        }
-
-        function convertToDate(date) {
-            var d = new Date(date);
-            var s;
-            if (d.getDate() < 10) {
-                s = "0" + (d.getDate())
-            } else {
-                s = d.getDate()
-            }
-            s = s + ".";
-            if (d.getMonth() < 10) {
-                s = s + "0" + (d.getMonth() + 1)
-            } else {
-                s = s + d.getMonth()
-            }
-            d = s + "." + d.getFullYear();
-            return d;
         }
 
         function getAllRegulations() {

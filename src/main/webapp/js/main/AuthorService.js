@@ -6,7 +6,9 @@ angular.module('courtApp').factory('AuthorService',
                 loadAllAuthors: loadAllAuthors,
                 getAllAuthors: getAllAuthors,
                 loadAllAuthorsForOrganization: loadAllAuthorsForOrganization,
-                getAllAuthorsForOrganization: getAllAuthorsForOrganization,
+                getAuthorsForRegionalCourt: getAuthorsForRegionalCourt,
+                getAuthorsForOrganization: getAuthorsForOrganization,
+                setAuthorsForOrganization: setAuthorsForOrganization,
                 getAuthor: getAuthor,
                 createAuthor: createAuthor,
                 updateAuthor: updateAuthor,
@@ -30,6 +32,22 @@ angular.module('courtApp').factory('AuthorService',
                 return deferred.promise;
             }
 
+            function setAuthorsForOrganization(id) {
+                var deferred = $q.defer();
+                $http.get(urls.AUTHOR_SERVICE_API + "org/" + id)
+                    .then(
+                        function (response) {
+                            $localStorage.authorsForOrganization = response.data;
+                            deferred.resolve(response.data);
+                        },
+                        function (errResponse) {
+                            console.error('Error while loading Author with id :' + id);
+                            deferred.reject(errResponse);
+                        }
+                    );
+                return deferred.promise;
+            }
+
             function getStatus() {
                 return $localStorage.status;
             }
@@ -37,8 +55,11 @@ angular.module('courtApp').factory('AuthorService',
             function getAllAuthors() {
                 return $localStorage.authors;
             }
+            function getAuthorsForOrganization() {
+                return $localStorage.authorsForOrganization;
+            }
 
-            function getAllAuthorsForOrganization() {
+            function getAuthorsForRegionalCourt() {
                 return $localStorage.authorsRegionalCourt;
             }
 
@@ -85,6 +106,7 @@ angular.module('courtApp').factory('AuthorService',
                     .then(
                         function (response) {
                             loadAllAuthors();
+                            setAuthorsForOrganization(entity.organization.id);
                             deferred.resolve(response.data);
                         },
                         function (errResponse) {
@@ -102,6 +124,7 @@ angular.module('courtApp').factory('AuthorService',
                     .then(
                         function (response) {
                             loadAllAuthors();
+                            setAuthorsForOrganization(entity.organization.id);
                             deferred.resolve(response.data);
                         },
                         function (errResponse) {

@@ -14,8 +14,32 @@ angular.module('courtApp').controller('SecondInstanceController',
         self.getAllAuthors = getAllAuthors;
         self.editSecondInstance = editSecondInstance;
         self.removeSecondInstance = removeSecondInstance;
+        self.getAuthorsForOrganization = getAuthorsForOrganization;
 
-        self.done = false;
+        $("#ModalSaveSecondInstance").on('show.bs.modal', function (e) {
+            if(document.getElementById("secondInstanceID").value != null) {
+                $scope.$apply(function () {
+                    self.secondInstance = document.getElementById("uiSecondInstance").value;
+                    if(self.secondInstance != null){
+                        self.secondInstance.decreeDate = new Date(self.secondInstance.decreeDate);
+                        AuthorService.setAuthorsForOrganization(self.secondInstance.organization.id);
+                    }
+                })
+            } else {
+                self.secondInstance = null;
+            }
+        });
+
+        $scope.changedValue = function(item) {
+            if (self.secondInstance.authorDocument != null){
+                self.secondInstance.authorDocument = null;
+            }
+            AuthorService.setAuthorsForOrganization(item.id);
+        }
+
+        function getAuthorsForOrganization() {
+            return AuthorService.getAuthorsForOrganization();
+        }
 
         function getAllSecondInstances() {
             return SecondInstanceService.getAllSecondInstances();
@@ -39,6 +63,7 @@ angular.module('courtApp').controller('SecondInstanceController',
                 $('#ModalSaveSecondInstance').modal('toggle');
             }
         }
+
 
         function createSecondInstance(secondInstance) {
             console.log('About to create secondInstance');

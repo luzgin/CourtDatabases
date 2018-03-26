@@ -52,4 +52,10 @@ public class AuthorDocumentServiceImpl implements AuthorDocumentService {
         return authorDocumentRepository.findByOrganization_NameAndOrganization_TypeAndActivWork(organizationName,organizationType,true);
     }
 
+    @Override
+    public List<AuthorDocument> findByOrganization_IdAndActivWork(long id) {
+        return authorDocumentRepository.findByOrganization_IdAndActivWork(id, true);
+    }
+
+
 }

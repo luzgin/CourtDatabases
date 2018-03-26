@@ -26,7 +26,6 @@ angular.module('courtApp').controller('CardController',
             self.getAllAuthors = getAllAuthors;
             self.getAllVialators = getAllVialators;
             self.parseToDate = parseToDate;
-            self.convertToDate = convertToDate;
             self.getAuthorsForRegionalCourt = getAuthorsForRegionalCourt;
             self.paintTable = paintTable;
 
@@ -150,24 +149,6 @@ angular.module('courtApp').controller('CardController',
                 return new Date(date);
             }
 
-            function convertToDate(date) {
-                var d = new Date(date);
-                var s;
-                if (d.getDate() < 10) {
-                    s = "0" + (d.getDate())
-                } else {
-                    s = d.getDate()
-                }
-                s = s + ".";
-                if (d.getMonth() < 10) {
-                    s = s + "0" + (d.getMonth() + 1)
-                } else {
-                    s = s + d.getMonth()
-                }
-                d = s + "." + d.getFullYear();
-                return d;
-            }
-
             function getAllNamesEntityDecree() {
                 return NameEntityDecreeService.getAllNamesEntityDecree();
             }
@@ -182,7 +163,7 @@ angular.module('courtApp').controller('CardController',
             }
 
             function getAuthorsForRegionalCourt() {
-                return AuthorService.getAllAuthorsForOrganization();
+                return AuthorService.getAuthorsForRegionalCourt();
             }
 
             function getAllRegulations() {

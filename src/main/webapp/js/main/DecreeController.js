@@ -9,27 +9,38 @@ angular.module('courtApp').controller('DecreeController',
         self.createDecree = createDecree;
         self.updateDecree = updateDecree;
         self.getAllRegulations = getAllRegulations;
-        self.getAllAuthors = getAllAuthors;
+        self.getAuthorsForOrganization = getAuthorsForOrganization;
         self.getAllOrganizations = getAllOrganizations;
         self.getAllSecondInstance = getAllSecondInstance;
         self.editDecree = editDecree;
         self.removeDecree = removeDecree;
 
         self.decree.decreeDate = new Date(self.decree.decreeDate);
+
         $("#ModalSaveDecree").on('show.bs.modal', function (e) {
            if(document.getElementById("decreeId").value != null) {
                $scope.$apply(function () {
                    self.decree = document.getElementById("uiDecree").value;
-                   self.decree.decreeDate = new Date(self.decree.decreeDate);
+                   if(self.decree != null){
+                       self.decree.decreeDate = new Date(self.decree.decreeDate);
+                       AuthorService.setAuthorsForOrganization(self.decree.organization.id);
+                   }
                })
            }
         });
 
+        $scope.changedValue = function(item) {
+            if (self.decree.authorDocument != null){
+                self.decree.authorDocument = null;
+            }
+            AuthorService.setAuthorsForOrganization(item.id);
+        }
+
         function getAllRegulations() {
             return DecreeService.getAllRegulations();
         }
-        function getAllAuthors() {
-            return AuthorService.getAllAuthors();
+        function getAuthorsForOrganization() {
+            return AuthorService.getAuthorsForOrganization();
         }
         function getAllOrganizations() {
             return OrgService.getAllOrganizations();
@@ -55,7 +66,6 @@ angular.module('courtApp').controller('DecreeController',
             DecreeService.createDecree(decree).then(
                 function (response) {
                     console.log('decree created successfully');
-                    self.done = true;
                     self.decree = {};
                 },
                 function (errResponse) {

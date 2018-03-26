@@ -42,8 +42,8 @@
                                     {{$select.selected.decreeDate | date: 'dd.MM.yyyy'}}
                                     {{$select.selected.organization.name}} {{$select.selected.authorDocument.name}}
                                 </ui-select-match>
-                                <ui-select-choices repeat="item in cardC.getAllRegulations() | filter: $select.search">
-                                    <div ng-bind-html="item.decreeDate | highlight: $select.search"></div>
+                                <ui-select-choices repeat="item in cardC.getAllRegulations()">
+                                    <div ng-bind-html="item.decreeDate | date: 'dd.MM.yyyy' | highlight: $select.search"></div>
                                     <small ng-bind-html="item.organization.name | highlight: $select.search"></small>
                                     <small ng-bind-html="' | ' + item.authorDocument.position | highlight: $select.search"></small>
                                     <small ng-bind-html="item.authorDocument.name | highlight: $select.search"></small>
@@ -95,7 +95,7 @@
                             <label for="dateDecree">Дата</label>
                             <input type="text" class="form-control btn-sm" id="dateDecree"
                                    ng-model="cardC.card.decreeAdm.decreeDate"
-                                   ng-value="cardC.convertToDate(cardC.card.decreeAdm.decreeDate)" readonly/>
+                                   ng-value="cardC.card.decreeAdm.decreeDate | date: 'dd.MM.yyyy'" readonly/>
                         </div>
                     </div>
                 </div>
@@ -125,8 +125,8 @@
                         <div class="col-md-2 pl-0">
                             <label for="dateDecreeSecondInstance">Дата</label>
                             <input type="text" class="form-control btn-sm" id="dateDecreeSecondInstance"
-                                   ng-model="cardC.card.decreeAdm.secondInstanceAdm.decreeDate"
-                                   ng-value="cardC.convertToDate(cardC.card.decreeAdm.secondInstanceAdm.decreeDate)"
+                                   ng-model="cardC.card.decreeAdm.secondInstanceAdm.decreeDate "
+                                   ng-value="cardC.card.decreeAdm.secondInstanceAdm.decreeDate | date: 'dd.MM.yyyy'"
                                    readonly/>
                         </div>
                     </div>
@@ -476,6 +476,7 @@
                                 <ui-select
                                         ng-model="decC.decree.organization"
                                         ng-value="decC.decree.organization"
+                                        ng-change="changedValue(decC.decree.organization)"
                                         theme="selectize"
                                         title="Введите для поиска...">
                                     <ui-select-match placeholder="Введите для поиска...">{{$select.selected.name}}
@@ -492,14 +493,15 @@
                                        data-target="#ModalSaveOrganization"/>
                             </div>
                         </div>
-                        <div class="form-group row">
+                        <div class="form-group row" ng-if="decC.decree.organization != null">
                             <label class="col-md-3 control-label">Автор</label>
                             <div class="col-md-7">
                                 <ui-select ng-model="decC.decree.authorDocument" theme="selectize"
                                            title="Введите для поиска...">
                                     <ui-select-match placeholder="Введите для поиска...">{{$select.selected.name}}
                                     </ui-select-match>
-                                    <ui-select-choices repeat="item in decC.getAllAuthors() | filter: $select.search">
+                                    <!-- <ui-select-choices repeat="item in decC.getAllAuthors() | filter: $select.search"> -->
+                                    <ui-select-choices repeat="item in decC.getAuthorsForOrganization()">
                                         <div ng-bind-html="item.name | highlight: $select.search"></div>
                                     </ui-select-choices>
                                 </ui-select>
@@ -510,7 +512,7 @@
                                        data-target="#ModalSaveAuthor"/>
                             </div>
                         </div>
-                        <div class="form-group row">
+                        <div class="form-group row" ng-if="decC.decree.organization != null">
                             <label class="col-md-3 control-label">Должность</label>
                             <div class="col-md-7">
                                 <input type="text" class="form-control" ng-model="decC.decree.authorDocument.position"
@@ -527,41 +529,48 @@
                                     <label class="control-label">Вступило в силу</label>
                                 </div>
                                 <div class="col-md-3 px-0">
-                                    <select ng-value="decC.decree.enteredIntoForce"
-                                            ng-model="decC.decree.enteredIntoForce"
-                                            class="form-control">
-                                        <option value='true'>Да</option>
-                                        <option value='false'>Нет</option>
-                                    </select>
-
-                                    <!--    выбор по radiobutton
-                                    <input class="form-check-input"
-                                           type="radio"
-                                           ng-value="true"
-                                           ng-model="decC.decree.enteredIntoForce">
-                                    <label class="form-check-label">Да</label>
-                                    <input class="form-check-input"
-                                           type="radio"
-                                           ng-value="false"
-                                           ng-model="decC.decree.enteredIntoForce">
-                                    <label class="form-check-label">Нет</label>
-                                    -->
+                                    <!--  <select ng-value="decC.decree.enteredIntoForce"
+                                              ng-model="decC.decree.enteredIntoForce"
+                                              class="form-control">
+                                          <option value='true'>Да</option>
+                                          <option value='false'>Нет</option>
+                                      </select>
+                                      -->
+                                    <div class="col row pr-0">
+                                        <div class="col-md-6">
+                                            <input id="radioDecreeTrue"
+                                                   class="form-check-input"
+                                                   type="radio"
+                                                   ng-value="true"
+                                                   ng-model="decC.decree.enteredIntoForce">
+                                            <label class="form-check-label" for="radioDecreeTrue">Да</label>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <input id="radioDecreeFalse"
+                                                   class="form-check-input"
+                                                   type="radio"
+                                                   ng-value="false"
+                                                   ng-model="decC.decree.enteredIntoForce">
+                                            <label class="form-check-label" for="radioDecreeFalse">Нет</label>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                         <div class="form-group row">
                             <label class="col-md-3 control-label">Вторая инстанция</label>
                             <div class="col-md-7">
-
-                                <ui-select ng-model="decC.decree.secondInstanceAdm" theme="selectize"
+                                <ui-select id="uiSecondInstance"
+                                           ng-model="decC.decree.secondInstanceAdm" theme="selectize"
                                            title="Введите для поиска...">
                                     <ui-select-match placeholder="Введите для поиска...">
-                                        {{$select.selected.decreeDate}} {{$select.selected.organization.name}}
+                                        {{$select.selected.decreeDate | date: 'dd.MM.yyyy'}}
+                                        {{$select.selected.organization.name}}
                                         {{$select.selected.authorDocument.name}}
                                     </ui-select-match>
                                     <ui-select-choices
-                                            repeat="item in decC.getAllSecondInstance() | filter: $select.search">
-                                        <div ng-bind-html="item.decreeDate | highlight: $select.search"></div>
+                                            repeat="item in decC.getAllSecondInstance()">
+                                        <div ng-bind-html="item.decreeDate | date: 'dd.MM.yyyy' | highlight: $select.search"></div>
                                         <small ng-bind-html="item.organization.name | highlight: $select.search"></small>
                                         <small ng-bind-html="item.authorDocument.position | highlight: $select.search"></small>
                                         <small ng-bind-html="item.authorDocument.name | highlight: $select.search"></small>
@@ -680,11 +689,14 @@
                 </div>
                 <div class="modal-body">
                     <form ng-submit="secIC.submit()" class="form-horizontal" role="form">
-                        <input type="hidden" ng-model="secIC.secondInstance.id"/>
+                        <input type="hidden" id="secondInstanceID" ng-model="secIC.secondInstance.id"/>
                         <div class="form-group row">
                             <label class="col-md-3 control-label">Организация</label>
                             <div class="col-md-7">
-                                <ui-select ng-model="secIC.secondInstance.organization" theme="selectize"
+                                <ui-select ng-model="secIC.secondInstance.organization"
+                                           ng-value="secIC.secondInstance.organization"
+                                           ng-change="changedValue(secIC.secondInstance.organization)"
+                                           theme="selectize"
                                            title="Введите для поиска...">
                                     <ui-select-match placeholder="Введите для поиска...">{{$select.selected.name}}
                                     </ui-select-match>
@@ -700,14 +712,14 @@
                                        data-target="#ModalSaveOrganization"/>
                             </div>
                         </div>
-                        <div class="form-group row">
+                        <div class="form-group row" ng-if="secIC.secondInstance.organization != null">
                             <label class="col-md-3 control-label">Автор</label>
                             <div class="col-md-7">
                                 <ui-select ng-model="secIC.secondInstance.authorDocument" theme="selectize"
                                            title="Введите для поиска...">
                                     <ui-select-match placeholder="Введите для поиска...">{{$select.selected.name}}
                                     </ui-select-match>
-                                    <ui-select-choices repeat="item in secIC.getAllAuthors() | filter: $select.search">
+                                    <ui-select-choices repeat="item in secIC.getAuthorsForOrganization() | filter: $select.search">
                                         <div ng-bind-html="item.name | highlight: $select.search"></div>
                                     </ui-select-choices>
                                 </ui-select>
@@ -875,19 +887,36 @@
                         </div>
                         <div class="form-group row">
                             <label class="col-md-2 control-label">Сумма госпошлины</label>
-                            <div class="col-md-10">
-                                <input type="text" class="form-control" ng-model="comC.complaint.summPoshlini"
-                                       required/>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-md-2 control-label">Дан ответ</label>
-                            <div class="col-md-10">
-                                <select ng-value="comC.complaint.activ" ng-model="comC.complaint.activ"
-                                        class="form-control">
-                                    <option value='true'>Да</option>
-                                    <option value='false'>Нет</option>
-                                </select>
+                            <div class="col-md-10 row">
+                                <div class="col-md-4">
+                                    <input type="text" class="form-control" ng-model="comC.complaint.summPoshlini"
+                                           required/>
+                                </div>
+                                <div class="col-md-8 row">
+                                    <div class="col-md-4">
+                                        <label class="control-label">Дан ответ</label>
+                                    </div>
+                                    <div class="col-md-6 row">
+                                        <div class="col row pr-0">
+                                            <div class="col-md-6">
+                                                <input id="radioComplaintFalse"
+                                                       class="form-check-input"
+                                                       type="radio"
+                                                       ng-value="false"
+                                                       ng-model="comC.complaint.activ">
+                                                <label class="form-check-label" for="radioComplaintFalse">Нет</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <input id="radioComplaintTrue"
+                                                       class="form-check-input"
+                                                       type="radio"
+                                                       ng-value="true"
+                                                       ng-model="comC.complaint.activ">
+                                                <label class="form-check-label" for="radioComplaintTrue">Да</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <div class="modal-footer row mr-0">

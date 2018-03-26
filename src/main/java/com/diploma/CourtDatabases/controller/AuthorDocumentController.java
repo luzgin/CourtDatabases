@@ -18,6 +18,11 @@ public class AuthorDocumentController {
         return authorDocumentService.getAll();
     }
 
+    @GetMapping(value = "/author/org/{id}")
+    public List<AuthorDocument> findAuthorsForOrgaization(@PathVariable("id") long id) {
+        return authorDocumentService.findByOrganization_IdAndActivWork(id);
+    }
+
     @GetMapping(value = "/author/forOrganization/{name}/{type}")
     public List<AuthorDocument> findAuthorForOrganization(@PathVariable("name") String organizationName, @PathVariable("type") int type) {
         return authorDocumentService.findByOrganization_NameAndOrganization_TypeAndActivWork(organizationName, type);
