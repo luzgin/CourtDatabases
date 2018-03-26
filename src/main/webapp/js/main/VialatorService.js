@@ -1,7 +1,7 @@
 'use strict';
 angular.module('courtApp').factory('VialatorService',
-    ['$localStorage', '$http', '$q', 'urls',
-        function ($localStorage, $http, $q, urls) {
+    ['$localStorage', '$http', '$q', 'urls','$rootScope',
+        function ($localStorage, $http, $q, urls,$rootScope) {
             var factory = {
                 loadAllVialators: loadAllVialators,
                 loadAllVialatorsFiz: loadAllVialatorsFiz,
@@ -96,9 +96,8 @@ angular.module('courtApp').factory('VialatorService',
                 $http.post(urls.VIALATOR_SERVICE_API, entity)
                     .then(
                         function (response) {
+                            $rootScope.$broadcast('setVialatorForCard', {a: response.data});
                             loadAllVialators();
-                            loadAllVialatorsFiz();
-                            loadAllVialatorsOrg();
                             deferred.resolve(response.data);
                         },
                         function (errResponse) {

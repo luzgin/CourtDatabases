@@ -288,13 +288,19 @@ angular.module('courtApp').controller('CardController',
             }
 
 
-            $scope.$on('printTable', function (editRequestCase, item) {
+            $scope.$on('printTable', function () {
                 var table = document.getElementById("complaintsTable");
                 for (var i = 1; i < table.rows.length; i++) {
                     if (table.rows[i].cells[0].innerHTML === document.getElementById("numberCard").value) {
                         table.rows[i].style.backgroundColor = '#ceffc3';
                     }
                 }
+            })
+            $scope.$on('setDecreeForCard', function (setDecreeForCard, item) {
+                self.card.decreeAdm = item.a;
+            })
+            $scope.$on('setVialatorForCard', function (setVialatorForCard, item) {
+                self.card.vialator = item.a;
             })
         }
     ]);

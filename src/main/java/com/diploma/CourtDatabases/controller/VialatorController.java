@@ -30,8 +30,8 @@ public class VialatorController {
     }
 
     @PostMapping("/vialator/")
-    public void save(@RequestBody Vialator vialator) {
-        vialatorService.save(vialator);
+    public Vialator save(@RequestBody Vialator vialator) {
+        return vialatorService.save(vialator);
     }
 
     @DeleteMapping("/vialator/{id}")
@@ -48,14 +48,14 @@ public class VialatorController {
     @PutMapping("/vialator/{id}")
     public void editVialator(@PathVariable("id") long id, @RequestBody Vialator vialator) {
         Vialator currentVialator = vialatorService.findById(id);
-        if (vialator.getTypeVialator()==1){
+        if (vialator.getTypeVialator() == 1) {
             currentVialator.setFirstName(vialator.getFirstName());
             currentVialator.setSecondName(vialator.getSecondName());
             currentVialator.setLastName(vialator.getLastName());
             currentVialator.setTypeVialator(vialator.getTypeVialator());
             currentVialator.setPrivateNumber(vialator.getPrivateNumber());
             vialatorService.update(currentVialator);
-        }else{
+        } else {
             currentVialator.setFirstName(vialator.getFirstName());
             currentVialator.setTypeVialator(vialator.getTypeVialator());
             currentVialator.setPrivateNumber(vialator.getPrivateNumber());

@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('courtApp').controller('DecreeController',
-    ['DecreeService', 'AuthorService', 'OrgService', 'SecondInstanceService', '$scope', function (DecreeService, AuthorService, OrgService, SecondInstanceService, $scope) {
+    ['DecreeService', 'AuthorService', 'OrgService', 'SecondInstanceService', '$scope','$rootScope', function (DecreeService, AuthorService, OrgService, SecondInstanceService, $scope, $rootScope) {
         var self = this;
         self.decree = {};
         self.regulations = [];
@@ -53,12 +53,11 @@ angular.module('courtApp').controller('DecreeController',
             if (self.decree.id === undefined || self.decree.id === null) {
                 console.log('Saving New decree', self.decree);
                 createDecree(self.decree);
-                $('#ModalSaveDecree').modal('toggle');
             } else {
                 updateDecree(self.decree, self.decree.id);
                 console.log('decree updated with id ', self.decree.id);
-                $('#ModalSaveDecree').modal('toggle');
             }
+            $('#ModalSaveDecree').modal('toggle');
         }
 
         function createDecree(decree) {

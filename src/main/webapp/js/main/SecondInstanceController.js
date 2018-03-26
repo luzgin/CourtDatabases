@@ -16,7 +16,7 @@ angular.module('courtApp').controller('SecondInstanceController',
         self.removeSecondInstance = removeSecondInstance;
         self.getAuthorsForOrganization = getAuthorsForOrganization;
 
-        $("#ModalSaveSecondInstance").on('show.bs.modal', function (e) {
+        $("#ModalSaveSecondInstance").on('show.bs.modal', function () {
             if(document.getElementById("secondInstanceID").value != null) {
                 $scope.$apply(function () {
                     self.secondInstance = document.getElementById("uiSecondInstance").value;

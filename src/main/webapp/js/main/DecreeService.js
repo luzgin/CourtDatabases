@@ -1,7 +1,7 @@
 'use strict';
 angular.module('courtApp').factory('DecreeService',
-    ['$localStorage', '$http', '$q', 'urls',
-        function ($localStorage, $http, $q, urls) {
+    ['$localStorage', '$http', '$q', 'urls','$rootScope',
+        function ($localStorage, $http, $q, urls, $rootScope) {
             var factory = {
                 loadAllRegulations: loadAllRegulations,
                 getAllRegulations: getAllRegulations,
@@ -54,6 +54,7 @@ angular.module('courtApp').factory('DecreeService',
                 $http.post(urls.DECREE_SERVICE_API, entity)
                     .then(
                         function (response) {
+                            $rootScope.$broadcast('setDecreeForCard', {a: response.data});
                             loadAllRegulations();
                             deferred.resolve(response.data);
                         },

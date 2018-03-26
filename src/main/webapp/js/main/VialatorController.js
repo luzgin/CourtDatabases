@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('courtApp').controller('VialatorController',
-    ['VialatorService', '$scope', function (VialatorService, $scope) {
+    ['VialatorService', '$scope','$rootScope', function (VialatorService, $scope,$rootScope) {
         var self = this;
         self.vialatorsFiz = [];
         self.vialatorsOrg = [];
@@ -54,6 +54,7 @@ angular.module('courtApp').controller('VialatorController',
                 }
                 console.log('Saving New vialator', self.vialator);
                 createVialator(self.vialator);
+                //$rootScope.$broadcast('setVialatorForCard', {a: self.vialator});
                 $('#ModalSaveVialators').modal('toggle');
             } else {
                 updateVialator(self.vialator, self.vialator.id);
@@ -67,7 +68,6 @@ angular.module('courtApp').controller('VialatorController',
             VialatorService.createVialator(vialator).then(
                 function (response) {
                     console.log('vialator created successfully');
-                    self.done = true;
                     self.vialator = {};
                 },
                 function (errResponse) {
