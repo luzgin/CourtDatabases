@@ -5,6 +5,7 @@ angular.module('courtApp').controller('SecondInstanceController',
         var self = this;
         self.secondInstance = {};
         self.secondInstances = [];
+        self.authorsForOrganization = [];
 
         self.submit = submit;
         self.createSecondInstance = createSecondInstance;
@@ -34,8 +35,19 @@ angular.module('courtApp').controller('SecondInstanceController',
             if (self.secondInstance.authorDocument != null){
                 self.secondInstance.authorDocument = null;
             }
-            AuthorService.setAuthorsForOrganization(item.id);
+            AuthorService.setAuthorsForOrganization(item.id)
+                .then(function (response) {
+                    self.authorsForOrganization = AuthorService.getAuthorsForOrganization();
+                },
+                function (errResponse) {
+                    console.error('Error set authorsForOrganization');
+
+                })
         }
+
+        $scope.$on('setAuthorsForOrganization', function () {
+            self.authorsForOrganization = AuthorService.getAuthorsForOrganization();
+        })
 
         function getAuthorsForOrganization() {
             return AuthorService.getAuthorsForOrganization();

@@ -8,7 +8,7 @@ angular.module('courtApp').factory('DecreeService',
                 getDecree: getDecree,
                 createDecree: createDecree,
                 updateDecree: updateDecree,
-                removeDecree: removeDecree,
+                removeDecree: removeDecree
             };
             return factory;
 

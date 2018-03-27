@@ -1,7 +1,7 @@
 'use strict';
 angular.module('courtApp').factory('AuthorService',
-    ['$localStorage', '$http', '$q', 'urls',
-        function ($localStorage, $http, $q, urls) {
+    ['$localStorage', '$http', '$q', 'urls','$rootScope',
+        function ($localStorage, $http, $q, urls, $rootScope) {
             var factory = {
                 loadAllAuthors: loadAllAuthors,
                 getAllAuthors: getAllAuthors,
@@ -16,6 +16,7 @@ angular.module('courtApp').factory('AuthorService',
                 getStatus: getStatus
             };
             return factory;
+            var authorsForOrganization = []; //список авторов для выбранной организации в select
 
             function loadAllAuthors() {
                 var deferred = $q.defer();
@@ -32,12 +33,12 @@ angular.module('courtApp').factory('AuthorService',
                 return deferred.promise;
             }
 
-            function setAuthorsForOrganization(id) {
+            function setAuthorsForOrganization(id) { //список авторов для выбранной организации в select
                 var deferred = $q.defer();
                 $http.get(urls.AUTHOR_SERVICE_API + "org/" + id)
                     .then(
                         function (response) {
-                            $localStorage.authorsForOrganization = response.data;
+                            authorsForOrganization = response.data;
                             deferred.resolve(response.data);
                         },
                         function (errResponse) {
@@ -56,7 +57,7 @@ angular.module('courtApp').factory('AuthorService',
                 return $localStorage.authors;
             }
             function getAuthorsForOrganization() {
-                return $localStorage.authorsForOrganization;
+                return authorsForOrganization;
             }
 
             function getAuthorsForRegionalCourt() {
@@ -97,7 +98,6 @@ angular.module('courtApp').factory('AuthorService',
                 return deferred.promise;
             }
 
-
             function createAuthor(entity) {
                 console.log('Creating entity');
                 var deferred = $q.defer();
@@ -106,7 +106,14 @@ angular.module('courtApp').factory('AuthorService',
                     .then(
                         function (response) {
                             loadAllAuthors();
-                            setAuthorsForOrganization(entity.organization.id);
+                            setAuthorsForOrganization(entity.organization.id)
+                                .then( //после добавления автора, обновление информации об авторах в переменных контроллеров
+                                    function (response) {
+                                        $rootScope.$broadcast('setAuthorsForOrganization');
+                                    },
+                                    function (errResponse) {
+                                    }
+                                );
                             deferred.resolve(response.data);
                         },
                         function (errResponse) {
