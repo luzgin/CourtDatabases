@@ -91,6 +91,9 @@ angular.module('courtApp').controller('AuthorController',
                     }
                 );
         }
+        $scope.$on('setOrganizationForAuthor', function (setOrganizationForAuthor, item) {
+            self.author.organization = item.a;
+        })
 
     }
     ]);

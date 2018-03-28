@@ -42,7 +42,7 @@
                                     {{$select.selected.decreeDate | date: 'dd.MM.yyyy'}}
                                     {{$select.selected.organization.name}} {{$select.selected.authorDocument.name}}
                                 </ui-select-match>
-                                <ui-select-choices repeat="item in cardC.getAllRegulations()">
+                                <ui-select-choices repeat="item in cardC.getAllRegulations() | filter: $select.search">
                                     <div ng-bind-html="item.decreeDate | date: 'dd.MM.yyyy' | highlight: $select.search"></div>
                                     <small ng-bind-html="item.organization.name | highlight: $select.search"></small>
                                     <small ng-bind-html="' | ' + item.authorDocument.position | highlight: $select.search"></small>
@@ -321,7 +321,7 @@
                                 <td>{{item.entityIskAdm.name}}</td>
                                 <td>{{item.nameAuthorComplaint}}</td>
                                 <td>{{item.summPoshlini}}</td>
-                                <td>{{item.reinstatementOfTerm == 1 ? 'Да' : 'Нет' }}</td>
+                                <td>{{item.reinstatementOfTerm == 1 ? '+' : '' }}</td>
                                 <td>{{item.activ == 1 ? 'Да' : 'Нет' }}</td>
                             </tr>
                             </tbody>
@@ -507,7 +507,9 @@
                                 </ui-select>
                             </div>
                             <div class="col-md-2 row justify-content-md-end">
-                                <input type="button" class="btn btn-outline-success btn-sm" value="Добавить"
+                                <input type="button" class="btn btn-outline-success btn-sm"
+                                       value="Добавить"
+                                       ng-click="decC.setOrganizationForAuthor(decC.decree.organization)"
                                        data-toggle="modal"
                                        data-target="#ModalSaveAuthor"/>
                             </div>
@@ -658,7 +660,7 @@
                         <div class="form-group row">
                             <label class="col-md-2 control-label">Организация</label>
                             <div class="col-md-10">
-                                <ui-select ng-model="autC.author.organization" theme="selectize"
+                                <ui-select id="organizationSelectForAuthor" ng-model="autC.author.organization" theme="selectize"
                                            title="Введите для поиска...">
                                     <ui-select-match placeholder="Введите для поиска...">{{$select.selected.name}}
                                     </ui-select-match>
@@ -896,7 +898,7 @@
                             <label class="col-md-2 control-label">Сумма госпошлины</label>
                             <div class="col-md-10 row">
                                 <div class="col-md-4">
-                                    <input type="text" class="form-control" ng-model="comC.complaint.summPoshlini"
+                                    <input type="number" step="0.1" class="form-control" ng-model="comC.complaint.summPoshlini"
                                            required/>
                                 </div>
                                 <div class="col-md-8 row">

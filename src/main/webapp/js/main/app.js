@@ -213,13 +213,10 @@ posdApp.config(function ($routeProvider) {
 posdApp.filter('propsFilter', function () {
     return function (items, props) {
         var out = [];
-
         if (angular.isArray(items)) {
             var keys = Object.keys(props);
-
             items.forEach(function (item) {
                 var itemMatches = false;
-
                 for (var i = 0; i < keys.length; i++) {
                     var prop = keys[i];
                     var text = props[prop].toLowerCase();
@@ -228,7 +225,6 @@ posdApp.filter('propsFilter', function () {
                         break;
                     }
                 }
-
                 if (itemMatches) {
                     out.push(item);
                 }
@@ -237,7 +233,6 @@ posdApp.filter('propsFilter', function () {
             // Let the output be the input untouched
             out = items;
         }
-
         return out;
     };
 });

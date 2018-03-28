@@ -102,6 +102,10 @@ angular.module('courtApp').controller('CardController',
                         document.getElementById("editComplaint").setAttribute('disabled', 'disabled');
                         document.getElementById("removeComplaint").setAttribute('disabled', 'disabled');
                     }
+                }else{
+                    self.complaintForEdit = {};
+                    document.getElementById("editComplaint").setAttribute('disabled', 'disabled');
+                    document.getElementById("removeComplaint").setAttribute('disabled', 'disabled');
                 }
 
             }

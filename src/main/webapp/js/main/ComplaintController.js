@@ -76,7 +76,7 @@ angular.module('courtApp').controller('ComplaintController',
             ComplaintService.updateComplaint(complaint, id)
                 .then(
                     function (response) {
-                        console.log('complaint updated successfully' + self.complaint);
+                        console.log('complaint updated successfully' + JSON.stringify(self.complaint));
                         self.done = true;
                     },
                     function (errResponse) {

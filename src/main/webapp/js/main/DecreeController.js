@@ -16,6 +16,7 @@ angular.module('courtApp').controller('DecreeController',
             self.getAllSecondInstance = getAllSecondInstance;
             self.editDecree = editDecree;
             self.removeDecree = removeDecree;
+            self.setOrganizationForAuthor = setOrganizationForAuthor;
 
             self.decree.decreeDate = new Date(self.decree.decreeDate);
 
@@ -47,6 +48,10 @@ angular.module('courtApp').controller('DecreeController',
             $scope.$on('setAuthorsForOrganization', function () { //загрузка авторов в переменную для выбраного select после добавления автора
                 self.authorsForOrganization = AuthorService.getAuthorsForOrganization();
             })
+
+            function setOrganizationForAuthor(item) {
+                $rootScope.$broadcast('setOrganizationForAuthor', {a: item});
+            }
 
             function getAllRegulations() {
                 return DecreeService.getAllRegulations();

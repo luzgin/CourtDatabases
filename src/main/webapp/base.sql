@@ -179,7 +179,7 @@ CREATE TABLE IF NOT EXISTS complaints_adm (
   activ                 BOOLEAN      NOT NULL,
   reinstatement_of_term BOOLEAN      NOT NULL,
   decree_adm_id         INT(10)      NOT NULL,
-  summ_poshlini         DECIMAL(50)  NOT NULL,
+  summ_poshlini         DOUBLE(50,10)  NOT NULL,
   card_adm_id           INT(10),
   PRIMARY KEY (id),
   FOREIGN KEY (entity_id) REFERENCES entity_isk_adm (id),
