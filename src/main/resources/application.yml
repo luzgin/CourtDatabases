@@ -16,7 +16,6 @@ spring:
     database: mysql
     hibernate:
       ddl-auto: update
-      show-sql: true
 
   jackson:
     serialization:

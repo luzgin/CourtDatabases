@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Date;
 import java.util.List;
 @Service("CardAdmService")
 @Transactional
@@ -42,5 +43,10 @@ public class CardAdmServiceImpl implements CardAdmService {
     @Override
     public CardAdm findByCardNumber(Integer cardNumber) {
         return cardAdmRepository.findByCardNumber(cardNumber);
+    }
+
+    @Override
+    public List<CardAdm> findByCreateDateBetween(Date dateFrom, Date dateTo) {
+        return cardAdmRepository.findByCreateDateBetween(dateFrom,dateTo);
     }
 }

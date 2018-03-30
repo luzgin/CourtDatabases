@@ -36,10 +36,14 @@ public class ComplaintsAdmServiceImpl implements ComplaintsAdmService {
     }
 
     @Override
-    public List<ComplaintsAdm> findByDecreeAdm(Long id) {
-        return complaintsAdmRepository.findByDecreeAdm(id);
+    public List<ComplaintsAdm> findByDecreeAdm_Id(Long id) {
+        return complaintsAdmRepository.findByDecreeAdm_Id(id);
     }
 
+    @Override
+    public List<ComplaintsAdm> findByDecreeAdm(DecreeAdm decreeAdm) {
+        return complaintsAdmRepository.findByDecreeAdm(decreeAdm);
+    }
     @Override
     public ComplaintsAdm findById(long id) {
         return complaintsAdmRepository.findOne(id);

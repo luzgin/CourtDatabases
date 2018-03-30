@@ -11,6 +11,9 @@ public interface ComplaintsAdmService {
     ComplaintsAdm update(ComplaintsAdm complaintsAdm);
     void delete(long id);
     List<ComplaintsAdm> findAll();
-    List<ComplaintsAdm> findByDecreeAdm(Long id);
+    List<ComplaintsAdm> findByDecreeAdm_Id(Long id);
+    List<ComplaintsAdm> findByDecreeAdm(DecreeAdm decreeAdm);
     ComplaintsAdm findById(long id);
+
+
 }

@@ -2,6 +2,7 @@ package com.diploma.CourtDatabases.service;
 
 import com.diploma.CourtDatabases.entity.CardAdm;
 
+import java.util.Date;
 import java.util.List;
 
 public interface CardAdmService {
@@ -16,4 +17,6 @@ public interface CardAdmService {
     CardAdm findById(long id);
 
     CardAdm findByCardNumber(Integer cardNumber);
+
+    List<CardAdm> findByCreateDateBetween(Date dateFrom, Date dateTo);
 }

@@ -11,6 +11,6 @@ import java.util.List;
 
 @Repository
 public interface ComplaintsAdmRepository extends JpaRepository<ComplaintsAdm, Long> {
-    @Query("select c from ComplaintsAdm c where c.decreeAdm.id = :id")
-    List<ComplaintsAdm> findByDecreeAdm(@Param("id")Long id);
+    List<ComplaintsAdm> findByDecreeAdm_Id(Long id);
+    List<ComplaintsAdm> findByDecreeAdm(DecreeAdm decreeAdm);
 }

@@ -28,6 +28,7 @@ angular.module('courtApp').controller('CardController',
             self.parseToDate = parseToDate;
             self.getAuthorsForRegionalCourt = getAuthorsForRegionalCourt;
             self.paintTable = paintTable;
+            self.clearDecree = clearDecree;
 
             self.createComplaint = createComplaint;
             self.setComplaintForEdit = setComplaintForEdit;
@@ -47,6 +48,8 @@ angular.module('courtApp').controller('CardController',
             self.removeRequestCase = removeRequestCase;
             self.getDateRequestCaseForCard = getDateRequestCaseForCard;
 
+            self.convertToDate = convertToDate;
+
             self.card.createDate = new Date(self.card.createDate);
             if (self.card.resultDate != null) {
                 self.card.resultDate = new Date(self.card.resultDate);
@@ -57,6 +60,28 @@ angular.module('courtApp').controller('CardController',
             }
             if (self.card.vialator != null) {
                 document.getElementById("addVialator").setAttribute('disabled', 'disabled');
+            }
+
+            function clearDecree() {
+                self.card.decreeAdm = null
+            }
+
+            function convertToDate(date) {
+                var d = new Date(date);
+                var s;
+                if (d.getDate() < 10) {
+                    s = "0" + (d.getDate())
+                } else {
+                    s = d.getDate()
+                }
+                s = s + ".";
+                if (d.getMonth() < 10) {
+                    s = s + "0" + (d.getMonth() + 1)
+                } else {
+                    s = s + d.getMonth()
+                }
+                d = s + "." + d.getFullYear();
+                return d.toString();
             }
 
             document.getElementById("editComplaint").setAttribute('disabled', 'disabled');
@@ -306,5 +331,6 @@ angular.module('courtApp').controller('CardController',
             $scope.$on('setVialatorForCard', function (setVialatorForCard, item) {
                 self.card.vialator = item.a;
             })
+
         }
     ]);

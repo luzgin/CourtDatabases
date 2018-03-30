@@ -76,7 +76,7 @@ public class CardController {
                     for (int i = 0; i < complaintsForCurrentDecree.size(); i++) {
                         ComplaintsAdm com = complaintsForCurrentDecree.get(i);
                         if (com.isReinstatementOfTerm() == false){ //если не восстановление срока
-                                                       
+
                         }
                     }
                 }

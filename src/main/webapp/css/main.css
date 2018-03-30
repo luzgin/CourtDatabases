@@ -25,3 +25,6 @@
 }
 /*Размер checkbox */
 .bigbox { -moz-transform: scale(2); -o-transform: scale(2); height: 50px; width: 50px }
+
+/* Изображение руки при наведении */
+.cursor {cursor: pointer}

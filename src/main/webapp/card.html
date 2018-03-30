@@ -43,7 +43,7 @@
                                     {{$select.selected.organization.name}} {{$select.selected.authorDocument.name}}
                                 </ui-select-match>
                                 <ui-select-choices repeat="item in cardC.getAllRegulations() | filter: $select.search">
-                                    <div ng-bind-html="item.decreeDate | date: 'dd.MM.yyyy' | highlight: $select.search"></div>
+                                    <div ng-bind-html="convertToDate(item.decreeDate) | highlight: $select.search"></div>
                                     <small ng-bind-html="item.organization.name | highlight: $select.search"></small>
                                     <small ng-bind-html="' | ' + item.authorDocument.position | highlight: $select.search"></small>
                                     <small ng-bind-html="item.authorDocument.name | highlight: $select.search"></small>
@@ -55,6 +55,7 @@
                                    type="button"
                                    class="btn btn-outline-success btn-sm"
                                    value="Добавить"
+                                   ng-click="cardC.clearDecree()"
                                    data-toggle="modal"
                                    data-target="#ModalSaveDecree"/>
                         </div>
@@ -302,7 +303,7 @@
                                        ng-click="cardC.removeComplaint();" value="Удалить"/>
                             </div>
                             <thead>
-                            <tr>
+                            <tr >
                                 <th class="div-center" width="7.5%">№ карточки</th>
                                 <th class="div-center" width="7.5%">Дата</th>
                                 <th class="div-center" width="40%">Сужность жалобы</th>
@@ -313,7 +314,7 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <tr ng-click="cardC.setComplaintForEdit(item)"
+                            <tr class="cursor" ng-click="cardC.setComplaintForEdit(item)"
                                 ng-repeat="item in cardC.getComplaintsForDecree()"
                                 ng-load="ngRepeatFinished">
                                 <td>{{item.cardAdm.cardNumber}}</td>
@@ -361,7 +362,7 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <tr ng-click="cardC.setRequestCase(item)"
+                            <tr class="cursor" ng-click="cardC.setRequestCase(item)"
                                 ng-repeat="item in cardC.getDateRequestCaseForCard()">
                                 <td>{{item.date | date: 'dd.MM.yyyy'}}</td>
                                 <td>{{item.organization}}</td>
@@ -432,7 +433,7 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <tr ng-click="cardC.setReturnCase(item)"
+                            <tr class="cursor" ng-click="cardC.setReturnCase(item)"
                                 ng-repeat="item in cardC.getDateReturnCaseForCard()">
                                 <td>{{item.date | date: 'dd.MM.yyyy'}}</td>
                                 <td>{{item.organization}}</td>
