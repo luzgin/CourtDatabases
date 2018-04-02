@@ -70,7 +70,7 @@ angular.module('courtApp').factory('ComplaintService',
 
 
             function createComplaint(entity) {
-                console.log('Creating entity');
+                console.log('Creating entity', entity);
                 var deferred = $q.defer();
                 $http.post(urls.CONPLAINT_SERVICE_API, entity)
                     .then(
