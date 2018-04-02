@@ -21,7 +21,7 @@ public class ComplaintAdmController {
 
     @GetMapping(value = "/complaint/dec/{id}")
     public List<ComplaintsAdm> getComplaintsForDecree(@PathVariable("id") long id) {
-        return complaintsAdmService.findByDecreeAdm(id);
+        return complaintsAdmService.findByDecreeAdm_Id(id);
     }
 
     @GetMapping("/complaint/{id}")
