@@ -70,15 +70,27 @@ angular.module('courtApp').controller('DecreeController',
             }
 
             function submit() {
-                console.log('Submitting');
-                if (self.decree.id === undefined || self.decree.id === null) {
-                    console.log('Saving New decree', self.decree);
-                    createDecree(self.decree);
-                } else {
-                    updateDecree(self.decree, self.decree.id);
-                    console.log('decree updated with id ', self.decree.id);
+                if ($scope.decreeForm.$valid) {
+                    console.log('Submitting');
+                    if (self.decree.id === undefined || self.decree.id === null) {
+                        console.log('Saving New decree', self.decree);
+                        createDecree(self.decree);
+                    } else {
+                        updateDecree(self.decree, self.decree.id);
+                        console.log('decree updated with id ', self.decree.id);
+                    }
+                    $('#ModalSaveDecree').modal('toggle');
+                } else {  //TODO: добавить в выподающие сообщения
+                    if ($scope.decreeForm.uiOrganizationModalDecree.$error.required){
+                        $scope.decreeForm.uiOrganizationModalDecree.check = true;
+                    }else if ($scope.decreeForm.authorModalDecree.$error.required){
+                        $scope.decreeForm.authorModalDecree.check = true;
+                    }else if ($scope.decreeForm.dateModalDecree.$error.required){
+                        $scope.decreeForm.dateModalDecree.check = true;
+                    }else if ($scope.decreeForm.enteredIntoForceModalDecree.$error.required){
+                        $scope.decreeForm.enteredIntoForceModalDecree.check = true;
+                    }
                 }
-                $('#ModalSaveDecree').modal('toggle');
             }
 
             function createDecree(decree) {

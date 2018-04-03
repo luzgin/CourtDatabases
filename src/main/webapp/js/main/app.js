@@ -18,7 +18,7 @@ posdApp.constant('urls', {
     DATE_REQUEST_SERVICE_API: 'http://localhost:8080/api/requestCase/'
 });
 
-posdApp.config(function ($routeProvider) {
+posdApp.config(function ($routeProvider, $locationProvider) {
     $routeProvider
         .when('/', {
             templateUrl: 'listCard.html',
@@ -208,6 +208,10 @@ posdApp.config(function ($routeProvider) {
         .otherwise({
             redirectTo: "/nameEntityDecree"
         })
+
+  //  $locationProvider.html5Mode(true);
+    $locationProvider.hashPrefix('');
+
 });
 
 posdApp.filter('propsFilter', function () {

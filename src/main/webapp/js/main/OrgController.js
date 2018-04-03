@@ -20,18 +20,25 @@ angular.module('courtApp').controller('OrgController',
         }
 
         function submit() {
-            console.log('Submitting');
-            if (self.organization.id === undefined || self.organization.id === null) {
-                console.log('Saving New organization', self.organization);
-                createOrganization(self.organization);
-                $('#ModalSaveOrganization').modal('toggle');
-            } else {
-                updateOrganization(self.organization, self.organization.id);
-                console.log('organization updated with id ', self.organization.id);
-                $('#ModalSaveOrganization').modal('toggle');
+            if ($scope.organizationForm.$valid) {
+                console.log('Submitting');
+                if (self.organization.id === undefined || self.organization.id === null) {
+                    console.log('Saving New organization', self.organization);
+                    createOrganization(self.organization);
+                    $('#ModalSaveOrganization').modal('toggle');
+                } else {
+                    updateOrganization(self.organization, self.organization.id);
+                    console.log('organization updated with id ', self.organization.id);
+                    $('#ModalSaveOrganization').modal('toggle');
+                }
+            }
+            else {
+                if ($scope.organizationForm.nameModalOrganization.$error.required){
+                    document.getElementById("nameInputSave").focus();
+                    $scope.organizationForm.nameModalOrganization.check = true;
+                }
             }
         }
-
         function createOrganization(organization) {
             console.log('About to create organization');
             OrgService.createOrganization(organization).then(
@@ -51,7 +58,7 @@ angular.module('courtApp').controller('OrgController',
             OrgService.updateOrganization(organization, id)
                 .then(
                     function (response) {
-                        console.log('organization updated successfully'+ self.organization);
+                        console.log('organization updated successfully' + self.organization);
                         self.done = true;
                     },
                     function (errResponse) {
@@ -59,27 +66,29 @@ angular.module('courtApp').controller('OrgController',
                     }
                 );
         }
+
         function editOrganization(id) {
             console.log('organization get');
-             OrgService.getOrganization(id).then(
+            OrgService.getOrganization(id).then(
                 function (organization) {
                     self.organization = organization;
-                    console.log('organization get'+ self.organization);
+                    console.log('organization get' + self.organization);
                 },
                 function (errResponse) {
                     console.error('Error while removing organization ' + id + ', Error :' + errResponse.data);
                 }
             );
         }
-        function removeOrganization(id){
-            console.log('About to remove organization with id '+id);
+
+        function removeOrganization(id) {
+            console.log('About to remove organization with id ' + id);
             OrgService.removeOrganization(id)
                 .then(
-                    function(){
-                        console.log('organization '+id + ' removed successfully');
+                    function () {
+                        console.log('organization ' + id + ' removed successfully');
                     },
-                    function(errResponse){
-                        console.error('Error while removing organization '+id +', Error :'+errResponse.data);
+                    function (errResponse) {
+                        console.error('Error while removing organization ' + id + ', Error :' + errResponse.data);
                     }
                 );
         }

@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html ng-app="courtApp">
 <head>
+    <base href="/">
     <meta charset="UTF-8">
     <title>ПОСД</title>
     <link href="css/reset.css" rel="stylesheet" type="text/css" media="all"/>
@@ -13,7 +14,7 @@
 <body>
 <div class="container">
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a class="navbar-brand" href="#">ПОСД</a>
+        <a class="navbar-brand" href="/">ПОСД</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -21,10 +22,18 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="index.html">Главная <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="/">Главная <span class="sr-only">(current)</span></a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Link</a>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" role="button"
+                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Отчеты
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="#/card">Сведения о результатах рассмотрения жалоб (протестов)
+                            <br> на вступившие в законную силу постановления по делам
+                            <br>об административных правонарушениях</a>
+                    </div>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button"
@@ -32,19 +41,19 @@
                         Справочники
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="index.html#!/entityIsk">Сущность иска</a>
-                        <a class="dropdown-item" href="index.html#!/result">Результат рассмотрения дела</a>
-                        <a class="dropdown-item" href="index.html#!/article">Статьи</a>
-                        <a class="dropdown-item" href="index.html#!/organization">Организации</a>
-                        <a class="dropdown-item" href="index.html#!/vialators">Правонарушители</a>
-                        <a class="dropdown-item" href="index.html#!/author">Автор документа</a>
-                        <a class="dropdown-item" href="index.html#!/nameEntityDecree">Сущность постановления</a>
-                        <a class="dropdown-item" href="index.html#!/entityDecree">Результаты постановлений</a>
-                        <a class="dropdown-item" href="index.html#!/secondInstance">Вторые инстанции</a>
-                        <a class="dropdown-item" href="index.html#!/regulations">Постановления</a>
-                        <a class="dropdown-item" href="index.html#!/complaints">Жалобы</a>
+                        <a class="dropdown-item" href="#/entityIsk">Сущность иска</a>
+                        <a class="dropdown-item" href="#/result">Результат рассмотрения дела</a>
+                        <a class="dropdown-item" href="#/article">Статьи</a>
+                        <a class="dropdown-item" href="#/organization">Организации</a>
+                        <a class="dropdown-item" href="#/vialators">Правонарушители</a>
+                        <a class="dropdown-item" href="#/author">Автор документа</a>
+                        <a class="dropdown-item" href="#/nameEntityDecree">Сущность постановления</a>
+                        <a class="dropdown-item" href="#/entityDecree">Результаты постановлений</a>
+                        <a class="dropdown-item" href="#/secondInstance">Вторые инстанции</a>
+                        <a class="dropdown-item" href="#/regulations">Постановления</a>
+                        <a class="dropdown-item" href="#/complaints">Жалобы</a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Something else here</a>
+                        <a class="dropdown-item" href="/">Something else here</a>
                     </div>
                 </li>
             </ul>

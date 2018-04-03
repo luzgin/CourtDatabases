@@ -2,7 +2,7 @@
     <div class="card-header py-2">
         Карточка
     </div>
-    <form name="cardForm" ng-submit="cardC.submit()" class="form-horizontal" role="form">
+    <form name="cardForm" class="form-horizontal" role="form" novalidate>
         <input id="cardId" type="hidden" ng-value="cardC.card.id" ng-model="cardC.card.id"/>
         <input type="hidden" ng-model="cardC.card.cardActiv"/>
         <div class="card-body">
@@ -10,18 +10,34 @@
                 <div class="col-md-4">
                     <div class="form-group row">
                         <label class="col-md-5" for="numberCard">Номер карточки</label>
-                        <div class="col-md-4">
-                            <input type="text" class="form-control btn-sm" id="numberCard"
-                                   ng-model="cardC.card.cardNumber"/>
+                        <div class="col-md-6">
+                            <input name="numberCard"
+                                   type="text"
+                                   class="form-control btn-sm"
+                                   id="numberCard"
+                                   ng-model="cardC.card.cardNumber"
+                                   ng-required="true"
+                                   ng-pattern="/[0-9]{1}[А-Яа-яЁё]{1}-[0-9]{1,4}/"
+                                   placeholder="4X-XXX"/>
+                            <span style="color:red" ng-show="cardForm.numberCard.check && cardForm.numberCard.$invalid">
+  							    Введите № в формате: 4х-123
+                            </span>
                         </div>
+
                     </div>
                 </div>
                 <div class="col-md-7">
                     <div class="form-group row">
                         <label class="col-md-3" for="createCard">Дата создания</label>
                         <div class="col-md-4">
-                            <input type="date" class="form-control btn-sm" id="createCard"
-                                   ng-model="cardC.card.createDate"/>
+                            <input type="date"
+                                   class="form-control btn-sm"
+                                   id="createCard"
+                                   name="createCard"
+                                   ng-model="cardC.card.createDate"
+                                   ng-required="true"/>
+                            <span style="color:red"
+                                  ng-show="cardForm.createCard.check && cardForm.createCard.$error.required">Выберете дату</span>
                         </div>
                     </div>
                 </div>
@@ -34,10 +50,12 @@
                     <div class="form-group row mb-2">
                         <div class="col-md-6 pr-0">
                             <ui-select id="uiDecree"
+                                       name="decreeForCard"
                                        ng-model="cardC.card.decreeAdm"
                                        ng-value="cardC.card.decreeAdm"
                                        theme="selectize"
-                                       title="Введите для поиска...">
+                                       title="Введите для поиска..."
+                                       ng-required="true">
                                 <ui-select-match placeholder="Введите для поиска...">
                                     {{$select.selected.decreeDate | date: 'dd.MM.yyyy'}}
                                     {{$select.selected.organization.name}} {{$select.selected.authorDocument.name}}
@@ -49,6 +67,8 @@
                                     <small ng-bind-html="item.authorDocument.name | highlight: $select.search"></small>
                                 </ui-select-choices>
                             </ui-select>
+                            <span style="color:red"
+                                  ng-show="cardForm.decreeForCard.check && cardForm.decreeForCard.$error.required">Выберете постановление</span>
                         </div>
                         <div class="col-md-auto">
                             <input id="addDecree"
@@ -141,10 +161,13 @@
                     <div class="form-group row mb-2">
                         <div class="col-md-6 pr-0">
                             <ui-select id="uiVialator"
+                                       name="vailatorForCard"
                                        ng-model="cardC.card.vialator"
                                        ng-value="cardC.card.vialator"
                                        theme="selectize"
-                                       title="Введите для поиска...">
+                                       title="Введите для поиска..."
+                                       ng-required="true">
+
                                 <ui-select-match placeholder="Введите для поиска...">
                                     {{$select.selected.privateNumber}} {{$select.selected.firstName}}
                                     {{$select.selected.secondName}} {{$select.selected.lastName}}
@@ -156,6 +179,8 @@
                                     <small ng-bind-html="item.lastName | highlight: $select.search"></small>
                                 </ui-select-choices>
                             </ui-select>
+                            <span style="color:red"
+                                  ng-show="cardForm.vailatorForCard.check && cardForm.vailatorForCard.$error.required">Выберете нарушителя</span>
                         </div>
                         <div class="col-md-auto">
                             <input id="addVialator"
@@ -224,8 +249,12 @@
                         <div class="form-group row">
                             <label class="col-md-2 pr-0">Статья</label>
                             <div class="col-md-10 p-0">
-                                <ui-select ng-model="cardC.card.articleAdm" theme="selectize"
-                                           title="Введите для поиска...">
+                                <ui-select id="uiArticle"
+                                           name="articleForCard"
+                                           ng-model="cardC.card.articleAdm"
+                                           theme="selectize"
+                                           title="Введите для поиска..."
+                                           ng-required="true">
                                     <ui-select-match placeholder="Введите для поиска...">Ст.
                                         {{$select.selected.article}} <span ng-if="$select.selected.part != 0">ч. {{$select.selected.part}}</span>
                                     </ui-select-match>
@@ -236,6 +265,8 @@
                                         <small ng-bind-html="' | '+ item.note | highlight: $select.search"></small>
                                     </ui-select-choices>
                                 </ui-select>
+                                <span style="color:red"
+                                      ng-show="cardForm.articleForCard.check && cardForm.articleForCard.$error.required">Выберете статью</span>
                             </div>
                         </div>
                     </div>
@@ -243,8 +274,12 @@
                         <div class="form-group row">
                             <label class="col-md-3 pr-0">Сущность постановления</label>
                             <div class="col-md-9">
-                                <ui-select ng-model="cardC.card.entityDecreeAdm.nameEntityDecreeAdm" theme="selectize"
-                                           title="Введите для поиска...">
+                                <ui-select id="uiEntityDecree"
+                                           name="entityDecreeForCard"
+                                           ng-model="cardC.card.entityDecreeAdm.nameEntityDecreeAdm"
+                                           theme="selectize"
+                                           title="Введите для поиска..."
+                                           ng-required="true">
                                     <ui-select-match placeholder="Введите для поиска...">{{$select.selected.name}}
                                     </ui-select-match>
                                     <ui-select-choices
@@ -252,6 +287,8 @@
                                         <div ng-bind-html="item.name | highlight: $select.search"></div>
                                     </ui-select-choices>
                                 </ui-select>
+                                <span style="color:red"
+                                      ng-show="cardForm.entityDecreeForCard.check && cardForm.entityDecreeForCard.$error.required">Выберете сущность постановления</span>
                             </div>
                         </div>
                         <input type="hidden" ng-model="cardC.card.entityDecreeAdm.id"/>
@@ -303,7 +340,7 @@
                                        ng-click="cardC.removeComplaint();" value="Удалить"/>
                             </div>
                             <thead>
-                            <tr >
+                            <tr>
                                 <th class="div-center" width="7.5%">№ карточки</th>
                                 <th class="div-center" width="7.5%">Дата</th>
                                 <th class="div-center" width="40%">Сужность жалобы</th>
@@ -449,11 +486,11 @@
             </div>
             <div class="row justify-content-md-center">
                 <div class="col col-md-2">
-                    <input type="button" class="btn btn-primary" onclick="location.href = 'index.html#!/'"
+                    <input type="button" class="btn btn-primary" onclick="location.href = '/'"
                            value="Назад"/>
                 </div>
                 <div class="col col-md-2">
-                    <input type="submit" class="btn btn-success"
+                    <input type="submit" class="btn btn-success" ng-click="cardC.submit()"
                            value="{{!cardC.card.id ? 'Добавить' : 'Сохранить'}}"/>
                 </div>
             </div>
@@ -469,17 +506,19 @@
                     <h4 class="modal-title">Добавление/Редактирование постановления</h4>
                 </div>
                 <div class="modal-body">
-                    <form ng-submit="decC.submit()" class="form-horizontal" role="form">
+                    <form name="decreeForm" ng-submit="decC.submit()" class="form-horizontal" role="form" novalidate>
                         <input type="hidden" ng-model="decC.decree.id"/>
                         <div class="form-group row">
                             <label class="col-md-3 control-label">Организация</label>
                             <div class="col-md-7">
                                 <ui-select
+                                        name="uiOrganizationModalDecree"
                                         ng-model="decC.decree.organization"
                                         ng-value="decC.decree.organization"
                                         ng-change="changedValue(decC.decree.organization)"
                                         theme="selectize"
-                                        title="Введите для поиска...">
+                                        title="Введите для поиска..."
+                                        ng-required="true">
                                     <ui-select-match placeholder="Введите для поиска...">{{$select.selected.name}}
                                     </ui-select-match>
                                     <ui-select-choices
@@ -487,9 +526,15 @@
                                         <div ng-bind-html="item.name | highlight: $select.search"></div>
                                     </ui-select-choices>
                                 </ui-select>
+                                <span style="color:red"
+                                      ng-show="decreeForm.uiOrganizationModalDecree.check && decreeForm.uiOrganizationModalDecree.$error.required">
+                                    Не может быть пустым!
+                                </span>
                             </div>
                             <div class="col-md-2 row justify-content-md-end">
-                                <input type="button" class="btn btn-outline-success btn-sm" value="Добавить"
+                                <input type="button"
+                                       class="btn btn-outline-success btn-sm"
+                                       value="Добавить"
                                        data-toggle="modal"
                                        data-target="#ModalSaveOrganization"/>
                             </div>
@@ -497,15 +542,21 @@
                         <div class="form-group row" ng-if="decC.decree.organization != null">
                             <label class="col-md-3 control-label">Автор</label>
                             <div class="col-md-7">
-                                <ui-select ng-model="decC.decree.authorDocument" theme="selectize"
-                                           title="Введите для поиска...">
+                                <ui-select name="authorModalDecree"
+                                           ng-model="decC.decree.authorDocument"
+                                           theme="selectize"
+                                           title="Введите для поиска..."
+                                           ng-required="true">
                                     <ui-select-match placeholder="Введите для поиска...">{{$select.selected.name}}
                                     </ui-select-match>
-                                    <!-- <ui-select-choices repeat="item in decC.getAllAuthors() | filter: $select.search"> -->
                                     <ui-select-choices repeat="item in decC.getAuthorsForOrganization()">
                                         <div ng-bind-html="item.name | highlight: $select.search"></div>
                                     </ui-select-choices>
                                 </ui-select>
+                                <span style="color:red"
+                                      ng-show="decreeForm.authorModalDecree.check && decreeForm.authorModalDecree.$error.required">
+                                    Не может быть пустым!
+                                </span>
                             </div>
                             <div class="col-md-2 row justify-content-md-end">
                                 <input type="button" class="btn btn-outline-success btn-sm"
@@ -526,26 +577,30 @@
                             <label class="col-md-3 control-label">Дата</label>
                             <div class="col-md-7 row pr-0">
                                 <div class="col-md-5 pr-0">
-                                    <input type="date" class="form-control btn-sm" ng-model="decC.decree.decreeDate"/>
+                                    <input id="dateModalDecree"
+                                           name="dateModalDecree"
+                                           type="date"
+                                           class="form-control btn-sm"
+                                           ng-model="decC.decree.decreeDate"
+                                           ng-required="true"/>
+                                    <span style="color:red"
+                                          ng-show="decreeForm.dateModalDecree.check && decreeForm.dateModalDecree.$error.required">
+                                    Не может быть пустым!
+                                </span>
                                 </div>
                                 <div class="col-md-4 pr-0">
                                     <label class="control-label">Вступило в силу</label>
                                 </div>
                                 <div class="col-md-3 px-0">
-                                    <!--  <select ng-value="decC.decree.enteredIntoForce"
-                                              ng-model="decC.decree.enteredIntoForce"
-                                              class="form-control">
-                                          <option value='true'>Да</option>
-                                          <option value='false'>Нет</option>
-                                      </select>
-                                      -->
                                     <div class="col row pr-0">
                                         <div class="col-md-6">
                                             <input id="radioDecreeTrue"
+                                                   name="enteredIntoForceModalDecree"
                                                    class="form-check-input"
                                                    type="radio"
                                                    ng-value="true"
-                                                   ng-model="decC.decree.enteredIntoForce">
+                                                   ng-model="decC.decree.enteredIntoForce"
+                                                   ng-required="true">
                                             <label class="form-check-label" for="radioDecreeTrue">Да</label>
                                         </div>
                                         <div class="col-md-6">
@@ -557,6 +612,10 @@
                                             <label class="form-check-label" for="radioDecreeFalse">Нет</label>
                                         </div>
                                     </div>
+                                    <span style="color:red"
+                                          ng-show="decreeForm.enteredIntoForceModalDecree.check && decreeForm.enteredIntoForceModalDecree.$error.required">
+                                   Не может быть пустым!
+                                </span>
                                 </div>
                             </div>
                         </div>
@@ -605,13 +664,21 @@
                     <h4 class="modal-title">Добавление/редактирование организации</h4>
                 </div>
                 <div class="modal-body">
-                    <form ng-submit="orgC.submit()" class="form-horizontal" role="form">
+                    <form name="organizationForm" ng-submit="orgC.submit()" class="form-horizontal" role="form"
+                          novalidate>
                         <input type="hidden" ng-model="orgC.organization.id"/>
                         <div class="form-group row">
                             <label class="col-md-2 control-label" for="nameInputSave">Название</label>
                             <div class="col-md-10">
-                                <input type="text" class="form-control" id="nameInputSave"
-                                       ng-model="orgC.organization.name"/>
+                                <input id="nameInputSave"
+                                       name="nameModalOrganization"
+                                       type="text" class="form-control"
+                                       ng-model="orgC.organization.name"
+                                       ng-required="true"/>
+                                <span style="color:red"
+                                      ng-show="organizationForm.nameModalOrganization.check && organizationForm.nameModalOrganization.$error.required">
+                                    Не может быть пустым!
+                                </span>
                             </div>
                         </div>
                         <div class="modal-footer row mr-0">
@@ -633,19 +700,36 @@
                     <h4 class="modal-title">Добавление/Редактирование автора</h4>
                 </div>
                 <div class="modal-body">
-                    <form ng-submit="autC.submit()" class="form-horizontal" role="form">
+                    <form name="authorForm" ng-submit="autC.submit()" class="form-horizontal" role="form" novalidate>
                         <input type="hidden" ng-model="autC.author.id"/>
                         <div class="form-group row">
                             <label class="col-md-2 control-label" for="nameSave">ФИО</label>
                             <div class="col-md-10">
-                                <input type="text" class="form-control" id="nameSave" ng-model="autC.author.name"/>
+                                <input id="nameSave"
+                                       name="nameModalAuthor"
+                                       type="text"
+                                       class="form-control"
+                                       ng-model="autC.author.name"
+                                       ng-required="true"/>
+                                <span style="color:red"
+                                      ng-show="authorForm.nameModalAuthor.check && authorForm.nameModalAuthor.$error.required">
+                                    Не может быть пустым!
+                                </span>
                             </div>
                         </div>
                         <div class="form-group row">
                             <label class="col-md-2 control-label" for="positionSave">Должность</label>
                             <div class="col-md-10">
-                                <input type="text" class="form-control" id="positionSave"
-                                       ng-model="autC.author.position"/>
+                                <input id="positionSave"
+                                       name="positionModalAuthor"
+                                       type="text"
+                                       class="form-control"
+                                       ng-model="autC.author.position"
+                                       ng-required="true"/>
+                                <span style="color:red"
+                                      ng-show="authorForm.positionModalAuthor.check && authorForm.positionModalAuthor.$error.required">
+                                    Не может быть пустым!
+                                </span>
                             </div>
                         </div>
                         <div ng-show="autC.author.id != null" class="form-group row">
@@ -661,8 +745,12 @@
                         <div class="form-group row">
                             <label class="col-md-2 control-label">Организация</label>
                             <div class="col-md-10">
-                                <ui-select id="organizationSelectForAuthor" ng-model="autC.author.organization" theme="selectize"
-                                           title="Введите для поиска...">
+                                <ui-select id="organizationSelectForAuthor"
+                                           name="organizationModalAuthor"
+                                           ng-model="autC.author.organization"
+                                           theme="selectize"
+                                           title="Введите для поиска..."
+                                           ng-required="true">
                                     <ui-select-match placeholder="Введите для поиска...">{{$select.selected.name}}
                                     </ui-select-match>
                                     <ui-select-choices
@@ -670,6 +758,10 @@
                                         <div ng-bind-html="item.name | highlight: $select.search"></div>
                                     </ui-select-choices>
                                 </ui-select>
+                                <span style="color:red"
+                                      ng-show="authorForm.organizationModalAuthor.check && authorForm.organizationModalAuthor.$error.required">
+                                    Не может быть пустым!
+                                </span>
                             </div>
                         </div>
                         <div class="modal-footer row mr-0">
@@ -691,16 +783,19 @@
                     <h4 class="modal-title">Добавление/Редактирование инстанции</h4>
                 </div>
                 <div class="modal-body">
-                    <form ng-submit="secIC.submit()" class="form-horizontal" role="form">
+                    <form name="secondInstanceForm" ng-submit="secIC.submit()" class="form-horizontal" role="form"
+                          novalidate>
                         <input type="hidden" id="secondInstanceID" ng-model="secIC.secondInstance.id"/>
                         <div class="form-group row">
                             <label class="col-md-3 control-label">Организация</label>
                             <div class="col-md-7">
-                                <ui-select ng-model="secIC.secondInstance.organization"
+                                <ui-select name="organizationModalSecondInstance"
+                                           ng-model="secIC.secondInstance.organization"
                                            ng-value="secIC.secondInstance.organization"
                                            ng-change="changedValue(secIC.secondInstance.organization)"
                                            theme="selectize"
-                                           title="Введите для поиска...">
+                                           title="Введите для поиска..."
+                                           ng-required="true">
                                     <ui-select-match placeholder="Введите для поиска...">{{$select.selected.name}}
                                     </ui-select-match>
                                     <ui-select-choices
@@ -708,6 +803,10 @@
                                         <div ng-bind-html="item.name | highlight: $select.search"></div>
                                     </ui-select-choices>
                                 </ui-select>
+                                <span style="color:red"
+                                      ng-show="secondInstanceForm.organizationModalSecondInstance.check && secondInstanceForm.organizationModalSecondInstance.$error.required">
+                                    Не может быть пустым!
+                                </span>
                             </div>
                             <div class="col-md-2 row justify-content-md-end">
                                 <input type="button" class="btn btn-outline-success btn-sm" value="Добавить"
@@ -718,14 +817,22 @@
                         <div class="form-group row" ng-if="secIC.secondInstance.organization != null">
                             <label class="col-md-3 control-label">Автор</label>
                             <div class="col-md-7">
-                                <ui-select ng-model="secIC.secondInstance.authorDocument" theme="selectize"
-                                           title="Введите для поиска...">
+                                <ui-select name="authorModalSecondInstance"
+                                           ng-model="secIC.secondInstance.authorDocument"
+                                           theme="selectize"
+                                           title="Введите для поиска..."
+                                           ng-required="true">
                                     <ui-select-match placeholder="Введите для поиска...">{{$select.selected.name}}
                                     </ui-select-match>
-                                    <ui-select-choices repeat="item in secIC.getAuthorsForOrganization() | filter: $select.search">
+                                    <ui-select-choices
+                                            repeat="item in secIC.getAuthorsForOrganization() | filter: $select.search">
                                         <div ng-bind-html="item.name | highlight: $select.search"></div>
                                     </ui-select-choices>
                                 </ui-select>
+                                <span style="color:red"
+                                      ng-show="secondInstanceForm.authorModalSecondInstance.check && secondInstanceForm.authorModalSecondInstance.$error.required">
+                                    Не может быть пустым!
+                                </span>
                             </div>
                             <div class="col-md-2 row justify-content-md-end">
                                 <input type="button" class="btn btn-outline-success btn-sm" value="Добавить"
@@ -736,14 +843,24 @@
                         <div class="form-group row" ng-if="secIC.secondInstance.organization != null">
                             <label class="col-md-3 control-label">Должность</label>
                             <div class="col-md-7">
-                                <input type="text" class="form-control" ng-model="secIC.secondInstance.authorDocument.position"
+                                <input type="text" class="form-control"
+                                       ng-model="secIC.secondInstance.authorDocument.position"
                                        disabled/>
                             </div>
                         </div>
                         <div class="form-group row">
                             <label class="col-md-3 control-label">Дата</label>
                             <div class="col-md-7">
-                                <input type="date" class="form-control" ng-model="secIC.secondInstance.decreeDate"/>
+                                <input id="dateModalSecondInstance"
+                                       name="dateModalSecondInstance"
+                                       type="date"
+                                       class="form-control"
+                                       ng-model="secIC.secondInstance.decreeDate"
+                                       ng-required="true"/>
+                                <span style="color:red"
+                                      ng-show="secondInstanceForm.dateModalSecondInstance.check && secondInstanceForm.dateModalSecondInstance.$error.required">
+                                    Не может быть пустым!
+                                </span>
                             </div>
                         </div>
                         <div class="modal-footer row mr-0">
@@ -771,43 +888,76 @@
                     <div class=" mb-3 col row justify-content-center">
                         <div class="form-check form-check-inline"
                              ng-if="viaC.vialator.typeVialator == 1 || viaC.vialator.typeVialator == null">
-                            <input type="radio" ng-model="radioChecked.on" value="1">
-                            <label class="form-check-label h4">Физическое лицо</label>
+                            <input id="radioChecked1" type="radio" ng-model="radioChecked.on" value="1">
+                            <label for="radioChecked1" class="form-check-label h4">Физическое лицо</label>
                         </div>
                         <div class="form-check form-check-inline"
                              ng-if="viaC.vialator.typeVialator == 2 || viaC.vialator.typeVialator == null">
-                            <input type="radio" ng-model="radioChecked.on" value="2">
-                            <label class="form-check-label h4">Юридическое лицо</label>
+                            <input id="radioChecked2" type="radio" ng-model="radioChecked.on" value="2">
+                            <label for="radioChecked2" class="form-check-label h4">Юридическое лицо</label>
                         </div>
                     </div>
-                    <div ng-if="radioChecked.on==='1'?true:false">
-                        <form ng-submit="viaC.submit()" class="form-horizontal" role="form">
+                    <div ng-show="radioChecked.on==='1'?true:false">
+                        <form name="vialatorFormFiz" ng-submit="viaC.submit()" class="form-horizontal" role="form"
+                              novalidate>
                             <input type="hidden" ng-model="viaC.vialator.id"/>
                             <div class="form-group row">
                                 <label class="col-md-2 control-label" for="privateNumber">Личный номер</label>
                                 <div class="col-md-10">
-                                    <input type="text" class="form-control" id="privateNumber"
-                                           ng-model="viaC.vialator.privateNumber" required/>
+                                    <input id="privateNumber"
+                                           name="privateNumberModalVialator"
+                                           type="text"
+                                           class="form-control"
+                                           ng-model="viaC.vialator.privateNumber"
+                                           ng-required="true"/>
+                                    <span style="color:red"
+                                          ng-show="vialatorFormFiz.privateNumberModalVialator.check && vialatorFormFiz.privateNumberModalVialator.$error.required">
+                                    Не может быть пустым!
+                                </span>
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label class="col-md-2 control-label" for="firstName">Фамилия</label>
                                 <div class="col-md-10">
-                                    <input type="text" class="form-control" id="firstName"
-                                           ng-model="viaC.vialator.firstName" required/>
+                                    <input id="firstName"
+                                           name="firstNameModalVialator"
+                                           type="text" class="form-control"
+                                           ng-model="viaC.vialator.firstName"
+                                           ng-required="true"/>
+                                    <span style="color:red"
+                                          ng-show="vialatorFormFiz.firstNameModalVialator.check && vialatorFormFiz.firstNameModalVialator.$error.required">
+                                    Не может быть пустым!
+                                </span>
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label class="col-md-2 control-label" for="secondName">Имя</label>
                                 <div class="col-md-10">
-                                    <input type="text" class="form-control" ng-model="viaC.vialator.secondName"
-                                           required/>
+                                    <input id="secondNameFiz"
+                                           name="secondNameModalVialator"
+                                           type="text"
+                                           class="form-control"
+                                           ng-model="viaC.vialator.secondName"
+                                           ng-required="true"/>
+                                    <span style="color:red"
+                                          ng-show="vialatorFormFiz.secondNameModalVialator.check && vialatorFormFiz.secondNameModalVialator.$error.required">
+                                    Не может быть пустым!
+                                </span>
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label class="col-md-2 control-label" for="lastName">Отчество</label>
                                 <div class="col-md-10">
-                                    <input type="text" class="form-control" ng-model="viaC.vialator.lastName" required/>
+                                    <input id="lastNameModalVialator"
+                                           name="lastNameModalVialator"
+                                           type="text"
+                                           class="form-control"
+                                           ng-model="viaC.vialator.lastName"
+                                           ng-required="true"/>
+                                    <span style="color:red"
+                                          ng-show="vialatorFormFiz.lastNameModalVialator.check && vialatorFormFiz.lastNameModalVialator.$error.required">
+                                    Не может быть пустым!
+                                </span>
                                 </div>
                             </div>
                             <div class="modal-footer row mr-0">
@@ -818,21 +968,39 @@
                             </div>
                         </form>
                     </div>
-                    <div ng-if="radioChecked.on==='2'?true:false">
-                        <form ng-submit="viaC.submit()" class="form-horizontal" role="form">
+                    <div ng-show="radioChecked.on==='2'?true:false">
+                        <form name="vialatorFormUr" ng-submit="viaC.submit()" class="form-horizontal" role="form"
+                              novalidate>
                             <input type="hidden" ng-model="viaC.vialator.id"/>
                             <div class="form-group row">
                                 <label class="col-md-2 control-label" for="privateNumber">УНП</label>
                                 <div class="col-md-10">
-                                    <input type="text" class="form-control"
-                                           ng-model="viaC.vialator.privateNumber" required/>
+                                    <input id="unpModalVialator"
+                                           name="unpModalVialator"
+                                           type="text"
+                                           class="form-control"
+                                           ng-model="viaC.vialator.privateNumber"
+                                           ng-pattern="/[0-9]{9}/"
+                                           ng-required="true"/>
+                                    <span style="color:red"
+                                          ng-show="vialatorFormUr.unpModalVialator.check && vialatorFormUr.unpModalVialator.$invalid">
+                                    Введите УНП в формате: 123456789
+                                </span>
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label class="col-md-2 control-label" for="firstName">Название</label>
                                 <div class="col-md-10">
-                                    <input type="text" class="form-control"
-                                           ng-model="viaC.vialator.firstName" required/>
+                                    <input id="firstNameUrModalVialator"
+                                           name="firstNameUrModalVialator"
+                                           type="text"
+                                           class="form-control"
+                                           ng-model="viaC.vialator.firstName"
+                                           ng-required="true"/>
+                                    <span style="color:red"
+                                          ng-show="vialatorFormUr.firstNameUrModalVialator.check && vialatorFormUr.firstNameUrModalVialator.$error.required">
+                                    Не может быть пустым!
+                                </span>
                                 </div>
                             </div>
                             <div class="modal-footer row mr-0">
@@ -899,7 +1067,8 @@
                             <label class="col-md-2 control-label">Сумма госпошлины</label>
                             <div class="col-md-10 row">
                                 <div class="col-md-4">
-                                    <input type="number" step="0.1" class="form-control" ng-model="comC.complaint.summPoshlini"
+                                    <input type="number" step="0.1" class="form-control"
+                                           ng-model="comC.complaint.summPoshlini"
                                            required/>
                                 </div>
                                 <div class="col-md-8 row">

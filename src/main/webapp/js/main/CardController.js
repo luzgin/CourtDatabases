@@ -127,7 +127,7 @@ angular.module('courtApp').controller('CardController',
                         document.getElementById("editComplaint").setAttribute('disabled', 'disabled');
                         document.getElementById("removeComplaint").setAttribute('disabled', 'disabled');
                     }
-                }else{
+                } else {
                     self.complaintForEdit = {};
                     document.getElementById("editComplaint").setAttribute('disabled', 'disabled');
                     document.getElementById("removeComplaint").setAttribute('disabled', 'disabled');
@@ -222,13 +222,40 @@ angular.module('courtApp').controller('CardController',
             }
 
             function submit() {
-                console.log('Submitting');
-                if (self.card.id === undefined || self.card.id === null) {
-                    console.log('Saving New card', self.card);
-                    createCard(self.card);
-                } else {
-                    updateCard(self.card, self.card.id);
-                    console.log('card updated with id ', self.card.id);
+                if ($scope.cardForm.$valid) {
+                    console.log('Submitting');
+                    if (self.card.id === undefined || self.card.id === null) {
+                        console.log('Saving New card', self.card);
+                        createCard(self.card);
+                    } else {
+                        updateCard(self.card, self.card.id);
+                        console.log('card updated with id ', self.card.id);
+                    }
+                }else{
+                    if ($scope.cardForm.numberCard.$invalid){
+                        document.getElementById("numberCard").focus(); //TODO: добавить ошибку в выподающее окно
+                        $scope.cardForm.numberCard.check = true;
+
+                    }else if ($scope.cardForm.createCard.$error.required){
+                        document.getElementById("createCard").focus();
+                        $scope.cardForm.createCard.check = true;
+
+                    }else if ($scope.cardForm.decreeForCard.$error.required){
+                        document.getElementById("uiDecree").focus();
+                        $scope.cardForm.decreeForCard.check = true;
+
+                    }else if ($scope.cardForm.vailatorForCard.$error.required){
+                        document.getElementById("uiVialator").focus();
+                        $scope.cardForm.vailatorForCard.check = true;
+
+                    }else if ($scope.cardForm.articleForCard.$error.required){
+                        document.getElementById("uiArticle").focus();
+                        $scope.cardForm.articleForCard.check = true;
+
+                    }else if ($scope.cardForm.entityDecreeForCard.$error.required){
+                        document.getElementById("uiEntityDecree").focus();
+                        $scope.cardForm.entityDecreeForCard.check = true;
+                    }
                 }
             }
 
@@ -308,6 +335,7 @@ angular.module('courtApp').controller('CardController',
             function paintTable() {
 
             }
+
             function editReturnCase() {
                 $rootScope.$broadcast('editReturnCase', {b: self.returnCase});
             }
