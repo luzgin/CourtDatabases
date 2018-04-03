@@ -2,7 +2,7 @@
     <div class="card-header py-2">
         Карточка
     </div>
-    <form ng-submit="cardC.submit()" class="form-horizontal" role="form">
+    <form name="cardForm" ng-submit="cardC.submit()" class="form-horizontal" role="form">
         <input id="cardId" type="hidden" ng-value="cardC.card.id" ng-model="cardC.card.id"/>
         <input type="hidden" ng-model="cardC.card.cardActiv"/>
         <div class="card-body">

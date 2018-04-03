@@ -74,6 +74,7 @@ public class CardController {
         while (iteratorDecree.hasNext()) {
             DecreeAdm currentDecree = iteratorDecree.next();
             List<ComplaintsAdm> complaintsForCurrentDecree = complaintsAdmService.findByDecreeAdm(currentDecree); //жалобы для выбранного посталовления
+            Date secondDate = new Date(0, 0, 0);
             for (int i = 0; i < complaintsForCurrentDecree.size(); i++) { //фильтрация жалоб за указанный период отчета
                 if (complaintsForCurrentDecree.get(i).getCardAdm().getCreateDate().getTime() >= dateFrom.getTime()
                         && complaintsForCurrentDecree.get(i).getCardAdm().getCreateDate().getTime() <= dateTo.getTime()) {
@@ -81,7 +82,6 @@ public class CardController {
                     complaintsForCurrentDecree.remove(i);
                 }
             }
-
             if (complaintsForCurrentDecree.size() > 0) {
                 if (complaintsForCurrentDecree.size() == 1) {
                     if (!complaintsForCurrentDecree.get(0).isReinstatementOfTerm()) {
@@ -104,22 +104,27 @@ public class CardController {
                                     } else {
                                         if (complaint2.getComplainDate().getTime() > firstComplaintCardResultDate.getTime()) {
                                             if (!complaint2.isReinstatementOfTerm()) {
+                                                if (complaint2.getComplainDate().getTime() > (secondDate.getTime() + 10 * 24 * 60 * 60 * 1000)) {
+                                                    secondDate = complaint2.getComplainDate();
                                                     numberOfCasesForCurrentComplaint++;
                                                     listComplaintsForCurrentDecree.remove(j);
+                                                }
                                             }
                                         }
                                     }
                                 }
-                            } else {
+                            } else { // если дело не рассмотрело
                                 List<DateRequestCase> dateRequestCases = dateRequestCaseService.findByCardAdm_Id(complaint1.getCardAdm().getId());
                                 if (dateRequestCases.size() != 0) {
                                     for (int j = 0; j < complaintsForCurrentDecree.size(); j++) {
                                         ComplaintsAdm complaint2 = complaintsForCurrentDecree.get(j);
-                                        if (complaint2.getComplainDate().getTime() >= firstComplaintCreateDate.getTime()
+                                        if (complaint2.getComplainDate().getTime() >= firstComplaintCreateDate.getTime() //не больше чем 30 дней с момента поступления материала
                                                 && complaint2.getComplainDate().getTime() <= (dateRequestCases.get(0).getDate().getTime() + 30 * 24 * 60 * 60 * 1000)) {
                                         } else {
                                             if (complaint2.getComplainDate().getTime() > (dateRequestCases.get(0).getDate().getTime() + 30 * 24 * 60 * 60 * 1000)) {
-                                                numberOfCasesForCurrentComplaint++;
+                                                if (!complaint2.isReinstatementOfTerm()) {
+                                                    numberOfCasesForCurrentComplaint++;
+                                                }
                                             }
                                         }
                                     }
@@ -130,8 +135,14 @@ public class CardController {
                                                 && complaint2.getComplainDate().getTime() <= (complaint2.getComplainDate().getTime() + 30 * 24 * 60 * 60 * 1000)) {
                                         } else {
                                             if (complaint2.getComplainDate().getTime() > (complaint2.getComplainDate().getTime() + 30 * 24 * 60 * 60 * 1000)) {
-                                                numberOfCasesForCurrentComplaint++;
-                                                listComplaintsForCurrentDecree.remove(j);
+                                                if (!complaint2.isReinstatementOfTerm()) {
+                                                    if (complaint2.getComplainDate().getTime() > (secondDate.getTime() + 10 * 24 * 60 * 60 * 1000)) {
+                                                        secondDate = complaint2.getComplainDate();
+                                                        numberOfCasesForCurrentComplaint++;
+                                                        listComplaintsForCurrentDecree.remove(j);
+                                                    }
+
+                                                }
                                             }
                                         }
                                     }
