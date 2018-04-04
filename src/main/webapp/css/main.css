@@ -28,3 +28,26 @@
 
 /* Изображение руки при наведении */
 .cursor {cursor: pointer}
+
+.rotate {
+    text-align: center;
+    vertical-align: middle;
+    white-space: nowrap;
+
+}
+.rotate div {
+    -moz-transform: rotate(-90.0deg);  /* FF3.5+ */
+    -o-transform: rotate(-90.0deg);  /* Opera 10.5 */
+    -webkit-transform: rotate(-90.0deg);  /* Saf3.1+, Chrome */
+    filter:  progid:DXImageTransform.Microsoft.BasicImage(rotation=0.083);  /* IE6,IE7 */
+    -ms-filter: "progid:DXImageTransform.Microsoft.BasicImage(rotation=0.083)"; /* IE8 */
+    margin-left: -5.5em;
+    margin-right: -5.5em;
+}
+
+.bor td {
+    border: 1px black solid;
+    padding: 5px;
+    text-align: center;
+    vertical-align: middle;
+}

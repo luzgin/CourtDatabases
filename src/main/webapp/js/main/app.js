@@ -56,6 +56,11 @@ posdApp.config(function ($routeProvider, $locationProvider) {
                 }
             }
         })
+        .when('/repotr', {
+            templateUrl: 'report.html',
+            controller: 'ReportController',
+            controllerAs: 'repC',
+        })
         .when('/organization', {
             templateUrl: 'listOrganization.html',
             controller: 'OrgController',

@@ -13,8 +13,6 @@ angular.module('courtApp').controller('ArticleController',
         self.editArticle = editArticle;
         self.removeArticle = removeArticle;
 
-        self.done = false;
-
         function getAllArticles() {
             return ArticleService.getAllArticles();
         }

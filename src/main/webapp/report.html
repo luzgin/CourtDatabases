@@ -1,0 +1,161 @@
+<div class="container p-0">
+    <div class="panel panel-default">
+        <div class="row justify-content-center">
+            <div class="pt-3 h5">СПРАВКА О РЕХУЛЬТАТАХ РАССМОТРЕНИЯ ЖАЛОБ (ПРОТЕСТОВ) НА ВСТУПИВШИЕ В ЗАКОННУЮ СИЛУ
+            </div>
+            <div class="h5">ПОСТАНОВЛЕНИЙ ПО ДЕЛАМОБ АДМИНИСТРАТИВНЫХ ПРАВОНАРУШЕНИЙ</div>
+        </div>
+        <form name="dateRequestForm" ng-submit="repC.getReport(dateFrom, dateTo)" class="form-horizontal" role="form">
+            <div class="panel panel-default row m-0 py-3 justify-content-center ">
+                <div class="col-md-auto"><p class="h5">C</p></div>
+                <div class="col-md-auto">
+                    <input type="date"
+                           class="form-control "
+                           ng-model="dateFrom"/></div>
+                <div class="col-md-auto"><p class="h5">ПО</p></div>
+                <div class="col-md-auto">
+                    <input type="date"
+                           class="form-control"
+                           ng-model="dateTo"/></div>
+                <div class="col-md-auto">
+                    <input type="submit" value="Сформировать"
+                           class="btn btn btn-outline-primary btn-sm"></div>
+            </div>
+        </form>
+        <div class="panel-body">
+            <table cellpadding="0" cellspacing="0" align="center" class="bor">
+                <tr>
+                    <td class="td1" rowspan="2"></td>
+                    <td colspan="2" class="h6 td1">Рассм. жалоб на<br> постановлен. об<br> отказе в востан.<br>
+                        пропущенного<br> срока на обжал.
+                        (опротестование)
+                    </td>
+                    <td rowspan="2" class="td1 h6 rotate rotate-m-0">
+                        <div style="margin-left: -9em; margin-right: -9em">Рассмотрено дел с жалобами (протестами)</div>
+                    </td>
+                    <td colspan="8" class="td1 h6" style="text-align: center;vertical-align: middle;">Результат
+                        рассмотрения
+                    </td>
+                </tr>
+                <tr>
+                    <td height="300px" class="td1 h6 rotate">
+                        <div>удовлетворено</div>
+                    </td>
+                    <td class="h6 rotate">
+                        <div>отклонено</div>
+                    </td>
+                    <td class="h6 rotate">
+                        <div style="margin-left: -6em; margin-right: -6em">оставлено постановлений без<br>изменений, а
+                            жалоб (протест) без<br>удовлетворения
+                        </div>
+                    </td>
+                    <td class="h6 rotate">
+                        <div style="margin-left: -7em; margin-right: -7em">отменено постановление полностью<br> или в
+                            части и прекращено дело об<br> административном правонарушении
+                        </div>
+                    </td>
+                    <td class="h6 rotate">
+                        <div>из них отменено постановлений<br> полностью с прекращением<br> производства по делу в связи
+                            с<br> возбуждением уголовного дела
+                        </div>
+                    </td>
+                    <td class="h6 rotate">
+                        <div style="margin-left: -7em; margin-right: -7em">отменено постановлений полностью<br> или в
+                            части и направлено дело на<br> новое рассмотрение
+                        </div>
+                    </td>
+                    <td class="h6 rotate">
+                        <div>отменено последнее по времени<br> постановление и оставлено в силе<br> одно из ранее
+                            вынесенных по делу<br> постановлений
+                        </div>
+                    </td>
+                    <td class="h6 rotate">
+                        <div>изменено постановлений</div>
+                    </td>
+                    <td class="h6 rotate">
+                        <div style="margin-left: -6em; margin-right: -6em">направлено на рассмотрение в<br> другие
+                            органы
+                        </div>
+                    </td>
+                    <td class="h6 rotate">
+                        <div style="margin-left: -6.5em; margin-right: -6.5em">возвращено без рассмотрения</div>
+                    </td>
+                </tr>
+                <tr class="alig-center">
+                    <td>1</td>
+                    <td>2</td>
+                    <td>3</td>
+                    <td>4</td>
+                    <td>5</td>
+                    <td>6</td>
+                    <td>7</td>
+                    <td>8</td>
+                    <td>9</td>
+                    <td>10</td>
+                    <td>11</td>
+                    <td>12</td>
+
+
+                </tr>
+                <tr class="alig-center">
+                    <td class="text-left">Подведомственными судами</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+
+                </tr>
+                <tr>
+                    <td class="text-left">из них рассматривались ранее как не вступившие в законную силу</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td class="text-left">Подведомственные другим органам</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td class="text-left">Всего:</td>
+                    <td></td>
+                    <td></td>
+                    <td>{{repC.rep.total}}</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+
+            </table>
+        </div>
+    </div>
+</div>
