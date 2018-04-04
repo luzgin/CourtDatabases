@@ -5,18 +5,35 @@
             </div>
             <div class="h5">ПОСТАНОВЛЕНИЙ ПО ДЕЛАМОБ АДМИНИСТРАТИВНЫХ ПРАВОНАРУШЕНИЙ</div>
         </div>
-        <form name="dateRequestForm" ng-submit="repC.getReport(dateFrom, dateTo)" class="form-horizontal" role="form">
+        <form name="reportForm" ng-submit="repC.getReport(dateFrom, dateTo)" class="form-horizontal" role="form"
+              novalidate>
             <div class="panel panel-default row m-0 py-3 justify-content-center ">
                 <div class="col-md-auto"><p class="h5">C</p></div>
                 <div class="col-md-auto">
-                    <input type="date"
+                    <input id="dateFrom"
+                           name="dateFrom"
+                           type="date"
                            class="form-control "
-                           ng-model="dateFrom"/></div>
+                           ng-model="dateFrom"
+                           ng-required="true"/>
+                    <span style="color:red"
+                          ng-show="reportForm.dateFrom.check && reportForm.dateFrom.$error.required">
+                                   Не может быть пустым!
+                                </span>
+                </div>
                 <div class="col-md-auto"><p class="h5">ПО</p></div>
                 <div class="col-md-auto">
-                    <input type="date"
+                    <input id="dateTo"
+                           name="dateTo"
+                           type="date"
                            class="form-control"
-                           ng-model="dateTo"/></div>
+                           ng-model="dateTo"
+                           ng-required="true"/>
+                    <span style="color:red"
+                          ng-show="reportForm.dateTo.check && reportForm.dateTo.$error.required">
+                                   Не может быть пустым!
+                                </span>
+                </div>
                 <div class="col-md-auto">
                     <input type="submit" value="Сформировать"
                            class="btn btn btn-outline-primary btn-sm"></div>
