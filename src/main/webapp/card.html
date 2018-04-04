@@ -909,10 +909,11 @@
                                            type="text"
                                            class="form-control"
                                            ng-model="viaC.vialator.privateNumber"
+                                           ng-pattern="/[0-9]{7}[A-Z]{1}[0-9]{3}[A-Z]{2}[0-9]{1}/"
                                            ng-required="true"/>
                                     <span style="color:red"
-                                          ng-show="vialatorFormFiz.privateNumberModalVialator.check && vialatorFormFiz.privateNumberModalVialator.$error.required">
-                                    Не может быть пустым!
+                                          ng-show="vialatorFormFiz.privateNumberModalVialator.check && vialatorFormFiz.privateNumberModalVialator.$invalid">
+                                    Введите личный номер латинскими символами в формате: 1234567X123XX1
                                 </span>
                                 </div>
                             </div>
@@ -1024,14 +1025,21 @@
                     <h4 class="modal-title">Добавление/Редактирование жалобы</h4>
                 </div>
                 <div class="modal-body">
-                    <form ng-submit="comC.submit()" class="form-horizontal" role="form">
+                    <form name="complaintForm" ng-submit="comC.submit()" class="form-horizontal" role="form" novalidate>
                         <input type="hidden" ng-model="comC.complaint.id"/>
                         <div class="form-group row">
                             <label class="col-md-2 control-label">Дата</label>
                             <div class="col-md-10 row">
                                 <div class="col-md-5">
-                                    <input type="date" class="form-control" ng-model="comC.complaint.complainDate"
-                                           required/>
+                                    <input id="dateComplaintModalComplaint"
+                                           name="dateComplaintModalComplaint"
+                                           type="date" class="form-control"
+                                           ng-model="comC.complaint.complainDate"
+                                           ng-required="true"/>
+                                    <span style="color:red"
+                                          ng-show="complaintForm.dateComplaintModalComplaint.check && complaintForm.dateComplaintModalComplaint.$error.required">
+                                    Не может быть пустым!
+                                </span>
                                 </div>
                                 <div class="col-md-auto row align-self-center pr-4">
                                     <label>Восстановление срока</label>
@@ -1046,30 +1054,53 @@
                         <div class="form-group row">
                             <label class="col-md-2 control-label">Сущность жалобы</label>
                             <div class="col-md-10">
-                                <ui-select ng-model="comC.complaint.entityIskAdm" theme="selectize"
-                                           title="Введите для поиска...">
+                                <ui-select name="entityIskModalComplaint"
+                                           ng-model="comC.complaint.entityIskAdm"
+                                           theme="selectize"
+                                           title="Введите для поиска..."
+                                           ng-required="true">
                                     <ui-select-match placeholder="Введите для поиска...">{{$select.selected.name}}
                                     </ui-select-match>
                                     <ui-select-choices repeat="item in comC.getAllEntities() | filter: $select.search">
                                         <div ng-bind-html="item.name | highlight: $select.search"></div>
                                     </ui-select-choices>
                                 </ui-select>
+                                <span style="color:red"
+                                      ng-show="complaintForm.entityIskModalComplaint.check && complaintForm.entityIskModalComplaint.$error.required">
+                                    Не может быть пустым!
+                                </span>
                             </div>
                         </div>
                         <div class="form-group row">
                             <label class="col-md-2 control-label">Автор</label>
                             <div class="col-md-10">
-                                <input type="text" class="form-control" ng-model="comC.complaint.nameAuthorComplaint"
-                                       required/>
+                                <input id="authorModalComplaint"
+                                       name="authorModalComplaint"
+                                       type="text"
+                                       class="form-control"
+                                       ng-model="comC.complaint.nameAuthorComplaint"
+                                       ng-required="true"/>
+                                <span style="color:red"
+                                      ng-show="complaintForm.authorModalComplaint.check && complaintForm.authorModalComplaint.$error.required">
+                                    Не может быть пустым!
+                                </span>
                             </div>
                         </div>
                         <div class="form-group row">
                             <label class="col-md-2 control-label">Сумма госпошлины</label>
                             <div class="col-md-10 row">
                                 <div class="col-md-4">
-                                    <input type="number" step="0.1" class="form-control"
+                                    <input id="amountModalComplaint"
+                                           name="amountModalComplaint"
+                                           type="number"
+                                           step="0.1"
+                                           class="form-control"
                                            ng-model="comC.complaint.summPoshlini"
-                                           required/>
+                                           ng-required="true"/>
+                                    <span style="color:red"
+                                          ng-show="complaintForm.amountModalComplaint.check && complaintForm.amountModalComplaint.$error.required">
+                                    Не может быть пустым!
+                                </span>
                                 </div>
                                 <div class="col-md-8 row">
                                     <div class="col-md-4">
@@ -1079,10 +1110,12 @@
                                         <div class="col row pr-0">
                                             <div class="col-md-6">
                                                 <input id="radioComplaintFalse"
+                                                       name="radioModalComplaint"
                                                        class="form-check-input"
                                                        type="radio"
                                                        ng-value="false"
-                                                       ng-model="comC.complaint.activ">
+                                                       ng-model="comC.complaint.activ"
+                                                       ng-required="true">
                                                 <label class="form-check-label" for="radioComplaintFalse">Нет</label>
                                             </div>
                                             <div class="col-md-6">
@@ -1093,6 +1126,10 @@
                                                        ng-model="comC.complaint.activ">
                                                 <label class="form-check-label" for="radioComplaintTrue">Да</label>
                                             </div>
+                                            <span style="color:red"
+                                                  ng-show="complaintForm.radioModalComplaint.check && complaintForm.radioModalComplaint.$error.required">
+                                    Не может быть пустым!
+                                </span>
                                         </div>
                                     </div>
                                 </div>
@@ -1117,19 +1154,37 @@
                     <h4 class="modal-title">Добавление/Редактирование возвращения дела</h4>
                 </div>
                 <div class="modal-body">
-                    <form ng-submit="dretC.submit()" class="form-horizontal" role="form">
+                    <form name="dateReturnForm" ng-submit="dretC.submit()" class="form-horizontal" role="form"
+                          novalidate>
                         <input type="hidden" ng-model="dretC.dateReturn.id"/>
                         <div class="form-group row">
                             <label class="col-md-2 control-label" for="nameSave">Орагнизация</label>
                             <div class="col-md-10">
-                                <input type="text" class="form-control" ng-model="dretC.dateReturn.organization"/>
+                                <input id="organizationModalDateReturn"
+                                       name="organizationModalDateReturn"
+                                       type="text"
+                                       class="form-control"
+                                       ng-model="dretC.dateReturn.organization"
+                                       ng-required="true"/>
+                                <span style="color:red"
+                                      ng-show="dateReturnForm.organizationModalDateReturn.check && dateReturnForm.organizationModalDateReturn.$error.required">
+                                   Не может быть пустым!
+                                </span>
                             </div>
                         </div>
                         <div class="form-group row">
                             <label class="col-md-2 control-label" for="positionSave">Дата</label>
                             <div class="col-md-10">
-                                <input type="date" class="form-control"
-                                       ng-model="dretC.dateReturn.date"/>
+                                <input id="dateModalDateReturn"
+                                       name="dateModalDateReturn"
+                                       type="date"
+                                       class="form-control"
+                                       ng-model="dretC.dateReturn.date"
+                                       ng-required="true"/>
+                                <span style="color:red"
+                                      ng-show="dateReturnForm.dateModalDateReturn.check && dateReturnForm.dateModalDateReturn.$error.required">
+                                   Не может быть пустым!
+                                </span>
                             </div>
                         </div>
                         <div class="modal-footer row mr-0">
@@ -1151,22 +1206,37 @@
                     <h4 class="modal-title">Добавление/Редактирование возвращения дела</h4>
                 </div>
                 <div class="modal-body">
-                    <form ng-submit="dreqC.submit()" class="form-horizontal" role="form">
+                    <form name="dateRequestForm" ng-submit="dreqC.submit()" class="form-horizontal" role="form"
+                          novalidate>
                         <input type="hidden" ng-model="dreqC.dateRequest.id"/>
                         <div class="form-group row">
                             <label class="col-md-2 control-label" for="nameSave">Орагнизация</label>
                             <div class="col-md-10">
-                                <input type="text"
+                                <input id="organizationModalDateRequest"
+                                       name="organizationModalDateRequest"
+                                       type="text"
                                        class="form-control"
-                                       ng-model="dreqC.dateRequest.organization"/>
+                                       ng-model="dreqC.dateRequest.organization"
+                                       ng-required="true"/>
+                                <span style="color:red"
+                                      ng-show="dateRequestForm.organizationModalDateRequest.check && dateRequestForm.organizationModalDateRequest.$error.required">
+                                   Не может быть пустым!
+                                </span>
                             </div>
                         </div>
                         <div class="form-group row">
                             <label class="col-md-2 control-label" for="positionSave">Дата</label>
                             <div class="col-md-10">
-                                <input type="date"
+                                <input id="dateModalDateRequest"
+                                       name="dateModalDateRequest"
+                                       type="date"
                                        class="form-control"
-                                       ng-model="dreqC.dateRequest.date"/>
+                                       ng-model="dreqC.dateRequest.date"
+                                       ng-required="true"/>
+                                <span style="color:red"
+                                      ng-show="dateRequestForm.dateModalDateRequest.check && dateRequestForm.dateModalDateRequest.$error.required">
+                                   Не может быть пустым!
+                                </span>
                             </div>
                         </div>
                         <div class="modal-footer row mr-0">

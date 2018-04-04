@@ -30,15 +30,32 @@ angular.module('courtApp').controller('ComplaintController',
         }
 
         function submit() {
-            console.log('Submitting');
-            if (self.complaint.id === undefined || self.complaint.id === null) {
-                console.log('Saving New complaint', self.complaint);
-                createComplaint(self.complaint);
-                $('#ModalSaveComplaint').modal('toggle');
+            if ($scope.complaintForm.$valid) {
+                console.log('Submitting');
+                if (self.complaint.id === undefined || self.complaint.id === null) {
+                    console.log('Saving New complaint', self.complaint);
+                    createComplaint(self.complaint);
+                    $('#ModalSaveComplaint').modal('toggle');
+                } else {
+                    updateComplaint(self.complaint, self.complaint.id);
+                    console.log('complaint updated with id ', self.complaint.id);
+                    $('#ModalSaveComplaint').modal('toggle');
+                }
             } else {
-                updateComplaint(self.complaint, self.complaint.id);
-                console.log('complaint updated with id ', self.complaint.id);
-                $('#ModalSaveComplaint').modal('toggle');
+                if ($scope.complaintForm.dateComplaintModalComplaint.$error.required) {
+                    $scope.complaintForm.dateComplaintModalComplaint.check = true;
+                    document.getElementById("dateComplaintModalComplaint").focus();
+                }else if ($scope.complaintForm.entityIskModalComplaint.$error.required) {
+                    $scope.complaintForm.entityIskModalComplaint.check = true;
+                }else if ($scope.complaintForm.authorModalComplaint.$error.required) {
+                    $scope.complaintForm.authorModalComplaint.check = true;
+                    document.getElementById("authorModalComplaint").focus();
+                }else if ($scope.complaintForm.amountModalComplaint.$error.required) {
+                    $scope.complaintForm.amountModalComplaint.check = true;
+                    document.getElementById("amountModalComplaint").focus();
+                }else if ($scope.complaintForm.radioModalComplaint.$error.required) {
+                    $scope.complaintForm.radioModalComplaint.check = true;
+                }
             }
         }
 

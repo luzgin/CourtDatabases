@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('courtApp').controller('DateRequestController',
-    ['DateRequestService','CardService', '$scope', function (DateRequestService, CardService, $scope) {
+    ['DateRequestService', 'CardService', '$scope', function (DateRequestService, CardService, $scope) {
         var self = this;
         self.dateRequest = {};
         self.dateRequests = [];
@@ -19,15 +19,25 @@ angular.module('courtApp').controller('DateRequestController',
         }
 
         function submit() {
-            console.log('Submitting');
-            if (self.dateRequest.id === undefined || self.dateRequest.id === null) {
-                console.log('Saving New dateRequest', self.dateRequest);
-                createDateRequest(self.dateRequest);
-                $('#ModalSaveDateRequest').modal('toggle');
+            if ($scope.dateRequestForm.$valid) {
+                console.log('Submitting');
+                if (self.dateRequest.id === undefined || self.dateRequest.id === null) {
+                    console.log('Saving New dateRequest', self.dateRequest);
+                    createDateRequest(self.dateRequest);
+                    $('#ModalSaveDateRequest').modal('toggle');
+                } else {
+                    updateDateRequest(self.dateRequest, self.dateRequest.id);
+                    console.log('dateRequest updated with id ', self.dateRequest.id);
+                    $('#ModalSaveDateRequest').modal('toggle');
+                }
             } else {
-                updateDateRequest(self.dateRequest, self.dateRequest.id);
-                console.log('dateRequest updated with id ', self.dateRequest.id);
-                $('#ModalSaveDateRequest').modal('toggle');
+                if ($scope.dateRequestForm.organizationModalDateRequest.$error.required) {
+                    $scope.dateRequestForm.organizationModalDateRequest.check = true;
+                    document.getElementById("organizationModalDateRequest").focus();
+                } else if ($scope.dateRequestForm.dateModalDateRequest.$error.required) {
+                    $scope.dateRequestForm.dateModalDateRequest.check = true;
+                    document.getElementById("dateModalDateRequest").focus();
+                }
             }
         }
 
@@ -58,7 +68,7 @@ angular.module('courtApp').controller('DateRequestController',
             DateRequestService.updateDateRequest(dateRequest, id)
                 .then(
                     function (response) {
-                        console.log('dateRequest updated successfully'+ self.dateRequest);
+                        console.log('dateRequest updated successfully' + self.dateRequest);
                         self.done = true;
                     },
                     function (errResponse) {
@@ -66,30 +76,33 @@ angular.module('courtApp').controller('DateRequestController',
                     }
                 );
         }
+
         function editDateRequest(id) {
             console.log('dateRequest get');
             DateRequestService.getDateRequest(id).then(
                 function (dateRequest) {
                     self.dateRequest = dateRequest;
-                    console.log('dateRequest get'+ self.dateRequest);
+                    console.log('dateRequest get' + self.dateRequest);
                 },
                 function (errResponse) {
                     console.error('Error while removing dateRequest ' + id + ', Error :' + errResponse.data);
                 }
             );
         }
-        function removeDateRequest(id){
-            console.log('About to remove dateRequest with id '+id);
+
+        function removeDateRequest(id) {
+            console.log('About to remove dateRequest with id ' + id);
             DateRequestService.removeDateRequest(id)
                 .then(
-                    function(){
-                        console.log('dateRequest '+id + ' removed successfully');
+                    function () {
+                        console.log('dateRequest ' + id + ' removed successfully');
                     },
-                    function(errResponse){
-                        console.error('Error while removing dateRequest '+id +', Error :'+errResponse.data);
+                    function (errResponse) {
+                        console.error('Error while removing dateRequest ' + id + ', Error :' + errResponse.data);
                     }
                 );
         }
+
         $scope.$on('editRequestCase', function (editRequestCase, item) {
             self.dateRequest = item.c;
             self.dateRequest.date = new Date(self.dateRequest.date);

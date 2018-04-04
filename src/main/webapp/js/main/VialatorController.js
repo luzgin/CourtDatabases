@@ -71,7 +71,7 @@ angular.module('courtApp').controller('VialatorController',
                 if ($scope.vialatorFormFiz.$valid) {
                     save();
                 } else {
-                    if ($scope.vialatorFormFiz.privateNumberModalVialator.$error.required) {
+                    if ($scope.vialatorFormFiz.privateNumberModalVialator.$invalid) {
                         $scope.vialatorFormFiz.privateNumberModalVialator.check = true;
                         document.getElementById("privateNumber").focus();
                     } else if ($scope.vialatorFormFiz.firstNameModalVialator.$error.required) {
