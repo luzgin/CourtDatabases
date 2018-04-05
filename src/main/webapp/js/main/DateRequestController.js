@@ -22,6 +22,7 @@ angular.module('courtApp').controller('DateRequestController',
             if ($scope.dateRequestForm.$valid) {
                 console.log('Submitting');
                 if (self.dateRequest.id === undefined || self.dateRequest.id === null) {
+                    self.dateRequest.date.setHours(3);
                     console.log('Saving New dateRequest', self.dateRequest);
                     createDateRequest(self.dateRequest);
                     $('#ModalSaveDateRequest').modal('toggle');

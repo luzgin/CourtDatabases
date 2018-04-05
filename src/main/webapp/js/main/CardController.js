@@ -225,6 +225,7 @@ angular.module('courtApp').controller('CardController',
                 if ($scope.cardForm.$valid) {
                     console.log('Submitting');
                     if (self.card.id === undefined || self.card.id === null) {
+                        self.card.createDate.setHours(3);
                         console.log('Saving New card', self.card);
                         createCard(self.card);
                     } else {

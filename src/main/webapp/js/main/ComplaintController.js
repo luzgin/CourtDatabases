@@ -15,7 +15,7 @@ angular.module('courtApp').controller('ComplaintController',
         self.editComplaint = editComplaint;
         self.removeComplaint = removeComplaint;
 
-        self.complaint.complainDate = new Date(self.complaint.complainDate);
+       //self.complaint.complainDate = new Date(self.complaint.complainDate);
 
         function getAllComplaints() {
             return ComplaintService.getAllComplaints();
@@ -33,12 +33,13 @@ angular.module('courtApp').controller('ComplaintController',
             if ($scope.complaintForm.$valid) {
                 console.log('Submitting');
                 if (self.complaint.id === undefined || self.complaint.id === null) {
+                    self.complaint.complainDate.setHours(3);
                     console.log('Saving New complaint', self.complaint);
                     createComplaint(self.complaint);
                     $('#ModalSaveComplaint').modal('toggle');
                 } else {
                     updateComplaint(self.complaint, self.complaint.id);
-                    console.log('complaint updated with id ', self.complaint.id);
+                    console.log('complaint updated with id ', self.complaint);
                     $('#ModalSaveComplaint').modal('toggle');
                 }
             } else {

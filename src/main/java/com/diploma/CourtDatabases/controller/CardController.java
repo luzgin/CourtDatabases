@@ -4,6 +4,10 @@ import com.diploma.CourtDatabases.entity.CardAdm;
 import com.diploma.CourtDatabases.entity.ComplaintsAdm;
 import com.diploma.CourtDatabases.entity.DateRequestCase;
 import com.diploma.CourtDatabases.entity.DecreeAdm;
+import com.diploma.CourtDatabases.entity.report.Case;
+import com.diploma.CourtDatabases.entity.report.ReinstatementOfTerm;
+import com.diploma.CourtDatabases.entity.report.ReportEntity;
+import com.diploma.CourtDatabases.entity.report.ResultCase;
 import com.diploma.CourtDatabases.service.CardAdmService;
 import com.diploma.CourtDatabases.service.ComplaintsAdmService;
 import com.diploma.CourtDatabases.service.DateRequestCaseService;
@@ -64,6 +68,8 @@ public class CardController {
 
     @GetMapping(value = "/cardAdm/report/{dateFrom}/{dateTo}")
     public Integer qwe(@PathVariable("dateFrom") @DateTimeFormat(pattern = "yyyy-MM-dd") Date dateFrom, @PathVariable("dateTo") @DateTimeFormat(pattern = "yyyy-MM-dd") Date dateTo) {
+        ReportEntity reportEntity = new ReportEntity();
+
         Integer numberOfCases = 0;
         List<CardAdm> cardsList = cardAdmService.findByCreateDateBetween(dateFrom, dateTo); //список всех карточек за период
         HashSet<DecreeAdm> decreeSet = new HashSet<>();
@@ -74,7 +80,7 @@ public class CardController {
         while (iteratorDecree.hasNext()) {
             DecreeAdm currentDecree = iteratorDecree.next();
             List<ComplaintsAdm> complaintsForCurrentDecree = complaintsAdmService.findByDecreeAdm(currentDecree); //жалобы для выбранного посталовления
-            Date secondDate = new Date(0, 0, 0);
+            Date secondDate = new Date(1970, 1, 1);
             for (int i = 0; i < complaintsForCurrentDecree.size(); i++) { //фильтрация жалоб за указанный период отчета
                 if (complaintsForCurrentDecree.get(i).getCardAdm().getCreateDate().getTime() >= dateFrom.getTime()
                         && complaintsForCurrentDecree.get(i).getCardAdm().getCreateDate().getTime() <= dateTo.getTime()) {
@@ -84,6 +90,20 @@ public class CardController {
             }
             if (complaintsForCurrentDecree.size() > 0) {
                 if (complaintsForCurrentDecree.size() == 1) {
+
+                    if (complaintsForCurrentDecree.get(0).getDecreeAdm().getOrganization().getType() == 1){
+
+                        if (!complaintsForCurrentDecree.get(0).isReinstatementOfTerm()) {
+
+                            numberOfCases++;
+                        }else{
+                           
+                        }
+
+
+                    }
+
+
                     if (!complaintsForCurrentDecree.get(0).isReinstatementOfTerm()) {
                         numberOfCases++;
                     }

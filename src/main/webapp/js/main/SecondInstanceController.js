@@ -69,6 +69,7 @@ angular.module('courtApp').controller('SecondInstanceController',
             if ($scope.secondInstanceForm.$valid) {
                 console.log('Submitting');
                 if (self.secondInstance.id === undefined || self.secondInstance.id === null) {
+                    self.secondInstance.decreeDate.setHours(3);
                     console.log('Saving New secondInstance', self.secondInstance);
                     createSecondInstance(self.secondInstance);
                     $('#ModalSaveSecondInstance').modal('toggle');

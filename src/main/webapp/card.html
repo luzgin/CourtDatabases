@@ -17,10 +17,10 @@
                                    id="numberCard"
                                    ng-model="cardC.card.cardNumber"
                                    ng-required="true"
-                                   ng-pattern="/[0-9]{1}[А-Яа-яЁё]{1}-[0-9]{1,4}/"
-                                   placeholder="4X-XXX"/>
+                                   ng-pattern="/[0-9]{1}-(([А-Яа-яЁё]{1})|([А-Яа-яЁё]{1}\([А-Яа-яЁё]{2}\)))-[0-9]{1,4}/"
+                                   placeholder="4-а/а(пр)-123"/>
                             <span style="color:red" ng-show="cardForm.numberCard.check && cardForm.numberCard.$invalid">
-  							    Введите № в формате: 4х-123
+  							    Введите № в формате: 4-а/а(пр)-123
                             </span>
                         </div>
 

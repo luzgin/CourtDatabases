@@ -23,6 +23,7 @@ angular.module('courtApp').controller('DateReturnController',
             if ($scope.dateReturnForm.$valid) {
                 console.log('Submitting');
                 if (self.dateReturn.id === undefined || self.dateReturn.id === null) {
+                    self.dateReturn.date.setHours(3);
                     console.log('Saving New dateReturn', self.dateReturn);
                     createDateReturn(self.dateReturn);
                     $('#ModalSaveDateReturn').modal('toggle');

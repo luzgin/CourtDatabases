@@ -73,6 +73,7 @@ angular.module('courtApp').controller('DecreeController',
                 if ($scope.decreeForm.$valid) {
                     console.log('Submitting');
                     if (self.decree.id === undefined || self.decree.id === null) {
+                        self.decree.decreeDate.setHours(3);
                         console.log('Saving New decree', self.decree);
                         createDecree(self.decree);
                     } else {
