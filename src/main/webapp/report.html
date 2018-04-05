@@ -116,17 +116,17 @@
                 </tr>
                 <tr class="alig-center">
                     <td class="text-left">Подведомственными судами</td>
+                    <td>{{yesReinstatementOfTermCourt=((repC.rep.reportCoutrs | filter:{type:2, reinstatementOfTerm:true}).length)}}</td>
+                    <td>{{noReinstatementOfTermCourt=((repC.rep.reportCoutrs | filter:{type:2, reinstatementOfTerm:false}).length)}}</td>
+                    <td>{{casesCourt=((repC.rep.reportCoutrs | filter:{type:1}).length)}}</td>
+                    <td>{{r1Court=((repC.rep.reportCoutrs | filter:{type:1, resultNumber:1}).length)}}</td>
+                    <td>{{r2Court=((repC.rep.reportCoutrs | filter:{type:1, resultNumber:3}).length)}}</td>
                     <td></td>
+                    <td>{{r4Court=((repC.rep.reportCoutrs | filter:{type:1, resultNumber:2}).length)}}</td>
+                    <td>{{r5Court=((repC.rep.reportCoutrs | filter:{type:1, resultNumber:4}).length)}}</td>
+                    <td>{{r6Court=((repC.rep.reportCoutrs | filter:{type:1, resultNumber:5}).length)}}</td>
                     <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
+                    <td>{{r7Court=((repC.rep.reportCoutrs | filter:{type:1, resultNumber:6}).length)}}</td>
 
                 </tr>
                 <tr>
@@ -145,31 +145,31 @@
                 </tr>
                 <tr>
                     <td class="text-left">Подведомственные другим органам</td>
+                    <td>{{yesReinstatementOfTermOther=((repC.rep.otherOrganization | filter:{type:2, reinstatementOfTerm:true}).length)}}</td>
+                    <td>{{noReinstatementOfTermOther=((repC.rep.otherOrganization | filter:{type:2, reinstatementOfTerm:false}).length)}}</td>
+                    <td>{{casesOther=((repC.rep.otherOrganization | filter:{type:1}).length)}}</td>
+                    <td>{{r1Other=((repC.rep.otherOrganization | filter:{type:1, resultNumber:1}).length)}}</td>
+                    <td>{{r2Other=((repC.rep.otherOrganization | filter:{type:1, resultNumber:3}).length)}}</td>
                     <td></td>
+                    <td>{{r4Other=((repC.rep.otherOrganization | filter:{type:1, resultNumber:2}).length)}}</td>
+                    <td>{{r5Other=((repC.rep.otherOrganization | filter:{type:1, resultNumber:4}).length)}}</td>
+                    <td>{{r6Other=((repC.rep.otherOrganization | filter:{type:1, resultNumber:5}).length)}}</td>
                     <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
+                    <td>{{r7Other=((repC.rep.otherOrganization | filter:{type:1, resultNumber:6}).length)}}</td>
                 </tr>
                 <tr>
                     <td class="text-left">Всего:</td>
+                    <td>{{yesReinstatementOfTermCourt+yesReinstatementOfTermOther}}</td>
+                    <td>{{noReinstatementOfTermCourt+noReinstatementOfTermOther}}</td>
+                    <td>{{casesCourt+casesOther}}</td>
+                    <td>{{r1Court+r1Other}}</td>
+                    <td>{{r2Court+r2Other}}</td>
                     <td></td>
+                    <td>{{r4Court+r4Other}}</td>
+                    <td>{{r5Court+r5Other}}</td>
+                    <td>{{r6Court+r6Other}}</td>
                     <td></td>
-                    <td>{{repC.rep.total}}</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
+                    <td>{{r7Court+r7Other}}</td>
                 </tr>
 
             </table>

@@ -4,6 +4,7 @@ public class ResultCase extends Case {
     private Integer resultNumber;
 
     public ResultCase() {
+        setType(1);
     }
 
     public Integer getResultNumber() {

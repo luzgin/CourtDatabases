@@ -1,21 +1,23 @@
 package com.diploma.CourtDatabases.entity.report;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ReportEntity {
-    private List<Case> reportCoutrs;
+    private List<Case> reportCourts;
     private List<Case> otherOrganization;
 
     public ReportEntity() {
-
+        this.reportCourts = new ArrayList<Case>();
+        this.otherOrganization = new ArrayList<Case>();
     }
 
     public List<Case> getReportCoutrs() {
-        return reportCoutrs;
+        return reportCourts;
     }
 
-    public void setReportCoutrs(List<Case> reportCoutrs) {
-        this.reportCoutrs = reportCoutrs;
+    public void setReportCourts(List<Case> reportCourts) {
+        this.reportCourts = reportCourts;
     }
 
     public List<Case> getOtherOrganization() {
@@ -29,7 +31,7 @@ public class ReportEntity {
     @Override
     public String toString() {
         return "ReportEntity{" +
-                "reportCoutrs=" + reportCoutrs +
+                "reportCoutrs=" + reportCourts +
                 ", otherOrganization=" + otherOrganization +
                 '}';
     }

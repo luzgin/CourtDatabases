@@ -13,7 +13,6 @@ angular.module('courtApp').factory('ReportService',
                 $http.get(urls.CARD_SERVICE_API+"report/"+dateFrom+"/"+dateTo)
                     .then(
                         function (response) {
-                            console.log('report :' + response.data);
                             deferred.resolve(response.data);
                         },
                         function (errResponse) {

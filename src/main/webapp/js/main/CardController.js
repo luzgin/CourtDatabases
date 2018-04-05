@@ -279,7 +279,7 @@ angular.module('courtApp').controller('CardController',
                 CardService.updateCard(card, id)
                     .then(
                         function (response) {
-                            console.log('card updated successfully' + self.card);
+                            console.log('card updated successfully' + JSON.stringify(self.card));
                         },
                         function (errResponse) {
                             console.error('Error while updating card');

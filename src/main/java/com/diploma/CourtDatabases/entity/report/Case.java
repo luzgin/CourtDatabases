@@ -1,6 +1,6 @@
 package com.diploma.CourtDatabases.entity.report;
 
-public abstract class Case {
+public class Case {
     private Integer type;
 
     public Integer getType() {

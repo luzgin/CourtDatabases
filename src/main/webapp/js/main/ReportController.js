@@ -27,10 +27,10 @@ angular.module('courtApp').controller('ReportController',
                 var dateT = new Date(dateTo);
                 ReportService.getReport(dateF.getFullYear() + "-" + (dateF.getMonth() + 1) + "-" + dateF.getDate(), dateT.getFullYear() + "-" + (dateT.getMonth() + 1) + "-" + dateT.getDate()).then(
                     function (report) {
-                        self.rep.total = report;
+                        self.rep = report;
                     },
                     function (errResponse) {
-                        console.error('Error report ' + id + ', Error :' + errResponse.data);
+                        console.error('Error :' + errResponse.data);
                     }
                 )
             } else {

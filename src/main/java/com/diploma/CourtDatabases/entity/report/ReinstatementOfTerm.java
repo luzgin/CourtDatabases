@@ -6,6 +6,7 @@ public class ReinstatementOfTerm extends Case {
     private boolean reinstatementOfTerm;
 
     public ReinstatementOfTerm() {
+        setType(2);
     }
 
     public boolean isReinstatementOfTerm() {
