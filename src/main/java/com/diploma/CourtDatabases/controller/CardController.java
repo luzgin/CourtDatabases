@@ -65,7 +65,7 @@ public class CardController {
     }
 
     @GetMapping(value = "/cardAdm/report/{dateFrom}/{dateTo}")
-    public ReportEntity qwe(@PathVariable("dateFrom") @DateTimeFormat(pattern = "yyyy-MM-dd") Date dateFrom, @PathVariable("dateTo") @DateTimeFormat(pattern = "yyyy-MM-dd") Date dateTo) {
+    public ReportEntity finalReport(@PathVariable("dateFrom") @DateTimeFormat(pattern = "yyyy-MM-dd") Date dateFrom, @PathVariable("dateTo") @DateTimeFormat(pattern = "yyyy-MM-dd") Date dateTo) {
         ReportEntity reportEntity = new ReportEntity();
         Integer numberOfCases = 0;
         List<CardAdm> cardsList = cardAdmService.findByCreateDateBetween(dateFrom, dateTo); //список всех карточек за период
@@ -86,131 +86,93 @@ public class CardController {
                 }
             }
             if (complaintsForCurrentDecree.size() > 0) {
-                if (complaintsForCurrentDecree.size() == 1) {
-                    List<DateReturnCase> dateReturnCases = dateReturnCaseService.findByCardAdm_Id(complaintsForCurrentDecree.get(0).getCardAdm().getId());
-                    if (complaintsForCurrentDecree.get(0).getDecreeAdm().getOrganization().getType() == 1) {
-                        if (!complaintsForCurrentDecree.get(0).isReinstatementOfTerm()) {
+                // если жалоб на постановление больше 1
+
+                List<ComplaintsAdm> listComplaintsForCurrentDecree = complaintsForCurrentDecree;
+                for (int i = 0; i < listComplaintsForCurrentDecree.size(); i++) {
+                    ComplaintsAdm complaint1 = listComplaintsForCurrentDecree.get(i);
+                    Date firstComplaintCreateDate = complaint1.getComplainDate();
+                    Date firstComplaintCardResultDate = complaint1.getCardAdm().getResultDate();
+                    List<DateReturnCase> dateReturnCasesCom1 = dateReturnCaseService.findByCardAdm_Id(complaint1.getCardAdm().getId());
+                    if (firstComplaintCardResultDate == null && dateReturnCasesCom1.size() == 0) {
+                        listComplaintsForCurrentDecree.remove(i);
+                    } else if (firstComplaintCardResultDate == null && dateReturnCasesCom1.size() != 0) {
+                        firstComplaintCardResultDate = dateReturnCasesCom1.get(0).getDate();
+                    } else {
+                        for (int j = 0; j < complaintsForCurrentDecree.size(); j++) {
+                            ComplaintsAdm complaint2 = complaintsForCurrentDecree.get(j);
+                            if (!complaint1.equals(complaint2)) {
+                                Date secondComplaintCardResultDate = complaint2.getCardAdm().getResultDate();
+                                List<DateReturnCase> dateReturnCasesCom2 = dateReturnCaseService.findByCardAdm_Id(complaint2.getCardAdm().getId());
+                                if ((secondComplaintCardResultDate != null) || (secondComplaintCardResultDate == null && dateReturnCasesCom2.size() != 0)) {
+                                    if (complaint2.getComplainDate().getTime() >= firstComplaintCreateDate.getTime()
+                                            && complaint2.getComplainDate().getTime() <= firstComplaintCardResultDate.getTime()) {
+                                        listComplaintsForCurrentDecree.remove(j);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                for (ComplaintsAdm complaint :
+                        listComplaintsForCurrentDecree) {
+                    List<DateReturnCase> dateReturnCases = dateReturnCaseService.findByCardAdm_Id(complaint.getCardAdm().getId());
+                    if (complaint.getDecreeAdm().getOrganization().getType() == 1) { //подведомственно судам
+                        if (!complaint.isReinstatementOfTerm()) {
                             ResultCase resultCase = new ResultCase();
-                            if (complaintsForCurrentDecree.get(0).getCardAdm().getResultDate() == null && dateReturnCases.size() != 0) {
+                            if (complaint.getDecreeAdm().getSecondInstanceAdm() != null){
+                                resultCase.setSenondInstance(true);
+                            }else{
+                                resultCase.setSenondInstance(false);
+                            }
+                            if (complaint.getCardAdm().getResultDate() == null && dateReturnCases.size() != 0) {
                                 resultCase.setResultNumber(6);//Возвращено без рассмотрения
-                            } else if (complaintsForCurrentDecree.get(0).getCardAdm().getResultAdmCase().getId() == 1) {
+                            } else if (complaint.getCardAdm().getResultAdmCase().getId() == 1) {
                                 resultCase.setResultNumber(1); //Оставлено без изменения, а жалоба (протест) - без
-                            } else if (complaintsForCurrentDecree.get(0).getCardAdm().getResultAdmCase().getId() == 2) {
+                            } else if (complaint.getCardAdm().getResultAdmCase().getId() == 2) {
                                 resultCase.setResultNumber(2);//Отменено полностью или в части и направлено на нов.
-                            } else if (complaintsForCurrentDecree.get(0).getCardAdm().getResultAdmCase().getId() == 3) {
+                            } else if (complaint.getCardAdm().getResultAdmCase().getId() == 3) {
                                 resultCase.setResultNumber(3);//Отменено полностью или в части и прекращено дело
-                            } else if (complaintsForCurrentDecree.get(0).getCardAdm().getResultAdmCase().getId() == 4) {
+                            } else if (complaint.getCardAdm().getResultAdmCase().getId() == 4) {
                                 resultCase.setResultNumber(4);//Отменено последнее по времени постановление, и ост
-                            } else if (complaintsForCurrentDecree.get(0).getCardAdm().getResultAdmCase().getId() == 5) {
+                            } else if (complaint.getCardAdm().getResultAdmCase().getId() == 5) {
                                 resultCase.setResultNumber(5);//Изменено постановление
                             }
                             reportEntity.getReportCoutrs().add(resultCase);
                         } else {
                             ReinstatementOfTerm reinstatementOfTerm = new ReinstatementOfTerm();
-                            if (complaintsForCurrentDecree.get(0).getCardAdm().getResultAdmCase().getId() == 1) {// если жалоба на востановление срока отклонена
+                            if (complaint.getCardAdm().getResultAdmCase().getId() == 1) {// если жалоба на востановление срока отклонена
                                 reinstatementOfTerm.setReinstatementOfTerm(false);
                             } else {
                                 reinstatementOfTerm.setReinstatementOfTerm(true);
                             }
                             reportEntity.getReportCoutrs().add(reinstatementOfTerm);
                         }
-                    } else {
-                        if (!complaintsForCurrentDecree.get(0).isReinstatementOfTerm()) {
+                    } else { //подведомственно другим организациям
+                        if (!complaint.isReinstatementOfTerm()) {
                             ResultCase resultCase = new ResultCase();
-                            if (complaintsForCurrentDecree.get(0).getCardAdm().getResultDate() == null && dateReturnCases.size() != 0) {
+                            if (complaint.getCardAdm().getResultDate() == null && dateReturnCases.size() != 0) {
                                 resultCase.setResultNumber(6);//Возвращено без рассмотрения
-                            } else if (complaintsForCurrentDecree.get(0).getCardAdm().getResultAdmCase().getId() == 1) {
+                            } else if (complaint.getCardAdm().getResultAdmCase().getId() == 1) {
                                 resultCase.setResultNumber(1); //Оставлено без изменения, а жалоба (протест) - без
-                            } else if (complaintsForCurrentDecree.get(0).getCardAdm().getResultAdmCase().getId() == 2) {
+                            } else if (complaint.getCardAdm().getResultAdmCase().getId() == 2) {
                                 resultCase.setResultNumber(2);//Отменено полностью или в части и направлено на нов.
-                            } else if (complaintsForCurrentDecree.get(0).getCardAdm().getResultAdmCase().getId() == 3) {
+                            } else if (complaint.getCardAdm().getResultAdmCase().getId() == 3) {
                                 resultCase.setResultNumber(3);//Отменено полностью или в части и прекращено дело
-                            } else if (complaintsForCurrentDecree.get(0).getCardAdm().getResultAdmCase().getId() == 4) {
+                            } else if (complaint.getCardAdm().getResultAdmCase().getId() == 4) {
                                 resultCase.setResultNumber(4);//Отменено последнее по времени постановление, и ост
-                            } else if (complaintsForCurrentDecree.get(0).getCardAdm().getResultAdmCase().getId() == 5) {
+                            } else if (complaint.getCardAdm().getResultAdmCase().getId() == 5) {
                                 resultCase.setResultNumber(5);//Изменено постановление
                             }
                             reportEntity.getOtherOrganization().add(resultCase);
                         } else {
                             ReinstatementOfTerm reinstatementOfTerm = new ReinstatementOfTerm();
-                            if (complaintsForCurrentDecree.get(0).getCardAdm().getResultAdmCase().getId() == 1) {// если жалоба на востановление срока отклонена
+                            if (complaint.getCardAdm().getResultAdmCase().getId() == 1) {// если жалоба на востановление срока отклонена
                                 reinstatementOfTerm.setReinstatementOfTerm(false);
                             } else {
                                 reinstatementOfTerm.setReinstatementOfTerm(true);
                             }
                             reportEntity.getOtherOrganization().add(reinstatementOfTerm);
-                        }
-                    }
-                } else {// если жалоб на постановление больше 1
-
-                    List<ComplaintsAdm> listComplaintsForCurrentDecree = complaintsForCurrentDecree;
-                    for (int i = 0; i < listComplaintsForCurrentDecree.size(); i++) { 
-                        ComplaintsAdm complaint1 = listComplaintsForCurrentDecree.get(i);
-                        Date firstComplaintCreateDate = complaint1.getComplainDate();
-                        Date firstComplaintCardResultDate = complaint1.getCardAdm().getResultDate();
-                        for (int j = 0; j < complaintsForCurrentDecree.size(); j++) {
-                            ComplaintsAdm complaint2 = complaintsForCurrentDecree.get(j);
-                            if (!complaint1.equals(complaint2) && complaint2.getComplainDate().getTime() >= firstComplaintCreateDate.getTime()
-                                    && complaint2.getComplainDate().getTime() <= firstComplaintCardResultDate.getTime()) {
-                                listComplaintsForCurrentDecree.remove(j);
-                            }
-                        }
-                    }
-                    for (ComplaintsAdm complaint:
-                            listComplaintsForCurrentDecree) {
-                        List<DateReturnCase> dateReturnCases = dateReturnCaseService.findByCardAdm_Id(complaint.getCardAdm().getId());
-                        if (complaint.getDecreeAdm().getOrganization().getType() == 1) {
-                            if (!complaint.isReinstatementOfTerm()) {
-                                ResultCase resultCase = new ResultCase();
-                                if (complaint.getCardAdm().getResultDate() == null && dateReturnCases.size() != 0) {
-                                    resultCase.setResultNumber(6);//Возвращено без рассмотрения
-                                } else if (complaint.getCardAdm().getResultAdmCase().getId() == 1) {
-                                    resultCase.setResultNumber(1); //Оставлено без изменения, а жалоба (протест) - без
-                                } else if (complaint.getCardAdm().getResultAdmCase().getId() == 2) {
-                                    resultCase.setResultNumber(2);//Отменено полностью или в части и направлено на нов.
-                                } else if (complaint.getCardAdm().getResultAdmCase().getId() == 3) {
-                                    resultCase.setResultNumber(3);//Отменено полностью или в части и прекращено дело
-                                } else if (complaint.getCardAdm().getResultAdmCase().getId() == 4) {
-                                    resultCase.setResultNumber(4);//Отменено последнее по времени постановление, и ост
-                                } else if (complaint.getCardAdm().getResultAdmCase().getId() == 5) {
-                                    resultCase.setResultNumber(5);//Изменено постановление
-                                }
-                                reportEntity.getReportCoutrs().add(resultCase);
-                            } else {
-                                ReinstatementOfTerm reinstatementOfTerm = new ReinstatementOfTerm();
-                                if (complaint.getCardAdm().getResultAdmCase().getId() == 1) {// если жалоба на востановление срока отклонена
-                                    reinstatementOfTerm.setReinstatementOfTerm(false);
-                                } else {
-                                    reinstatementOfTerm.setReinstatementOfTerm(true);
-                                }
-                                reportEntity.getReportCoutrs().add(reinstatementOfTerm);
-                            }
-                        } else {
-                            if (!complaint.isReinstatementOfTerm()) {
-                                ResultCase resultCase = new ResultCase();
-                                if (complaint.getCardAdm().getResultDate() == null && dateReturnCases.size() != 0) {
-                                    resultCase.setResultNumber(6);//Возвращено без рассмотрения
-                                } else if (complaint.getCardAdm().getResultAdmCase().getId() == 1) {
-                                    resultCase.setResultNumber(1); //Оставлено без изменения, а жалоба (протест) - без
-                                } else if (complaint.getCardAdm().getResultAdmCase().getId() == 2) {
-                                    resultCase.setResultNumber(2);//Отменено полностью или в части и направлено на нов.
-                                } else if (complaint.getCardAdm().getResultAdmCase().getId() == 3) {
-                                    resultCase.setResultNumber(3);//Отменено полностью или в части и прекращено дело
-                                } else if (complaint.getCardAdm().getResultAdmCase().getId() == 4) {
-                                    resultCase.setResultNumber(4);//Отменено последнее по времени постановление, и ост
-                                } else if (complaint.getCardAdm().getResultAdmCase().getId() == 5) {
-                                    resultCase.setResultNumber(5);//Изменено постановление
-                                }
-                                reportEntity.getOtherOrganization().add(resultCase);
-                            } else {
-                                ReinstatementOfTerm reinstatementOfTerm = new ReinstatementOfTerm();
-                                if (complaint.getCardAdm().getResultAdmCase().getId() == 1) {// если жалоба на востановление срока отклонена
-                                    reinstatementOfTerm.setReinstatementOfTerm(false);
-                                } else {
-                                    reinstatementOfTerm.setReinstatementOfTerm(true);
-                                }
-                                reportEntity.getOtherOrganization().add(reinstatementOfTerm);
-                            }
                         }
                     }
                 }

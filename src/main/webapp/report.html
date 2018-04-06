@@ -131,17 +131,17 @@
                 </tr>
                 <tr>
                     <td class="text-left">из них рассматривались ранее как не вступившие в законную силу</td>
+                    <td>{{yesReinstatementOfTermCourt=((repC.rep.reportCoutrs | filter:{type:2, reinstatementOfTerm:true, senondInstance:true}).length)}}</td>
+                    <td>{{noReinstatementOfTermCourt=((repC.rep.reportCoutrs | filter:{type:2, reinstatementOfTerm:false, senondInstance:true}).length)}}</td>
+                    <td>{{casesCourt=((repC.rep.reportCoutrs | filter:{type:1, senondInstance:true}).length)}}</td>
+                    <td>{{r1Court=((repC.rep.reportCoutrs | filter:{type:1, resultNumber:1, senondInstance:true}).length)}}</td>
+                    <td>{{r2Court=((repC.rep.reportCoutrs | filter:{type:1, resultNumber:3, senondInstance:true}).length)}}</td>
                     <td></td>
+                    <td>{{r4Court=((repC.rep.reportCoutrs | filter:{type:1, resultNumber:2, senondInstance:true}).length)}}</td>
+                    <td>{{r5Court=((repC.rep.reportCoutrs | filter:{type:1, resultNumber:4, senondInstance:true}).length)}}</td>
+                    <td>{{r6Court=((repC.rep.reportCoutrs | filter:{type:1, resultNumber:5, senondInstance:true}).length)}}</td>
                     <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
+                    <td>{{r7Court=((repC.rep.reportCoutrs | filter:{type:1, resultNumber:6, senondInstance:true}).length)}}</td>
                 </tr>
                 <tr>
                     <td class="text-left">Подведомственные другим органам</td>

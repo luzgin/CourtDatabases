@@ -422,19 +422,27 @@
                     </div>
                     <div class="col-md-2">
                         <label for="resultDate">Дата рассмотрения</label>
-                        <input type="date" class="form-control btn-sm" id="resultDate"
+                        <input id="resultDate"
+                               name="dateResultCase"
+                               type="date"
+                               class="form-control btn-sm"
                                ng-model="cardC.card.resultDate"/>
                     </div>
                     <div class="col-md-7">
                         <label>Результат рассмотрения</label>
-                        <ui-select ng-model="cardC.card.resultAdmCase" theme="selectize" title="Введите для поиска...">
+                        <ui-select name="resultCase"
+                                   ng-model="cardC.card.resultAdmCase"
+                                   theme="selectize"
+                                   title="Введите для поиска...">
                             <ui-select-match placeholder="Введите для поиска...">{{$select.selected.name}}
                             </ui-select-match>
                             <ui-select-choices repeat="item in cardC.getAllResults() | filter: $select.search">
                                 <div ng-bind-html="item.name | highlight: $select.search"></div>
                             </ui-select-choices>
                         </ui-select>
-
+                        <span style="color:red"
+                              ng-show="cardForm.resultCase.check">Выберете решение</span>
+                    </div>
                     </div>
                 </div>
                 <div class="card border-dark mb-3">

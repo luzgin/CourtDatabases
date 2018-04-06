@@ -223,37 +223,42 @@ angular.module('courtApp').controller('CardController',
 
             function submit() {
                 if ($scope.cardForm.$valid) {
-                    console.log('Submitting');
-                    if (self.card.id === undefined || self.card.id === null) {
-                        self.card.createDate.setHours(3);
-                        console.log('Saving New card', self.card);
-                        createCard(self.card);
-                    } else {
-                        updateCard(self.card, self.card.id);
-                        console.log('card updated with id ', self.card.id);
+                    if (self.card.resultDate != null && self.card.resultAdmCase == null) {
+                        $scope.cardForm.resultCase.check = true;
                     }
-                }else{
-                    if ($scope.cardForm.numberCard.$invalid){
+                    else {
+                        console.log('Submitting');
+                        if (self.card.id === undefined || self.card.id === null) {
+                            self.card.createDate.setHours(3);
+                            console.log('Saving New card', self.card);
+                            createCard(self.card);
+                        } else {
+                            updateCard(self.card, self.card.id);
+                            console.log('card updated with id ', self.card.id);
+                        }
+                    }
+                } else {
+                    if ($scope.cardForm.numberCard.$invalid) {
                         document.getElementById("numberCard").focus(); //TODO: добавить ошибку в выподающее окно
                         $scope.cardForm.numberCard.check = true;
 
-                    }else if ($scope.cardForm.createCard.$error.required){
+                    } else if ($scope.cardForm.createCard.$error.required) {
                         document.getElementById("createCard").focus();
                         $scope.cardForm.createCard.check = true;
 
-                    }else if ($scope.cardForm.decreeForCard.$error.required){
+                    } else if ($scope.cardForm.decreeForCard.$error.required) {
                         document.getElementById("uiDecree").focus();
                         $scope.cardForm.decreeForCard.check = true;
 
-                    }else if ($scope.cardForm.vailatorForCard.$error.required){
+                    } else if ($scope.cardForm.vailatorForCard.$error.required) {
                         document.getElementById("uiVialator").focus();
                         $scope.cardForm.vailatorForCard.check = true;
 
-                    }else if ($scope.cardForm.articleForCard.$error.required){
+                    } else if ($scope.cardForm.articleForCard.$error.required) {
                         document.getElementById("uiArticle").focus();
                         $scope.cardForm.articleForCard.check = true;
 
-                    }else if ($scope.cardForm.entityDecreeForCard.$error.required){
+                    } else if ($scope.cardForm.entityDecreeForCard.$error.required) {
                         document.getElementById("uiEntityDecree").focus();
                         $scope.cardForm.entityDecreeForCard.check = true;
                     }
