@@ -44,10 +44,19 @@
     margin-left: -5.5em;
     margin-right: -5.5em;
 }
-
+.color1{
+    border: 3px red solid;
+}
+.bor-table td, th{
+    border: 1px black solid;
+    padding: 5px;
+    text-align: center;
+    vertical-align: middle;
+}
 .bor td {
     border: 1px black solid;
     padding: 5px;
     text-align: center;
     vertical-align: middle;
 }
+

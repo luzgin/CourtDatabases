@@ -27,7 +27,6 @@ angular.module('courtApp').controller('CardController',
             self.getAllVialators = getAllVialators;
             self.parseToDate = parseToDate;
             self.getAuthorsForRegionalCourt = getAuthorsForRegionalCourt;
-            self.paintTable = paintTable;
             self.clearDecree = clearDecree;
 
             self.createComplaint = createComplaint;
@@ -61,6 +60,7 @@ angular.module('courtApp').controller('CardController',
             if (self.card.vialator != null) {
                 document.getElementById("addVialator").setAttribute('disabled', 'disabled');
             }
+
 
             function clearDecree() {
                 self.card.decreeAdm = null
@@ -338,9 +338,6 @@ angular.module('courtApp').controller('CardController',
 
             }
 
-            function paintTable() {
-
-            }
 
             function editReturnCase() {
                 $rootScope.$broadcast('editReturnCase', {b: self.returnCase});
@@ -359,6 +356,7 @@ angular.module('courtApp').controller('CardController',
                     }
                 }
             })
+
             $scope.$on('setDecreeForCard', function (setDecreeForCard, item) {
                 self.card.decreeAdm = item.a;
             })
