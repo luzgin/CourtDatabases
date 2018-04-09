@@ -91,44 +91,73 @@ angular.module('courtApp').controller('CardController',
             document.getElementById("editDateRequest").setAttribute('disabled', 'disabled');
             document.getElementById("removeDateRequest").setAttribute('disabled', 'disabled');
 
-            function setReturnCase(item) {
+            function setReturnCase(item, tr) {
+                var currentTr = document.getElementById("tableReturnCase").getElementsByTagName("tbody")[0].getElementsByTagName("tr");
+                function ressetBorder() {
+                    for (var i = 0; i < currentTr.length; i++ ){
+                        currentTr[i].style.border = "1px black solid"
+                    }
+                }
                 if (self.returnCase == item) {
                     self.returnCase = {};
+                    ressetBorder();
                     document.getElementById("editDateReturn").setAttribute('disabled', 'disabled');
                     document.getElementById("removeDateReturn").setAttribute('disabled', 'disabled');
                 } else {
                     self.returnCase = item;
+                    ressetBorder();
+                    currentTr[tr.$index].style.border = "3px red solid"
                     document.getElementById("editDateReturn").removeAttribute('disabled');
                     document.getElementById("removeDateReturn").removeAttribute('disabled');
                 }
             }
 
-            function setRequestCase(item) {
+            function setRequestCase(item,tr) {
+                var currentTr = document.getElementById("tableRequestCase").getElementsByTagName("tbody")[0].getElementsByTagName("tr");
+                function ressetBorder() {
+                    for (var i = 0; i < currentTr.length; i++ ){
+                        currentTr[i].style.border = "1px black solid"
+                    }
+                }
                 if (self.requestCase == item) {
                     self.requestCase = {};
+                    ressetBorder();
                     document.getElementById("editDateRequest").setAttribute('disabled', 'disabled');
                     document.getElementById("removeDateRequest").setAttribute('disabled', 'disabled');
                 } else {
                     self.requestCase = item;
+                    ressetBorder();
+                    currentTr[tr.$index].style.border = "3px red solid"
                     document.getElementById("editDateRequest").removeAttribute('disabled');
                     document.getElementById("removeDateRequest").removeAttribute('disabled');
 
                 }
             }
 
-            function setComplaintForEdit(item) {
+            function setComplaintForEdit(item, tr) {
+                var currentTr = document.getElementById("complaintsTable").getElementsByTagName("tbody")[0].getElementsByTagName("tr");
+                function ressetBorder() {
+                    for (var i = 0; i < currentTr.length; i++ ){
+                        currentTr[i].style.border = "1px black solid"
+                    }
+                }
                 if (item.cardAdm.cardNumber === document.getElementById("numberCard").value) {
                     if (self.complaintForEdit != item) {
                         self.complaintForEdit = item;
+                        ressetBorder();
+                        currentTr[tr.$index].style.border = "3px red solid"
                         document.getElementById("editComplaint").removeAttribute('disabled');
                         document.getElementById("removeComplaint").removeAttribute('disabled');
+
                     } else {
                         self.complaintForEdit = {};
+                        ressetBorder();
                         document.getElementById("editComplaint").setAttribute('disabled', 'disabled');
                         document.getElementById("removeComplaint").setAttribute('disabled', 'disabled');
                     }
                 } else {
                     self.complaintForEdit = {};
+                    ressetBorder();
                     document.getElementById("editComplaint").setAttribute('disabled', 'disabled');
                     document.getElementById("removeComplaint").setAttribute('disabled', 'disabled');
                 }
@@ -320,8 +349,6 @@ angular.module('courtApp').controller('CardController',
 
             function createComplaint() {
                 $rootScope.$broadcast('createComplaint');
-
-
             }
 
             function createReturnCase() {
@@ -349,6 +376,9 @@ angular.module('courtApp').controller('CardController',
 
 
             $scope.$on('printTable', function () {
+                self.complaintForEdit = {};
+                document.getElementById("editComplaint").setAttribute('disabled', 'disabled');
+                document.getElementById("removeComplaint").setAttribute('disabled', 'disabled');
                 var table = document.getElementById("complaintsTable");
                 for (var i = 1; i < table.rows.length; i++) {
                     if (table.rows[i].cells[0].innerHTML === document.getElementById("numberCard").value) {
@@ -356,7 +386,6 @@ angular.module('courtApp').controller('CardController',
                     }
                 }
             })
-
             $scope.$on('setDecreeForCard', function (setDecreeForCard, item) {
                 self.card.decreeAdm = item.a;
             })

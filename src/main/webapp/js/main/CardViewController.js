@@ -11,11 +11,12 @@ angular.module('courtApp').controller('CardViewController',
             self.setCard = setCard;
             self.setCardForRemove = setCardForRemove;
 
+            document.getElementById("removeButton").setAttribute('disabled', 'disabled');
             $(document).ready(function () {
                 $("tbody tr").click(function () {
-                    if($(this).hasClass("color-form-title")){
+                    if ($(this).hasClass("color-form-title")) {
                         $(this).toggleClass("color-form-title");
-                    }else{
+                    } else {
                         $('table tr').removeClass('color-form-title');
                         $(this).toggleClass("color-form-title");
                     }
@@ -33,21 +34,23 @@ angular.module('courtApp').controller('CardViewController',
                 DateRequestService.loadDateRequestForCard(item.id);
             }
 
-            function setCardForRemove(item) {
+            function setCardForRemove(item, tr) {
+                var currentTr = document.getElementById("myTable").getElementsByTagName("tbody")[0].getElementsByTagName("tr");
+                function ressetBorder() {
+                    for (var i = 0; i < currentTr.length; i++) {
+                        currentTr[i].style.backgroundColor = "#ffffff";
+                    }
+                }
                 if (self.cardForRemove != item) {
                     self.cardForRemove = item;
+                    ressetBorder();
+                    currentTr[tr.$index].style.backgroundColor = '#9cc3e0';
+                    document.getElementById("removeButton").removeAttribute('disabled');
                 } else {
                     self.cardForRemove = {};
+                    ressetBorder();
+                    document.getElementById("removeButton").setAttribute('disabled', 'disabled');
                 }
-                /*   закрашивание строки таблицы при наведении, раскоментить main.css
-                $(document).ready(function(){
-                    $('table tr').on('click', function(e) {
-                        $('table tr').removeClass('marked');
-                        $(this).addClass('marked');
-                    });
-                });
-                */
-
             }
 
             function removeCard() {

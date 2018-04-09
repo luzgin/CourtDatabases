@@ -248,7 +248,7 @@ posdApp.filter('propsFilter', function () {
 posdApp.directive('ngLoad', function ($timeout,  $rootScope) {
     return {
         restrict: 'A',
-        link: function (scope, element, attr) {
+        link: function (scope) {
             if (scope.$last === true) {
                 $timeout(function () {
                     $rootScope.$broadcast('printTable');

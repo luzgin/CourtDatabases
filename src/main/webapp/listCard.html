@@ -12,11 +12,11 @@
                         Добавить карточку
                     </button>
                 </a>
-                <button class="btn btn-danger btn-sm" ng-click="cdviewC.removeCard();">Удалить</button>
+                <button id="removeButton" class="btn btn-danger btn-sm" ng-click="cdviewC.removeCard();">Удалить</button>
             </div>
         </div>
         <div class="scroll-table">
-            <table id="myTable" class="bor-table table-sm table-hover ">
+            <table id="myTable" class="bor-table table-sm table-hover">
                 <thead>
                 <tr>
                     <th class="div-center" width="10%">Номер</th>
@@ -27,12 +27,11 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr class="cursor" ng-click="cdviewC.setCardForRemove(item)" ng-dblclick="cdviewC.setCard(item)"
+                <tr class="cursor" ng-click="cdviewC.setCardForRemove(item, this)" ng-dblclick="cdviewC.setCard(item)"
                     ondblclick="location.href ='#/card'"
                     ng-repeat="item in cdviewC.getAllCards() | filter:search | orderBy: '-createDate'">
                     <td>{{item.cardNumber}}</td>
                     <td>{{item.createDate | date: 'dd.MM.yyyy'}}</td>
-
                     <td>
                         <div ng-show="item.vialator.typeVialator != 2">
                             Л.Н.: {{item.vialator.privateNumber}}<br>

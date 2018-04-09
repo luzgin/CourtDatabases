@@ -351,8 +351,9 @@
                             </tr>
                             </thead>
                             <tbody name="tbodyComplaint">
-                            <tr class="cursor" ng-click="cardC.setComplaintForEdit(item)"
+                            <tr class="cursor"
                                 ng-repeat="item in cardC.getComplaintsForDecree()"
+                                ng-click="cardC.setComplaintForEdit(item,this)"
                                 ng-load="ngRepeatFinished">
                                 <td>{{item.cardAdm.cardNumber}}</td>
                                 <td>{{item.complainDate | date: 'dd.MM.yyyy'}}</td>
@@ -371,7 +372,8 @@
                         Поступление дел при истребовании
                     </div>
                     <div class="card-body py-2 px-3">
-                        <table class="col bor-table table-sm table-hover mb-0 table-striped">
+                        <table id="tableRequestCase" name="tableRequestCase"
+                               class="col bor-table table-sm table-hover mb-0 table-striped">
                             <div class="row justify-content-end pr-3 pb-2">
                                 <input type="button"
                                        class="btn btn-outline-success btn-sm"
@@ -398,7 +400,7 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <tr class="cursor" ng-click="cardC.setRequestCase(item)"
+                            <tr class="cursor" ng-click="cardC.setRequestCase(item, this)"
                                 ng-repeat="item in cardC.getDateRequestCaseForCard()">
                                 <td>{{item.date | date: 'dd.MM.yyyy'}}</td>
                                 <td>{{item.organization}}</td>
@@ -448,7 +450,8 @@
                         Возвращение дел
                     </div>
                     <div class="card-body py-2 px-3">
-                        <table class="col bor-table table-sm table-hover mb-0 table-striped">
+                        <table id="tableReturnCase" name="tableReturnCase"
+                               class="col bor-table table-sm table-hover mb-0 table-striped">
                             <div class="row justify-content-end pr-3 pb-2">
                                 <input type="button"
                                        class="btn btn-outline-success btn-sm"
@@ -476,7 +479,7 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <tr class="cursor" ng-click="cardC.setReturnCase(item)"
+                            <tr class="cursor" ng-click="cardC.setReturnCase(item, this)"
                                 ng-repeat="item in cardC.getDateReturnCaseForCard()">
                                 <td>{{item.date | date: 'dd.MM.yyyy'}}</td>
                                 <td>{{item.organization}}</td>
