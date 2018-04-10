@@ -152,7 +152,7 @@ public class CardController {
                         if (!complaint.isReinstatementOfTerm()) {
                             ResultCase resultCase = new ResultCase();
                             if (complaint.getCardAdm().getResultDate() == null && dateReturnCases.size() != 0) {
-                                resultCase.setResultNumber(6);//Возвращено без рассмотрения
+                                resultCase.setResultNumber(8);//Возвращено без рассмотрения
                             } else if (complaint.getCardAdm().getResultAdmCase().getId() == 1) {
                                 resultCase.setResultNumber(1); //Оставлено без изменения, а жалоба (протест) - без
                             } else if (complaint.getCardAdm().getResultAdmCase().getId() == 2) {
@@ -160,9 +160,13 @@ public class CardController {
                             } else if (complaint.getCardAdm().getResultAdmCase().getId() == 3) {
                                 resultCase.setResultNumber(3);//Отменено полностью или в части и прекращено дело
                             } else if (complaint.getCardAdm().getResultAdmCase().getId() == 4) {
-                                resultCase.setResultNumber(4);//Отменено последнее по времени постановление, и ост
+                                resultCase.setResultNumber(4);//Отменено полностью или в части и прекращено дело в связи с возбуждением уголовного дела
                             } else if (complaint.getCardAdm().getResultAdmCase().getId() == 5) {
-                                resultCase.setResultNumber(5);//Изменено постановление
+                                resultCase.setResultNumber(5);//Отменено последнее по времени постановление, и ост
+                            } else if (complaint.getCardAdm().getResultAdmCase().getId() == 6) {
+                                resultCase.setResultNumber(6);//Изменено постановление
+                            } else if (complaint.getCardAdm().getResultAdmCase().getId() == 7) {
+                                resultCase.setResultNumber(7);//Направлено на рассмотрение в другие органы
                             }
                             reportEntity.getOtherOrganization().add(resultCase);
                         } else {

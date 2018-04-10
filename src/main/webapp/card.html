@@ -61,7 +61,7 @@
                                     {{$select.selected.organization.name}} {{$select.selected.authorDocument.name}}
                                 </ui-select-match>
                                 <ui-select-choices repeat="item in cardC.getAllRegulations() | filter: $select.search">
-                                    <div ng-bind-html="item.decreeDate | highlight: $select.search"></div>
+                                    <div ng-bind-html="item.decreeDate| date: 'dd.MM.yyyy'| highlight: $select.search"></div>
                                     <small ng-bind-html="item.organization.name | highlight: $select.search"></small>
                                     <small ng-bind-html="' | ' + item.authorDocument.position | highlight: $select.search"></small>
                                     <small ng-bind-html="item.authorDocument.name | highlight: $select.search"></small>

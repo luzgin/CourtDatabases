@@ -1242,8 +1242,10 @@ INSERT INTO `entity_isk_adm` (`name`) VALUES ('По протесту проку�
 INSERT INTO `result_adm` (`name`) VALUES ('Оставлено без изменения, а жалоба (протест) - без удовлетворения');
 INSERT INTO `result_adm` (`name`) VALUES ('Отменено полностью или в части и направлено на новое рассмотрение');
 INSERT INTO `result_adm` (`name`) VALUES ('Отменено полностью или в части и прекращено дело');
+INSERT INTO `result_adm` (`name`) VALUES ('Отменено полностью или в части и прекращено дело в связи с возбуждением уголовного дела');
 INSERT INTO `result_adm` (`name`) VALUES ('Отменено последнее по времени постановление, и оставлено в силе одно из ранее вынесенных постановлений');
 INSERT INTO `result_adm` (`name`) VALUES ('Изменено постановление');
+INSERT INTO `result_adm` (`name`) VALUES ('Направлено на рассмотрение в другие органы');
 
 INSERT INTO `vialator` (`type_vialator`, `firstname`, `secondname`, `lastname`, `private_number`)
 VALUES ('1', 'Архипов', 'Никита', 'Сергеевич', '3101290E001PB3');
@@ -1260,14 +1262,4 @@ INSERT INTO `vialator` (`type_vialator`, `firstname`, `private_number`) VALUES (
 INSERT INTO `vialator` (`type_vialator`, `firstname`, `private_number`) VALUES ('2', 'ОАО Марко', 'number ur 3');
 INSERT INTO `vialator` (`type_vialator`, `firstname`, `private_number`) VALUES ('2', 'ОДО ВИСЕМ', 'number ur 4');
 INSERT INTO `vialator` (`type_vialator`, `firstname`, `private_number`) VALUES ('2', 'ИП Иванов АА', 'number ur 5');
-
-
-INSERT INTO `second_instance_adm` (`organization_id`, `author_document_id`, `decree_date`) VALUES (2, 2, '2017-01-02');
-INSERT INTO `second_instance_adm` (`organization_id`, `author_document_id`, `decree_date`) VALUES (4, 2, '2012-12-12');
-
-INSERT INTO `decree_adm` (`author_document_id`, `organization_id`, `decree_date`, `entered_into_force`, `second_instance_id`)
-VALUES (3, 1, '2016-02-25', 1, NULL);
-INSERT INTO `decree_adm` (`author_document_id`, `organization_id`, `decree_date`, `entered_into_force`, `second_instance_id`)
-VALUES (2, 5, '2015-12-20', 1, 1);
-
 

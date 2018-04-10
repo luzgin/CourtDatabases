@@ -47,7 +47,13 @@ angular.module('courtApp').controller('CardController',
             self.removeRequestCase = removeRequestCase;
             self.getDateRequestCaseForCard = getDateRequestCaseForCard;
 
-            self.convertToDate = convertToDate;
+            self.stringToDate= stringToDate;
+
+            function stringToDate(st) {
+                var pattern = /(\d{2})\.(\d{2})\.(\d{4})/;
+                var dt = new Date(st.replace(pattern,'$3-$2-$1'));
+                return dt;
+            }
 
             self.card.createDate = new Date(self.card.createDate);
             if (self.card.resultDate != null) {
@@ -64,24 +70,6 @@ angular.module('courtApp').controller('CardController',
 
             function clearDecree() {
                 self.card.decreeAdm = null
-            }
-
-            function convertToDate(date) {
-                var d = new Date(date);
-                var s;
-                if (d.getDate() < 10) {
-                    s = "0" + (d.getDate())
-                } else {
-                    s = d.getDate()
-                }
-                s = s + ".";
-                if (d.getMonth() < 10) {
-                    s = s + "0" + (d.getMonth() + 1)
-                } else {
-                    s = s + d.getMonth()
-                }
-                d = s + "." + d.getFullYear();
-                return d.toString();
             }
 
             document.getElementById("editComplaint").setAttribute('disabled', 'disabled');

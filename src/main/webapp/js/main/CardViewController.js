@@ -64,6 +64,7 @@ angular.module('courtApp').controller('CardViewController',
                             console.error('Error while removing card, Error :' + errResponse.data);
                         }
                     );
+                document.getElementById("removeButton").setAttribute('disabled', 'disabled');
             }
         }
     ]);
