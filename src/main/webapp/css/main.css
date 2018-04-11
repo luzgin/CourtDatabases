@@ -60,3 +60,13 @@
     vertical-align: middle;
 }
 
+
+/* Всплывающее окно уведомления */
+#notifies {
+    position:fixed;
+    width: 300px;
+    height:auto;
+    top: 40px;
+    right:40px;
+    opacity: 0.0;
+}

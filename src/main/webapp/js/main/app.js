@@ -214,7 +214,7 @@ posdApp.config(function ($routeProvider, $locationProvider) {
             redirectTo: "/nameEntityDecree"
         })
 
-  //  $locationProvider.html5Mode(true);
+    //  $locationProvider.html5Mode(true);
     $locationProvider.hashPrefix('');
 
 });
@@ -245,7 +245,7 @@ posdApp.filter('propsFilter', function () {
         return out;
     };
 });
-posdApp.directive('ngLoad', function ($timeout,  $rootScope) {
+posdApp.directive('ngLoad', function ($timeout, $rootScope) {
     return {
         restrict: 'A',
         link: function (scope) {
@@ -257,3 +257,63 @@ posdApp.directive('ngLoad', function ($timeout,  $rootScope) {
         }
     }
 });
+var Notify = {
+    TYPE_INFO: 0,
+    TYPE_SUCCESS: 1,
+    TYPE_WARNING: 2,
+    TYPE_DANGER: 3,
+
+    generate: function (aText, aOptHeader, aOptType_int) {
+        var lTypeIndexes = [this.TYPE_INFO, this.TYPE_SUCCESS, this.TYPE_WARNING, this.TYPE_DANGER];
+        var ltypes = ['alert-info', 'alert-success', 'alert-warning', 'alert-danger'];
+        var ltype = ltypes[this.TYPE_INFO];
+
+        if (aOptType_int !== undefined && lTypeIndexes.indexOf(aOptType_int) !== -1) {
+            ltype = ltypes[aOptType_int];
+        }
+
+        var lText = '';
+        if (aOptHeader) {
+            lText += "<h5>" + aOptHeader + "</h5>";
+        }
+        lText += "<h6>" + aText + "</h6>";
+        var lNotify_e = $("<div class='alert " + ltype + "'>" + lText + "</div>");
+
+        var start = Date.now();
+        var timer = setInterval(function () {
+            var timePassed = Date.now() - start;
+            addOpacity(timePassed);
+            if (timePassed >= 300) {
+                clearInterval(timer); // конец через 2 секунды
+                return;
+            }
+        }, 20);
+        setTimeout(function () {
+            deleteOpacity();
+        }, 4600);
+
+        function addOpacity(timePassed) {
+            document.getElementById("notifies").style.opacity = timePassed / 300;
+        }
+
+        function deleteOpacity() {
+            var start = Date.now();
+            var timer = setInterval(function () {
+                var timePassed = Date.now() - start;
+                document.getElementById("notifies").style.opacity = (1 - (timePassed / 300));
+                if (timePassed >= 300) {
+                    clearInterval(timer); // конец через 2 секунды
+                    return;
+                }
+            }, 50);
+
+
+        }
+        
+        setTimeout(function () {
+            lNotify_e.alert('close');
+        }, 5000);
+
+        lNotify_e.appendTo($("#notifies"));
+    }
+};

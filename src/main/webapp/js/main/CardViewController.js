@@ -10,6 +10,7 @@ angular.module('courtApp').controller('CardViewController',
             self.removeCard = removeCard;
             self.setCard = setCard;
             self.setCardForRemove = setCardForRemove;
+            self.qwe = qwe;
 
             document.getElementById("removeButton").setAttribute('disabled', 'disabled');
             $(document).ready(function () {
@@ -36,11 +37,13 @@ angular.module('courtApp').controller('CardViewController',
 
             function setCardForRemove(item, tr) {
                 var currentTr = document.getElementById("myTable").getElementsByTagName("tbody")[0].getElementsByTagName("tr");
+
                 function ressetBorder() {
                     for (var i = 0; i < currentTr.length; i++) {
                         currentTr[i].style.backgroundColor = "#ffffff";
                     }
                 }
+
                 if (self.cardForRemove != item) {
                     self.cardForRemove = item;
                     ressetBorder();
@@ -65,6 +68,15 @@ angular.module('courtApp').controller('CardViewController',
                         }
                     );
                 document.getElementById("removeButton").setAttribute('disabled', 'disabled');
+            }
+
+
+
+            function qwe() {
+                Notify.generate('Текст уведомления sdfg dfg dfg df gdfg dfg df gd dfg d ', 'Заголовок уведомления', 0);
+                Notify.generate('Текст уведомления sdfg dfg dfg df gdfg dfg df gd dfg d ', 'Заголовок уведомления', 1);
+                Notify.generate('Текст уведомления sdfg dfg dfg df gdfg dfg df gd dfg d ', 'Заголовок уведомления', 2);
+                Notify.generate('Текст уведомления sdfg dfg dfg df gdfg dfg df gd dfg d ', 'Заголовок уведомления', 3);
             }
         }
     ]);
