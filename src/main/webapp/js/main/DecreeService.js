@@ -88,6 +88,14 @@ angular.module('courtApp').factory('DecreeService',
                 $http.put(urls.DECREE_SERVICE_API + id, entity)
                     .then(
                         function (response) {
+                            var dec = response.data;
+                            //перевод даты из 13 символьной в обычную
+                            dec.decreeDate = new Date(dec.decreeDate);
+                            if(dec.secondInstanceAdm != null){
+                                dec.secondInstanceAdm.decreeDate = new Date(dec.secondInstanceAdm.decreeDate);
+                            }
+                            //передача сохраненного постановления на форму
+                            $rootScope.$broadcast('setDecreeForCard', {a: dec});
                             loadAllRegulations();
                             deferred.resolve(response.data);
                         },

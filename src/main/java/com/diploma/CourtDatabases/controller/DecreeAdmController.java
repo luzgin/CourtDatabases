@@ -29,14 +29,14 @@ public class DecreeAdmController {
     }
 
     @PutMapping("/decree/{id}")
-    public void editDecree(@PathVariable("id") long id, @RequestBody DecreeAdm decreeAdm) {
+    public DecreeAdm editDecree(@PathVariable("id") long id, @RequestBody DecreeAdm decreeAdm) {
         DecreeAdm currentDecree = decreeAdmService.findById(id);
         currentDecree.setOrganization(decreeAdm.getOrganization());
         currentDecree.setAuthorDocument(decreeAdm.getAuthorDocument());
         currentDecree.setDecreeDate(decreeAdm.getDecreeDate());
         currentDecree.setEnteredIntoForce(decreeAdm.isEnteredIntoForce());
         currentDecree.setSecondInstanceAdm(decreeAdm.getSecondInstanceAdm());
-        decreeAdmService.update(currentDecree);
+        return decreeAdmService.update(currentDecree);
     }
 
     @DeleteMapping("/decree/{id}")

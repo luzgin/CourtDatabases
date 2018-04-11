@@ -22,15 +22,13 @@ angular.module('courtApp').controller('DecreeController',
             function stringToDate(st) {
                 var pattern = /(\d{2})\.(\d{2})\.(\d{4})/;
                 var dt;
-                try{
+                try {
                     dt = new Date(st.replace(pattern, '$3-$2-$1'));
-                }catch(e) {
+                } catch (e) {
                     dt = new Date(st);
                 }
                 return dt;
             }
-
-           // self.decree.decreeDate = new Date(self.decree.decreeDate);
 
             $("#ModalSaveDecree").on('show.bs.modal', function (e) {
                 if (document.getElementById("decreeId").value != null) {
@@ -38,7 +36,14 @@ angular.module('courtApp').controller('DecreeController',
                         self.decree = document.getElementById("uiDecree").value;
                         if (self.decree != null) {
                             self.decree.decreeDate = stringToDate(self.decree.decreeDate);
-                            AuthorService.setAuthorsForOrganization(self.decree.organization.id);
+                            AuthorService.setAuthorsForOrganization(self.decree.organization.id)
+                                .then(function (response) {
+                                        self.authorsForOrganization = AuthorService.getAuthorsForOrganization();
+                                    },
+                                    function (errResponse) {
+                                        console.error('Error set authorsForOrganization');
+
+                                    });
                         }
                     })
                 }
@@ -84,10 +89,10 @@ angular.module('courtApp').controller('DecreeController',
             function submit() {
                 if ($scope.decreeForm.$valid) {
                     console.log('Submitting');
-                    console.log(self.decree.secondInstanceAdm.decreeDate);
                     //перевод в дату в формате yyyy-MM-dd
-                    self.decree.secondInstanceAdm.decreeDate = stringToDate(self.decree.secondInstanceAdm.decreeDate);
-                    console.log(self.decree.secondInstanceAdm.decreeDate);
+                    if (self.decree.secondInstanceAdm != null) {
+                        self.decree.secondInstanceAdm.decreeDate = stringToDate(self.decree.secondInstanceAdm.decreeDate);
+                    }
                     if (self.decree.id === undefined || self.decree.id === null) {
                         self.decree.decreeDate.setHours(3);
                         console.log('Saving New decree', self.decree);
@@ -98,13 +103,13 @@ angular.module('courtApp').controller('DecreeController',
                     }
                     $('#ModalSaveDecree').modal('toggle');
                 } else {  //TODO: добавить в выподающие сообщения
-                    if ($scope.decreeForm.uiOrganizationModalDecree.$error.required){
+                    if ($scope.decreeForm.uiOrganizationModalDecree.$error.required) {
                         $scope.decreeForm.uiOrganizationModalDecree.check = true;
-                    }else if ($scope.decreeForm.authorModalDecree.$error.required){
+                    } else if ($scope.decreeForm.authorModalDecree.$error.required) {
                         $scope.decreeForm.authorModalDecree.check = true;
-                    }else if ($scope.decreeForm.dateModalDecree.$error.required){
+                    } else if ($scope.decreeForm.dateModalDecree.$error.required) {
                         $scope.decreeForm.dateModalDecree.check = true;
-                    }else if ($scope.decreeForm.enteredIntoForceModalDecree.$error.required){
+                    } else if ($scope.decreeForm.enteredIntoForceModalDecree.$error.required) {
                         $scope.decreeForm.enteredIntoForceModalDecree.check = true;
                     }
                 }

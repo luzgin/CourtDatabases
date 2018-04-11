@@ -123,7 +123,7 @@
                 </div>
             </div>
             <div class="card mt-2 border-dark"
-                 ng-if="cardC.card.decreeAdm.secondInstanceAdm != null || secondInstanceAdm">
+                 ng-show="cardC.card.decreeAdm.secondInstanceAdm != null || secondInstanceAdm">
                 <div class="card-header p-1  text-center color-form-title">
                     Вторая инстанция
                 </div>
@@ -147,8 +147,8 @@
                         <div class="col-md-2 pl-0">
                             <label for="dateDecreeSecondInstance">Дата</label>
                             <input type="text" class="form-control btn-sm" id="dateDecreeSecondInstance"
-                                   ng-model="cardC.card.decreeAdm.secondInstanceAdm.decreeDate "
-                                   ng-value="cardC.card.decreeAdm.secondInstanceAdm.decreeDate.toLocaleString([],{year: 'numeric', month: 'numeric', day: 'numeric'})"
+                                   ng-model="cardC.card.decreeAdm.secondInstanceAdm.decreeDate"
+                                   ng-value="cardC.card.decreeAdm.secondInstanceAdm.decreeDate | date:'dd.MM.yyyy'"
                                    readonly/>
                         </div>
                     </div>
@@ -188,6 +188,7 @@
                                    type="button"
                                    class="btn btn-outline-success btn-sm"
                                    value="Добавить"
+                                   ng-click="cardC.clearVialator()"
                                    data-toggle="modal"
                                    data-target="#ModalSaveVialators"/>
                         </div>

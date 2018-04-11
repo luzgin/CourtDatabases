@@ -28,6 +28,7 @@ angular.module('courtApp').controller('CardController',
             self.parseToDate = parseToDate;
             self.getAuthorsForRegionalCourt = getAuthorsForRegionalCourt;
             self.clearDecree = clearDecree;
+            self.clearVialator = clearVialator;
 
             self.createComplaint = createComplaint;
             self.setComplaintForEdit = setComplaintForEdit;
@@ -49,17 +50,6 @@ angular.module('courtApp').controller('CardController',
 
             self.stringToDate = stringToDate;
 
-            function stringToDate(st) {
-                var pattern = /(\d{2})\.(\d{2})\.(\d{4})/;
-                var dt;
-                try{
-                    dt = new Date(st.replace(pattern, '$3-$2-$1'));
-                }catch(e) {
-                    dt = new Date(st);
-                }
-                return dt;
-            }
-
             self.card.createDate = new Date(self.card.createDate);
             if (self.card.resultDate != null) {
                 self.card.resultDate = new Date(self.card.resultDate);
@@ -67,17 +57,12 @@ angular.module('courtApp').controller('CardController',
             if (self.card.decreeAdm != null) {
                 document.getElementById("addDecree").setAttribute('disabled', 'disabled');
                 self.card.decreeAdm.decreeDate = new Date(self.card.decreeAdm.decreeDate);
-                if(self.card.decreeAdm.secondInstanceAdm != null){
+                if (self.card.decreeAdm.secondInstanceAdm != null) {
                     self.card.decreeAdm.secondInstanceAdm.decreeDate = new Date(self.card.decreeAdm.secondInstanceAdm.decreeDate);
                 }
             }
             if (self.card.vialator != null) {
                 document.getElementById("addVialator").setAttribute('disabled', 'disabled');
-            }
-
-
-            function clearDecree() {
-                self.card.decreeAdm = null
             }
 
             document.getElementById("editComplaint").setAttribute('disabled', 'disabled');
@@ -86,6 +71,17 @@ angular.module('courtApp').controller('CardController',
             document.getElementById("removeDateReturn").setAttribute('disabled', 'disabled');
             document.getElementById("editDateRequest").setAttribute('disabled', 'disabled');
             document.getElementById("removeDateRequest").setAttribute('disabled', 'disabled');
+
+            function stringToDate(st) {
+                var pattern = /(\d{2})\.(\d{2})\.(\d{4})/;
+                var dt;
+                try {
+                    dt = new Date(st.replace(pattern, '$3-$2-$1'));
+                } catch (e) {
+                    dt = new Date(st);
+                }
+                return dt;
+            }
 
             function setReturnCase(item, tr) {
                 var currentTr = document.getElementById("tableReturnCase").getElementsByTagName("tbody")[0].getElementsByTagName("tr");
@@ -96,7 +92,7 @@ angular.module('courtApp').controller('CardController',
                     }
                 }
 
-                if (self.returnCase == item) {
+                if (self.returnCase === item) {
                     self.returnCase = {};
                     ressetBorder();
                     document.getElementById("editDateReturn").setAttribute('disabled', 'disabled');
@@ -104,7 +100,7 @@ angular.module('courtApp').controller('CardController',
                 } else {
                     self.returnCase = item;
                     ressetBorder();
-                    currentTr[tr.$index].style.border = "3px red solid"
+                    currentTr[tr.$index].style.border = "3px red solid";
                     document.getElementById("editDateReturn").removeAttribute('disabled');
                     document.getElementById("removeDateReturn").removeAttribute('disabled');
                 }
@@ -119,7 +115,7 @@ angular.module('courtApp').controller('CardController',
                     }
                 }
 
-                if (self.requestCase == item) {
+                if (self.requestCase === item) {
                     self.requestCase = {};
                     ressetBorder();
                     document.getElementById("editDateRequest").setAttribute('disabled', 'disabled');
@@ -127,10 +123,9 @@ angular.module('courtApp').controller('CardController',
                 } else {
                     self.requestCase = item;
                     ressetBorder();
-                    currentTr[tr.$index].style.border = "3px red solid"
+                    currentTr[tr.$index].style.border = "3px red solid";
                     document.getElementById("editDateRequest").removeAttribute('disabled');
                     document.getElementById("removeDateRequest").removeAttribute('disabled');
-
                 }
             }
 
@@ -144,18 +139,17 @@ angular.module('courtApp').controller('CardController',
                 }
 
                 if (item.cardAdm.cardNumber === document.getElementById("numberCard").value) {
-                    if (self.complaintForEdit != item) {
-                        self.complaintForEdit = item;
-                        ressetBorder();
-                        currentTr[tr.$index].style.border = "3px red solid"
-                        document.getElementById("editComplaint").removeAttribute('disabled');
-                        document.getElementById("removeComplaint").removeAttribute('disabled');
-
-                    } else {
+                    if (self.complaintForEdit === item) {
                         self.complaintForEdit = {};
                         ressetBorder();
                         document.getElementById("editComplaint").setAttribute('disabled', 'disabled');
                         document.getElementById("removeComplaint").setAttribute('disabled', 'disabled');
+                    } else {
+                        self.complaintForEdit = item;
+                        ressetBorder();
+                        currentTr[tr.$index].style.border = "3px red solid";
+                        document.getElementById("editComplaint").removeAttribute('disabled');
+                        document.getElementById("removeComplaint").removeAttribute('disabled');
                     }
                 } else {
                     self.complaintForEdit = {};
@@ -163,7 +157,6 @@ angular.module('courtApp').controller('CardController',
                     document.getElementById("editComplaint").setAttribute('disabled', 'disabled');
                     document.getElementById("removeComplaint").setAttribute('disabled', 'disabled');
                 }
-
             }
 
             function removeReturnCase() {
@@ -177,7 +170,6 @@ angular.module('courtApp').controller('CardController',
                             console.error('Error while removing return case, Error :' + errResponse.data);
                         }
                     );
-                    ;
                 }
             }
 
@@ -192,10 +184,16 @@ angular.module('courtApp').controller('CardController',
                             console.error('Error while removing request case, Error :' + errResponse.data);
                         }
                     );
-                    ;
                 }
             }
 
+            function clearDecree() {
+                self.card.decreeAdm = null
+            }
+
+            function clearVialator() {
+                self.card.vialator = null
+            }
 
             function getAllArticles() {
                 return ArticleService.getAllArticles();
@@ -213,7 +211,7 @@ angular.module('courtApp').controller('CardController',
                 return NameEntityDecreeService.getAllNamesEntityDecree();
             }
 
-            //пересмотреть и удалить
+//пересмотреть и удалить
             function getAllEntitiesDecree() {
                 return EntityDecreeService.getAllEntitiesDecree();
             }
@@ -266,6 +264,9 @@ angular.module('courtApp').controller('CardController',
                             console.log('Saving New card', self.card);
                             createCard(self.card);
                         } else {
+                            if(self.card.resultDate != null){
+                                self.card.resultDate.setHours(3);
+                            }
                             updateCard(self.card, self.card.id);
                             console.log('card updated with id ', self.card.id);
                         }
@@ -369,7 +370,6 @@ angular.module('courtApp').controller('CardController',
 
             }
 
-
             function editReturnCase() {
                 $rootScope.$broadcast('editReturnCase', {b: self.returnCase});
             }
@@ -390,6 +390,7 @@ angular.module('courtApp').controller('CardController',
                     }
                 }
             })
+
             $scope.$on('setDecreeForCard', function (setDecreeForCard, item) {
                 self.card.decreeAdm = item.a;
             })
@@ -398,4 +399,5 @@ angular.module('courtApp').controller('CardController',
             })
 
         }
-    ]);
+    ])
+;
