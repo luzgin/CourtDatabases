@@ -17,15 +17,27 @@ angular.module('courtApp').controller('DecreeController',
             self.editDecree = editDecree;
             self.removeDecree = removeDecree;
             self.setOrganizationForAuthor = setOrganizationForAuthor;
+            self.stringToDate = stringToDate;
 
-            self.decree.decreeDate = new Date(self.decree.decreeDate);
+            function stringToDate(st) {
+                var pattern = /(\d{2})\.(\d{2})\.(\d{4})/;
+                var dt;
+                try{
+                    dt = new Date(st.replace(pattern, '$3-$2-$1'));
+                }catch(e) {
+                    dt = new Date(st);
+                }
+                return dt;
+            }
+
+           // self.decree.decreeDate = new Date(self.decree.decreeDate);
 
             $("#ModalSaveDecree").on('show.bs.modal', function (e) {
                 if (document.getElementById("decreeId").value != null) {
                     $scope.$apply(function () {
                         self.decree = document.getElementById("uiDecree").value;
                         if (self.decree != null) {
-                            self.decree.decreeDate = new Date(self.decree.decreeDate);
+                            self.decree.decreeDate = stringToDate(self.decree.decreeDate);
                             AuthorService.setAuthorsForOrganization(self.decree.organization.id);
                         }
                     })
@@ -72,6 +84,10 @@ angular.module('courtApp').controller('DecreeController',
             function submit() {
                 if ($scope.decreeForm.$valid) {
                     console.log('Submitting');
+                    console.log(self.decree.secondInstanceAdm.decreeDate);
+                    //перевод в дату в формате yyyy-MM-dd
+                    self.decree.secondInstanceAdm.decreeDate = stringToDate(self.decree.secondInstanceAdm.decreeDate);
+                    console.log(self.decree.secondInstanceAdm.decreeDate);
                     if (self.decree.id === undefined || self.decree.id === null) {
                         self.decree.decreeDate.setHours(3);
                         console.log('Saving New decree', self.decree);
@@ -146,6 +162,11 @@ angular.module('courtApp').controller('DecreeController',
                         }
                     );
             }
+
+            $scope.$on('setSecondInstanceForDecree', function (setSecondInstanceForDecree, item) {
+                self.decree.secondInstanceAdm = item.a;
+
+            })
 
         }
     ]);

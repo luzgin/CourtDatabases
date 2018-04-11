@@ -116,7 +116,8 @@
                             <label for="dateDecree">Дата</label>
                             <input type="text" class="form-control btn-sm" id="dateDecree"
                                    ng-model="cardC.card.decreeAdm.decreeDate"
-                                   ng-value="cardC.card.decreeAdm.decreeDate | date: 'dd.MM.yyyy'" readonly/>
+                                   ng-value="cardC.card.decreeAdm.decreeDate.toLocaleString([],{year: 'numeric', month: 'numeric', day: 'numeric'})"
+                                   readonly/>
                         </div>
                     </div>
                 </div>
@@ -147,7 +148,7 @@
                             <label for="dateDecreeSecondInstance">Дата</label>
                             <input type="text" class="form-control btn-sm" id="dateDecreeSecondInstance"
                                    ng-model="cardC.card.decreeAdm.secondInstanceAdm.decreeDate "
-                                   ng-value="cardC.card.decreeAdm.secondInstanceAdm.decreeDate | date: 'dd.MM.yyyy'"
+                                   ng-value="cardC.card.decreeAdm.secondInstanceAdm.decreeDate.toLocaleString([],{year: 'numeric', month: 'numeric', day: 'numeric'})"
                                    readonly/>
                         </div>
                     </div>
@@ -508,7 +509,7 @@
 </div>
 <!-- --------------------------------------------   Modal windows --------------------------------------------------- -->
 <div ng-controller="DecreeController as decC">
-    <div id="ModalSaveDecree" class="modal fade" role="dialog">
+    <div id="ModalSaveDecree" class="modal fade" role="dialog" data-backdrop="static" data-keyboard="false">
         <div class="widht-modal-dialog modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -630,9 +631,14 @@
                         </div>
                         <div class="form-group row">
                             <label class="col-md-3 control-label">Вторая инстанция</label>
-                            <div class="col-md-7">
+                            <div class="col-md-5">
+                                <input type="hidden"
+                                       id="secondInstanceIDModalDecree"
+                                       ng-model="decC.decree.secondInstanceAdm.id"
+                                       ng-value="decC.decree.secondInstanceAdm.id">
                                 <ui-select id="uiSecondInstance"
-                                           ng-model="decC.decree.secondInstanceAdm" theme="selectize"
+                                           ng-model="decC.decree.secondInstanceAdm"
+                                           ng-value="decC.decree.secondInstanceAdm" theme="selectize"
                                            title="Введите для поиска...">
                                     <ui-select-match placeholder="Введите для поиска...">
                                         {{$select.selected.decreeDate | date: 'dd.MM.yyyy'}}
@@ -640,7 +646,7 @@
                                         {{$select.selected.authorDocument.name}}
                                     </ui-select-match>
                                     <ui-select-choices
-                                            repeat="item in decC.getAllSecondInstance()">
+                                            repeat="item in decC.getAllSecondInstance() | filter: $select.search">
                                         <div ng-bind-html="item.decreeDate | date: 'dd.MM.yyyy' | highlight: $select.search"></div>
                                         <small ng-bind-html="item.organization.name | highlight: $select.search"></small>
                                         <small ng-bind-html="item.authorDocument.position | highlight: $select.search"></small>
@@ -648,10 +654,17 @@
                                     </ui-select-choices>
                                 </ui-select>
                             </div>
-                            <div class="col-md-2 row justify-content-md-end">
-                                <input type="button" class="btn btn-outline-success btn-sm" value="Добавить"
-                                       data-toggle="modal"
-                                       data-target="#ModalSaveSecondInstance"/>
+                            <div class="col-md-4 m-0 pl-0 row ">
+                                <div class="col-md-5 row justify-content-md-end m-0 p-0">
+                                    <input type="button" class="btn btn-outline-success btn-sm" value="Добавить"
+                                           data-toggle="modal"
+                                           data-target="#ModalSaveSecondInstance"/>
+                                </div>
+                                <div class="col-md-7 row justify-content-md-end m-0">
+                                    <input type="button" class="btn btn-outline-primary btn-sm" value="Редактировать"
+                                           data-toggle="modal"
+                                           data-target="#ModalSaveSecondInstance"/>
+                                </div>
                             </div>
                         </div>
                         <div class="modal-footer row mr-0">
@@ -666,7 +679,7 @@
     </div>
 </div>
 <div ng-controller="OrgController as orgC">
-    <div id="ModalSaveOrganization" class="modal fade" role="dialog">
+    <div id="ModalSaveOrganization" class="modal fade" role="dialog" data-backdrop="static" data-keyboard="false">
         <div class="widht-modal-dialog modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -702,7 +715,7 @@
     </div>
 </div>
 <div ng-controller="AuthorController as autC">
-    <div id="ModalSaveAuthor" class="modal fade" role="dialog">
+    <div id="ModalSaveAuthor" class="modal fade" role="dialog" data-backdrop="static" data-keyboard="false">
         <div class="widht-modal-dialog modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -785,7 +798,7 @@
     </div>
 </div>
 <div ng-controller="SecondInstanceController as secIC">
-    <div id="ModalSaveSecondInstance" class="modal fade" role="dialog">
+    <div id="ModalSaveSecondInstance" class="modal fade" role="dialog" data-backdrop="static" data-keyboard="false">
         <div class="widht-modal-dialog modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -884,7 +897,7 @@
     </div>
 </div>
 <div ng-controller="VialatorController as viaC">
-    <div id="ModalSaveVialators" class="modal fade" role="dialog">
+    <div id="ModalSaveVialators" class="modal fade" role="dialog" data-backdrop="static" data-keyboard="false">
         <div class="widht-modal-dialog modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -1027,7 +1040,7 @@
     </div>
 </div>
 <div ng-controller="ComplaintController as comC">
-    <div id="ModalSaveComplaint" class="modal fade" role="dialog">
+    <div id="ModalSaveComplaint" class="modal fade" role="dialog" data-backdrop="static" data-keyboard="false">
         <div class="widht-modal-dialog modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -1156,7 +1169,7 @@
     </div>
 </div>
 <div ng-controller="DateReturnController as dretC">
-    <div id="ModalSaveDateReturn" class="modal fade" role="dialog">
+    <div id="ModalSaveDateReturn" class="modal fade" role="dialog" data-backdrop="static" data-keyboard="false">
         <div class="widht-modal-dialog modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -1208,7 +1221,7 @@
     </div>
 </div>
 <div ng-controller="DateRequestController as dreqC">
-    <div id="ModalSaveDateRequest" class="modal fade" role="dialog">
+    <div id="ModalSaveDateRequest" class="modal fade" role="dialog" data-backdrop="static" data-keyboard="false">
         <div class="widht-modal-dialog modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">

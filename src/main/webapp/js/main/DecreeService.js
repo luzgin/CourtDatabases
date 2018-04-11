@@ -1,6 +1,6 @@
 'use strict';
 angular.module('courtApp').factory('DecreeService',
-    ['$localStorage', '$http', '$q', 'urls','$rootScope',
+    ['$localStorage', '$http', '$q', 'urls', '$rootScope',
         function ($localStorage, $http, $q, urls, $rootScope) {
             var factory = {
                 loadAllRegulations: loadAllRegulations,
@@ -17,7 +17,16 @@ angular.module('courtApp').factory('DecreeService',
                 $http.get(urls.DECREE_SERVICE_API)
                     .then(
                         function (response) {
-                            $localStorage.regulations = response.data;
+                            //преобразование даты создания постановления в строку для кореектного поиска по вып. списку
+                            var arr = response.data;
+                            var pattern = /(\d{4})\-(\d{2})\-(\d{2})/;
+                            for (var i = 0; i < arr.length; i++) {
+                                var st = arr[i].decreeDate
+                                var dt = st.replace(pattern, '$3.$2.$1');
+                                arr[i].decreeDate = dt;
+                            }
+                            //запись форматированного списка в локальную переменную
+                            $localStorage.regulations = arr;
                             deferred.resolve(response);
                         },
                         function (errResponse) {
@@ -54,7 +63,14 @@ angular.module('courtApp').factory('DecreeService',
                 $http.post(urls.DECREE_SERVICE_API, entity)
                     .then(
                         function (response) {
-                            $rootScope.$broadcast('setDecreeForCard', {a: response.data});
+                            var dec = response.data;
+                            //перевод даты из 13 символьной в обычную
+                            dec.decreeDate = new Date(dec.decreeDate);
+                            if(dec.secondInstanceAdm != null){
+                                dec.secondInstanceAdm.decreeDate = new Date(dec.secondInstanceAdm.decreeDate);
+                            }
+                            //передача сохраненного постановления на форму
+                            $rootScope.$broadcast('setDecreeForCard', {a: dec});
                             loadAllRegulations();
                             deferred.resolve(response.data);
                         },

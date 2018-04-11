@@ -16,13 +16,25 @@ angular.module('courtApp').controller('SecondInstanceController',
         self.editSecondInstance = editSecondInstance;
         self.removeSecondInstance = removeSecondInstance;
         self.getAuthorsForOrganization = getAuthorsForOrganization;
+        self.stringToDate = stringToDate;
+
+        function stringToDate(st) {
+            var pattern = /(\d{2})\.(\d{2})\.(\d{4})/;
+            var dt;
+            try{
+                dt = new Date(st.replace(pattern, '$3-$2-$1'));
+            }catch(e) {
+                dt = new Date(st);
+            }
+            return dt;
+        }
 
         $("#ModalSaveSecondInstance").on('show.bs.modal', function () {
-            if (document.getElementById("secondInstanceID").value != null) {
+            if (document.getElementById("secondInstanceIDModalDecree").value != null) {
                 $scope.$apply(function () {
                     self.secondInstance = document.getElementById("uiSecondInstance").value;
                     if (self.secondInstance != null) {
-                        self.secondInstance.decreeDate = new Date(self.secondInstance.decreeDate);
+                        self.secondInstance.decreeDate = stringToDate(self.secondInstance.decreeDate);
                         AuthorService.setAuthorsForOrganization(self.secondInstance.organization.id);
                     }
                 })

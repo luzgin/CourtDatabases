@@ -47,11 +47,16 @@ angular.module('courtApp').controller('CardController',
             self.removeRequestCase = removeRequestCase;
             self.getDateRequestCaseForCard = getDateRequestCaseForCard;
 
-            self.stringToDate= stringToDate;
+            self.stringToDate = stringToDate;
 
             function stringToDate(st) {
                 var pattern = /(\d{2})\.(\d{2})\.(\d{4})/;
-                var dt = new Date(st.replace(pattern,'$3-$2-$1'));
+                var dt;
+                try{
+                    dt = new Date(st.replace(pattern, '$3-$2-$1'));
+                }catch(e) {
+                    dt = new Date(st);
+                }
                 return dt;
             }
 
@@ -62,6 +67,9 @@ angular.module('courtApp').controller('CardController',
             if (self.card.decreeAdm != null) {
                 document.getElementById("addDecree").setAttribute('disabled', 'disabled');
                 self.card.decreeAdm.decreeDate = new Date(self.card.decreeAdm.decreeDate);
+                if(self.card.decreeAdm.secondInstanceAdm != null){
+                    self.card.decreeAdm.secondInstanceAdm.decreeDate = new Date(self.card.decreeAdm.secondInstanceAdm.decreeDate);
+                }
             }
             if (self.card.vialator != null) {
                 document.getElementById("addVialator").setAttribute('disabled', 'disabled');
@@ -81,11 +89,13 @@ angular.module('courtApp').controller('CardController',
 
             function setReturnCase(item, tr) {
                 var currentTr = document.getElementById("tableReturnCase").getElementsByTagName("tbody")[0].getElementsByTagName("tr");
+
                 function ressetBorder() {
-                    for (var i = 0; i < currentTr.length; i++ ){
+                    for (var i = 0; i < currentTr.length; i++) {
                         currentTr[i].style.border = "1px black solid"
                     }
                 }
+
                 if (self.returnCase == item) {
                     self.returnCase = {};
                     ressetBorder();
@@ -100,13 +110,15 @@ angular.module('courtApp').controller('CardController',
                 }
             }
 
-            function setRequestCase(item,tr) {
+            function setRequestCase(item, tr) {
                 var currentTr = document.getElementById("tableRequestCase").getElementsByTagName("tbody")[0].getElementsByTagName("tr");
+
                 function ressetBorder() {
-                    for (var i = 0; i < currentTr.length; i++ ){
+                    for (var i = 0; i < currentTr.length; i++) {
                         currentTr[i].style.border = "1px black solid"
                     }
                 }
+
                 if (self.requestCase == item) {
                     self.requestCase = {};
                     ressetBorder();
@@ -124,11 +136,13 @@ angular.module('courtApp').controller('CardController',
 
             function setComplaintForEdit(item, tr) {
                 var currentTr = document.getElementById("complaintsTable").getElementsByTagName("tbody")[0].getElementsByTagName("tr");
+
                 function ressetBorder() {
-                    for (var i = 0; i < currentTr.length; i++ ){
+                    for (var i = 0; i < currentTr.length; i++) {
                         currentTr[i].style.border = "1px black solid"
                     }
                 }
+
                 if (item.cardAdm.cardNumber === document.getElementById("numberCard").value) {
                     if (self.complaintForEdit != item) {
                         self.complaintForEdit = item;
@@ -240,6 +254,8 @@ angular.module('courtApp').controller('CardController',
 
             function submit() {
                 if ($scope.cardForm.$valid) {
+                    //перевод в дату в формате yyyy-MM-dd
+                    self.card.decreeAdm.decreeDate = stringToDate(self.card.decreeAdm.decreeDate);
                     if (self.card.resultDate != null && self.card.resultAdmCase == null) {
                         $scope.cardForm.resultCase.check = true;
                     }

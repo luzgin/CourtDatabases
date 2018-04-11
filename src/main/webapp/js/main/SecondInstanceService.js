@@ -1,7 +1,7 @@
 'use strict';
 angular.module('courtApp').factory('SecondInstanceService',
-    ['$localStorage', '$http', '$q', 'urls',
-        function ($localStorage, $http, $q, urls) {
+    ['$localStorage', '$http', '$q', 'urls','$rootScope',
+        function ($localStorage, $http, $q, urls,$rootScope) {
             var factory = {
                 loadAllSecondInstances: loadAllSecondInstances,
                 getAllSecondInstances: getAllSecondInstances,
@@ -17,7 +17,16 @@ angular.module('courtApp').factory('SecondInstanceService',
                 $http.get(urls.SECOND_INSTANCE_SERVICE_API)
                     .then(
                         function (response) {
-                            $localStorage.secondInstances = response.data;
+                            //преобразование даты создания постановления в строку для кореектного поиска по вып. списку
+                            var arr = response.data;
+                            var pattern = /(\d{4})\-(\d{2})\-(\d{2})/;
+                            for (var i = 0; i < arr.length; i++) {
+                                var st = arr[i].decreeDate
+                                var dt = st.replace(pattern, '$3.$2.$1');
+                                arr[i].decreeDate = dt;
+                            }
+                            //запись форматированного списка в локальную переменную
+                            $localStorage.secondInstances = arr;
                             deferred.resolve(response);
                         },
                         function (errResponse) {
@@ -54,6 +63,11 @@ angular.module('courtApp').factory('SecondInstanceService',
                 $http.post(urls.SECOND_INSTANCE_SERVICE_API, secondInstance)
                     .then(
                         function (response) {
+                            var secInst = response.data;
+                            //перевод даты из 13 символьной в обычную
+                            secInst.decreeDate = new Date(secInst.decreeDate);
+                            //передача сохраненного постановления на форму
+                            $rootScope.$broadcast('setSecondInstanceForDecree', {a: secInst});
                             loadAllSecondInstances();
                             deferred.resolve(response.data);
                         },
