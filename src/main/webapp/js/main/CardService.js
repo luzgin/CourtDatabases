@@ -44,11 +44,11 @@ angular.module('courtApp').factory('CardService',
                     function (response) {
                         entityDecree = response;
                         entity.entityDecreeAdm = entityDecree;
-                        console.log('Creating entity');
                         entity.cardActiv = true;
                         $http.post(urls.CARD_SERVICE_API, entity)
                             .then(
                                 function (response) {
+                                    console.log('card save ok');
                                     CardViewService.loadAllCards();
                                     deferred.resolve(response.data);
                                 },

@@ -73,14 +73,18 @@ angular.module('courtApp').controller('VialatorController',
                 } else {
                     if ($scope.vialatorFormFiz.privateNumberModalVialator.$invalid) {
                         $scope.vialatorFormFiz.privateNumberModalVialator.check = true;
+                        Message.generate('Укажите личный номер!', 2);
                         document.getElementById("privateNumber").focus();
                     } else if ($scope.vialatorFormFiz.firstNameModalVialator.$error.required) {
+                        Message.generate('Укажите фамилию!', 2);
                         $scope.vialatorFormFiz.firstNameModalVialator.check = true;
                         document.getElementById("firstName").focus();
                     } else if ($scope.vialatorFormFiz.secondNameModalVialator.$error.required) {
+                        Message.generate('Укажите имя!', 2);
                         $scope.vialatorFormFiz.secondNameModalVialator.check = true;
                         document.getElementById("secondNameFiz").focus();
                     } else if ($scope.vialatorFormFiz.lastNameModalVialator.$error.required) {
+                        Message.generate('Укажите отчество!', 2);
                         $scope.vialatorFormFiz.lastNameModalVialator.check = true;
                         document.getElementById("lastNameModalVialator").focus();
                     }
@@ -92,8 +96,10 @@ angular.module('courtApp').controller('VialatorController',
                     if ($scope.vialatorFormUr.unpModalVialator.$invalid) {
                         $scope.vialatorFormUr.unpModalVialator.check = true;
                         document.getElementById("unpModalVialator").focus();
+                        Message.generate('Укажите УНП!', 2);
                     } else if ($scope.vialatorFormUr.firstNameUrModalVialator.$error.required) {
                         $scope.vialatorFormUr.firstNameUrModalVialator.check = true;
+                        Message.generate('Укажите название!', 2);
                         document.getElementById("firstNameUrModalVialator").focus();
                     }
 
@@ -106,10 +112,12 @@ angular.module('courtApp').controller('VialatorController',
             console.log('About to create vialator');
             VialatorService.createVialator(vialator).then(
                 function (response) {
+                    Message.generate('Правонарушитель успешно добавлен!', 1);
                     console.log('vialator created successfully');
                     self.vialator = {};
                 },
                 function (errResponse) {
+                    Message.generate('Ошибка при добавлении правонарушителя', 3);
                     console.error('Error while creating vialator');
                 }
             );
@@ -120,10 +128,12 @@ angular.module('courtApp').controller('VialatorController',
             VialatorService.updateVialator(vialator, id)
                 .then(
                     function (response) {
+                        Message.generate('Правонарушитель успешно изменен!', 1);
                         console.log('vialator updated successfully' + self.vialator);
                         self.done = true;
                     },
                     function (errResponse) {
+                        Message.generate('Ошибка при изменении правонарушителя', 3);
                         console.error('Error while updating vialator');
                     }
                 );

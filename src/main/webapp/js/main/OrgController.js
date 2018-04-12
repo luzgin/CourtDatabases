@@ -35,6 +35,7 @@ angular.module('courtApp').controller('OrgController',
             else {
                 if ($scope.organizationForm.nameModalOrganization.$error.required){
                     document.getElementById("nameInputSave").focus();
+                    Message.generate('Введите название организации!', 2);
                     $scope.organizationForm.nameModalOrganization.check = true;
                 }
             }
@@ -43,11 +44,12 @@ angular.module('courtApp').controller('OrgController',
             console.log('About to create organization');
             OrgService.createOrganization(organization).then(
                 function (response) {
+                    Message.generate('Организация успешно добавлена', 1);
                     console.log('organization created successfully');
-                    self.done = true;
                     self.organization = {};
                 },
                 function (errResponse) {
+                    Message.generate('Ошибка при добавлении организации!', 3);
                     console.error('Error while creating organization');
                 }
             );
@@ -58,10 +60,11 @@ angular.module('courtApp').controller('OrgController',
             OrgService.updateOrganization(organization, id)
                 .then(
                     function (response) {
+                        Message.generate('Организация успешно изменена', 1);
                         console.log('organization updated successfully' + self.organization);
-                        self.done = true;
                     },
                     function (errResponse) {
+                        Message.generate('Ошибка при изменении организации!', 3);
                         console.error('Error while updating User');
                     }
                 );

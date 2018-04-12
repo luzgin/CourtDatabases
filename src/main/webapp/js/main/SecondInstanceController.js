@@ -93,11 +93,14 @@ angular.module('courtApp').controller('SecondInstanceController',
             } else {
                 if ($scope.secondInstanceForm.organizationModalSecondInstance.$error.required){
                     $scope.secondInstanceForm.organizationModalSecondInstance.check = true;
+                    Message.generate('Укажите организацию!', 2);
 
                 }else if ($scope.secondInstanceForm.authorModalSecondInstance.$error.required){
                     $scope.secondInstanceForm.authorModalSecondInstance.check = true;
+                    Message.generate('Укажите автора!', 2);
 
                 }else if ($scope.secondInstanceForm.dateModalSecondInstance.$error.required){
+                    Message.generate('Укажите дату!', 2);
                     document.getElementById("dateModalSecondInstance").focus();
                     $scope.secondInstanceForm.dateModalSecondInstance.check = true;
 
@@ -111,10 +114,11 @@ angular.module('courtApp').controller('SecondInstanceController',
             SecondInstanceService.createSecondInstance(secondInstance).then(
                 function (response) {
                     console.log('secondInstance created successfully');
-                    self.done = true;
+                    Message.generate('Вторая инстанция успешно добавлена!', 1);
                     self.secondInstance = {};
                 },
                 function (errResponse) {
+                    Message.generate('Ошибка при добавлении второй инстанции', 3);
                     console.error('Error while creating secondInstance');
                 }
             );
@@ -126,9 +130,10 @@ angular.module('courtApp').controller('SecondInstanceController',
                 .then(
                     function (response) {
                         console.log('secondInstance updated successfully' + self.secondInstance);
-                        self.done = true;
+                        Message.generate('Вторая инстанция успешно изменена!', 1);
                     },
                     function (errResponse) {
+                        Message.generate('Ошибка при изменении второй инстанции', 3);
                         console.error('Error while updating secondInstance');
                     }
                 );

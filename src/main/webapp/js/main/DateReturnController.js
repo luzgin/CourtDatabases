@@ -36,7 +36,9 @@ angular.module('courtApp').controller('DateReturnController',
                 if ($scope.dateReturnForm.organizationModalDateReturn.$error.required) {
                     $scope.dateReturnForm.organizationModalDateReturn.check = true;
                     document.getElementById("organizationModalDateReturn").focus();
+                    Message.generate('Укажите организацию, куда возвращается дело!', 2);
                 }else  if ($scope.dateReturnForm.dateModalDateReturn.$error.required) {
+                    Message.generate('Укажите дату отправки!', 2);
                     $scope.dateReturnForm.dateModalDateReturn.check = true;
                     document.getElementById("dateModalDateReturn").focus();
                 }
@@ -50,10 +52,12 @@ angular.module('courtApp').controller('DateReturnController',
                     dateReturn.cardAdm = response;
                     DateReturnService.createDateReturn(dateReturn).then(
                         function (response) {
+                            Message.generate('Информация о возвращаемом деле успешно добавлена', 1);
                             console.log('dateReturn created successfully');
                             self.dateReturn = {};
                         },
                         function (errResponse) {
+                            Message.generate('Ошибка при добавлении информации о возвращаемом деле', 3);
                             console.error('Error while creating dateReturn');
                         }
                     );
@@ -70,10 +74,11 @@ angular.module('courtApp').controller('DateReturnController',
             DateReturnService.updateDateReturn(dateReturn, id)
                 .then(
                     function (response) {
+                        Message.generate('Информация о возвращаемом деле успешно изменена', 1);
                         console.log('dateReturn updated successfully' + self.dateReturn);
-                        self.done = true;
                     },
                     function (errResponse) {
+                        Message.generate('Ошибка при изменении информации о возвращаемом деле', 3);
                         console.error('Error while updating dateReturn');
                     }
                 );
@@ -97,9 +102,11 @@ angular.module('courtApp').controller('DateReturnController',
             DateReturnService.removeDateReturn(id)
                 .then(
                     function () {
+                        Message.generate('Информация о возвращаемом деле успешно удалена', 0);
                         console.log('dateReturn ' + id + ' removed successfully');
                     },
                     function (errResponse) {
+                        Message.generate('Ошибка при удалении информации о возвращаемом деле', 3);
                         console.error('Error while removing dateReturn ' + id + ', Error :' + errResponse.data);
                     }
                 );

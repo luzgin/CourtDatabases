@@ -6,21 +6,15 @@
                 <input type="text" class="form-control" ng-model="search.name"
                        placeholder="Введите фамилию для поиска..."/>
             </div>
-            <div class=" mb-3 col row justify-content-end">
-                <button type="button" class="btn btn-primary" data-toggle="modal"
-                        data-target="#ModalSave">Добавить автора
-                </button>
-            </div>
         </div>
         <div class="scroll-table">
-            <table class="tab-scroll table table-striped table-bordered table-sm table-hover">
+            <table class="tab-scroll bor-table table-sm table-hover">
                 <thead>
                 <tr>
-                    <th class="div-center" width="25%">ФИО</th>
-                    <th class="div-center" width="15%">Должность</th>
+                    <th class="div-center" width="20%">ФИО</th>
+                    <th class="div-center" width="25%">Должность</th>
                     <th class="div-center" width="10">Статус</th>
                     <th class="div-center" width="35%">Организация</th>
-                    <th class="div-center" width="5%"></th>
                     <th class="div-center" width="5%"></th>
                 </tr>
                 </thead>
@@ -33,17 +27,9 @@
                     <td>
                         <div ng-if="item.type !='1'" class="div-center">
                             <button type="button" data-toggle="modal"
-                                    data-target="#ModalSave" ng-click="autC.editAuthor(item.id)"
+                                    data-target="#ModalSaveAuthor" ng-click="autC.editAuthor(item.id)"
                                     class="btn btn-sm btn-success custom-width">Редактировать
                             </button>
-                        </div>
-                    </td>
-                    <td>
-                        <div class="div-center">
-                            <div class="div-center">
-                                <button class="btn btn-sm btn-danger" ng-click="autC.removeAuthor(item.id);">Удалить
-                                </button>
-                            </div>
                         </div>
                     </td>
                 </tr>
@@ -54,25 +40,43 @@
 </div>
 
 
-<div id="ModalSave" class="modal fade" role="dialog">
+<div id="ModalSaveAuthor" class="modal fade" role="dialog" data-backdrop="static" data-keyboard="false">
     <div class="widht-modal-dialog modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
                 <h4 class="modal-title">Добавление/Редактирование автора</h4>
             </div>
             <div class="modal-body">
-                <form ng-submit="autC.submit()" class="form-horizontal" role="form">
+                <form name="authorForm" ng-submit="autC.submit()" class="form-horizontal" role="form" novalidate>
                     <input type="hidden" ng-model="autC.author.id"/>
                     <div class="form-group row">
                         <label class="col-md-2 control-label" for="nameSave">ФИО</label>
                         <div class="col-md-10">
-                            <input type="text" class="form-control" id="nameSave" ng-model="autC.author.name"/>
+                            <input id="nameSave"
+                                   name="nameModalAuthor"
+                                   type="text"
+                                   class="form-control"
+                                   ng-model="autC.author.name"
+                                   ng-required="true"/>
+                            <span style="color:red"
+                                  ng-show="authorForm.nameModalAuthor.check && authorForm.nameModalAuthor.$error.required">
+                                    Не может быть пустым!
+                                </span>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-md-2 control-label" for="positionSave">Должность</label>
                         <div class="col-md-10">
-                            <input type="text" class="form-control" id="positionSave" ng-model="autC.author.position"/>
+                            <input id="positionSave"
+                                   name="positionModalAuthor"
+                                   type="text"
+                                   class="form-control"
+                                   ng-model="autC.author.position"
+                                   ng-required="true"/>
+                            <span style="color:red"
+                                  ng-show="authorForm.positionModalAuthor.check && authorForm.positionModalAuthor.$error.required">
+                                    Не может быть пустым!
+                                </span>
                         </div>
                     </div>
                     <div ng-show="autC.author.id != null" class="form-group row">
@@ -88,20 +92,32 @@
                     <div class="form-group row">
                         <label class="col-md-2 control-label">Организация</label>
                         <div class="col-md-10">
-                            <select class="form-control"
-                                    ng-options="item.name for item in autC.getAllOrganizations() track by item.id"
-                                    ng-model="autC.author.organization">
-                            </select>
+                            <ui-select id="organizationSelectForAuthor"
+                                       name="organizationModalAuthor"
+                                       ng-model="autC.author.organization"
+                                       theme="selectize"
+                                       title="Введите для поиска..."
+                                       ng-required="true">
+                                <ui-select-match placeholder="Введите для поиска...">{{$select.selected.name}}
+                                </ui-select-match>
+                                <ui-select-choices
+                                        repeat="item in autC.getAllOrganizations() | filter: $select.search">
+                                    <div ng-bind-html="item.name | highlight: $select.search"></div>
+                                </ui-select-choices>
+                            </ui-select>
+                            <span style="color:red"
+                                  ng-show="authorForm.organizationModalAuthor.check && authorForm.organizationModalAuthor.$error.required">
+                                    Не может быть пустым!
+                                </span>
                         </div>
                     </div>
                     <div class="modal-footer row mr-0">
-                        <input type="submit" value="{{!autC.author.id ? 'Добавить' : 'Обновить'}}"
+                        <input type="submit" value="{{!autC.author.id ? 'Добавить' : 'Сохранить'}}"
                                class="btn btn-primary btn-sm">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
+                        <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Закрыть</button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
 </div>
-

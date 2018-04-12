@@ -68,5 +68,6 @@
     height:auto;
     top: 40px;
     right:40px;
+    z-index: 999999;
     opacity: 0.0;
 }

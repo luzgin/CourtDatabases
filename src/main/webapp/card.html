@@ -91,7 +91,7 @@
                            id="decreeId"
                            ng-model="cardC.card.decreeAdm.id"
                            ng-value="cardC.card.decreeAdm.id">
-                    <div class="form-group row mb-0" ng-if="cardC.card.decreeAdm != null">
+                    <div class="form-group row mb-0" ng-show="cardC.card.decreeAdm != null">
                         <div class="col-md-4 pr-0">
                             <label for="organization">Организация</label>
                             <input type="text" class="form-control btn-sm"
@@ -114,8 +114,7 @@
                         </div>
                         <div class="col-md-2 pl-0">
                             <label for="dateDecree">Дата</label>
-                            <input type="text" class="form-control btn-sm" id="dateDecree"
-                                   ng-model="cardC.card.decreeAdm.decreeDate"
+                            <input type="text" class="form-control btn-sm" id="dateDecree" name="dateDecree"
                                    ng-value="cardC.card.decreeAdm.decreeDate.toLocaleString([],{year: 'numeric', month: 'numeric', day: 'numeric'})"
                                    readonly/>
                         </div>
@@ -147,8 +146,7 @@
                         <div class="col-md-2 pl-0">
                             <label for="dateDecreeSecondInstance">Дата</label>
                             <input type="text" class="form-control btn-sm" id="dateDecreeSecondInstance"
-                                   ng-model="cardC.card.decreeAdm.secondInstanceAdm.decreeDate"
-                                   ng-value="cardC.card.decreeAdm.secondInstanceAdm.decreeDate | date:'dd.MM.yyyy'"
+                                   ng-value="cardC.card.decreeAdm.secondInstanceAdm.decreeDate.toLocaleString([],{year: 'numeric', month: 'numeric', day: 'numeric'})"
                                    readonly/>
                         </div>
                     </div>
@@ -444,7 +442,7 @@
                             </ui-select-choices>
                         </ui-select>
                         <span style="color:red"
-                              ng-show="cardForm.resultCase.check">Выберете решение</span>
+                              ng-show="cardForm.resultCase.check">Выберете результат!</span>
                     </div>
                 </div>
                 <div class="card border-dark mb-3">

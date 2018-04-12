@@ -10,7 +10,6 @@ angular.module('courtApp').controller('CardViewController',
             self.removeCard = removeCard;
             self.setCard = setCard;
             self.setCardForRemove = setCardForRemove;
-            self.qwe = qwe;
 
             document.getElementById("removeButton").setAttribute('disabled', 'disabled');
             $(document).ready(function () {
@@ -61,22 +60,15 @@ angular.module('courtApp').controller('CardViewController',
                 CardService.removeCard(self.cardForRemove.id)
                     .then(
                         function () {
+                            Message.generate('Карточка № '+self.cardForRemove.cardNumber+' успешно удалена!', 0);
                             console.log('card  removed successfully');
                         },
                         function (errResponse) {
                             console.error('Error while removing card, Error :' + errResponse.data);
+                            Message.generate('Ошибка при удалении карточки!', 3);
                         }
                     );
                 document.getElementById("removeButton").setAttribute('disabled', 'disabled');
-            }
-
-
-
-            function qwe() {
-                Notify.generate('Текст уведомления sdfg dfg dfg df gdfg dfg df gd dfg d ', 'Заголовок уведомления', 0);
-                Notify.generate('Текст уведомления sdfg dfg dfg df gdfg dfg df gd dfg d ', 'Заголовок уведомления', 1);
-                Notify.generate('Текст уведомления sdfg dfg dfg df gdfg dfg df gd dfg d ', 'Заголовок уведомления', 2);
-                Notify.generate('Текст уведомления sdfg dfg dfg df gdfg dfg df gd dfg d ', 'Заголовок уведомления', 3);
             }
         }
     ]);

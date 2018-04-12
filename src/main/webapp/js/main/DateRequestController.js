@@ -34,8 +34,10 @@ angular.module('courtApp').controller('DateRequestController',
             } else {
                 if ($scope.dateRequestForm.organizationModalDateRequest.$error.required) {
                     $scope.dateRequestForm.organizationModalDateRequest.check = true;
+                    Message.generate('Укажите организацию, от куда поступило дело!', 2);
                     document.getElementById("organizationModalDateRequest").focus();
                 } else if ($scope.dateRequestForm.dateModalDateRequest.$error.required) {
+                    Message.generate('Укажите дату поступления!', 2);
                     $scope.dateRequestForm.dateModalDateRequest.check = true;
                     document.getElementById("dateModalDateRequest").focus();
                 }
@@ -49,10 +51,12 @@ angular.module('courtApp').controller('DateRequestController',
                     dateRequest.cardAdm = response;
                     DateRequestService.createDateRequest(dateRequest).then(
                         function (response) {
+                            Message.generate('Информация о поступившем деле успешно добавлена', 1);
                             console.log('dateRequest created successfully');
                             self.dateRequest = {};
                         },
                         function (errResponse) {
+                            Message.generate('Ошибка при добавлении информации о поступившем деле', 3);
                             console.error('Error while creating dateRequest');
                         }
                     );
@@ -69,10 +73,12 @@ angular.module('courtApp').controller('DateRequestController',
             DateRequestService.updateDateRequest(dateRequest, id)
                 .then(
                     function (response) {
+                        Message.generate('Информация о поступившем деле успешно изменена', 1);
                         console.log('dateRequest updated successfully' + self.dateRequest);
                         self.done = true;
                     },
                     function (errResponse) {
+                        Message.generate('Ошибка при изменении информации о поступившем деле', 3);
                         console.error('Error while updating dateRequest');
                     }
                 );
@@ -93,15 +99,16 @@ angular.module('courtApp').controller('DateRequestController',
 
         function removeDateRequest(id) {
             console.log('About to remove dateRequest with id ' + id);
-            DateRequestService.removeDateRequest(id)
-                .then(
-                    function () {
-                        console.log('dateRequest ' + id + ' removed successfully');
-                    },
-                    function (errResponse) {
-                        console.error('Error while removing dateRequest ' + id + ', Error :' + errResponse.data);
-                    }
-                );
+            DateRequestService.removeDateRequest(id).then(
+                function () {
+                    Message.generate('Информация о поступившем деле успешно удалена', 0);
+                    console.log('dateRequest ' + id + ' removed successfully');
+                },
+                function (errResponse) {
+                    Message.generate('Ошибка при удалении информации о поступившем деле', 3);
+                    console.error('Error while removing dateRequest ' + id + ', Error :' + errResponse.data);
+                }
+            );
         }
 
         $scope.$on('editRequestCase', function (editRequestCase, item) {

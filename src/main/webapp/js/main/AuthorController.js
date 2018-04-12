@@ -43,14 +43,17 @@ angular.module('courtApp').controller('AuthorController',
                 }
             } else {
                 if ($scope.authorForm.nameModalAuthor.$error.required){
+                    Message.generate('Укажите имя автора!', 2);
                     document.getElementById("nameSave").focus();
                     $scope.authorForm.nameModalAuthor.check = true;
 
                 }else if ($scope.authorForm.positionModalAuthor.$error.required){
+                    Message.generate('Укажите должность автора!', 2);
                     document.getElementById("positionSave").focus();
                     $scope.authorForm.positionModalAuthor.check = true;
 
                 }else if ($scope.authorForm.organizationModalAuthor.$error.required){
+                    Message.generate('Укажите организацию!', 2);
                     $scope.authorForm.organizationModalAuthor.check = true;
                 }
             }
@@ -60,12 +63,11 @@ angular.module('courtApp').controller('AuthorController',
             console.log('About to create author');
             AuthorService.createAuthor(author).then(
                 function (response) {
-                    console.log('author created successfully');
-                    self.done = true;
+                    Message.generate('Автор успешно добавлен', 1);
                     self.author = {};
                 },
                 function (errResponse) {
-                    console.error('Error while creating author');
+                    Message.generate('Ошибка при добавлении автора', 1);
                 }
             );
         }
@@ -75,10 +77,12 @@ angular.module('courtApp').controller('AuthorController',
             AuthorService.updateAuthor(author, id)
                 .then(
                     function (response) {
+                        Message.generate('Автор успешно изменен', 1);
                         console.log('author updated successfully' + self.author);
                         self.done = true;
                     },
                     function (errResponse) {
+                        Message.generate('Ошибка при изменении автора', 1);
                         console.error('Error while updating author');
                     }
                 );

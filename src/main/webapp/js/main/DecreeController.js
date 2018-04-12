@@ -102,14 +102,18 @@ angular.module('courtApp').controller('DecreeController',
                         console.log('decree updated with id ', self.decree.id);
                     }
                     $('#ModalSaveDecree').modal('toggle');
-                } else {  //TODO: добавить в выподающие сообщения
+                } else {
                     if ($scope.decreeForm.uiOrganizationModalDecree.$error.required) {
+                        Message.generate('Не выбрана организация!', 2);
                         $scope.decreeForm.uiOrganizationModalDecree.check = true;
                     } else if ($scope.decreeForm.authorModalDecree.$error.required) {
+                        Message.generate('Не выбрана автор постановления!', 2);
                         $scope.decreeForm.authorModalDecree.check = true;
                     } else if ($scope.decreeForm.dateModalDecree.$error.required) {
+                        Message.generate('Не верно указана дата постановления!', 2);
                         $scope.decreeForm.dateModalDecree.check = true;
                     } else if ($scope.decreeForm.enteredIntoForceModalDecree.$error.required) {
+                        Message.generate('Не выбран статус вступления!', 2);
                         $scope.decreeForm.enteredIntoForceModalDecree.check = true;
                     }
                 }
@@ -119,10 +123,12 @@ angular.module('courtApp').controller('DecreeController',
                 console.log('About to create decree');
                 DecreeService.createDecree(decree).then(
                     function (response) {
+                        Message.generate('Постановление успешно добавлено!', 1);
                         console.log('decree created successfully');
                         self.decree = {};
                     },
                     function (errResponse) {
+                        Message.generate('Ошибка при добавлении постановления!', 3);
                         console.error('Error while creating decree');
                     }
                 );
@@ -133,10 +139,12 @@ angular.module('courtApp').controller('DecreeController',
                 DecreeService.updateDecree(decree, id)
                     .then(
                         function (response) {
+                            Message.generate('Постановление успешно изменено!', 1);
                             console.log('decree updated successfully' + self.decree);
                             self.done = true;
                         },
                         function (errResponse) {
+                            Message.generate('Ошибка при измеении постановления!', 3);
                             console.error('Error while updating decree');
                         }
                     );

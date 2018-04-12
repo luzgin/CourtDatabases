@@ -164,9 +164,11 @@ angular.module('courtApp').controller('CardController',
                     console.log('remove return case', self.returnCase);
                     DateReturnService.removeDateReturn(self.returnCase.id).then(
                         function () {
+                            Message.generate('Информация о возвращаемом деле успешно удалена', 0);
                             console.log('return case  removed successfully');
                         },
                         function (errResponse) {
+                            Message.generate('Ошибка при удалении информации о возвращаемом деле', 3);
                             console.error('Error while removing return case, Error :' + errResponse.data);
                         }
                     );
@@ -178,9 +180,11 @@ angular.module('courtApp').controller('CardController',
                     console.log('remove request case', self.requestCase);
                     DateRequestService.removeDateRequest(self.requestCase.id).then(
                         function () {
+                            Message.generate('Информация о поступившем деле успешно удалена', 0);
                             console.log('request case  removed successfully');
                         },
                         function (errResponse) {
+                            Message.generate('Ошибка при удалении информации о поступившем деле', 3);
                             console.error('Error while removing request case, Error :' + errResponse.data);
                         }
                     );
@@ -252,19 +256,19 @@ angular.module('courtApp').controller('CardController',
 
             function submit() {
                 if ($scope.cardForm.$valid) {
-                    //перевод в дату в формате yyyy-MM-dd
-                    self.card.decreeAdm.decreeDate = stringToDate(self.card.decreeAdm.decreeDate);
                     if (self.card.resultDate != null && self.card.resultAdmCase == null) {
+                        Message.generate('Не выбран результат рассмотрения!', 2);
                         $scope.cardForm.resultCase.check = true;
-                    }
-                    else {
+                    } else {
+                        //перевод в дату в формате yyyy-MM-dd
+                        self.card.decreeAdm.decreeDate = stringToDate(self.card.decreeAdm.decreeDate);
                         console.log('Submitting');
                         if (self.card.id === undefined || self.card.id === null) {
                             self.card.createDate.setHours(3);
                             console.log('Saving New card', self.card);
                             createCard(self.card);
                         } else {
-                            if(self.card.resultDate != null){
+                            if (self.card.resultDate != null) {
                                 self.card.resultDate.setHours(3);
                             }
                             updateCard(self.card, self.card.id);
@@ -273,30 +277,37 @@ angular.module('courtApp').controller('CardController',
                     }
                 } else {
                     if ($scope.cardForm.numberCard.$invalid) {
-                        document.getElementById("numberCard").focus(); //TODO: добавить ошибку в выподающее окно
+                        Message.generate('Не верно указан номер!', 2);
+                        document.getElementById("numberCard").focus();
                         $scope.cardForm.numberCard.check = true;
 
                     } else if ($scope.cardForm.createCard.$error.required) {
+                        Message.generate('Не верно указана дата создания карточки!', 2);
                         document.getElementById("createCard").focus();
                         $scope.cardForm.createCard.check = true;
 
                     } else if ($scope.cardForm.decreeForCard.$error.required) {
+                        Message.generate('Не выбрано постановление!', 2);
                         document.getElementById("uiDecree").focus();
                         $scope.cardForm.decreeForCard.check = true;
 
                     } else if ($scope.cardForm.vailatorForCard.$error.required) {
+                        Message.generate('Не выбран правонарушитель!', 2);
                         document.getElementById("uiVialator").focus();
                         $scope.cardForm.vailatorForCard.check = true;
 
                     } else if ($scope.cardForm.articleForCard.$error.required) {
+                        Message.generate('Не выбрана статья!', 2);
                         document.getElementById("uiArticle").focus();
                         $scope.cardForm.articleForCard.check = true;
 
                     } else if ($scope.cardForm.entityDecreeForCard.$error.required) {
+                        Message.generate('Не выбрана сущность постановления!', 2);
                         document.getElementById("uiEntityDecree").focus();
                         $scope.cardForm.entityDecreeForCard.check = true;
                     }
                 }
+
             }
 
             function createCard(card) {
@@ -305,10 +316,10 @@ angular.module('courtApp').controller('CardController',
                     function (response) {
                         self.card.id = response.id;
                         ComplaintService.loadComplaintsForDecree(self.card.decreeAdm.id);
-                        console.log('card created successfully');
+                        Message.generate('Успешно сохранено', 1);
                     },
                     function (errResponse) {
-                        console.error('Error while creating card');
+                        Message.generate('Ошибка при сохранении', 3);
                     }
                 );
             }
@@ -318,10 +329,10 @@ angular.module('courtApp').controller('CardController',
                 CardService.updateCard(card, id)
                     .then(
                         function (response) {
-                            console.log('card updated successfully' + JSON.stringify(self.card));
+                            Message.generate('Успешно сохранено', 1);
                         },
                         function (errResponse) {
-                            console.error('Error while updating card');
+                            Message.generate('Ошибка при сохранении', 3);
                         }
                     );
             }

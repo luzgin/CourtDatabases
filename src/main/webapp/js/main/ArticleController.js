@@ -12,9 +12,13 @@ angular.module('courtApp').controller('ArticleController',
         self.getAllArticles = getAllArticles;
         self.editArticle = editArticle;
         self.removeArticle = removeArticle;
+        self.clearArticle = clearArticle;
 
         function getAllArticles() {
             return ArticleService.getAllArticles();
+        }
+        function clearArticle() {
+            self.article = {};
         }
 
         function submit() {
@@ -33,10 +37,11 @@ angular.module('courtApp').controller('ArticleController',
             ArticleService.createArticle(article).then(
                 function (response) {
                     console.log('article created successfully');
-                    self.done = true;
+                    Message.generate('Статья успешно добавлена', 1);
                     self.article = {};
                 },
                 function (errResponse) {
+                    Message.generate('Ошибка при добавлении статьи', 3);
                     console.error('Error while creating article');
                 }
             );
@@ -48,9 +53,10 @@ angular.module('courtApp').controller('ArticleController',
                 .then(
                     function (response) {
                         console.log('article updated successfully'+ self.article);
-                        self.done = true;
+                        Message.generate('Статья успешно изменена', 1);
                     },
                     function (errResponse) {
+                        Message.generate('Ошибка при изменении статьи', 3);
                         console.error('Error while updating article');
                     }
                 );

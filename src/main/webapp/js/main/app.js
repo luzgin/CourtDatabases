@@ -257,13 +257,13 @@ posdApp.directive('ngLoad', function ($timeout, $rootScope) {
         }
     }
 });
-var Notify = {
+var Message = {
     TYPE_INFO: 0,
     TYPE_SUCCESS: 1,
     TYPE_WARNING: 2,
     TYPE_DANGER: 3,
 
-    generate: function (aText, aOptHeader, aOptType_int) {
+    generate: function (aText, aOptType_int) {
         var lTypeIndexes = [this.TYPE_INFO, this.TYPE_SUCCESS, this.TYPE_WARNING, this.TYPE_DANGER];
         var ltypes = ['alert-info', 'alert-success', 'alert-warning', 'alert-danger'];
         var ltype = ltypes[this.TYPE_INFO];
@@ -273,47 +273,28 @@ var Notify = {
         }
 
         var lText = '';
-        if (aOptHeader) {
-            lText += "<h5>" + aOptHeader + "</h5>";
-        }
         lText += "<h6>" + aText + "</h6>";
-        var lNotify_e = $("<div class='alert " + ltype + "'>" + lText + "</div>");
-
+        var lMessage_e = $("<div class='alert " + ltype + "'>" + lText + "</div>");
         var start = Date.now();
         var timer = setInterval(function () {
             var timePassed = Date.now() - start;
             addOpacity(timePassed);
             if (timePassed >= 300) {
-                clearInterval(timer); // конец через 2 секунды
+                clearInterval(timer);
                 return;
             }
         }, 20);
-        setTimeout(function () {
-            deleteOpacity();
-        }, 4600);
 
         function addOpacity(timePassed) {
             document.getElementById("notifies").style.opacity = timePassed / 300;
         }
 
-        function deleteOpacity() {
-            var start = Date.now();
-            var timer = setInterval(function () {
-                var timePassed = Date.now() - start;
-                document.getElementById("notifies").style.opacity = (1 - (timePassed / 300));
-                if (timePassed >= 300) {
-                    clearInterval(timer); // конец через 2 секунды
-                    return;
-                }
-            }, 50);
-
-
-        }
-        
         setTimeout(function () {
-            lNotify_e.alert('close');
-        }, 5000);
+            document.getElementById("notifies").style.opacity = 0;
+            lMessage_e.alert('close');
+        }, 4000);
+        document.getElementById("notifies").style.opacity = 0;
+        lMessage_e.prependTo($("#notifies"));
 
-        lNotify_e.appendTo($("#notifies"));
     }
 };
