@@ -61,7 +61,7 @@ posdApp.config(function ($routeProvider, $locationProvider) {
             controller: 'ReportController',
             controllerAs: 'repC',
         })
-        .when('/organization', {
+        .when('/organizations', {
             templateUrl: 'listOrganization.html',
             controller: 'OrgController',
             controllerAs: 'orgC',
@@ -74,7 +74,7 @@ posdApp.config(function ($routeProvider, $locationProvider) {
             }
 
         })
-        .when('/result', {
+        .when('/results', {
             templateUrl: 'listResult.html',
             controller: 'ResController',
             controllerAs: 'resC',
@@ -86,7 +86,7 @@ posdApp.config(function ($routeProvider, $locationProvider) {
                 }
             }
         })
-        .when('/entityIsk', {
+        .when('/entityIsks', {
             templateUrl: 'listEntityIsk.html',
             controller: 'EntityController',
             controllerAs: 'entC',
@@ -98,7 +98,7 @@ posdApp.config(function ($routeProvider, $locationProvider) {
                 }
             }
         })
-        .when('/article', {
+        .when('/articles', {
             templateUrl: 'listArticle.html',
             controller: 'ArticleController',
             controllerAs: 'artC',
@@ -127,7 +127,7 @@ posdApp.config(function ($routeProvider, $locationProvider) {
                 }
             }
         })
-        .when('/author', {
+        .when('/authors', {
             templateUrl: 'listAuthor.html',
             controller: 'AuthorController',
             controllerAs: 'autC',

@@ -45,7 +45,7 @@
         </div>
     </nav>
     <div class="panel panel-default">
-        <div class="panel-heading div-center h3">Нарушители</div>
+        <div class="panel-heading text-center h3">Нарушители</div>
         <div class="panel-body" ng-controller="RadioController">
             <div class=" mb-3 col row justify-content-end">
                 <div ng-if="radioChecked.on==='1'?true:false">
@@ -77,26 +77,26 @@
                        ng-controller="FindAllVialatorsFiz">
                     <thead>
                     <tr>
-                        <th class="div-center" width="5%">id</th>
-                        <th class="div-center" width="5%">Тип</th>
-                        <th class="div-center" width="15%">Личный номер</th>
-                        <th class="div-center" width="20%">Фамилия</th>
-                        <th class="div-center" width="17.5%">Имя</th>
-                        <th class="div-center" width="17.5%">Отчество</th>
-                        <th class="div-center" width="15%"></th>
-                        <th class="div-center" width="5%"></th>
+                        <th class="text-center" width="5%">id</th>
+                        <th class="text-center" width="5%">Тип</th>
+                        <th class="text-center" width="15%">Личный номер</th>
+                        <th class="text-center" width="20%">Фамилия</th>
+                        <th class="text-center" width="17.5%">Имя</th>
+                        <th class="text-center" width="17.5%">Отчество</th>
+                        <th class="text-center" width="15%"></th>
+                        <th class="text-center" width="5%"></th>
                     </tr>
                     </thead>
                     <tbody>
                     <tr ng-repeat="item in vialatorsFizList">
-                        <td class="div-center">{{item.id}}</td>
-                        <td class="div-center">{{item.typeVialator}}</td>
-                        <td class="div-center">{{item.privateNumber}}</td>
-                        <td class="div-center">{{item.firstName}}</td>
-                        <td class="div-center">{{item.secondName}}</td>
-                        <td class="div-center">{{item.lastName}}</td>
+                        <td class="text-center">{{item.id}}</td>
+                        <td class="text-center">{{item.typeVialator}}</td>
+                        <td class="text-center">{{item.privateNumber}}</td>
+                        <td class="text-center">{{item.firstName}}</td>
+                        <td class="text-center">{{item.secondName}}</td>
+                        <td class="text-center">{{item.lastName}}</td>
                         <td>
-                            <div ng-if="item.type !='1'" class="div-center">
+                            <div ng-if="item.type !='1'" class="text-center">
                                 <button type="button" class="btn btn-primary" data-toggle="modal"
                                         data-target="#organizationModalEdit"
                                         data-organization="{{item}}">Редактировать
@@ -104,8 +104,8 @@
                             </div>
                         </td>
                         <td>
-                            <div ng-if="item.type !='1'" class="div-center">
-                                <div ng-controller="DeleteVialator" class="div-center">
+                            <div ng-if="item.type !='1'" class="text-center">
+                                <div ng-controller="DeleteVialator" class="text-center">
                                     <button class="btn btn-danger" ng-click="deleteVialator(item);">Удалить
                                     </button>
                                 </div>
@@ -121,22 +121,22 @@
                        ng-controller="FindAllVialatorsOrg">
                     <thead>
                     <tr>
-                        <th class="div-center" width="5%">id</th>
-                        <th class="div-center" width="5%">Тип</th>
-                        <th class="div-center" width="10%">УНП</th>
-                        <th class="div-center" width="70%">Название</th>
-                        <th class="div-center" width="5%"></th>
-                        <th class="div-center" width="5%"></th>
+                        <th class="text-center" width="5%">id</th>
+                        <th class="text-center" width="5%">Тип</th>
+                        <th class="text-center" width="10%">УНП</th>
+                        <th class="text-center" width="70%">Название</th>
+                        <th class="text-center" width="5%"></th>
+                        <th class="text-center" width="5%"></th>
                     </tr>
                     </thead>
                     <tbody>
                     <tr ng-repeat="item in vialatorsOrgList">
-                        <td class="div-center">{{item.id}}</td>
-                        <td class="div-center">{{item.typeVialator}}</td>
-                        <td class="div-center">{{item.privateNumber}}</td>
-                        <td class="div-center">{{item.firstName}}</td>
+                        <td class="text-center">{{item.id}}</td>
+                        <td class="text-center">{{item.typeVialator}}</td>
+                        <td class="text-center">{{item.privateNumber}}</td>
+                        <td class="text-center">{{item.firstName}}</td>
                         <td>
-                            <div ng-if="item.type !='1'" class="div-center">
+                            <div ng-if="item.type !='1'" class="text-center">
                                 <button type="button" class="btn btn-primary" data-toggle="modal"
                                         data-target="#organizationModalEdit"
                                         data-organization="{{item}}">Редактировать
@@ -144,8 +144,8 @@
                             </div>
                         </td>
                         <td>
-                            <div ng-if="item.type !='1'" class="div-center">
-                                <div ng-controller="DeleteVialator" class="div-center">
+                            <div ng-if="item.type !='1'" class="text-center">
+                                <div ng-controller="DeleteVialator" class="text-center">
                                     <button class="btn btn-danger" ng-click="deleteVialator(item);">Удалить
                                     </button>
                                 </div>

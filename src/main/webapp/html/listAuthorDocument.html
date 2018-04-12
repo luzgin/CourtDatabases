@@ -28,7 +28,7 @@
         </div>
     </nav>
     <div class="panel panel-default">
-        <div class="panel-heading div-center h3">Автор документа</div>
+        <div class="panel-heading text-center h3">Автор документа</div>
         <div class="panel-body">
 
             <div class=" mb-3 col row justify-content-end">
@@ -41,22 +41,22 @@
                    ng-controller="FindAllAuthorDocument">
                 <thead>
                 <tr>
-                    <th class="div-center" width="5%">id</th>
-                    <th class="div-center" width="30%">ФИО</th>
-                    <th class="div-center" width="10%">Работает ли</th>
-                    <th class="div-center" width="45%">Организация</th>
-                    <th class="div-center" width="5%"></th>
-                    <th class="div-center" width="5%"></th>
+                    <th class="text-center" width="5%">id</th>
+                    <th class="text-center" width="30%">ФИО</th>
+                    <th class="text-center" width="10%">Работает ли</th>
+                    <th class="text-center" width="45%">Организация</th>
+                    <th class="text-center" width="5%"></th>
+                    <th class="text-center" width="5%"></th>
                 </tr>
                 </thead>
                 <tbody>
                 <tr ng-repeat="item in authorDocumentList">
-                    <td class="div-center">{{item.id}}</td>
-                    <td class="div-center">{{item.name}}</td>
-                    <td class="div-center">{{item.activWork}}</td>
-                    <td class="div-center">{{item.organization.name}}</td>
+                    <td class="text-center">{{item.id}}</td>
+                    <td class="text-center">{{item.name}}</td>
+                    <td class="text-center">{{item.activWork}}</td>
+                    <td class="text-center">{{item.organization.name}}</td>
                     <td>
-                        <div ng-if="item.type !='1'" class="div-center">
+                        <div ng-if="item.type !='1'" class="text-center">
                             <button type="button" class="btn btn-primary btn-sm" data-toggle="modal"
                                     data-target="#authorModalEdit"
                                     data-author="{{item}}">Редактировать
@@ -64,7 +64,7 @@
                         </div>
                     </td>
                     <td>
-                        <div ng-controller="DeleteAuthor" class="div-center">
+                        <div ng-controller="DeleteAuthor" class="text-center">
                             <button class="btn btn-danger btn-sm" ng-click="deleteAuthor(item);">Удалить</button>
                         </div>
                     </td>

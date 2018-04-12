@@ -1,19 +1,7 @@
 <div class="container">
     <div class="panel panel-default">
-        <div class="panel-heading div-center h3">Нарушители</div>
+        <div class="panel-heading text-center py-3 h3">Нарушители</div>
         <div class="panel-body">
-            <div class=" mb-3 col row justify-content-end">
-                <div ng-if="radioChecked.on==='1'?true:false">
-                    <button type="button" class="btn btn-primary" data-toggle="modal"
-                            data-target="#ModalSaveFiz">Добавить физ. лицо
-                    </button>
-                </div>
-                <div ng-if="radioChecked.on==='2'?true:false">
-                    <button type="button" class="btn btn-primary" data-toggle="modal"
-                            data-target="#ModalSaveOrg">Добавить юр. лицо
-                    </button>
-                </div>
-            </div>
             <div class=" mb-3 col row justify-content-center">
                 <div class="form-check form-check-inline">
                     <input type="radio" id="fiz" ng-model="radioChecked.on" value="1">
@@ -24,141 +12,219 @@
                     <label class="form-check-label h4" for="org">Юридические лица</label>
                 </div>
             </div>
-
             <div ng-if="radioChecked.on==='1'?true:false">
-                <table class="table table-striped table-bordered table-sm table-hover">
-                    <thead>
-                    <tr>
-                        <th class="div-center" width="15%">Личный номер</th>
-                        <th class="div-center" width="25%">Фамилия</th>
-                        <th class="div-center" width="20%">Имя</th>
-                        <th class="div-center" width="20%">Отчество</th>
-                        <th class="div-center"></th>
-                        <th class="div-center"></th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr ng-repeat="item in viaC.getAllVialatorsFiz()">
-                        <td class="div-center">{{item.privateNumber}}</td>
-                        <td class="div-center">{{item.firstName}}</td>
-                        <td class="div-center">{{item.secondName}}</td>
-                        <td class="div-center">{{item.lastName}}</td>
-                        <td>
-                            <button type="button"data-toggle="modal"
-                                    data-target="#ModalSaveFiz" ng-click="viaC.editVialator(item.id)" class="btn btn-sm btn-success custom-width">Редактировать</button>
-                        </td>
-                        <td>
-                            <div class="div-center">
-                                <div class="div-center">
-                                    <button class="btn btn-sm btn-danger" ng-click="viaC.removeVialator(item.id);">Удалить</button>
-                                </div>
-                            </div>
-                        </td>
-                    </tr>
+                <div class="scroll-table">
+                    <table class="tab-scroll bor-table table-sm table-hover col">
+                        <thead>
+                        <tr>
+                            <th class="text-center" width="20%">Личный номер</th>
+                            <th class="text-center" width="30%">Фамилия</th>
+                            <th class="text-center" width="20%">Имя</th>
+                            <th class="text-center" width="20%">Отчество</th>
+                            <th class="text-center"></th>
+                        </tr>
+                        <tr>
+                            <th> <input type="text" class="form-control text-center" ng-model="search1.privateNumber"
+                                        placeholder="Найти"/></th>
+                            <th> <input type="text" class="form-control text-center" ng-model="search2.firstName"
+                                        placeholder="Найти"/></th>
+                            <th> <input type="text" class="form-control text-center" ng-model="search3.secondName"
+                                        placeholder="Найти"/></th>
+                            <th> <input type="text" class="form-control text-center" ng-model="search4.lastName"
+                                        placeholder="Найти"/></th>
+                            <th></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="item in viaC.getAllVialatorsFiz() | filter: search1 | filter: search2 | filter: search3 | filter: search4">
+                            <td class="text-center"><input type="hidden" id="vialatorId" ng-model="item.id">{{item.privateNumber}}</td>
+                            <td class="text-center">{{item.firstName}}</td>
+                            <td class="text-center">{{item.secondName}}</td>
+                            <td class="text-center">{{item.lastName}}</td>
+                            <td>
+                                <button type="button" data-toggle="modal"
+                                        data-target="#ModalSaveVialators" ng-click="viaC.editVialator(item.id)"
+                                        class="btn btn-sm btn-success custom-width">Редактировать
+                                </button>
+                            </td>
+                        </tr>
 
-                    </tbody>
-                </table>
+                        </tbody>
+                    </table>
+                </div>
             </div>
             <div ng-if="radioChecked.on==='2'?true:false">
-                <table class="table table-striped table-bordered table-sm table-hover">
-                    <thead>
-                    <tr>
-                        <th class="div-center" width="10%">УНП</th>
-                        <th class="div-center" width="70%">Название</th>
-                        <th class="div-center" width="5%"></th>
-                        <th class="div-center" width="5%"></th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr ng-repeat="item in viaC.getAllVialatorsOrg()">
-                        <td class="div-center">{{item.privateNumber}}</td>
-                        <td class="div-center">{{item.firstName}}</td>
-                        <td>
-                                <button type="button"data-toggle="modal"
-                                        data-target="#ModalSaveOrg" ng-click="viaC.editVialator(item.id)" class="btn btn-sm btn-success custom-width">Редактировать</button>
-                        </td>
-                        <td>
-                            <div class="div-center">
-                                <div class="div-center">
-                                    <button class="btn btn-sm btn-danger" ng-click="viaC.removeVialator(item.id);">Удалить</button>
-                                </div>
+                <div class="scroll-table">
+                    <table class="tab-scroll bor-table table-sm table-hover col">
+                        <thead>
+                        <tr>
+                            <th class="text-center" width="10%">УНП</th>
+                            <th class="text-center" width="70%">Название</th>
+                            <th class="text-center" width="5%"></th>
+                        </tr>
+                        <tr>
+                            <th><input type="text" class="form-control text-center" ng-model="search1.privateNumber"
+                                       placeholder="Найти"/></th></th>
+                            <th><input type="text" class="form-control text-left" ng-model="search2.firstName"
+                                       placeholder="Найти"/></th></th>
+                            <th></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="item in viaC.getAllVialatorsOrg() | filter: search1 | filter: search2">
+                            <td><input type="hidden" id="vialatorId" ng-model="item.id">{{item.privateNumber}}</td>
+                            <td class="text-left pl-3">{{item.firstName}}</td>
+                            <td>
+                                <button type="button" data-toggle="modal"
+                                        data-target="#ModalSaveVialators" ng-click="viaC.editVialator(item.id)"
+                                        class="btn btn-sm btn-success custom-width">Редактировать
+                                </button>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="ModalSaveVialators" class="modal fade" role="dialog" data-backdrop="static" data-keyboard="false">
+    <div class="widht-modal-dialog modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" ng-if="radioChecked.on==='1'?true:false">Добавление/Редактирование физ.
+                    лица</h4>
+                <h4 class="modal-title" ng-if="radioChecked.on==='2'?true:false">Добавление/Редактирование юр.
+                    лица</h4>
+            </div>
+            <div class="modal-body">
+                <div class=" mb-3 col row justify-content-center">
+                    <div class="form-check form-check-inline"
+                         ng-if="viaC.vialator.typeVialator == 1 || viaC.vialator.typeVialator == null">
+                        <input id="radioChecked1" type="radio" ng-model="radioChecked.on" value="1">
+                        <label for="radioChecked1" class="form-check-label h4">Физическое лицо</label>
+                    </div>
+                    <div class="form-check form-check-inline"
+                         ng-if="viaC.vialator.typeVialator == 2 || viaC.vialator.typeVialator == null">
+                        <input id="radioChecked2" type="radio" ng-model="radioChecked.on" value="2">
+                        <label for="radioChecked2" class="form-check-label h4">Юридическое лицо</label>
+                    </div>
+                </div>
+                <div ng-show="radioChecked.on==='1'?true:false">
+                    <form name="vialatorFormFiz" ng-submit="viaC.submit()" class="form-horizontal" role="form"
+                          novalidate>
+                        <input type="hidden" ng-model="viaC.vialator.id"/>
+                        <div class="form-group row">
+                            <label class="col-md-2 control-label" for="privateNumber">Личный номер</label>
+                            <div class="col-md-10">
+                                <input id="privateNumber"
+                                       name="privateNumberModalVialator"
+                                       type="text"
+                                       class="form-control"
+                                       ng-model="viaC.vialator.privateNumber"
+                                       ng-pattern="/[0-9]{7}[A-Z]{1}[0-9]{3}[A-Z]{2}[0-9]{1}/"
+                                       ng-required="true"/>
+                                <span style="color:red"
+                                      ng-show="vialatorFormFiz.privateNumberModalVialator.check && vialatorFormFiz.privateNumberModalVialator.$invalid">
+                                    Введите личный номер латинскими символами в формате: 1234567X123XX1
+                                </span>
                             </div>
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
-</div>
-<div id="ModalSaveFiz" class="modal fade" role="dialog">
-    <div class="widht-modal-dialog modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title">Добавление/Редактирование физ. лица</h4>
-            </div>
-            <div class="modal-body">
-                <form ng-submit="viaC.submit()" class="form-horizontal" role="form">
-                    <input type="hidden" ng-model="viaC.vialator.id"/>
-                    <div class="form-group row">
-                        <label class="col-md-2 control-label" for="privateNumber">Личный номер</label>
-                        <div class="col-md-10">
-                            <input type="text" class="form-control" id="privateNumber" ng-model="viaC.vialator.privateNumber"/>
                         </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-md-2 control-label" for="firstName">Фамилия</label>
-                        <div class="col-md-10">
-                            <input type="text" class="form-control" id="firstName" ng-model="viaC.vialator.firstName"/>
+                        <div class="form-group row">
+                            <label class="col-md-2 control-label" for="firstName">Фамилия</label>
+                            <div class="col-md-10">
+                                <input id="firstName"
+                                       name="firstNameModalVialator"
+                                       type="text" class="form-control"
+                                       ng-model="viaC.vialator.firstName"
+                                       ng-required="true"/>
+                                <span style="color:red"
+                                      ng-show="vialatorFormFiz.firstNameModalVialator.check && vialatorFormFiz.firstNameModalVialator.$error.required">
+                                    Не может быть пустым!
+                                </span>
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-md-2 control-label" for="secondName">Имя</label>
-                        <div class="col-md-10">
-                            <input type="text" class="form-control" id="secondName" ng-model="viaC.vialator.secondName"/>
+                        <div class="form-group row">
+                            <label class="col-md-2 control-label" for="secondName">Имя</label>
+                            <div class="col-md-10">
+                                <input id="secondNameFiz"
+                                       name="secondNameModalVialator"
+                                       type="text"
+                                       class="form-control"
+                                       ng-model="viaC.vialator.secondName"
+                                       ng-required="true"/>
+                                <span style="color:red"
+                                      ng-show="vialatorFormFiz.secondNameModalVialator.check && vialatorFormFiz.secondNameModalVialator.$error.required">
+                                    Не может быть пустым!
+                                </span>
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-md-2 control-label" for="lastName">Отчество</label>
-                        <div class="col-md-10">
-                            <input type="text" class="form-control" id="lastName" ng-model="viaC.vialator.lastName"/>
+                        <div class="form-group row">
+                            <label class="col-md-2 control-label" for="lastName">Отчество</label>
+                            <div class="col-md-10">
+                                <input id="lastNameModalVialator"
+                                       name="lastNameModalVialator"
+                                       type="text"
+                                       class="form-control"
+                                       ng-model="viaC.vialator.lastName"
+                                       ng-required="true"/>
+                                <span style="color:red"
+                                      ng-show="vialatorFormFiz.lastNameModalVialator.check && vialatorFormFiz.lastNameModalVialator.$error.required">
+                                    Не может быть пустым!
+                                </span>
+                            </div>
                         </div>
-                    </div>
-                    <div class="modal-footer row mr-0">
-                        <input type="submit"  value="{{!viaC.vialator.id ? 'Добавить' : 'Обновить'}}" class="btn btn-primary btn-sm">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
-<div id="ModalSaveOrg" class="modal fade" role="dialog">
-    <div class="widht-modal-dialog modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title">Добавление/Редактирование юр. лица</h4>
-            </div>
-            <div class="modal-body">
-                <form ng-submit="viaC.submit()" class="form-horizontal" role="form">
-                    <input type="hidden" ng-model="viaC.vialator.id" />
-                    <div class="form-group row">
-                        <label class="col-md-2 control-label" for="UNP">УНП</label>
-                        <div class="col-md-10">
-                            <input type="text" class="form-control" id="UNP" ng-model="viaC.vialator.privateNumber"/>
+                        <div class="modal-footer row mr-0">
+                            <input type="submit" value="{{!viaC.vialator.id ? 'Добавить' : 'Изменить'}}"
+                                   class="btn btn-primary btn-sm">
+                            <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Закрыть
+                            </button>
                         </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-md-2 control-label" for="orgName">Название</label>
-                        <div class="col-md-10">
-                            <input type="text" class="form-control" id="orgName" ng-model="viaC.vialator.firstName"/>
+                    </form>
+                </div>
+                <div ng-show="radioChecked.on==='2'?true:false">
+                    <form name="vialatorFormUr" ng-submit="viaC.submit()" class="form-horizontal" role="form"
+                          novalidate>
+                        <input type="hidden" ng-model="viaC.vialator.id"/>
+                        <div class="form-group row">
+                            <label class="col-md-2 control-label" for="privateNumber">УНП</label>
+                            <div class="col-md-10">
+                                <input id="unpModalVialator"
+                                       name="unpModalVialator"
+                                       type="text"
+                                       class="form-control"
+                                       ng-model="viaC.vialator.privateNumber"
+                                       ng-pattern="/[0-9]{9}/"
+                                       ng-required="true"/>
+                                <span style="color:red"
+                                      ng-show="vialatorFormUr.unpModalVialator.check && vialatorFormUr.unpModalVialator.$invalid">
+                                    Введите УНП в формате: 123456789
+                                </span>
+                            </div>
                         </div>
-                    </div>
-                    <div class="modal-footer row mr-0">
-                        <input type="submit"  value="{{!viaC.vialator.id ? 'Добавить' : 'Обновить'}}" class="btn btn-primary btn-sm">
-                        <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Закрыть</button>
-                    </div>
-                </form>
+                        <div class="form-group row">
+                            <label class="col-md-2 control-label" for="firstName">Название</label>
+                            <div class="col-md-10">
+                                <input id="firstNameUrModalVialator"
+                                       name="firstNameUrModalVialator"
+                                       type="text"
+                                       class="form-control"
+                                       ng-model="viaC.vialator.firstName"
+                                       ng-required="true"/>
+                                <span style="color:red"
+                                      ng-show="vialatorFormUr.firstNameUrModalVialator.check && vialatorFormUr.firstNameUrModalVialator.$error.required">
+                                    Не может быть пустым!
+                                </span>
+                            </div>
+                        </div>
+                        <div class="modal-footer row mr-0">
+                            <input type="submit" value="{{!viaC.vialator.id ? 'Добавить' : 'Сохранить'}}"
+                                   class="btn btn-primary btn-sm">
+                            <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Закрыть
+                            </button>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
     </div>

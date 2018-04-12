@@ -1,61 +1,64 @@
 <div class="panel panel-default">
-    <div class="panel-heading div-center h3">Организации</div>
+    <div class="panel-heading text-center h3 py-3">Организации</div>
     <div class="panel-body">
-
-        <div class=" mb-3 col row justify-content-end">
-            <button type="button" class="btn btn-primary" data-toggle="modal"
-                    data-target="#ModalSave">Добавить организацию
-            </button>
-        </div>
-        <table class="table table-striped table-bordered table-sm table-hover">
-            <thead>
-            <tr>
-                <th class="div-center" width="80%">Название</th>
-                <th class="div-center" width="5%"></th>
-                <th class="div-center" width="5%"></th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr ng-repeat="item in orgC.getAllOrganizations()">
-                <td>{{item.name}}</td>
-                <td>
-                    <div ng-if="item.type !='1'" class="div-center">
-                        <button type="button"data-toggle="modal"
-                                data-target="#ModalSave" ng-click="orgC.editOrganization(item.id)" class="btn btn-sm btn-success custom-width">Редактировать</button>
-                    </div>
-                </td>
-                <td>
-                    <div ng-if="item.type !='1'" class="div-center">
-                        <div class="div-center">
-                            <button class="btn btn-sm btn-danger" ng-click="orgC.removeOrganization(item.id);">Удалить</button>
+        <div class="scroll-table">
+            <table class="bor-table table-sm table-hover col">
+                <thead>
+                <tr>
+                    <th class="text-center" width="90%">Название</th>
+                    <th class="text-center" width="10%"></th>
+                </tr>
+                <tr>
+                    <th width="80%"><input type="text" class="form-control text-left" ng-model="search.name"
+                                           placeholder="Найти"/></th>
+                    <th width="5%"></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="item in orgC.getAllOrganizations() | filter: search">
+                    <td class="text-left pl-3">{{item.name}}</td>
+                    <td>
+                        <div ng-if="item.type !='1'" class="text-center">
+                            <button type="button" data-toggle="modal"
+                                    data-target="#ModalSaveOrganization" ng-click="orgC.editOrganization(item.id)"
+                                    class="btn btn-sm btn-success custom-width">Редактировать
+                            </button>
                         </div>
-                    </div>
-                </td>
-            </tr>
-
-            </tbody>
-
-        </table>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>
-<div id="ModalSave" class="modal fade" role="dialog">
+<div id="ModalSaveOrganization" class="modal fade" role="dialog">
     <div class="widht-modal-dialog modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
                 <h4 class="modal-title">Добавление/редактирование организации</h4>
             </div>
             <div class="modal-body">
-                <form ng-submit="orgC.submit()" class="form-horizontal" role="form">
-                    <input type="hidden" ng-model="orgC.organization.id" />
+                <form name="organizationForm" ng-submit="orgC.submit()" class="form-horizontal" role="form"
+                      novalidate>
+                    <input type="hidden" ng-model="orgC.organization.id"/>
                     <div class="form-group row">
                         <label class="col-md-2 control-label" for="nameInputSave">Название</label>
                         <div class="col-md-10">
-                            <input type="text" class="form-control" id="nameInputSave" ng-model="orgC.organization.name"/>
+                            <input id="nameInputSave"
+                                   name="nameModalOrganization"
+                                   type="text" class="form-control"
+                                   ng-model="orgC.organization.name"
+                                   ng-required="true"/>
+                            <span style="color:red"
+                                  ng-show="organizationForm.nameModalOrganization.check && organizationForm.nameModalOrganization.$error.required">
+                                    Не может быть пустым!
+                                </span>
                         </div>
                     </div>
                     <div class="modal-footer row mr-0">
-                        <input type="submit"  value="{{!orgC.organization.id ? 'Добавить' : 'Обновить'}}" class="btn btn-primary btn-sm">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
+                        <input type="submit" value="{{!orgC.organization.id ? 'Добавить' : 'Изменить'}}"
+                               class="btn btn-primary btn-sm">
+                        <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Закрыть</button>
                     </div>
                 </form>
             </div>

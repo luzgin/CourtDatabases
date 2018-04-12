@@ -1,5 +1,5 @@
 <div class="panel panel-default">
-    <div class="panel-heading div-center h3">Итог результат постановления</div>
+    <div class="panel-heading text-center h3">Итог результат постановления</div>
     <div class="panel-body">
         <div class=" mb-3 col row justify-content-end">
             <button type="button" class="btn btn-primary" data-toggle="modal"
@@ -9,10 +9,10 @@
         <table class="tab-scroll bor-table table-sm table-hover">
             <thead>
             <tr>
-                <th class="div-center" width="25%">Сущность</th>
-                <th class="div-center" width="15%">Примечание</th>
-                <th class="div-center" width="5%"></th>
-                <th class="div-center" width="5%"></th>
+                <th class="text-center" width="25%">Сущность</th>
+                <th class="text-center" width="15%">Примечание</th>
+                <th class="text-center" width="5%"></th>
+                <th class="text-center" width="5%"></th>
             </tr>
             </thead>
             <tbody>
@@ -20,7 +20,7 @@
                 <td>{{item.nameEntityDecreeAdm.name}}</td>
                 <td>{{item.prim}}</td>
                 <td>
-                    <div ng-if="item.type !='1'" class="div-center">
+                    <div ng-if="item.type !='1'" class="text-center">
                         <button type="button" data-toggle="modal"
                                 data-target="#ModalSave" ng-click="endC.editEntityDecree(item.id)"
                                 class="btn btn-sm btn-success custom-width">Редактировать
@@ -28,8 +28,8 @@
                     </div>
                 </td>
                 <td>
-                    <div class="div-center">
-                        <div class="div-center">
+                    <div class="text-center">
+                        <div class="text-center">
                             <button class="btn btn-sm btn-danger" ng-click="endC.removeEntityDecree(item.id);">Удалить</button>
                         </div>
                     </div>
@@ -66,7 +66,7 @@
                         </div>
                     </div>
                     <div class="modal-footer row mr-0">
-                        <input type="submit" value="{{!endC.entityDecree.id ? 'Добавить' : 'Обновить'}}"
+                        <input type="submit" value="{{!endC.entityDecree.id ? 'Добавить' : 'Изменить'}}"
                                class="btn btn-primary btn-sm">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
                     </div>

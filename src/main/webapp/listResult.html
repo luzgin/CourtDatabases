@@ -1,38 +1,34 @@
 <div class="panel panel-default">
-    <div class="panel-heading div-center h3">Результат рассмотрения</div>
+    <div class="panel-heading text-center h3">Результат рассмотрения</div>
     <div class="panel-body">
         <div class=" mb-3 col row justify-content-end">
             <button type="button" class="btn btn-primary" data-toggle="modal"
                     data-target="#ModalSave">Добавить Результат
             </button>
         </div>
-        <table class="table table-striped table-bordered table-sm table-hover">
-            <thead>
-            <tr>
-                <th class="div-center" width="75%">Название</th>
-                <th class="div-center" width="5%"></th>
-                <th class="div-center" width="5%"></th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr ng-repeat="item in resC.getAllResults()">
-                <td>{{item.name}}</td>
-                <td>
-                    <div ng-if="item.type !='1'" class="div-center">
-                        <button type="button"data-toggle="modal"
-                                data-target="#ModalSave" ng-click="resC.editResult(item.id)" class="btn btn-sm btn-success custom-width">Редактировать</button>
-                    </div>
-                </td>
-                <td>
-                    <div class="div-center">
-                        <div class="div-center">
-                            <button class="btn btn-sm btn-danger" ng-click="resC.removeResult(item.id);">Удалить</button>
+        <div class="scroll-table">
+            <table class="tab-scroll bor-table table-sm table-hover col">
+                <thead>
+                <tr>
+                    <th class="text-center" width="75%">Название</th>
+                    <th class="text-center" width="5%"></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="item in resC.getAllResults()">
+                    <td class="text-left pl-3">{{item.name}}</td>
+                    <td>
+                        <div ng-if="item.type !='1'" class="text-center">
+                            <button type="button" data-toggle="modal"
+                                    data-target="#ModalSave" ng-click="resC.editResult(item.id)"
+                                    class="btn btn-sm btn-success custom-width">Редактировать
+                            </button>
                         </div>
-                    </div>
-                </td>
-            </tr>
-            </tbody>
-        </table>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>
 <div id="ModalSave" class="modal fade" role="dialog">
@@ -43,7 +39,7 @@
             </div>
             <div class="modal-body">
                 <form ng-submit="resC.submit()" class="form-horizontal" role="form">
-                    <input type="hidden" ng-model="resC.result.id" />
+                    <input type="hidden" ng-model="resC.result.id"/>
                     <div class="form-group row">
                         <label class="col-md-2 control-label" for="nameSave">Название</label>
                         <div class="col-md-10">
@@ -51,7 +47,8 @@
                         </div>
                     </div>
                     <div class="modal-footer row mr-0">
-                        <input type="submit"  value="{{!resC.result.id ? 'Добавить' : 'Обновить'}}" class="btn btn-primary btn-sm">
+                        <input type="submit" value="{{!resC.result.id ? 'Добавить' : 'Изменить'}}"
+                               class="btn btn-primary btn-sm">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
                     </div>
                 </form>

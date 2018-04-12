@@ -1,5 +1,5 @@
 <div class="panel panel-default">
-    <div class="panel-heading div-center h3">Жалобы</div>
+    <div class="panel-heading text-center h3">Жалобы</div>
     <div class="panel-body">
         <div class=" mb-3 col row justify-content-end">
             <button type="button" class="btn btn-primary" data-toggle="modal"
@@ -9,20 +9,20 @@
         <table class="table table-striped table-bordered table-sm table-hover">
             <thead>
             <tr>
-                <th class="div-center" width="5%">id</th>
-                <th class="div-center" width="10%">Дата</th>
-                <th class="div-center" width="10%">Автор</th>
-                <th class="div-center" width="20%">Сужность жалобы</th>
-                <th class="div-center" width="30%">Постановление</th>
-                <th class="div-center" width="10%">Сумма госпошлины</th>
-                <th class="div-center" width="5%">Дан ответ</th>
-                <th class="div-center" width="5%"></th>
-                <th class="div-center" width="5%"></th>
+                <th class="text-center" width="5%">id</th>
+                <th class="text-center" width="10%">Дата</th>
+                <th class="text-center" width="10%">Автор</th>
+                <th class="text-center" width="20%">Сужность жалобы</th>
+                <th class="text-center" width="30%">Постановление</th>
+                <th class="text-center" width="10%">Сумма госпошлины</th>
+                <th class="text-center" width="5%">Дан ответ</th>
+                <th class="text-center" width="5%"></th>
+                <th class="text-center" width="5%"></th>
             </tr>
             </thead>
             <tbody>
             <tr ng-repeat="item in comC.getAllComplaints()">
-                <td class="div-center">{{item.id}}</td>
+                <td class="text-center">{{item.id}}</td>
                 <td>{{item.complainDate}}</td>
                 <td>{{item.nameAuthorComplaint}}</td>
                 <td>{{item.entityIskAdm.name}}</td>
@@ -40,8 +40,8 @@
                     </button>
                 </td>
                 <td>
-                    <div class="div-center">
-                        <div class="div-center">
+                    <div class="text-center">
+                        <div class="text-center">
                             <button class="btn btn-danger btn-sm" ng-click="comC.removeComplaint(item.id);">Удалить
                             </button>
                         </div>
@@ -108,7 +108,7 @@
                         </div>
                     </div>
                     <div class="modal-footer row mr-0">
-                        <input type="submit" value="{{!comC.complaint.id ? 'Добавить' : 'Обновить'}}"
+                        <input type="submit" value="{{!comC.complaint.id ? 'Добавить' : 'Изменить'}}"
                                class="btn btn-primary btn-sm">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
                     </div>

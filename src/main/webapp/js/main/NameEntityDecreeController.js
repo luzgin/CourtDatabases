@@ -13,10 +13,13 @@ angular.module('courtApp').controller('NameEntityDecreeController',
         self.editNameEntityDecree = editNameEntityDecree;
         self.removeNameEntityDecree = removeNameEntityDecree;
 
-        self.done = false;
+        self.clearMameEntityDecree = clearMameEntityDecree;
 
         function getAllNamesEntityDecree() {
             return NameEntityDecreeService.getAllNamesEntityDecree();
+        }
+        function clearMameEntityDecree() {
+            self.nameEntityDecree = {};
         }
 
         function submit() {
@@ -24,9 +27,11 @@ angular.module('courtApp').controller('NameEntityDecreeController',
             if (self.nameEntityDecree.id === undefined || self.nameEntityDecree.id === null) {
                 console.log('Saving New nameEntityDecree', self.nameEntityDecree);
                 createNameEntityDecree(self.nameEntityDecree);
+                $('#ModalSaveNameEntityDecree').modal('toggle');
             } else {
                 updateNameEntityDecree(self.nameEntityDecree, self.nameEntityDecree.id);
                 console.log('nameEntityDecree updated with id ', self.nameEntityDecree.id);
+                $('#ModalSaveNameEntityDecree').modal('toggle');
             }
         }
 
@@ -35,10 +40,11 @@ angular.module('courtApp').controller('NameEntityDecreeController',
             NameEntityDecreeService.createNameEntityDecree(nameEntityDecree).then(
                 function (response) {
                     console.log('nameEntityDecree created successfully');
-                    self.done = true;
+                    Message.generate('Сущность постановления успешно добавлена!', 1);
                     self.nameEntityDecree = {};
                 },
                 function (errResponse) {
+                    Message.generate('Ошибка при добавлении сущности постановления!', 3);
                     console.error('Error while creating nameEntityDecree');
                 }
             );
@@ -50,9 +56,10 @@ angular.module('courtApp').controller('NameEntityDecreeController',
                 .then(
                     function (response) {
                         console.log('nameEntityDecree updated successfully'+ self.organization);
-                        self.done = true;
+                        Message.generate('Сущность постановления успешно изменена!', 1);
                     },
                     function (errResponse) {
+                        Message.generate('Ошибка при изменении сущности постановления!', 3);
                         console.error('Error while updating nameEntityDecree');
                     }
                 );

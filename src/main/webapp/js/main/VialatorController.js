@@ -22,7 +22,9 @@ angular.module('courtApp').controller('VialatorController',
         $("#ModalSaveVialators").on('show.bs.modal', function () {
             if (document.getElementById("vialatorId").value != null) {
                 $scope.$apply(function () {
-                    self.vialator = document.getElementById("uiVialator").value;
+                    try {
+                        self.vialator = document.getElementById("uiVialator").value;
+                    }catch (e){}
                     if (self.vialator != null) {
                         if (self.vialator.typeVialator == 2) {
                             $scope.radioChecked = {on: '2'};

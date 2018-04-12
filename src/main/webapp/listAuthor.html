@@ -1,31 +1,45 @@
 <div class="panel panel-default">
-    <div class="panel-heading div-center h3">Авторы документов</div>
+    <div class="panel-heading text-center py-3 h3">Авторы документов</div>
     <div class="panel-body">
-        <div class="m-0 row">
-            <div class="col-4 mb-3 col row justify-content-start">
-                <input type="text" class="form-control" ng-model="search.name"
-                       placeholder="Введите фамилию для поиска..."/>
-            </div>
-        </div>
         <div class="scroll-table">
             <table class="tab-scroll bor-table table-sm table-hover">
                 <thead>
                 <tr>
-                    <th class="div-center" width="20%">ФИО</th>
-                    <th class="div-center" width="25%">Должность</th>
-                    <th class="div-center" width="10">Статус</th>
-                    <th class="div-center" width="35%">Организация</th>
-                    <th class="div-center" width="5%"></th>
+                    <th class="text-center" width="20%">ФИО</th>
+                    <th class="text-center" width="25%">Должность</th>
+                    <th class="text-center" width="10">Статус</th>
+                    <th class="text-center" width="35%">Организация</th>
+                    <th class="text-center" width="5%"></th>
+                </tr>
+                <tr>
+                    <th>
+                        <input type="text" class="form-control text-center" ng-model="search1.name"
+                               placeholder="Найти"/>
+                    </th>
+                    <th>
+                        <input type="text" class="form-control text-center" ng-model="search2.position"
+                               placeholder="Найти"/>
+                    </th>
+                    <th>
+                        <input type="text" class="form-control text-center" ng-model="search3.activWork"
+                               placeholder="Найти"/>
+                    </th>
+                    <th>
+                        <input type="text" class="form-control text-center" ng-model="search4.organization.name"
+                               placeholder="Найти"/>
+                    </th>
+                    <th></th>
+
                 </tr>
                 </thead>
                 <tbody>
-                <tr ng-repeat="item in autC.getAllAuthors() | filter: search">
+                <tr ng-repeat="item in autC.getAllAuthors() | filter: search1 | filter: search2 | filter: search3 | filter: search4">
                     <td>{{item.name}}</td>
                     <td>{{item.position}}</td>
                     <td>{{item.activWork == 1 ? 'Работает' : 'Уволен' }}</td>
                     <td>{{item.organization.name}}</td>
                     <td>
-                        <div ng-if="item.type !='1'" class="div-center">
+                        <div ng-if="item.type !='1'" class="text-center">
                             <button type="button" data-toggle="modal"
                                     data-target="#ModalSaveAuthor" ng-click="autC.editAuthor(item.id)"
                                     class="btn btn-sm btn-success custom-width">Редактировать

@@ -1,5 +1,5 @@
 <div class="panel panel-default">
-    <div class="panel-heading div-center h3">Постановления</div>
+    <div class="panel-heading text-center h3">Постановления</div>
     <div class="panel-body">
         <div class=" mb-3 col row justify-content-end">
             <button type="button" class="btn btn-primary" data-toggle="modal"
@@ -9,23 +9,23 @@
         <table class="table table-striped table-bordered table-sm table-hover">
             <thead>
             <tr>
-                <th class="div-center" width="13%">Организация</th>
-                <th class="div-center" width="10%">Автор</th>
-                <th class="div-center" width="10">Должность</th>
-                <th class="div-center" width="7">Дата</th>
-                <th class="div-center" width="5%">Вступило в силу</th>
-                <th class="div-center" width="20%">Вторая инстанция</th>
-                <th class="div-center" width="5%"></th>
-                <th class="div-center" width="5%"></th>
+                <th class="text-center" width="13%">Организация</th>
+                <th class="text-center" width="10%">Автор</th>
+                <th class="text-center" width="10">Должность</th>
+                <th class="text-center" width="7">Дата</th>
+                <th class="text-center" width="5%">Вступило в силу</th>
+                <th class="text-center" width="20%">Вторая инстанция</th>
+                <th class="text-center" width="5%"></th>
+                <th class="text-center" width="5%"></th>
             </tr>
             </thead>
             <tbody>
             <tr ng-repeat="item in decC.getAllRegulations()">
-                <td class="div-center">{{item.organization.name}}</td>
-                <td class="div-center">{{item.authorDocument.name}}</td>
-                <td class="div-center">{{item.authorDocument.position}}</td>
-                <td class="div-center">{{item.decreeDate}}</td>
-                <td class="div-center">{{item.enteredIntoForce == 1 ? 'Да' : 'Нет' }}</td>
+                <td class="text-center">{{item.organization.name}}</td>
+                <td class="text-center">{{item.authorDocument.name}}</td>
+                <td class="text-center">{{item.authorDocument.position}}</td>
+                <td class="text-center">{{item.decreeDate}}</td>
+                <td class="text-center">{{item.enteredIntoForce == 1 ? 'Да' : 'Нет' }}</td>
                 <td>
                     <div ng-show="item.secondInstanceAdm.id != null">
                         Организация: {{item.secondInstanceAdm.organization.name}}<br>
@@ -41,8 +41,8 @@
                     </button>
                 </td>
                 <td>
-                    <div class="div-center">
-                        <div class="div-center">
+                    <div class="text-center">
+                        <div class="text-center">
                             <button class="btn btn-sm btn-danger" ng-click="decC.removeDecree(item.id);">Удалить
                             </button>
                         </div>
@@ -117,7 +117,7 @@
                         </div>
                     </div>
                     <div class="modal-footer row mr-0">
-                        <input type="submit" value="{{!decC.decree.id ? 'Добавить' : 'Обновить'}}"
+                        <input type="submit" value="{{!decC.decree.id ? 'Добавить' : 'Изменить'}}"
                                class="btn btn-primary btn-sm">
                         <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Закрыть</button>
                     </div>

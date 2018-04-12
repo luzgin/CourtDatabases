@@ -35,10 +35,11 @@ angular.module('courtApp').controller('ResController',
             ResService.createResult(result).then(
                 function (response) {
                     console.log('result created successfully');
-                    self.done = true;
+                    Message.generate('Результат успешно добавлен!', 1);
                     self.result = {};
                 },
                 function (errResponse) {
+                    Message.generate('Ошибка при добавлении результата!', 3);
                     console.error('Error while creating result');
                 }
             );
@@ -50,10 +51,11 @@ angular.module('courtApp').controller('ResController',
                 .then(
                     function (response) {
                         console.log('result updated successfully'+ self.organization);
-                        self.done = true;
+                        Message.generate('Результат успешно изменен!', 1);
                     },
                     function (errResponse) {
                         console.error('Error while updating result');
+                        Message.generate('Ошибка при изменении результата!', 3);
                     }
                 );
         }
