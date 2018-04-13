@@ -12,11 +12,14 @@ angular.module('courtApp').controller('EntityController',
         self.getAllEntities = getAllEntities;
         self.editEntity = editEntity;
         self.removeEntity = removeEntity;
+        self.clearEntity = clearEntity;
 
-        self.done = false;
 
         function getAllEntities() {
             return EntityService.getAllEntities();
+        }
+        function clearEntity() {
+            self.entity = {};
         }
 
         function submit() {
@@ -24,9 +27,11 @@ angular.module('courtApp').controller('EntityController',
             if (self.entity.id === undefined || self.entity.id === null) {
                 console.log('Saving New entity', self.entity);
                 createEntity(self.entity);
+                $('#ModalSaveEntityIsk').modal('toggle');
             } else {
                 updateEntity(self.entity, self.entity.id);
                 console.log('entity updated with id ', self.entity.id);
+                $('#ModalSaveEntityIsk').modal('toggle');
             }
         }
 
@@ -34,11 +39,12 @@ angular.module('courtApp').controller('EntityController',
             console.log('About to create entity');
             EntityService.createEntity(entity).then(
                 function (response) {
+                    Message.generate('Сущность жалобы успешно добавлена!', 1);
                     console.log('entity created successfully');
-                    self.done = true;
                     self.entity = {};
                 },
                 function (errResponse) {
+                    Message.generate('Ошибка при добавлении сущности жалобы!', 3);
                     console.error('Error while creating entity');
                 }
             );
@@ -49,10 +55,11 @@ angular.module('courtApp').controller('EntityController',
             EntityService.updateEntity(entity, id)
                 .then(
                     function (response) {
+                        Message.generate('Сущность жалобы успешно изменена!', 1);
                         console.log('entity updated successfully'+ self.entity);
-                        self.done = true;
                     },
                     function (errResponse) {
+                        Message.generate('Ошибка при изменении сущности жалобы!', 3);
                         console.error('Error while updating entity');
                     }
                 );

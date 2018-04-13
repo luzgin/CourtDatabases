@@ -2,8 +2,11 @@
     <div class="panel-heading text-center h3">Сущность жалобы</div>
     <div class="panel-body">
         <div class=" mb-3 col row justify-content-end">
-            <button type="button" class="btn btn-primary" data-toggle="modal"
-                    data-target="#ModalSave">Добавить сущность
+            <button type="button"
+                    ng-click="entC.clearEntity()"
+                    class="btn btn-primary"
+                    data-toggle="modal"
+                    data-target="#ModalSaveEntityIsk">Добавить сущность
             </button>
         </div>
         <table class="tab-scroll bor-table table-sm table-hover">
@@ -18,14 +21,14 @@
                 <td class="text-left pl-3">{{item.name}}</td>
                 <td>
                         <button type="button"data-toggle="modal"
-                                data-target="#ModalSave" ng-click="entC.editEntity(item.id)" class="btn btn-sm btn-success custom-width">Редактировать</button>
+                                data-target="#ModalSaveEntityIsk" ng-click="entC.editEntity(item.id)" class="btn btn-sm btn-success custom-width">Редактировать</button>
                 </td>
             </tr>
             </tbody>
         </table>
     </div>
 </div>
-<div id="ModalSave" class="modal fade" role="dialog">
+<div id="ModalSaveEntityIsk" class="modal fade" role="dialog">
     <div class="widht-modal-dialog modal-dialog">
         <div class="modal-content">
             <div class="modal-header">

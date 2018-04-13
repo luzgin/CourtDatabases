@@ -2,13 +2,12 @@
 .table-hover tbody tr:hover td, .table-hover tbody tr:hover th {
     background-color: #6c757d;
 }
-.text-center{
-    text-align: center;
-}
+
 .scroll-table {
     overflow: auto;
     height: 75vh;
 }
+
 /* Ширина модального окна */
 .widht-modal-dialog {
     max-width: 50%;
@@ -16,18 +15,27 @@
 }
 
 /* Цвет фона карточки */
-.color-form{
+.color-form {
     background-color: #e0e0e0;
 }
+
 /* Цвет фона заголовка карточки */
-.color-form-title{
+.color-form-title {
     background-color: #9cc3e0;
 }
+
 /*Размер checkbox */
-.bigbox { -moz-transform: scale(2); -o-transform: scale(2); height: 50px; width: 50px }
+.bigbox {
+    -moz-transform: scale(2);
+    -o-transform: scale(2);
+    height: 50px;
+    width: 50px
+}
 
 /* Изображение руки при наведении */
-.cursor {cursor: pointer}
+.cursor {
+    cursor: pointer
+}
 
 .rotate {
     text-align: center;
@@ -35,24 +43,28 @@
     white-space: nowrap;
 
 }
+
 .rotate div {
-    -moz-transform: rotate(-90.0deg);  /* FF3.5+ */
-    -o-transform: rotate(-90.0deg);  /* Opera 10.5 */
-    -webkit-transform: rotate(-90.0deg);  /* Saf3.1+, Chrome */
-    filter:  progid:DXImageTransform.Microsoft.BasicImage(rotation=0.083);  /* IE6,IE7 */
+    -moz-transform: rotate(-90.0deg); /* FF3.5+ */
+    -o-transform: rotate(-90.0deg); /* Opera 10.5 */
+    -webkit-transform: rotate(-90.0deg); /* Saf3.1+, Chrome */
+    filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=0.083); /* IE6,IE7 */
     -ms-filter: "progid:DXImageTransform.Microsoft.BasicImage(rotation=0.083)"; /* IE8 */
     margin-left: -5.5em;
     margin-right: -5.5em;
 }
-.color-border{
+
+.color-border {
     border: 3px red solid;
 }
-.bor-table td, th{
+
+.bor-table td, th {
     border: 1px black solid;
     padding: 5px;
     text-align: center;
     vertical-align: middle;
 }
+
 .bor td {
     border: 1px black solid;
     padding: 5px;
@@ -60,14 +72,29 @@
     vertical-align: middle;
 }
 
-
 /* Всплывающее окно уведомления */
 #notifies {
-    position:fixed;
+    position: fixed;
     width: 300px;
-    height:auto;
+    height: auto;
     top: 40px;
-    right:40px;
+    right: 40px;
     z-index: 999999;
     opacity: 0.0;
+}
+
+#ModalSaveDecree {
+    z-index: 100000;
+}
+
+#ModalSaveSecondInstance {
+    z-index: 200000;
+}
+
+#ModalSaveOrganization {
+    z-index: 300000;
+}
+
+#ModalSaveAuthor {
+    z-index: 300000;
 }

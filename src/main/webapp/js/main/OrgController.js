@@ -13,11 +13,10 @@ angular.module('courtApp').controller('OrgController',
         self.editOrganization = editOrganization;
         self.removeOrganization = removeOrganization;
 
-        self.done = false;
-
         function getAllOrganizations() {
             return OrgService.getAllOrganizations();
         }
+
 
         function submit() {
             if ($scope.organizationForm.$valid) {
@@ -33,13 +32,14 @@ angular.module('courtApp').controller('OrgController',
                 }
             }
             else {
-                if ($scope.organizationForm.nameModalOrganization.$error.required){
+                if ($scope.organizationForm.nameModalOrganization.$error.required) {
                     document.getElementById("nameInputSave").focus();
                     Message.generate('Введите название организации!', 2);
                     $scope.organizationForm.nameModalOrganization.check = true;
                 }
             }
         }
+
         function createOrganization(organization) {
             console.log('About to create organization');
             OrgService.createOrganization(organization).then(
