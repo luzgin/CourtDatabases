@@ -2,10 +2,6 @@
     <div class="panel-heading text-center h3">Карточки</div>
     <div class="panel-body">
         <div class="m-0 row">
-            <div class="col-4 mb-3 col row justify-content-start">
-                <input type="text" class="form-control" ng-model="search.cardNumber"
-                       placeholder="Введите номер карточки для поиска..."/>
-            </div>
             <div class=" mb-3 col row justify-content-end">
                 <a href="#/card">
                     <button type="button" class="btn btn-primary mr-3">
@@ -19,7 +15,10 @@
             <table id="myTable" class="bor-table table-sm table-hover">
                 <thead>
                 <tr>
-                    <th class="text-center" width="10%">Номер</th>
+                    <th class="text-center" width="10%">
+                        <input type="text" class="form-control text-center" ng-model="search.cardNumber"
+                                                                placeholder="Номер"/>
+                    </th>
                     <th class="text-center" width="15%">Дата создания</th>
                     <th class="text-center" width="30%">Правонарушитель</th>
                     <th class="text-center" width="35%">Постановление</th>
