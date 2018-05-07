@@ -1,6 +1,23 @@
 package com.diploma.CourtDatabases.service;
 
-public interface UserService {
+import com.diploma.CourtDatabases.entity.User;
+import org.springframework.security.core.userdetails.UserDetailsService;
 
+import java.util.List;
+import java.util.Optional;
 
+public interface UserService extends UserDetailsService {
+    User findById(long id);
+
+    Optional<User> findByUsername(String username);
+
+    User save(User user);
+
+    User update(User user);
+
+    User delete(long id);
+
+    List<User> findAllUsers();
+
+    boolean isUserExist(User user);
 }

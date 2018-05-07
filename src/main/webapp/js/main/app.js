@@ -211,7 +211,7 @@ posdApp.config(function ($routeProvider, $locationProvider) {
             }
         })
         .otherwise({
-            redirectTo: "/nameEntityDecree"
+            redirectTo: "/"
         })
 
     //  $locationProvider.html5Mode(true);

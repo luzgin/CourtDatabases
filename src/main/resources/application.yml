@@ -30,6 +30,4 @@ logging:
 security:
   basic:
     realm: CourtDatabase
-  user:
-    password: password
   sessions: stateless
