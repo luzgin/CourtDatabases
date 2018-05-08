@@ -3,6 +3,7 @@ package com.diploma.CourtDatabases.service.impl;
 import com.diploma.CourtDatabases.entity.DecreeAdm;
 import com.diploma.CourtDatabases.repository.DecreeAdmRepository;
 import com.diploma.CourtDatabases.service.DecreeAdmService;
+import lombok.NonNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,17 +16,17 @@ public class DecreeAdmServiceImpl implements DecreeAdmService {
     private DecreeAdmRepository decreeAdmRepository;
 
     @Override
-    public DecreeAdm save(DecreeAdm decreeAdm) {
+    public DecreeAdm save(@NonNull DecreeAdm decreeAdm) {
         return decreeAdmRepository.save(decreeAdm);
     }
 
     @Override
-    public DecreeAdm update(DecreeAdm decreeAdm) {
+    public DecreeAdm update(@NonNull DecreeAdm decreeAdm) {
         return decreeAdmRepository.save(decreeAdm);
     }
 
     @Override
-    public void delete(long id) {
+    public void delete(@NonNull long id) {
         decreeAdmRepository.delete(id);
     }
 
@@ -35,7 +36,7 @@ public class DecreeAdmServiceImpl implements DecreeAdmService {
     }
 
     @Override
-    public DecreeAdm findById(long id) {
+    public DecreeAdm findById(@NonNull long id) {
         return decreeAdmRepository.findOne(id);
     }
 }

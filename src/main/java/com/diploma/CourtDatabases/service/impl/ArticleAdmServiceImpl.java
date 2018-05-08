@@ -3,6 +3,7 @@ package com.diploma.CourtDatabases.service.impl;
 import com.diploma.CourtDatabases.entity.ArticleAdm;
 import com.diploma.CourtDatabases.repository.ArticleAdmRepository;
 import com.diploma.CourtDatabases.service.ArticleAdmService;
+import lombok.NonNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,17 +16,17 @@ public class ArticleAdmServiceImpl implements ArticleAdmService {
     private ArticleAdmRepository articleAdmRepository;
 
     @Override
-    public ArticleAdm save(ArticleAdm articleAdm) {
+    public ArticleAdm save(@NonNull ArticleAdm articleAdm) {
         return articleAdmRepository.save(articleAdm);
     }
 
     @Override
-    public ArticleAdm update(ArticleAdm articleAdm) {
+    public ArticleAdm update(@NonNull ArticleAdm articleAdm) {
         return articleAdmRepository.save(articleAdm);
     }
 
     @Override
-    public void delete(long id) {
+    public void delete(@NonNull long id) {
         articleAdmRepository.delete(id);
     }
 
@@ -35,7 +36,7 @@ public class ArticleAdmServiceImpl implements ArticleAdmService {
     }
 
     @Override
-    public ArticleAdm findById(long id) {
+    public ArticleAdm findById(@NonNull long id) {
         return articleAdmRepository.findOne(id);
     }
 }

@@ -2,6 +2,7 @@ package com.diploma.CourtDatabases.controller;
 
 import com.diploma.CourtDatabases.entity.SecondInstanceAdm;
 import com.diploma.CourtDatabases.service.SecondInstanceAdmService;
+import lombok.NonNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,17 +20,17 @@ public class SecondInstanceController {
     }
 
     @GetMapping("/secondInstance/{id}")
-    public SecondInstanceAdm findById(@PathVariable("id") long id) {
+    public SecondInstanceAdm findById(@NonNull @PathVariable("id") long id) {
         return secondInstanceAdmService.findById(id);
     }
 
     @PostMapping("/secondInstance/")
-    public SecondInstanceAdm save(@RequestBody SecondInstanceAdm secondInstanceAdm) {
+    public SecondInstanceAdm save(@NonNull @RequestBody SecondInstanceAdm secondInstanceAdm) {
         return secondInstanceAdmService.save(secondInstanceAdm);
     }
 
     @PutMapping("/secondInstance/{id}")
-    public void edit(@PathVariable("id") long id, @RequestBody SecondInstanceAdm secondInstance) {
+    public void edit(@NonNull @PathVariable("id") long id, @NonNull @RequestBody SecondInstanceAdm secondInstance) {
         SecondInstanceAdm currentSecondInstance = secondInstanceAdmService.findById(id);
         currentSecondInstance.setOrganization(secondInstance.getOrganization());
         currentSecondInstance.setAuthorDocument(secondInstance.getAuthorDocument());
@@ -38,7 +39,7 @@ public class SecondInstanceController {
     }
 
     @DeleteMapping("/secondInstance/{id}")
-    public void delete(@PathVariable("id") long id) {
+    public void delete(@NonNull @PathVariable("id") long id) {
         secondInstanceAdmService.delete(id);
     }
 }

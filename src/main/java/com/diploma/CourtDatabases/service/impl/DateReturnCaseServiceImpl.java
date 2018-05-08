@@ -3,6 +3,7 @@ package com.diploma.CourtDatabases.service.impl;
 import com.diploma.CourtDatabases.entity.DateReturnCase;
 import com.diploma.CourtDatabases.repository.DateReturnCaseRepository;
 import com.diploma.CourtDatabases.service.DateReturnCaseService;
+import lombok.NonNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,27 +17,27 @@ public class DateReturnCaseServiceImpl implements DateReturnCaseService {
     private DateReturnCaseRepository dateReturnCaseRepository;
 
     @Override
-    public DateReturnCase save(DateReturnCase dateReturnCase) {
+    public DateReturnCase save(@NonNull DateReturnCase dateReturnCase) {
         return dateReturnCaseRepository.save(dateReturnCase);
     }
 
     @Override
-    public DateReturnCase update(DateReturnCase dateReturnCase) {
+    public DateReturnCase update(@NonNull DateReturnCase dateReturnCase) {
         return dateReturnCaseRepository.save(dateReturnCase);
     }
 
     @Override
-    public void delete(long id) {
+    public void delete(@NonNull long id) {
         dateReturnCaseRepository.delete(id);
     }
 
     @Override
-    public DateReturnCase findById(long id) {
+    public DateReturnCase findById(@NonNull long id) {
         return dateReturnCaseRepository.findOne(id);
     }
 
     @Override
-    public List<DateReturnCase> findByCardAdm_Id(Long id) {
+    public List<DateReturnCase> findByCardAdm_Id(@NonNull Long id) {
         return dateReturnCaseRepository.findByCardAdm_Id(id);
     }
 }

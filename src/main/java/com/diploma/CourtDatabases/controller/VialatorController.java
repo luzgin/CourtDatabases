@@ -2,6 +2,7 @@ package com.diploma.CourtDatabases.controller;
 
 import com.diploma.CourtDatabases.entity.Vialator;
 import com.diploma.CourtDatabases.service.VialatorService;
+import lombok.NonNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -30,23 +31,23 @@ public class VialatorController {
     }
 
     @PostMapping("/vialator/")
-    public Vialator save(@RequestBody Vialator vialator) {
+    public Vialator save(@NonNull @RequestBody Vialator vialator) {
         return vialatorService.save(vialator);
     }
 
     @DeleteMapping("/vialator/{id}")
-    public void deleteVialator(@PathVariable("id") long id) {
+    public void deleteVialator(@NonNull @PathVariable("id") long id) {
         vialatorService.delete(id);
     }
 
 
     @GetMapping("/vialator/{id}")
-    public Vialator findById(@PathVariable("id") long id) {
+    public Vialator findById(@NonNull @PathVariable("id") long id) {
         return vialatorService.findById(id);
     }
 
     @PutMapping("/vialator/{id}")
-    public void editVialator(@PathVariable("id") long id, @RequestBody Vialator vialator) {
+    public void editVialator(@NonNull @PathVariable("id") long id, @NonNull @RequestBody Vialator vialator) {
         Vialator currentVialator = vialatorService.findById(id);
         if (vialator.getTypeVialator() == 1) {
             currentVialator.setFirstName(vialator.getFirstName());

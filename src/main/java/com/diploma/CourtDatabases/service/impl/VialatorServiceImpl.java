@@ -3,6 +3,7 @@ package com.diploma.CourtDatabases.service.impl;
 import com.diploma.CourtDatabases.entity.Vialator;
 import com.diploma.CourtDatabases.repository.VialatorRepository;
 import com.diploma.CourtDatabases.service.VialatorService;
+import lombok.NonNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -14,17 +15,17 @@ public class VialatorServiceImpl implements VialatorService {
     @Autowired
     private VialatorRepository vialatorRepository;
     @Override
-    public Vialator save(Vialator vialator) {
+    public Vialator save(@NonNull Vialator vialator) {
         return vialatorRepository.save(vialator);
     }
 
     @Override
-    public Vialator update(Vialator vialator) {
+    public Vialator update(@NonNull Vialator vialator) {
         return vialatorRepository.save(vialator);
     }
 
     @Override
-    public void delete(long id) {
+    public void delete(@NonNull long id) {
         vialatorRepository.delete(id);
     }
 
@@ -34,12 +35,12 @@ public class VialatorServiceImpl implements VialatorService {
     }
 
     @Override
-    public List<Vialator> findByTypeVialator(Integer type) {
+    public List<Vialator> findByTypeVialator(@NonNull Integer type) {
         return vialatorRepository.findByTypeVialator(type);
     }
 
     @Override
-    public Vialator findById(long id) {
+    public Vialator findById(@NonNull long id) {
         return vialatorRepository.findOne(id);
     }
 }

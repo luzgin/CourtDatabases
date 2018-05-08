@@ -2,6 +2,7 @@ package com.diploma.CourtDatabases.controller;
 
 import com.diploma.CourtDatabases.entity.ArticleAdm;
 import com.diploma.CourtDatabases.service.ArticleAdmService;
+import lombok.NonNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,17 +20,17 @@ public class ArticleAdmController {
     }
 
     @GetMapping("/article/{id}")
-    public ArticleAdm findArticleById(@PathVariable("id") long id) {
+    public ArticleAdm findArticleById(@NonNull @PathVariable("id") long id) {
         return articleAdmService.findById(id);
     }
 
     @PostMapping("/article/")
-    public ArticleAdm saveArticle(@RequestBody ArticleAdm articleAdm) {
+    public ArticleAdm saveArticle(@NonNull @RequestBody ArticleAdm articleAdm) {
         return articleAdmService.save(articleAdm);
     }
 
     @PutMapping("/article/{id}")
-    public void editArticle(@PathVariable("id") long id, @RequestBody ArticleAdm articleAdm) {
+    public void editArticle(@NonNull @PathVariable("id") long id, @NonNull @RequestBody ArticleAdm articleAdm) {
         ArticleAdm currentArticleAdm = articleAdmService.findById(id);
         currentArticleAdm.setArticle(articleAdm.getArticle());
         currentArticleAdm.setPart(articleAdm.getPart());
@@ -38,7 +39,7 @@ public class ArticleAdmController {
     }
 
     @DeleteMapping("/article/{id}")
-    public void deleteEntity(@PathVariable("id") long id) {
+    public void deleteEntity(@NonNull @PathVariable("id") long id) {
         articleAdmService.delete(id);
     }
 }

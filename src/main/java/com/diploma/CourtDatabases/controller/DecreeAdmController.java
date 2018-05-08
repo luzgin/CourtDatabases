@@ -2,6 +2,7 @@ package com.diploma.CourtDatabases.controller;
 
 import com.diploma.CourtDatabases.entity.DecreeAdm;
 import com.diploma.CourtDatabases.service.DecreeAdmService;
+import lombok.NonNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,17 +20,17 @@ public class DecreeAdmController {
     }
 
     @GetMapping("/decree/{id}")
-    public DecreeAdm findDecreeById(@PathVariable("id") long id) {
+    public DecreeAdm findDecreeById(@NonNull @PathVariable("id") long id) {
         return decreeAdmService.findById(id);
     }
 
     @PostMapping("/decree/")
-    public DecreeAdm saveDecree(@RequestBody DecreeAdm decreeAdm) {
+    public DecreeAdm saveDecree(@NonNull @RequestBody DecreeAdm decreeAdm) {
         return decreeAdmService.save(decreeAdm);
     }
 
     @PutMapping("/decree/{id}")
-    public DecreeAdm editDecree(@PathVariable("id") long id, @RequestBody DecreeAdm decreeAdm) {
+    public DecreeAdm editDecree(@NonNull @PathVariable("id") long id, @NonNull @RequestBody DecreeAdm decreeAdm) {
         DecreeAdm currentDecree = decreeAdmService.findById(id);
         currentDecree.setOrganization(decreeAdm.getOrganization());
         currentDecree.setAuthorDocument(decreeAdm.getAuthorDocument());
@@ -40,7 +41,7 @@ public class DecreeAdmController {
     }
 
     @DeleteMapping("/decree/{id}")
-    public void deleteDecree(@PathVariable("id") long id) {
+    public void deleteDecree(@NonNull @PathVariable("id") long id) {
         decreeAdmService.delete(id);
     }
 }

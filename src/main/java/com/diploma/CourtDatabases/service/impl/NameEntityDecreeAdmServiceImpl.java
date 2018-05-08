@@ -3,6 +3,7 @@ package com.diploma.CourtDatabases.service.impl;
 import com.diploma.CourtDatabases.entity.NameEntityDecreeAdm;
 import com.diploma.CourtDatabases.repository.NameEntityDecreeAdmRepository;
 import com.diploma.CourtDatabases.service.NameEntityDecreeAdmService;
+import lombok.NonNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,17 +17,17 @@ public class NameEntityDecreeAdmServiceImpl  implements NameEntityDecreeAdmServi
     private NameEntityDecreeAdmRepository nameEntityDecreeAdmRepository;
 
     @Override
-    public NameEntityDecreeAdm save(NameEntityDecreeAdm nameEntityDecreeAdm) {
+    public NameEntityDecreeAdm save(@NonNull NameEntityDecreeAdm nameEntityDecreeAdm) {
         return nameEntityDecreeAdmRepository.save(nameEntityDecreeAdm);
     }
 
     @Override
-    public NameEntityDecreeAdm update(NameEntityDecreeAdm nameEntityDecreeAdm) {
+    public NameEntityDecreeAdm update(@NonNull NameEntityDecreeAdm nameEntityDecreeAdm) {
         return nameEntityDecreeAdmRepository.save(nameEntityDecreeAdm);
     }
 
     @Override
-    public void delete(long id) {
+    public void delete(@NonNull long id) {
         nameEntityDecreeAdmRepository.delete(id);
     }
 
@@ -36,7 +37,7 @@ public class NameEntityDecreeAdmServiceImpl  implements NameEntityDecreeAdmServi
     }
 
     @Override
-    public NameEntityDecreeAdm findById(long id) {
+    public NameEntityDecreeAdm findById(@NonNull long id) {
         return nameEntityDecreeAdmRepository.findOne(id);
     }
 }

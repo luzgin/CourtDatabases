@@ -9,6 +9,7 @@ import com.diploma.CourtDatabases.service.CardAdmService;
 import com.diploma.CourtDatabases.service.ComplaintsAdmService;
 import com.diploma.CourtDatabases.service.DateRequestCaseService;
 import com.diploma.CourtDatabases.service.DateReturnCaseService;
+import lombok.NonNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
@@ -31,18 +32,18 @@ public class CardController {
     }
 
     @GetMapping("/cardAdm/{id}")
-    public CardAdm findById(@PathVariable("id") long id) {
+    public CardAdm findById(@NonNull @PathVariable("id") long id) {
         return cardAdmService.findById(id);
     }
 
     @PostMapping("/cardAdm/")
-    public CardAdm save(@RequestBody CardAdm cardAdm) {
+    public CardAdm save(@NonNull @RequestBody CardAdm cardAdm) {
         System.out.println(cardAdm);
         return cardAdmService.save(cardAdm);
     }
 
     @PutMapping("/cardAdm/{id}")
-    public void edit(@PathVariable("id") long id, @RequestBody CardAdm cardAdm) {
+    public void edit(@NonNull @PathVariable("id") long id, @NonNull @RequestBody CardAdm cardAdm) {
         CardAdm currentCardAdm = cardAdmService.findById(id);
         currentCardAdm.setCardNumber(cardAdm.getCardNumber());
         currentCardAdm.setCreateDate(cardAdm.getCreateDate());
@@ -60,12 +61,13 @@ public class CardController {
     }
 
     @DeleteMapping("/cardAdm/{id}")
-    public void deleteEntity(@PathVariable("id") long id) {
+    public void deleteEntity(@NonNull @PathVariable("id") long id) {
         cardAdmService.delete(id);
     }
 
     @GetMapping(value = "/cardAdm/report/{dateFrom}/{dateTo}")
-    public ReportEntity finalReport(@PathVariable("dateFrom") @DateTimeFormat(pattern = "yyyy-MM-dd") Date dateFrom, @PathVariable("dateTo") @DateTimeFormat(pattern = "yyyy-MM-dd") Date dateTo) {
+    public ReportEntity finalReport(@NonNull @PathVariable("dateFrom") @DateTimeFormat(pattern = "yyyy-MM-dd") Date dateFrom,
+                                    @NonNull @PathVariable("dateTo") @DateTimeFormat(pattern = "yyyy-MM-dd") Date dateTo) {
         ReportEntity reportEntity = new ReportEntity();
         Integer numberOfCases = 0;
         List<CardAdm> cardsList = cardAdmService.findByCreateDateBetween(dateFrom, dateTo); //список всех карточек за период

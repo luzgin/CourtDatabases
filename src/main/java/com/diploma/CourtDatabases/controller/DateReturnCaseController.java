@@ -2,6 +2,7 @@ package com.diploma.CourtDatabases.controller;
 
 import com.diploma.CourtDatabases.entity.DateReturnCase;
 import com.diploma.CourtDatabases.service.DateReturnCaseService;
+import lombok.NonNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,12 +14,12 @@ public class DateReturnCaseController {
     DateReturnCaseService dateReturnCaseService;
 
     @PostMapping("/returnCase/")
-    public DateReturnCase save(@RequestBody DateReturnCase dateReturnCase) {
+    public DateReturnCase save(@NonNull @RequestBody DateReturnCase dateReturnCase) {
         return dateReturnCaseService.save(dateReturnCase);
     }
 
     @PutMapping("/returnCase/{id}")
-    public DateReturnCase update(@PathVariable("id") long id, @RequestBody DateReturnCase dateReturnCase) {
+    public DateReturnCase update(@NonNull @PathVariable("id") long id, @NonNull @RequestBody DateReturnCase dateReturnCase) {
         DateReturnCase currentCase = dateReturnCaseService.findById(id);
         currentCase.setOrganization(dateReturnCase.getOrganization());
         currentCase.setDate(dateReturnCase.getDate());
@@ -27,17 +28,17 @@ public class DateReturnCaseController {
     }
 
     @DeleteMapping("/returnCase/{id}")
-    public void delete(@PathVariable("id") long id) {
+    public void delete(@NonNull @PathVariable("id") long id) {
         dateReturnCaseService.delete(id);
     }
 
     @GetMapping("/returnCase/{id}")
-    public DateReturnCase findById(@PathVariable("id") long id) {
+    public DateReturnCase findById(@NonNull @PathVariable("id") long id) {
         return dateReturnCaseService.findById(id);
     }
 
     @GetMapping("/returnCase/forCard/{id}")
-    public List<DateReturnCase> findByCardAdm_Id(@PathVariable("id") long id) {
+    public List<DateReturnCase> findByCardAdm_Id(@NonNull @PathVariable("id") long id) {
         return dateReturnCaseService.findByCardAdm_Id(id);
     }
 }

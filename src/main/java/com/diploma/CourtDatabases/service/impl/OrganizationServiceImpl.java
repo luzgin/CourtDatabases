@@ -3,6 +3,7 @@ package com.diploma.CourtDatabases.service.impl;
 import com.diploma.CourtDatabases.entity.Organization;
 import com.diploma.CourtDatabases.repository.OrganizationRepository;
 import com.diploma.CourtDatabases.service.OrganizationService;
+import lombok.NonNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,17 +16,17 @@ public class OrganizationServiceImpl implements OrganizationService {
     private OrganizationRepository organizationRepository;
 
     @Override
-    public Organization save(Organization organization) {
+    public Organization save(@NonNull Organization organization) {
         return organizationRepository.save(organization);
     }
 
     @Override
-    public Organization update(Organization organization) {
+    public Organization update(@NonNull Organization organization) {
         return organizationRepository.save(organization);
     }
 
     @Override
-    public void delete(long id) {
+    public void delete(@NonNull long id) {
         organizationRepository.delete(id);
     }
 
@@ -35,12 +36,12 @@ public class OrganizationServiceImpl implements OrganizationService {
     }
 
     @Override
-    public Organization findById(long id) {
+    public Organization findById(@NonNull long id) {
         return organizationRepository.findOne(id);
     }
 
     @Override
-    public Organization findByName(String name) {
+    public Organization findByName(@NonNull String name) {
         return organizationRepository.findByName(name);
     }
 }

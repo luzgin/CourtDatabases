@@ -3,6 +3,7 @@ package com.diploma.CourtDatabases.service.impl;
 import com.diploma.CourtDatabases.entity.DateRequestCase;
 import com.diploma.CourtDatabases.repository.DateRequestCaseRepository;
 import com.diploma.CourtDatabases.service.DateRequestCaseService;
+import lombok.NonNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,27 +17,27 @@ public class DateRequestCaseServiceImpl implements DateRequestCaseService {
     private DateRequestCaseRepository dateRequestCaseRepository;
 
     @Override
-    public DateRequestCase save(DateRequestCase dateRequestCase) {
+    public DateRequestCase save(@NonNull DateRequestCase dateRequestCase) {
         return dateRequestCaseRepository.save(dateRequestCase);
     }
 
     @Override
-    public DateRequestCase update(DateRequestCase dateRequestCase) {
+    public DateRequestCase update(@NonNull DateRequestCase dateRequestCase) {
         return dateRequestCaseRepository.save(dateRequestCase);
     }
 
     @Override
-    public void delete(long id) {
+    public void delete(@NonNull long id) {
         dateRequestCaseRepository.delete(id);
     }
 
     @Override
-    public DateRequestCase findById(long id) {
+    public DateRequestCase findById(@NonNull long id) {
         return dateRequestCaseRepository.findOne(id);
     }
 
     @Override
-    public List<DateRequestCase> findByCardAdm_Id(Long id) {
+    public List<DateRequestCase> findByCardAdm_Id(@NonNull Long id) {
         return dateRequestCaseRepository.findByCardAdm_Id(id);
     }
 }

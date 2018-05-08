@@ -4,6 +4,7 @@ import com.diploma.CourtDatabases.entity.ComplaintsAdm;
 import com.diploma.CourtDatabases.entity.DecreeAdm;
 import com.diploma.CourtDatabases.repository.ComplaintsAdmRepository;
 import com.diploma.CourtDatabases.service.ComplaintsAdmService;
+import lombok.NonNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,16 +18,16 @@ public class ComplaintsAdmServiceImpl implements ComplaintsAdmService {
     private ComplaintsAdmRepository complaintsAdmRepository;
 
     @Override
-    public ComplaintsAdm save(ComplaintsAdm complaintsAdm) {
+    public ComplaintsAdm save(@NonNull ComplaintsAdm complaintsAdm) {
         return complaintsAdmRepository.save(complaintsAdm);
     }
 
     @Override
-    public ComplaintsAdm update(ComplaintsAdm complaintsAdm) {
+    public ComplaintsAdm update(@NonNull ComplaintsAdm complaintsAdm) {
         return complaintsAdmRepository.save(complaintsAdm);
     }
     @Override
-    public void delete(long id) {
+    public void delete(@NonNull long id) {
         complaintsAdmRepository.delete(id);
     }
 
@@ -36,16 +37,16 @@ public class ComplaintsAdmServiceImpl implements ComplaintsAdmService {
     }
 
     @Override
-    public List<ComplaintsAdm> findByDecreeAdm_Id(Long id) {
+    public List<ComplaintsAdm> findByDecreeAdm_Id(@NonNull Long id) {
         return complaintsAdmRepository.findByDecreeAdm_Id(id);
     }
 
     @Override
-    public List<ComplaintsAdm> findByDecreeAdm(DecreeAdm decreeAdm) {
+    public List<ComplaintsAdm> findByDecreeAdm(@NonNull DecreeAdm decreeAdm) {
         return complaintsAdmRepository.findByDecreeAdm(decreeAdm);
     }
     @Override
-    public ComplaintsAdm findById(long id) {
+    public ComplaintsAdm findById(@NonNull long id) {
         return complaintsAdmRepository.findOne(id);
     }
 }

@@ -2,6 +2,7 @@ package com.diploma.CourtDatabases.controller;
 
 import com.diploma.CourtDatabases.entity.Organization;
 import com.diploma.CourtDatabases.service.OrganizationService;
+import lombok.NonNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,17 +20,17 @@ public class OrganizationConrtoller {
     }
 
     @GetMapping("/organization/{id}")
-    public Organization findOrganizationById(@PathVariable("id") long id) {
+    public Organization findOrganizationById(@NonNull @PathVariable("id") long id) {
         return organizationService.findById(id);
     }
 
     @PostMapping("/organization/")
-    public Organization saveOrganization(@RequestBody Organization organization) {
+    public Organization saveOrganization(@NonNull @RequestBody Organization organization) {
         return organizationService.save(organization);
     }
 
     @PutMapping("/organization/{id}")
-    public void editOrganization(@PathVariable("id") long id, @RequestBody Organization organization) {
+    public void editOrganization(@NonNull @PathVariable("id") long id, @NonNull @RequestBody Organization organization) {
         Organization currentOrganization = organizationService.findById(id);
         currentOrganization.setName(organization.getName());
         currentOrganization.setType(organization.getType());
@@ -37,7 +38,7 @@ public class OrganizationConrtoller {
     }
 
     @DeleteMapping("/organization/{id}")
-    public void deleteOrganization(@PathVariable("id") long id) {
+    public void deleteOrganization(@NonNull @PathVariable("id") long id) {
         organizationService.delete(id);
     }
 

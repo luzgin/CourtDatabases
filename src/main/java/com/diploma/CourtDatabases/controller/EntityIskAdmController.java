@@ -2,6 +2,7 @@ package com.diploma.CourtDatabases.controller;
 
 import com.diploma.CourtDatabases.entity.EntityIskAdm;
 import com.diploma.CourtDatabases.service.EntityIskAdmService;
+import lombok.NonNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
@@ -20,24 +21,24 @@ public class EntityIskAdmController {
     }
 
     @GetMapping("/entitiesiskadm/{id}")
-    public EntityIskAdm findEntityById(@PathVariable("id") long id) {
+    public EntityIskAdm findEntityById(@NonNull @PathVariable("id") long id) {
         return entityIskAdmService.findById(id);
     }
 
     @PostMapping("/entitiesiskadm/")
-    public EntityIskAdm saveEntity(@RequestBody EntityIskAdm entityIskAdm) {
+    public EntityIskAdm saveEntity(@NonNull @RequestBody EntityIskAdm entityIskAdm) {
         return entityIskAdmService.save(entityIskAdm);
     }
 
     @PutMapping("/entitiesiskadm/{id}")
-    public void editOrganization(@PathVariable("id") long id, @RequestBody EntityIskAdm entityIskAdm) {
+    public void editOrganization(@NonNull @PathVariable("id") long id, @NonNull @RequestBody EntityIskAdm entityIskAdm) {
         EntityIskAdm currentEntityIskAdm = entityIskAdmService.findById(id);
         currentEntityIskAdm.setName(entityIskAdm.getName());
         entityIskAdmService.update(currentEntityIskAdm);
     }
 
     @DeleteMapping("/entitiesiskadm/{id}")
-    public void deleteEntity(@PathVariable("id") long id) {
+    public void deleteEntity(@NonNull @PathVariable("id") long id) {
         entityIskAdmService.delete(id);
     }
 }
