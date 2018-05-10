@@ -22,49 +22,14 @@ import java.util.Optional;
 @Service("UserService")
 @Transactional
 public class UserServiceImpl implements UserService {
-
-    @PostConstruct
-    public void init() {
-        if (!findByUsername("user").isPresent()) {
-            save(User.builder()
-                    .username("user")
-                    .password(new BCryptPasswordEncoder().encode("password"))
-                    .authorities(Collections.singletonList(Role.USER))
-                    .accountNonExpired(true)
-                    .accountNonLocked(true)
-                    .credentialsNonExpired(true)
-                    .enabled(true)
-                    .build()
-            );
-            save(User.builder()
-                    .username("qwe")
-                    .password("qwe")
-                    .authorities(Collections.singletonList(Role.USER))
-                    .accountNonExpired(true)
-                    .accountNonLocked(true)
-                    .credentialsNonExpired(true)
-                    .enabled(true)
-                    .build()
-            );
-            save(User.builder()
-                    .username("asd")
-                    .password("asd")
-                    .authorities(Collections.singletonList(Role.USER))
-                    .accountNonExpired(true)
-                    .accountNonLocked(true)
-                    .credentialsNonExpired(true)
-                    .enabled(true)
-                    .build()
-            );
-        }
-    }
-
     @Autowired
     private UserRepository userRepository;
 
     @Override
-    public User findById(@NonNull long id) {
-        return null;
+    public  Optional<User> findById(@NonNull long id) {
+        return Optional.ofNullable(
+                userRepository.findOne(id)
+        );
     }
 
     @Override
@@ -101,6 +66,6 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserDetails loadUserByUsername(@NonNull String username) throws UsernameNotFoundException {
-        return findByUsername(username).orElseThrow(()->new UsernameNotFoundException("user " + username + "was not found"));
+        return findByUsername(username).orElseThrow(() -> new UsernameNotFoundException("user " + username + "was not found"));
     }
 }
