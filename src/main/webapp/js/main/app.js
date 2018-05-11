@@ -229,25 +229,21 @@ posdApp.config(function ($routeProvider, $locationProvider) {
 });
 
 posdApp.run( function(AuthService,$rootScope, $location) {
-    $rootScope.$on( "$routeChangeStart", function(event, toState, toParams, fromState, fromParams) {
+    $rootScope.$on( "$routeChangeStart", function(event, toState) {
         if (!AuthService.user) {
-            console.log("11");
                 $location.path("/login");
         } else {
             if (toState.$$route.data && toState.$$route.data.authorities) {
-                console.log("1");
                 var hasAccess = false;
                 for (var i = 0; i < AuthService.user.authorities.length; i++) {
-                    console.log("2");
                     var authorities = AuthService.user.authorities[i];
-                    if (toState.$$route.authorities == authorities) {
+                    if (toState.$$route.data.authorities == authorities) {
                         console.log("3");
                         hasAccess = true;
                         break;
                     }
                 }
                 if (!hasAccess) {
-                    console.log("4");
                     event.preventDefault();
                     $location.path("/access-denied");
                 }
