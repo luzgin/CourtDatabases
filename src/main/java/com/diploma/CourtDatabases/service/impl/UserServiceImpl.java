@@ -4,6 +4,7 @@ import com.diploma.CourtDatabases.entity.Role;
 import com.diploma.CourtDatabases.entity.User;
 import com.diploma.CourtDatabases.repository.UserRepository;
 import com.diploma.CourtDatabases.service.UserService;
+import com.google.common.collect.ImmutableList;
 import lombok.NonNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -25,8 +26,36 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private UserRepository userRepository;
 
+/*
+    @PostConstruct
+    public void init() {
+        if (!findByUsername("admin").isPresent()) {
+            save(User.builder()
+                    .username("admin")
+                    .password(new BCryptPasswordEncoder().encode("password"))
+                    .authorities( ImmutableList.of(Role.USER))
+                    .accountNonExpired(true)
+                    .accountNonLocked(true)
+                    .credentialsNonExpired(true)
+                    .enabled(true)
+                    .build());
+        }
+        if (!findByUsername("user").isPresent()) {
+            save(User.builder()
+                    .username("user")
+                    .password(new BCryptPasswordEncoder().encode("password"))
+                    .authorities(ImmutableList.of(Role.USER))
+                    .accountNonExpired(true)
+                    .accountNonLocked(true)
+                    .credentialsNonExpired(true)
+                    .enabled(true)
+                    .build());
+        }
+
+    }
+*/
     @Override
-    public  Optional<User> findById(@NonNull long id) {
+    public Optional<User> findById(@NonNull long id) {
         return Optional.ofNullable(
                 userRepository.findOne(id)
         );

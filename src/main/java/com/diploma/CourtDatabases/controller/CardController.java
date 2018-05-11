@@ -12,6 +12,7 @@ import com.diploma.CourtDatabases.service.DateReturnCaseService;
 import lombok.NonNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
@@ -26,6 +27,7 @@ public class CardController {
     @Autowired
     private DateReturnCaseService dateReturnCaseService;
 
+    @PreAuthorize("hasRole('USER')")
     @GetMapping(value = "/cardAdm/")
     public List<CardAdm> getAllCards() {
         return cardAdmService.findAll();

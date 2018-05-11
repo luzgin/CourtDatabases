@@ -1,5 +1,4 @@
 var posdApp = angular.module("courtApp", ['ngSanitize', 'ngRoute', 'ngStorage', 'ui.select']);
-
 posdApp.constant('urls', {
     BASE: 'http://localhost:8080/',
     ORGANIZATION_SERVICE_API: 'http://localhost:8080/api/organization/',
@@ -15,7 +14,8 @@ posdApp.constant('urls', {
     CONPLAINT_SERVICE_API: 'http://localhost:8080/api/complaint/',
     CARD_SERVICE_API: 'http://localhost:8080/api/cardAdm/',
     DATE_RETURN_SERVICE_API: 'http://localhost:8080/api/returnCase/',
-    DATE_REQUEST_SERVICE_API: 'http://localhost:8080/api/requestCase/'
+    DATE_REQUEST_SERVICE_API: 'http://localhost:8080/api/requestCase/',
+    AUTHENTICATE: 'http://localhost:8080/api/authenticate/'
 });
 
 posdApp.config(function ($routeProvider, $locationProvider) {
@@ -24,6 +24,9 @@ posdApp.config(function ($routeProvider, $locationProvider) {
             templateUrl: 'listCard.html',
             controller: 'CardViewController',
             controllerAs: 'cdviewC',
+            data: {
+                authorities:['USER']
+            } ,
             resolve: {
                 Complaints: function ($q, CardViewService) {
                     var deferred = $q.defer();
@@ -32,6 +35,9 @@ posdApp.config(function ($routeProvider, $locationProvider) {
                     return deferred.promise;
                 }
             }
+        })
+        .when('/login', {
+            templateUrl: '/html/login.html',
         })
         .when('/card', {
             templateUrl: 'card.html',
@@ -114,6 +120,9 @@ posdApp.config(function ($routeProvider, $locationProvider) {
             templateUrl: 'listVialator.html',
             controller: 'VialatorController',
             controllerAs: 'viaC',
+            data: {
+                authorities:['USER']
+            } ,
             resolve: {
                 vialatorFiz: function ($q, VialatorService) {
                     var deferred = $q.defer();
@@ -211,7 +220,7 @@ posdApp.config(function ($routeProvider, $locationProvider) {
             }
         })
         .otherwise({
-            redirectTo: "/"
+            redirectTo: "/page-not-found"
         })
 
     //  $locationProvider.html5Mode(true);
@@ -219,6 +228,34 @@ posdApp.config(function ($routeProvider, $locationProvider) {
 
 });
 
+posdApp.run( function(AuthService,$rootScope, $location) {
+    $rootScope.$on( "$routeChangeStart", function(event, toState, toParams, fromState, fromParams) {
+        if (!AuthService.user) {
+            console.log("11");
+                $location.path("/login");
+        } else {
+            if (toState.$$route.data && toState.$$route.data.authorities) {
+                console.log("1");
+                var hasAccess = false;
+                for (var i = 0; i < AuthService.user.authorities.length; i++) {
+                    console.log("2");
+                    var authorities = AuthService.user.authorities[i];
+                    if (toState.$$route.authorities == authorities) {
+                        console.log("3");
+                        hasAccess = true;
+                        break;
+                    }
+                }
+                if (!hasAccess) {
+                    console.log("4");
+                    event.preventDefault();
+                    $location.path("/access-denied");
+                }
+
+            }
+        }
+    });
+})
 posdApp.filter('propsFilter', function () {
     return function (items, props) {
         var out = [];
