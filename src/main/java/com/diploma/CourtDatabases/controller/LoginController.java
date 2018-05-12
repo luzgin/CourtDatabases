@@ -5,6 +5,7 @@ import com.diploma.CourtDatabases.entity.User;
 import com.diploma.CourtDatabases.service.UserService;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -35,19 +36,23 @@ public class LoginController {
     }
 
     @PostMapping(value = "/authenticate")
-    public ResponseEntity<Map<String, Object>> login(@RequestParam String username, @RequestParam String password,
+    public ResponseEntity<Map<String, Object>> login(@NonNull @RequestBody User userRequest,
                                                      HttpServletResponse response) throws IOException {
         String token = null;
-        User user = userService.findByUsername(username).get();
+        Optional<User> user = userService.findByUsername(userRequest.getUsername());
         Map<String, Object> tokenMap = new HashMap<String, Object>();
-        if (user != null && new BCryptPasswordEncoder().matches(password, user.getPassword())) {
-            token = Jwts.builder().setSubject(user.getUsername()).claim("roles", user.getAuthorities()).setIssuedAt(new Date())
-                    .signWith(SignatureAlgorithm.HS256, "secretkey").compact();
+        if (user.isPresent() && new BCryptPasswordEncoder().matches(userRequest.getPassword(), user.get().getPassword())) {
+            token = Jwts
+                    .builder()
+                    .setSubject(user.get().getUsername())
+                    .claim("roles", user.get().getAuthorities()).setIssuedAt(new Date())
+                    .signWith(SignatureAlgorithm.HS256, "secretkey")
+                    .compact();
             tokenMap.put("token", token);
-            tokenMap.put("user", user);
+            tokenMap.put("user", user.get());
             return new ResponseEntity<Map<String, Object>>(tokenMap, HttpStatus.OK);
         } else {
-            tokenMap.put("token", null);
+            tokenMap.put("UNAUTHORIZED", null);
             return new ResponseEntity<Map<String, Object>>(tokenMap, HttpStatus.UNAUTHORIZED);
         }
 

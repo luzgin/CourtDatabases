@@ -41,6 +41,9 @@ posdApp.config(function ($routeProvider, $locationProvider) {
         })
         .when('/card', {
             templateUrl: 'card.html',
+            data: {
+                authorities:['USER']
+            } ,
             resolve: {
                 Complaints: function ($q, CardService, ArticleService, AuthorService, ComplaintService, OrgService,
                                       DecreeService, SecondInstanceService, EntityDecreeService, EntityService,
@@ -66,11 +69,17 @@ posdApp.config(function ($routeProvider, $locationProvider) {
             templateUrl: 'report.html',
             controller: 'ReportController',
             controllerAs: 'repC',
+            data: {
+                authorities:['USER']
+            }
         })
         .when('/organizations', {
             templateUrl: 'listOrganization.html',
             controller: 'OrgController',
             controllerAs: 'orgC',
+            data: {
+                authorities:['USER']
+            } ,
             resolve: {
                 organizations: function ($q, OrgService) {
                     var deferred = $q.defer();
@@ -84,6 +93,9 @@ posdApp.config(function ($routeProvider, $locationProvider) {
             templateUrl: 'listResult.html',
             controller: 'ResController',
             controllerAs: 'resC',
+            data: {
+                authorities:['ADMIN']
+            } ,
             resolve: {
                 results: function ($q, ResService) {
                     var deferred = $q.defer();
@@ -96,6 +108,9 @@ posdApp.config(function ($routeProvider, $locationProvider) {
             templateUrl: 'listEntityIsk.html',
             controller: 'EntityController',
             controllerAs: 'entC',
+            data: {
+                authorities:['ADMIN']
+            } ,
             resolve: {
                 entityIsk: function ($q, EntityService) {
                     var deferred = $q.defer();
@@ -108,6 +123,9 @@ posdApp.config(function ($routeProvider, $locationProvider) {
             templateUrl: 'listArticle.html',
             controller: 'ArticleController',
             controllerAs: 'artC',
+            data: {
+                authorities:['USER']
+            } ,
             resolve: {
                 entityIsk: function ($q, ArticleService) {
                     var deferred = $q.defer();
@@ -140,6 +158,9 @@ posdApp.config(function ($routeProvider, $locationProvider) {
             templateUrl: 'listAuthor.html',
             controller: 'AuthorController',
             controllerAs: 'autC',
+            data: {
+                authorities:['USER']
+            } ,
             resolve: {
                 authors: function ($q, AuthorService, OrgService) {
                     var deferred = $q.defer();
@@ -153,6 +174,9 @@ posdApp.config(function ($routeProvider, $locationProvider) {
             templateUrl: 'listNameEntityDecree.html',
             controller: 'NameEntityDecreeController',
             controllerAs: 'nedC',
+            data: {
+                authorities:['ADMIN']
+            } ,
             resolve: {
                 authors: function ($q, NameEntityDecreeService) {
                     var deferred = $q.defer();
@@ -165,6 +189,9 @@ posdApp.config(function ($routeProvider, $locationProvider) {
             templateUrl: 'listEntityDecree.html',
             controller: 'EntityDecreeController',
             controllerAs: 'endC',
+            data: {
+                authorities:['ADMIN']
+            } ,
             resolve: {
                 authors: function ($q, EntityDecreeService, NameEntityDecreeService) {
                     var deferred = $q.defer();
@@ -178,6 +205,9 @@ posdApp.config(function ($routeProvider, $locationProvider) {
             templateUrl: 'listSecondInstance.html',
             controller: 'SecondInstanceController',
             controllerAs: 'secIC',
+            data: {
+                authorities:['ADMIN']
+            } ,
             resolve: {
                 secondInstance: function ($q, SecondInstanceService, AuthorService, OrgService) {
                     var deferred = $q.defer();
@@ -193,6 +223,9 @@ posdApp.config(function ($routeProvider, $locationProvider) {
             templateUrl: 'listDecree.html',
             controller: 'DecreeController',
             controllerAs: 'decC',
+            data: {
+                authorities:['ADMIN']
+            } ,
             resolve: {
                 Regulations: function ($q, DecreeService, AuthorService, OrgService, SecondInstanceService) {
                     var deferred = $q.defer();
@@ -209,6 +242,9 @@ posdApp.config(function ($routeProvider, $locationProvider) {
             templateUrl: 'listComplaint.html',
             controller: 'ComplaintController',
             controllerAs: 'comC',
+            data: {
+                authorities:['ADMIN']
+            } ,
             resolve: {
                 Complaints: function ($q, ComplaintService, DecreeService, EntityService) {
                     var deferred = $q.defer();
@@ -218,6 +254,9 @@ posdApp.config(function ($routeProvider, $locationProvider) {
                     return deferred.promise;
                 }
             }
+        })
+        .when('/access-denied', {
+            templateUrl: '/html/access-denied.html',
         })
         .otherwise({
             redirectTo: "/page-not-found"
@@ -238,7 +277,6 @@ posdApp.run( function(AuthService,$rootScope, $location) {
                 for (var i = 0; i < AuthService.user.authorities.length; i++) {
                     var authorities = AuthService.user.authorities[i];
                     if (toState.$$route.data.authorities == authorities) {
-                        console.log("3");
                         hasAccess = true;
                         break;
                     }

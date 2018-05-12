@@ -26,14 +26,14 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private UserRepository userRepository;
 
-/*
+
     @PostConstruct
     public void init() {
         if (!findByUsername("admin").isPresent()) {
             save(User.builder()
                     .username("admin")
                     .password(new BCryptPasswordEncoder().encode("password"))
-                    .authorities( ImmutableList.of(Role.USER))
+                    .authorities(ImmutableList.of(Role.USER, Role.ADMIN))
                     .accountNonExpired(true)
                     .accountNonLocked(true)
                     .credentialsNonExpired(true)
@@ -53,7 +53,7 @@ public class UserServiceImpl implements UserService {
         }
 
     }
-*/
+
     @Override
     public Optional<User> findById(@NonNull long id) {
         return Optional.ofNullable(
