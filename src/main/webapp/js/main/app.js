@@ -271,6 +271,9 @@ posdApp.run( function(AuthService,$rootScope, $location) {
     $rootScope.$on( "$routeChangeStart", function(event, toState) {
         if (!AuthService.user) {
                 $location.path("/login");
+                localStorage.clear();
+
+
         } else {
             if (toState.$$route.data && toState.$$route.data.authorities) {
                 var hasAccess = false;

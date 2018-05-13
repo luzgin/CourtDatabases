@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('courtApp')
-    .controller('LoginController', function ($http, $scope, $location, AuthService, $rootScope, $q, urls) {
+    .controller('LoginController', function ($http, $scope, $location, AuthService, $rootScope, $q, urls, $localStorage) {
         var self = this;
         self.user = {};
         self.message = '';

@@ -27,7 +27,7 @@ public class CardController {
     @Autowired
     private DateReturnCaseService dateReturnCaseService;
 
-    @PreAuthorize("hasRole('USER')")
+    @PreAuthorize("hasAuthority('USER')")
     @GetMapping(value = "/cardAdm/")
     public List<CardAdm> getAllCards() {
         return cardAdmService.findAll();
