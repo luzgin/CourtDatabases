@@ -17,7 +17,7 @@ public class UserController {
     private UserService userService;
 
     @PreAuthorize("hasAuthority('SUPER_ADMIN')")
-    @GetMapping(value = "/users")
+    @GetMapping(value = "/users/")
     public List<User> findAllUsers() {
         return userService.findAllUsers();
     }

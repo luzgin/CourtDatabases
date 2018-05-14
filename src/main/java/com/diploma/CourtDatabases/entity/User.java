@@ -39,5 +39,7 @@ public class User implements UserDetails {
     private boolean credentialsNonExpired;
     @Column(name = "enabled")
     private boolean enabled;
+    @Column(name = "name")
+    private String name;
 
 }

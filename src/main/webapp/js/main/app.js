@@ -15,7 +15,8 @@ posdApp.constant('urls', {
     CARD_SERVICE_API: 'http://localhost:8080/api/cardAdm/',
     DATE_RETURN_SERVICE_API: 'http://localhost:8080/api/returnCase/',
     DATE_REQUEST_SERVICE_API: 'http://localhost:8080/api/requestCase/',
-    AUTHENTICATE: 'http://localhost:8080/api/authenticate/'
+    AUTHENTICATE: 'http://localhost:8080/api/authenticate/',
+    USER_SERVICE_API: 'http://localhost:8080/api/users/'
 });
 
 posdApp.config(function ($routeProvider, $locationProvider) {
@@ -257,8 +258,17 @@ posdApp.config(function ($routeProvider, $locationProvider) {
         })
         .when('/users', {
             templateUrl: '/html/listUsers.html',
+            controller: 'UserController',
+            controllerAs: 'userC',
             data: {
-                authorities: ['SUPER_ADMIN']
+                authorities: ['SUPER_ADMIN'],
+            },
+            resolve: {
+                Users: function ($q, UserService) {
+                    var deferred = $q.defer();
+                    UserService.loadAllUsers().then(deferred.resolve, deferred.resolve);
+                    return deferred.promise;
+                }
             }
         })
         .when('/access-denied', {

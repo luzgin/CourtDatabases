@@ -38,6 +38,7 @@ public class UserServiceImpl implements UserService {
                     .accountNonLocked(true)
                     .credentialsNonExpired(true)
                     .enabled(true)
+                    .name("Иванов И.В.")
                     .build());
         }
         if (!findByUsername("admin").isPresent()) {
@@ -49,6 +50,7 @@ public class UserServiceImpl implements UserService {
                     .accountNonLocked(true)
                     .credentialsNonExpired(true)
                     .enabled(true)
+                    .name("Семенов Г.Д.")
                     .build());
         }
         if (!findByUsername("user").isPresent()) {
@@ -60,6 +62,7 @@ public class UserServiceImpl implements UserService {
                     .accountNonLocked(true)
                     .credentialsNonExpired(true)
                     .enabled(true)
+                    .name("Шышкина Ю.В.")
                     .build());
         }
 
@@ -90,13 +93,13 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User delete(@NonNull long id) {
-        return null;
+    public void delete(@NonNull long id) {
+        userRepository.delete(id);
     }
 
     @Override
     public List<User> findAllUsers() {
-        return null;
+        return userRepository.findAll();
     }
 
     @Override
