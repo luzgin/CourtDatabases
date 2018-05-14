@@ -5,7 +5,6 @@ angular.module('courtApp').factory('UserService',
             var factory = {
                 loadAllUsers: loadAllUsers,
                 getAllUsers: getAllUsers
-
             };
             return factory;
 

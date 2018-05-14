@@ -9,24 +9,19 @@
                     data-target="#ModalSave">Добавить пользователя
             </button>
         </div>
-        <div class="scroll-table">
-            <table class="bor-table table-sm table-hover">
-                <thead>
-                <tr>
-                    <th class="text-center" width="10%">Имя</th>
-                    <th class="text-center" width="10%">Логин</th>
-                    <th class="text-center" width="10%">Роли</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr ng-repeat="item in userC.findAllUsers()">
-                    <td>{{item.name}}</td>
-                    <td>{{item.username}}</td>
-                    <td>{{item.authorities.toString()}}</td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
+        <table ng-table="userC.tableParams" class="col bor-table table-sm table-hover table-condensed" show-filter="true">
+            <tr ng-repeat="user in $data">
+                <td title="'Имя'" filter="{ name: 'text'}" sortable="'name'">
+                    {{user.name}}
+                </td>
+                <td title="'Логин'" filter="{ username: 'text'}" sortable="'username'">
+                    {{user.username}}
+                </td>
+                <td title="'Роли'"  sortable="'role'">
+                    {{user.authorities.toString()}}
+                </td>
+            </tr>
+        </table>
     </div>
 </div>
 <!--

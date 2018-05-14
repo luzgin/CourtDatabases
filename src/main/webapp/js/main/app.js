@@ -1,4 +1,4 @@
-var posdApp = angular.module("courtApp", ['ngSanitize', 'ngRoute', 'ngStorage', 'ui.select']);
+var posdApp = angular.module("courtApp", ['ngSanitize', 'ngRoute','ngTable', 'ngStorage', 'ui.select']);
 posdApp.constant('urls', {
     BASE: 'http://localhost:8080/',
     ORGANIZATION_SERVICE_API: 'http://localhost:8080/api/organization/',
