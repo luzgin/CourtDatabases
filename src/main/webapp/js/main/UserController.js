@@ -12,6 +12,7 @@ angular.module('courtApp').controller('UserController',
         //   self.editUser = editUser;
         //     self.removeUser = removeUser;
         self.clearUser = clearUser;
+        self.modalShow = modalShow;
 
         var data = UserService.getAllUsers();
         self.tableParams = new NgTableParams({
@@ -21,6 +22,11 @@ angular.module('courtApp').controller('UserController',
 
         function findAllUsers() {
             return UserService.getAllUsers();
+        }
+        function modalShow(user) {
+            self.user = user;
+            $('#ModalSave').modal('show');
+
         }
 
         function clearUser() {

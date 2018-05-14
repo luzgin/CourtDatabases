@@ -45,7 +45,6 @@ angular.module('courtApp')
                     $scope.loginForm.password.check = true;
                 }
             }
-
         }
 
         function logout() {

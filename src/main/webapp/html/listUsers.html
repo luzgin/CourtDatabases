@@ -3,14 +3,14 @@
     <div class="panel-body">
         <div class=" mb-3 col row justify-content-end">
             <button type="button"
-                    class="btn btn-primary"
-                    ng-click=""
+                    class="btn btn-outline-primary"
+                    ng-click="userC.clearUser()"
                     data-toggle="modal"
                     data-target="#ModalSave">Добавить пользователя
             </button>
         </div>
         <table ng-table="userC.tableParams" class="col bor-table table-sm table-hover table-condensed" show-filter="true">
-            <tr ng-repeat="user in $data">
+            <tr class="cursor" ng-repeat="user in $data" ng-dblclick="userC.modalShow(user)">
                 <td title="'Имя'" filter="{ name: 'text'}" sortable="'name'">
                     {{user.name}}
                 </td>
@@ -20,40 +20,43 @@
                 <td title="'Роли'"  sortable="'role'">
                     {{user.authorities.toString()}}
                 </td>
+                <td title="'Статус'" filter="{ enabled: 'text'}" sortable="'enabled'">
+                    {{user.enabled ? 'Активен' : 'Заблокирован'}}
+                </td>
             </tr>
         </table>
     </div>
 </div>
-<!--
+
 <div id="ModalSave" class="modal fade" role="dialog">
     <div class="widht-modal-dialog modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title">Добавление/Редактирование статьи</h4>
+                <h4 class="modal-title">Добавление/Редактирование пользователя</h4>
             </div>
             <div class="modal-body">
-                <form ng-submit="artC.submit()" class="form-horizontal" role="form">
-                    <input type="hidden" ng-model="artC.article.id"/>
+                <form ng-submit="" class="form-horizontal" role="form">
+                    <input type="hidden" ng-model="userC.user.id"/>
                     <div class="form-group row">
-                        <label class="col-md-2 control-label" for="articleSave">Статья</label>
+                        <label class="col-md-2 control-label" for="nameSave">Имя</label>
                         <div class="col-md-10">
-                            <input type="text" class="form-control" id="articleSave" ng-model="artC.article.article"/>
+                            <input type="text" class="form-control" id="nameSave" ng-model="userC.user.name"/>
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-md-2 control-label" for="partSave">Часть</label>
+                        <label class="col-md-2 control-label" for="usernameSave">Логин</label>
                         <div class="col-md-10">
-                            <input type="text" class="form-control" id="partSave" ng-model="artC.article.part"/>
+                            <input type="text" class="form-control" id="usernameSave" ng-model="userC.user.username"/>
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-md-2 control-label" for="noteSave">Описание</label>
+                        <label class="col-md-2 control-label" for="statusSave">Статус</label>
                         <div class="col-md-10">
-                            <textarea type="text" class="form-control" id="noteSave" ng-model="artC.article.note"/>
+                            <input type="text" class="form-control" id="statusSave" ng-model="userC.user.enabled"/>
                         </div>
                     </div>
                     <div class="modal-footer row mr-0">
-                        <input type="submit" value="{{!artC.article.id ? 'Добавить' : 'Изменить'}}"
+                        <input type="submit" value="{{!userC.user.id ? 'Добавить' : 'Изменить'}}"
                                class="btn btn-primary btn-sm">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
                     </div>
@@ -62,4 +65,3 @@
         </div>
     </div>
 </div>
--->
