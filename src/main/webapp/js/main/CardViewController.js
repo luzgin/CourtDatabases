@@ -1,8 +1,9 @@
 'use strict';
 
 angular.module('courtApp').controller('CardViewController',
-    ['CardViewService', 'ComplaintService', 'DateReturnService', 'DateRequestService', 'CardService', '$scope',
+    ['CardViewService', 'ComplaintService', 'DateReturnService', 'DateRequestService', 'CardService',
         function (CardViewService, ComplaintService, DateReturnService, DateRequestService, CardService) {
+
             var self = this;
             self.cardForRemove = {};
             self.cards = [];

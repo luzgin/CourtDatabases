@@ -1,7 +1,7 @@
 <div class="panel panel-default">
     <div class="panel-heading text-center h3">Статьи</div>
     <div class="panel-body">
-        <div class=" mb-3 col row justify-content-end">
+        <div class=" mb-3 col row justify-content-end" ng-show="viewMenuAccses.authorities.length >1">
             <button type="button"
                     class="btn btn-primary"
                     ng-click="artC.clearArticle()"
@@ -16,7 +16,7 @@
                     <th class="text-center" width="10%">Статья</th>
                     <th class="text-center" width="5%">Часть</th>
                     <th class="text-center" width="70%">Описание</th>
-                    <th class="text-center" width="5%"></th>
+                    <th class="text-center" width="5%" ng-show="viewMenuAccses.authorities.length >1"></th>
                 </tr>
                 <tr>
                     <th width="10%">
@@ -24,7 +24,7 @@
                     </th>
                     <th width="5%"> <input type="text" class="form-control text-center" ng-model="search2.part"/></th>
                     <th width="70%"> <input type="text" class="form-control text-left" ng-model="search3.note"/></th>
-                    <th width="5%"></th>
+                    <th width="5%" ng-show="viewMenuAccses.authorities.length >1"></th>
                 </tr>
                 </thead>
                 <tbody>
@@ -32,7 +32,7 @@
                     <td>{{item.article}}</td>
                     <td><span ng-if="item.part != 0"> {{item.part}}</span></td>
                     <td class="text-left">{{item.note}}</td>
-                    <td>
+                    <td ng-show="viewMenuAccses.authorities.length >1">
                         <button type="button" data-toggle="modal"
                                 data-target="#ModalSave" ng-click="artC.editArticle(item.id)"
                                 class="btn btn-success btn-sm custom-width">Редактировать

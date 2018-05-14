@@ -29,6 +29,17 @@ public class UserServiceImpl implements UserService {
 
     @PostConstruct
     public void init() {
+        if (!findByUsername("super_admin").isPresent()) {
+            save(User.builder()
+                    .username("super_admin")
+                    .password(new BCryptPasswordEncoder().encode("password"))
+                    .authorities(ImmutableList.of(Role.USER, Role.ADMIN, Role.SUPER_ADMIN))
+                    .accountNonExpired(true)
+                    .accountNonLocked(true)
+                    .credentialsNonExpired(true)
+                    .enabled(true)
+                    .build());
+        }
         if (!findByUsername("admin").isPresent()) {
             save(User.builder()
                     .username("admin")

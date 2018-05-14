@@ -21,12 +21,12 @@ posdApp.constant('urls', {
 posdApp.config(function ($routeProvider, $locationProvider) {
     $routeProvider
         .when('/', {
-            templateUrl: 'listCard.html',
+            templateUrl: '/html/listCard.html',
             controller: 'CardViewController',
             controllerAs: 'cdviewC',
             data: {
-                authorities:['USER']
-            } ,
+                authorities: ['USER']
+            },
             resolve: {
                 Complaints: function ($q, CardViewService) {
                     var deferred = $q.defer();
@@ -40,10 +40,10 @@ posdApp.config(function ($routeProvider, $locationProvider) {
             templateUrl: '/html/login.html',
         })
         .when('/card', {
-            templateUrl: 'card.html',
+            templateUrl: '/html/card.html',
             data: {
-                authorities:['USER']
-            } ,
+                authorities: ['USER']
+            },
             resolve: {
                 Complaints: function ($q, CardService, ArticleService, AuthorService, ComplaintService, OrgService,
                                       DecreeService, SecondInstanceService, EntityDecreeService, EntityService,
@@ -66,20 +66,20 @@ posdApp.config(function ($routeProvider, $locationProvider) {
             }
         })
         .when('/report', {
-            templateUrl: 'report.html',
+            templateUrl: '/html/report.html',
             controller: 'ReportController',
             controllerAs: 'repC',
             data: {
-                authorities:['USER']
+                authorities: ['USER']
             }
         })
         .when('/organizations', {
-            templateUrl: 'listOrganization.html',
+            templateUrl: '/html/listOrganization.html',
             controller: 'OrgController',
             controllerAs: 'orgC',
             data: {
-                authorities:['USER']
-            } ,
+                authorities: ['USER']
+            },
             resolve: {
                 organizations: function ($q, OrgService) {
                     var deferred = $q.defer();
@@ -90,12 +90,12 @@ posdApp.config(function ($routeProvider, $locationProvider) {
 
         })
         .when('/results', {
-            templateUrl: 'listResult.html',
+            templateUrl: '/html/listResult.html',
             controller: 'ResController',
             controllerAs: 'resC',
             data: {
-                authorities:['ADMIN']
-            } ,
+                authorities: ['ADMIN']
+            },
             resolve: {
                 results: function ($q, ResService) {
                     var deferred = $q.defer();
@@ -105,12 +105,12 @@ posdApp.config(function ($routeProvider, $locationProvider) {
             }
         })
         .when('/entityIsks', {
-            templateUrl: 'listEntityIsk.html',
+            templateUrl: '/html/listEntityIsk.html',
             controller: 'EntityController',
             controllerAs: 'entC',
             data: {
-                authorities:['ADMIN']
-            } ,
+                authorities: ['ADMIN']
+            },
             resolve: {
                 entityIsk: function ($q, EntityService) {
                     var deferred = $q.defer();
@@ -120,12 +120,12 @@ posdApp.config(function ($routeProvider, $locationProvider) {
             }
         })
         .when('/articles', {
-            templateUrl: 'listArticle.html',
+            templateUrl: '/html/listArticle.html',
             controller: 'ArticleController',
             controllerAs: 'artC',
             data: {
-                authorities:['USER']
-            } ,
+                authorities: ['USER']
+            },
             resolve: {
                 entityIsk: function ($q, ArticleService) {
                     var deferred = $q.defer();
@@ -135,12 +135,12 @@ posdApp.config(function ($routeProvider, $locationProvider) {
             }
         })
         .when('/vialators', {
-            templateUrl: 'listVialator.html',
+            templateUrl: '/html/listVialator.html',
             controller: 'VialatorController',
             controllerAs: 'viaC',
             data: {
-                authorities:['USER']
-            } ,
+                authorities: ['USER']
+            },
             resolve: {
                 vialatorFiz: function ($q, VialatorService) {
                     var deferred = $q.defer();
@@ -155,12 +155,12 @@ posdApp.config(function ($routeProvider, $locationProvider) {
             }
         })
         .when('/authors', {
-            templateUrl: 'listAuthor.html',
+            templateUrl: '/html/listAuthor.html',
             controller: 'AuthorController',
             controllerAs: 'autC',
             data: {
-                authorities:['USER']
-            } ,
+                authorities: ['USER']
+            },
             resolve: {
                 authors: function ($q, AuthorService, OrgService) {
                     var deferred = $q.defer();
@@ -171,12 +171,12 @@ posdApp.config(function ($routeProvider, $locationProvider) {
             }
         })
         .when('/nameEntityDecree', {
-            templateUrl: 'listNameEntityDecree.html',
+            templateUrl: '/html/listNameEntityDecree.html',
             controller: 'NameEntityDecreeController',
             controllerAs: 'nedC',
             data: {
-                authorities:['ADMIN']
-            } ,
+                authorities: ['ADMIN']
+            },
             resolve: {
                 authors: function ($q, NameEntityDecreeService) {
                     var deferred = $q.defer();
@@ -186,12 +186,12 @@ posdApp.config(function ($routeProvider, $locationProvider) {
             }
         })
         .when('/entityDecree', {
-            templateUrl: 'listEntityDecree.html',
+            templateUrl: '/html/listEntityDecree.html',
             controller: 'EntityDecreeController',
             controllerAs: 'endC',
             data: {
-                authorities:['ADMIN']
-            } ,
+                authorities: ['ADMIN']
+            },
             resolve: {
                 authors: function ($q, EntityDecreeService, NameEntityDecreeService) {
                     var deferred = $q.defer();
@@ -202,12 +202,12 @@ posdApp.config(function ($routeProvider, $locationProvider) {
             }
         })
         .when('/secondInstance', {
-            templateUrl: 'listSecondInstance.html',
+            templateUrl: '/html/listSecondInstance.html',
             controller: 'SecondInstanceController',
             controllerAs: 'secIC',
             data: {
-                authorities:['ADMIN']
-            } ,
+                authorities: ['ADMIN']
+            },
             resolve: {
                 secondInstance: function ($q, SecondInstanceService, AuthorService, OrgService) {
                     var deferred = $q.defer();
@@ -220,12 +220,12 @@ posdApp.config(function ($routeProvider, $locationProvider) {
 
         })
         .when('/regulations', {
-            templateUrl: 'listDecree.html',
+            templateUrl: '/html/listDecree.html',
             controller: 'DecreeController',
             controllerAs: 'decC',
             data: {
-                authorities:['ADMIN']
-            } ,
+                authorities: ['ADMIN']
+            },
             resolve: {
                 Regulations: function ($q, DecreeService, AuthorService, OrgService, SecondInstanceService) {
                     var deferred = $q.defer();
@@ -239,12 +239,12 @@ posdApp.config(function ($routeProvider, $locationProvider) {
 
         })
         .when('/complaints', {
-            templateUrl: 'listComplaint.html',
+            templateUrl: '/html/listComplaint.html',
             controller: 'ComplaintController',
             controllerAs: 'comC',
             data: {
-                authorities:['ADMIN']
-            } ,
+                authorities: ['ADMIN']
+            },
             resolve: {
                 Complaints: function ($q, ComplaintService, DecreeService, EntityService) {
                     var deferred = $q.defer();
@@ -255,8 +255,17 @@ posdApp.config(function ($routeProvider, $locationProvider) {
                 }
             }
         })
+        .when('/users', {
+            templateUrl: '/html/listUsers.html',
+            data: {
+                authorities: ['SUPER_ADMIN']
+            }
+        })
         .when('/access-denied', {
             templateUrl: '/html/access-denied.html',
+        })
+        .when('/page-not-found', {
+            templateUrl: '/html/page-not-found.html',
         })
         .otherwise({
             redirectTo: "/page-not-found"
@@ -267,13 +276,12 @@ posdApp.config(function ($routeProvider, $locationProvider) {
 
 });
 
-posdApp.run( function(AuthService,$rootScope, $location) {
-    $rootScope.$on( "$routeChangeStart", function(event, toState) {
+posdApp.run(function (AuthService, $rootScope, $location) {
+    $rootScope.$on("$routeChangeStart", function (event, toState) {
+        $rootScope.viewMenuAccses = AuthService.user;
         if (!AuthService.user) {
-                $location.path("/login");
-                localStorage.clear();
-
-
+            $location.path("/login");
+            localStorage.clear();
         } else {
             if (toState.$$route.data && toState.$$route.data.authorities) {
                 var hasAccess = false;
@@ -288,7 +296,6 @@ posdApp.run( function(AuthService,$rootScope, $location) {
                     event.preventDefault();
                     $location.path("/access-denied");
                 }
-
             }
         }
     });

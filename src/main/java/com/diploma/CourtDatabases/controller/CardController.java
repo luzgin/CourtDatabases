@@ -33,17 +33,20 @@ public class CardController {
         return cardAdmService.findAll();
     }
 
+    @PreAuthorize("hasAuthority('USER')")
     @GetMapping("/cardAdm/{id}")
     public CardAdm findById(@NonNull @PathVariable("id") long id) {
         return cardAdmService.findById(id);
     }
 
+    @PreAuthorize("hasAuthority('USER')")
     @PostMapping("/cardAdm/")
     public CardAdm save(@NonNull @RequestBody CardAdm cardAdm) {
         System.out.println(cardAdm);
         return cardAdmService.save(cardAdm);
     }
 
+    @PreAuthorize("hasAuthority('USER')")
     @PutMapping("/cardAdm/{id}")
     public void edit(@NonNull @PathVariable("id") long id, @NonNull @RequestBody CardAdm cardAdm) {
         CardAdm currentCardAdm = cardAdmService.findById(id);
@@ -62,11 +65,13 @@ public class CardController {
         cardAdmService.update(currentCardAdm);
     }
 
+    @PreAuthorize("hasAuthority('USER')")
     @DeleteMapping("/cardAdm/{id}")
     public void deleteEntity(@NonNull @PathVariable("id") long id) {
         cardAdmService.delete(id);
     }
 
+    @PreAuthorize("hasAuthority('USER')")
     @GetMapping(value = "/cardAdm/report/{dateFrom}/{dateTo}")
     public ReportEntity finalReport(@NonNull @PathVariable("dateFrom") @DateTimeFormat(pattern = "yyyy-MM-dd") Date dateFrom,
                                     @NonNull @PathVariable("dateTo") @DateTimeFormat(pattern = "yyyy-MM-dd") Date dateTo) {
@@ -124,9 +129,9 @@ public class CardController {
                     if (complaint.getDecreeAdm().getOrganization().getType() == 1) { //подведомственно судам
                         if (!complaint.isReinstatementOfTerm()) {
                             ResultCase resultCase = new ResultCase();
-                            if (complaint.getDecreeAdm().getSecondInstanceAdm() != null){
+                            if (complaint.getDecreeAdm().getSecondInstanceAdm() != null) {
                                 resultCase.setSenondInstance(true);
-                            }else{
+                            } else {
                                 resultCase.setSenondInstance(false);
                             }
                             if (complaint.getCardAdm().getResultDate() == null && dateReturnCases.size() != 0) {

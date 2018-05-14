@@ -9,12 +9,11 @@
     <link href="css/select.css" rel="stylesheet" type="text/css" media="all"/>
     <link href="css/main.css" rel="stylesheet" type="text/css" media="all"/>
     <link rel="stylesheet" href="css/selectize.default.css">
-
 </head>
 <body>
 <div id="notifies"></div>
 <div class="container">
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark"ng-show="viewMenuAccses.authorities.length >0">
         <a class="navbar-brand" href="/">ПОСД</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -42,13 +41,14 @@
                         Справочники
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="#/entityIsks">Сущность иска</a>
-                        <a class="dropdown-item" href="#/results">Результат рассмотрения дела</a>
+                        <a ng-show="viewMenuAccses.authorities.length >1" class="dropdown-item" href="#/entityIsks">Сущность иска</a>
+                        <a ng-show="viewMenuAccses.authorities.length >1" class="dropdown-item" href="#/results">Результат рассмотрения дела</a>
                         <a class="dropdown-item" href="#/articles">Статьи</a>
                         <a class="dropdown-item" href="#/organizations">Организации</a>
                         <a class="dropdown-item" href="#/vialators">Правонарушители</a>
                         <a class="dropdown-item" href="#/authors">Автор документа</a>
-                        <a class="dropdown-item" href="#/nameEntityDecree">Сущность постановления</a>
+                        <a ng-show="viewMenuAccses.authorities.length >1" class="dropdown-item" href="#/nameEntityDecree">Сущность постановления</a>
+                        <a ng-show="viewMenuAccses.authorities.length >2" class="dropdown-item" href="#/users">Пользователи</a>
                     </div>
                 </li>
                 <li class="nav-item dropdown">
@@ -72,8 +72,9 @@
                         <a class="dropdown-item" href="/">Something else here</a>
                     </div>
                 </li>
-                <li class="nav-item dropdown"  ng-controller="LoginController as logC">
-                    <a class="nav-link" href="#" ng-click="logC.logout()">Выйти <span class="sr-only">(current)</span></a>
+                <li class="nav-item dropdown" ng-controller="LoginController as logC">
+                    <a class="nav-link" href="#" ng-click="logC.logout()">Выйти <span
+                            class="sr-only">(current)</span></a>
                 </li>
             </ul>
         </div>
