@@ -40,8 +40,12 @@ public class UserController {
         if (!currentUser.get().getPassword().equals(user.getPassword())){
            currentUser.get().setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
         }
-
-
         return userService.update(currentUser.get());
+    }
+
+    @PreAuthorize("hasAuthority('SUPER_ADMIN')")
+    @DeleteMapping("/users/{id}")
+    public void deleteUser(@NonNull @PathVariable("id") long id) {
+        userService.delete(id);
     }
 }

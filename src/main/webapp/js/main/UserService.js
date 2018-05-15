@@ -6,7 +6,8 @@ angular.module('courtApp').factory('UserService',
                 loadAllUsers: loadAllUsers,
                 getAllUsers: getAllUsers,
                 createUser: createUser,
-                updateUser: updateUser
+                updateUser: updateUser,
+                removeUser: removeUser
             };
             return factory;
 
@@ -65,7 +66,25 @@ angular.module('courtApp').factory('UserService',
                         }
                     );
                 return deferred.promise;
+            }
 
+            function removeUser(id) {
+                console.log('Removing user with id ' + id);
+                var deferred = $q.defer();
+                $http.delete(urls.USER_SERVICE_API + id)
+                    .then(
+                        function (response) {
+                            loadAllUsers();
+                            deferred.resolve(response.data);
+                        },
+                        function (errResponse) {
+                            console.error('Error while removing user with id :' + id);
+                            deferred.reject(errResponse);
+                        }
+                    );
+                return deferred.promise;
             }
         }
-    ]);
+
+])
+;

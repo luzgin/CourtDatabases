@@ -6,11 +6,10 @@ angular.module('courtApp').controller('UserController',
         self.user = {};
 
         self.submit = submit;
-        //  self.createUser = createUser;
-        //  self.updateUser = updateUser;
+        self.createUser = createUser;
+        self.updateUser = updateUser;
         self.findAllUsers = findAllUsers;
-        //   self.editUser = editUser;
-        //   self.removeUser = removeUser;
+        self.removeUser = removeUser;
         self.clearUser = clearUser;
         self.modalShow = modalShow;
 
@@ -103,31 +102,19 @@ angular.module('courtApp').controller('UserController',
                 );
         }
 
-        /*
-        function editArticle(id) {
-            console.log('article get');
-            ArticleService.getArticle(id).then(
-                function (article) {
-                    self.article = article;
-                    console.log('article get'+ self.article);
-                },
-                function (errResponse) {
-                    console.error('Error while removing article ' + id + ', Error :' + errResponse.data);
-                }
-            );
-        }
-        function removeArticle(id){
+
+        function removeUser(id){
             console.log('About to remove article with id '+id);
-            ArticleService.removeArticle(id)
+            UserService.removeUser(id)
                 .then(
                     function(){
-                        console.log('article '+id + ' removed successfully');
+                        console.log('user '+id + ' removed successfully');
                     },
                     function(errResponse){
-                        console.error('Error while removing article '+id +', Error :'+errResponse.data);
+                        console.error('Error while removing user '+id +', Error :'+errResponse.data);
                     }
                 );
         }
-*/
+
     }
     ]);

@@ -41,7 +41,8 @@
                     <div class="form-group row">
                         <label class="col-md-3 control-label" for="usernameSave">Логин</label>
                         <div class="col-md-9">
-                            <input type="text" class="form-control" id="usernameSave" ng-model="userC.user.username" ng-required="userC.user.id"/>
+                            <input type="text" class="form-control" id="usernameSave" ng-model="userC.user.username"
+                                   ng-required="userC.user.id"/>
                         </div>
                     </div>
                     <div class="form-group row">
@@ -53,20 +54,21 @@
                     <div class="form-group row" ng-show="!userC.user.id">
                         <label class="col-md-3 control-label" for="passwordSave">Пароль</label>
                         <div class="col-md-9">
-                            <input type="password" class="form-control" id="passwordSave" ng-model="userC.user.password"/>
+                            <input type="password" class="form-control" id="passwordSave"
+                                   ng-model="userC.user.password"/>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-md-3 control-label">Роли</label>
                         <div class="col-md-9">
-                        <label class="pl-3  control-label" ng-repeat="role in roles">
-                            <input type="checkbox"
-                                   name="selectedRoles[]"
-                                   value="{{role}}"
-                                   ng-checked="selection.indexOf(role) > -1"
-                                   ng-click="toggleSelection(role)"
-                            > {{role}}
-                        </label>
+                            <label class="pl-3  control-label" ng-repeat="role in roles">
+                                <input type="checkbox"
+                                       name="selectedRoles[]"
+                                       value="{{role}}"
+                                       ng-checked="selection.indexOf(role) > -1"
+                                       ng-click="toggleSelection(role)"
+                                > {{role}}
+                            </label>
                         </div>
                     </div>
                     <div class="form-group row" ng-show="userC.user.id">
@@ -80,11 +82,11 @@
                         </div>
 
                     </div>
-
                     <div class="form-group row pt-5" ng-show="userC.user.id">
                         <label class="col-md-3 control-label" for="newPasswordSave">Изменить пароль на:</label>
                         <div class="col-md-9">
-                            <input type="password" class="form-control" id="newPasswordSave" ng-model="userC.user.password"/>
+                            <input type="password" class="form-control" id="newPasswordSave"
+                                   ng-model="userC.user.password"/>
                         </div>
                     </div>
                     <div class="modal-footer row mr-0">
