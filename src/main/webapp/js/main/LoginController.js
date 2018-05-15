@@ -30,8 +30,12 @@ angular.module('courtApp')
                         },
                         function (errResponse) {
                             self.user.password = null;
-                            self.message = 'Не верный логин или пароль!';
-                            document.getElementById("password").focus();
+                            if (errResponse.status == 423){
+                                self.message = 'Пользователь заблокирован!';
+                            }else {
+                                self.message = 'Не верный логин или пароль!';
+                                document.getElementById("password").focus();
+                            }
                             deferred.reject(errResponse);
                         }
                     );

@@ -9,7 +9,8 @@
                     data-target="#ModalSave">Добавить пользователя
             </button>
         </div>
-        <table ng-table="userC.tableParams" class="col bor-table table-sm table-hover table-condensed" show-filter="true">
+        <table ng-table="userC.tableParams" class="col bor-table table-sm table-hover table-condensed"
+               show-filter="true">
             <tr class="cursor" ng-repeat="user in $data" ng-dblclick="userC.modalShow(user)">
                 <td title="'Имя'" filter="{ name: 'text'}" sortable="'name'">
                     {{user.name}}
@@ -17,7 +18,7 @@
                 <td title="'Логин'" filter="{ username: 'text'}" sortable="'username'">
                     {{user.username}}
                 </td>
-                <td title="'Роли'"  sortable="'role'">
+                <td title="'Роли'" sortable="'role'">
                     {{user.authorities.toString()}}
                 </td>
                 <td title="'Статус'" filter="{ enabled: 'text'}" sortable="'enabled'">
@@ -32,33 +33,64 @@
     <div class="widht-modal-dialog modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title">Добавление/Редактирование пользователя</h4>
+                <h4 class="modal-title">{{!userC.user.id ? 'Добавление' : 'Редактирвоание'}} пользователя</h4>
             </div>
             <div class="modal-body">
-                <form ng-submit="" class="form-horizontal" role="form">
+                <form ng-submit="userC.submit()" class="form-horizontal" role="form">
                     <input type="hidden" ng-model="userC.user.id"/>
                     <div class="form-group row">
-                        <label class="col-md-2 control-label" for="nameSave">Имя</label>
-                        <div class="col-md-10">
+                        <label class="col-md-3 control-label" for="usernameSave">Логин</label>
+                        <div class="col-md-9">
+                            <input type="text" class="form-control" id="usernameSave" ng-model="userC.user.username" ng-required="userC.user.id"/>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-md-3 control-label" for="nameSave">Имя</label>
+                        <div class="col-md-9">
                             <input type="text" class="form-control" id="nameSave" ng-model="userC.user.name"/>
                         </div>
                     </div>
-                    <div class="form-group row">
-                        <label class="col-md-2 control-label" for="usernameSave">Логин</label>
-                        <div class="col-md-10">
-                            <input type="text" class="form-control" id="usernameSave" ng-model="userC.user.username"/>
+                    <div class="form-group row" ng-show="!userC.user.id">
+                        <label class="col-md-3 control-label" for="passwordSave">Пароль</label>
+                        <div class="col-md-9">
+                            <input type="password" class="form-control" id="passwordSave" ng-model="userC.user.password"/>
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-md-2 control-label" for="statusSave">Статус</label>
-                        <div class="col-md-10">
-                            <input type="text" class="form-control" id="statusSave" ng-model="userC.user.enabled"/>
+                        <label class="col-md-3 control-label">Роли</label>
+                        <div class="col-md-9">
+                        <label class="pl-3  control-label" ng-repeat="role in roles">
+                            <input type="checkbox"
+                                   name="selectedRoles[]"
+                                   value="{{role}}"
+                                   ng-checked="selection.indexOf(role) > -1"
+                                   ng-click="toggleSelection(role)"
+                            > {{role}}
+                        </label>
+                        </div>
+                    </div>
+                    <div class="form-group row" ng-show="userC.user.id">
+                        <label class="col-md-3 control-label">Статус</label>
+                        <div class="col-md-9">
+                            <select ng-value="userC.user.enabled" ng-model="userC.user.enabled"
+                                    class="form-control">
+                                <option value='true'>Активен</option>
+                                <option value='false'>Заблокирован</option>
+                            </select>
+                        </div>
+
+                    </div>
+
+                    <div class="form-group row pt-5" ng-show="userC.user.id">
+                        <label class="col-md-3 control-label" for="newPasswordSave">Изменить пароль на:</label>
+                        <div class="col-md-9">
+                            <input type="password" class="form-control" id="newPasswordSave" ng-model="userC.user.password"/>
                         </div>
                     </div>
                     <div class="modal-footer row mr-0">
                         <input type="submit" value="{{!userC.user.id ? 'Добавить' : 'Изменить'}}"
                                class="btn btn-primary btn-sm">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
+                        <button type="button" class="btn btn-sm" data-dismiss="modal">Закрыть</button>
                     </div>
                 </form>
             </div>

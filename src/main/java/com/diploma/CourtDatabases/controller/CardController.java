@@ -42,7 +42,6 @@ public class CardController {
     @PreAuthorize("hasAuthority('USER')")
     @PostMapping("/cardAdm/")
     public CardAdm save(@NonNull @RequestBody CardAdm cardAdm) {
-        System.out.println(cardAdm);
         return cardAdmService.save(cardAdm);
     }
 

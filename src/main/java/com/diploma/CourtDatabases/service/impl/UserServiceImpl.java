@@ -27,7 +27,7 @@ public class UserServiceImpl implements UserService {
     private UserRepository userRepository;
 
 
-    @PostConstruct
+  /*  @PostConstruct
     public void init() {
         if (!findByUsername("super_admin").isPresent()) {
             save(User.builder()
@@ -66,7 +66,7 @@ public class UserServiceImpl implements UserService {
                     .build());
         }
 
-    }
+    }*/
 
     @Override
     public Optional<User> findById(@NonNull long id) {

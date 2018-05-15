@@ -37,9 +37,7 @@ public class JWTFilter extends GenericFilterBean {
         } else {
             try {
                 String token = authHeader.substring(7);
-                System.out.println(token);
                 Claims claims = Jwts.parser().setSigningKey("secretkey").parseClaimsJws(token).getBody();
-                System.out.println(claims.toString());
                 request.setAttribute("claims", claims);
                 SecurityContextHolder.getContext().setAuthentication(getAuthentication(claims));
                 filterChain.doFilter(req, res);

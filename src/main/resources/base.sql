@@ -4,7 +4,19 @@ CREATE DATABASE court_databases
 
 USE court_databases;
 
-DROP TABLE IF EXISTS `name_entity_decree_adm`;
+DROP TABLE IF EXISTS `users`;
+CREATE TABLE IF NOT EXISTS `users` (
+  `id` bigint(20) NOT NULL,
+  `account_non_expired` tinyint(1) DEFAULT NULL,
+  `account_non_locked` tinyint(1) DEFAULT NULL,
+  `credentials_non_expired` tinyint(1) DEFAULT NULL,
+  `enabled` tinyint(1) DEFAULT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  `password` varchar(255) DEFAULT NULL,
+  `username` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
 CREATE TABLE IF NOT EXISTS name_entity_decree_adm (
   id   INT(10) AUTO_INCREMENT,
   name VARCHAR(100) NOT NULL,
