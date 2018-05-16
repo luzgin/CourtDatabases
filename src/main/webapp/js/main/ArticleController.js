@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('courtApp').controller('ArticleController',
-    ['ArticleService', '$scope', function (ArticleService, $scope) {
+    ['ArticleService', '$scope', 'NgTableParams','$rootScope', function (ArticleService, $scope, NgTableParams, $rootScope) {
         var self = this;
         self.article = {};
         self.articles = [];
@@ -13,12 +13,27 @@ angular.module('courtApp').controller('ArticleController',
         self.editArticle = editArticle;
         self.removeArticle = removeArticle;
         self.clearArticle = clearArticle;
+        self.modalShow = modalShow;
+
+        var data = getAllArticles();
+        self.tableParams = new NgTableParams({
+            sorting: {name: "asc"},
+            count: 15
+        }, {counts: [15, 50, 100], dataset: data});
 
         function getAllArticles() {
             return ArticleService.getAllArticles();
         }
+
         function clearArticle() {
             self.article = {};
+        }
+
+        function modalShow(article) {
+            if ($rootScope.viewMenuAccses.authorities.length > 1) {
+                self.article = article;
+                $('#ModalSave').modal('toggle');
+            }
         }
 
         function submit() {
@@ -52,7 +67,7 @@ angular.module('courtApp').controller('ArticleController',
             ArticleService.updateArticle(article, id)
                 .then(
                     function (response) {
-                        console.log('article updated successfully'+ self.article);
+                        console.log('article updated successfully' + self.article);
                         Message.generate('Статья успешно изменена', 1);
                     },
                     function (errResponse) {
@@ -61,27 +76,29 @@ angular.module('courtApp').controller('ArticleController',
                     }
                 );
         }
+
         function editArticle(id) {
             console.log('article get');
             ArticleService.getArticle(id).then(
                 function (article) {
                     self.article = article;
-                    console.log('article get'+ self.article);
+                    console.log('article get' + self.article);
                 },
                 function (errResponse) {
                     console.error('Error while removing article ' + id + ', Error :' + errResponse.data);
                 }
             );
         }
-        function removeArticle(id){
-            console.log('About to remove article with id '+id);
+
+        function removeArticle(id) {
+            console.log('About to remove article with id ' + id);
             ArticleService.removeArticle(id)
                 .then(
-                    function(){
-                        console.log('article '+id + ' removed successfully');
+                    function () {
+                        console.log('article ' + id + ' removed successfully');
                     },
-                    function(errResponse){
-                        console.error('Error while removing article '+id +', Error :'+errResponse.data);
+                    function (errResponse) {
+                        console.error('Error while removing article ' + id + ', Error :' + errResponse.data);
                     }
                 );
         }

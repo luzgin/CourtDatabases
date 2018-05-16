@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('courtApp').controller('ResController',
-    ['ResService', '$scope', function (ResService, $scope) {
+    ['ResService', '$scope', 'NgTableParams', function (ResService, $scope, NgTableParams) {
         var self = this;
         self.result = {};
         self.results = [];
@@ -12,11 +12,23 @@ angular.module('courtApp').controller('ResController',
         self.getAllResults = getAllResults;
         self.editResult = editResult;
         self.removeResult = removeResult;
+        self.modalShow = modalShow;
+
+        var data = getAllResults();
+        self.tableParams = new NgTableParams({
+            sorting: {name: "asc"},
+            count: 10
+        }, {counts: [10, 25, 50], dataset: data});
 
         self.done = false;
 
         function getAllResults() {
             return ResService.getAllResults();
+        }
+
+        function modalShow(result) {
+            self.result = result;
+            $('#ModalSave').modal('toggle');
         }
 
         function submit() {

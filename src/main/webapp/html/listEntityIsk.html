@@ -9,22 +9,13 @@
                     data-target="#ModalSaveEntityIsk">Добавить сущность
             </button>
         </div>
-        <table class="tab-scroll bor-table table-sm table-hover">
-            <thead>
-            <tr>
-                <th class="text-center" width="85%">Название</th>
-                <th class="text-center" width="5%"></th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr ng-repeat="item in entC.getAllEntities()">
-                <td class="text-left pl-3">{{item.name}}</td>
-                <td>
-                        <button type="button"data-toggle="modal"
-                                data-target="#ModalSaveEntityIsk" ng-click="entC.editEntity(item.id)" class="btn btn-sm btn-success custom-width">Редактировать</button>
+        <table ng-table="entC.tableParams" class="col bor-table table-sm table-hover table-condensed"
+               show-filter="true">
+            <tr class="cursor" ng-repeat="item in $data" ng-dblclick="entC.modalShow(item)">
+                <td class="text-left pl-3" title="'Название'" filter="{ name: 'text'}" sortable="'name'">
+                    {{item.name}}
                 </td>
             </tr>
-            </tbody>
         </table>
     </div>
 </div>
@@ -32,11 +23,11 @@
     <div class="widht-modal-dialog modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title">Добавление/Редактирование сущности</h4>
+                <h4 class="modal-title">{{!entC.entity.id ? 'Добавление' : 'Редактирвоание'}} сущности</h4>
             </div>
             <div class="modal-body">
                 <form ng-submit="entC.submit()" class="form-horizontal" role="form">
-                    <input type="hidden" ng-model="entC.entity.id" />
+                    <input type="hidden" ng-model="entC.entity.id"/>
                     <div class="form-group row">
                         <label class="col-md-2 control-label" for="nameSave">Название</label>
                         <div class="col-md-10">
@@ -44,7 +35,8 @@
                         </div>
                     </div>
                     <div class="modal-footer row mr-0">
-                        <input type="submit"  value="{{!entC.entity.id ? 'Добавить' : 'Изменить'}}" class="btn btn-primary btn-sm">
+                        <input type="submit" value="{{!entC.entity.id ? 'Добавить' : 'Изменить'}}"
+                               class="btn btn-primary btn-sm">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
                     </div>
                 </form>

@@ -9,46 +9,61 @@
                     data-target="#ModalSave">Добавить статью
             </button>
         </div>
-        <div class="scroll-table">
-            <table class="bor-table table-sm table-hover">
-                <thead>
-                <tr>
-                    <th class="text-center" width="10%">Статья</th>
-                    <th class="text-center" width="5%">Часть</th>
-                    <th class="text-center" width="70%">Описание</th>
-                    <th class="text-center" width="5%" ng-show="viewMenuAccses.authorities.length >1"></th>
-                </tr>
-                <tr>
-                    <th width="10%">
-                        <input type="text" class="form-control text-center" ng-model="search1.article" placeholder="Найти"/>
-                    </th>
-                    <th width="5%"> <input type="text" class="form-control text-center" ng-model="search2.part"/></th>
-                    <th width="70%"> <input type="text" class="form-control text-left" ng-model="search3.note"/></th>
-                    <th width="5%" ng-show="viewMenuAccses.authorities.length >1"></th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr ng-repeat="item in artC.getAllArticles() | filter: search1 | filter: search2 | filter: search3">
-                    <td>{{item.article}}</td>
-                    <td><span ng-if="item.part != 0"> {{item.part}}</span></td>
-                    <td class="text-left">{{item.note}}</td>
-                    <td ng-show="viewMenuAccses.authorities.length >1">
-                        <button type="button" data-toggle="modal"
-                                data-target="#ModalSave" ng-click="artC.editArticle(item.id)"
-                                class="btn btn-success btn-sm custom-width">Редактировать
-                        </button>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
+
+        <!--
+          <table class="bor-table table-sm table-hover">
+              <thead>
+              <tr>
+                  <th class="text-center" width="10%">Статья</th>
+                  <th class="text-center" width="5%">Часть</th>
+                  <th class="text-center" width="70%">Описание</th>
+                  <th class="text-center" width="5%" ng-show="viewMenuAccses.authorities.length >1"></th>
+              </tr>
+              <tr>
+                  <th width="10%">
+                      <input type="text" class="form-control text-center" ng-model="search1.article" placeholder="Найти"/>
+                  </th>
+                  <th width="5%"> <input type="text" class="form-control text-center" ng-model="search2.part"/></th>
+                  <th width="70%"> <input type="text" class="form-control text-left" ng-model="search3.note"/></th>
+                  <th width="5%" ng-show="viewMenuAccses.authorities.length >1"></th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr ng-repeat="item in artC.getAllArticles() | filter: search1 | filter: search2 | filter: search3">
+                  <td>{{item.article}}</td>
+                  <td><span ng-if="item.part != 0"> {{item.part}}</span></td>
+                  <td class="text-left">{{item.note}}</td>
+                  <td ng-show="viewMenuAccses.authorities.length >1">
+                      <button type="button" data-toggle="modal"
+                              data-target="#ModalSave" ng-click="artC.editArticle(item.id)"
+                              class="btn btn-success btn-sm custom-width">Редактировать
+                      </button>
+                  </td>
+              </tr>
+              </tbody>
+          </table>
+          -->
+        <table ng-table="artC.tableParams" class="col bor-table table-sm table-hover table-condensed"
+               show-filter="true">
+            <tr class="cursor" ng-repeat="item in $data" ng-dblclick="artC.modalShow(item)">
+                <td class="text-center" width="10%" title="'Статья'" filter="{ article: 'text'}" sortable="'article'">
+                    {{item.article}}
+                </td>
+                <td class="text-center" width="5%" title="'Часть'" filter="{ part: 'text'}" sortable="'part'">
+                    <span ng-if="item.part != 0"> {{item.part}}</span>
+                </td>
+                <td class="text-left pl-3" width="85%" title="'Описание'" filter="{ note: 'text'}" sortable="'note'">
+                    {{item.note}}
+                </td>
+            </tr>
+        </table>
     </div>
 </div>
 <div id="ModalSave" class="modal fade" role="dialog">
     <div class="widht-modal-dialog modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title">Добавление/Редактирование статьи</h4>
+                <h4 class="modal-title">{{!artC.article.id ? 'Добавление' : 'Редактирвоание'}} статьи</h4>
             </div>
             <div class="modal-body">
                 <form ng-submit="artC.submit()" class="form-horizontal" role="form">
@@ -74,7 +89,7 @@
                     <div class="modal-footer row mr-0">
                         <input type="submit" value="{{!artC.article.id ? 'Добавить' : 'Изменить'}}"
                                class="btn btn-primary btn-sm">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
+                        <button type="button" class="btn btn-sm" data-dismiss="modal">Закрыть</button>
                     </div>
                 </form>
             </div>

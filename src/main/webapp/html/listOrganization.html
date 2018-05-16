@@ -1,6 +1,7 @@
 <div class="panel panel-default">
     <div class="panel-heading text-center h3 py-3">Организации</div>
     <div class="panel-body">
+<!--
         <div class="scroll-table">
             <table class="bor-table table-sm table-hover col">
                 <thead>
@@ -29,6 +30,15 @@
                 </tbody>
             </table>
         </div>
+        -->
+        <table ng-table="orgC.tableParams" class="col bor-table table-sm table-hover table-condensed"
+               show-filter="true">
+            <tr class="cursor" ng-repeat="item in $data" ng-dblclick="orgC.modalShow(item)">
+                <td class="text-left pl-3" title="'Название'" filter="{ name: 'text'}" sortable="'name'">
+                    {{item.name}}
+                </td>
+            </tr>
+        </table>
     </div>
 </div>
 <div id="ModalSaveOrganization" class="modal fade" role="dialog">

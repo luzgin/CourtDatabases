@@ -7,26 +7,13 @@
             </button>
         </div>
         <div class="scroll-table">
-            <table class="tab-scroll bor-table table-sm table-hover col">
-                <thead>
-                <tr>
-                    <th class="text-center" width="75%">Название</th>
-                    <th class="text-center" width="5%"></th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr ng-repeat="item in resC.getAllResults()">
-                    <td class="text-left pl-3">{{item.name}}</td>
-                    <td>
-                        <div ng-if="item.type !='1'" class="text-center">
-                            <button type="button" data-toggle="modal"
-                                    data-target="#ModalSave" ng-click="resC.editResult(item.id)"
-                                    class="btn btn-sm btn-success custom-width">Редактировать
-                            </button>
-                        </div>
+            <table ng-table="resC.tableParams" class="col bor-table table-sm table-hover table-condensed"
+                   show-filter="true">
+                <tr class="cursor" ng-repeat="item in $data" ng-dblclick="resC.modalShow(item)">
+                    <td class="text-left pl-3" title="'Название'" filter="{ name: 'text'}" sortable="'name'">
+                        {{item.name}}
                     </td>
                 </tr>
-                </tbody>
             </table>
         </div>
     </div>
@@ -35,7 +22,7 @@
     <div class="widht-modal-dialog modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title">Добавление/Редактирование результата</h4>
+                <h4 class="modal-title">{{!resC.result.id ? 'Добавление' : 'Редактирвоание'}} результата</h4>
             </div>
             <div class="modal-body">
                 <form ng-submit="resC.submit()" class="form-horizontal" role="form">

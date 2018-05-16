@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('courtApp').controller('CardViewController',
-    ['CardViewService', 'ComplaintService', 'DateReturnService', 'DateRequestService', 'CardService',
-        function (CardViewService, ComplaintService, DateReturnService, DateRequestService, CardService) {
+    ['CardViewService', 'ComplaintService', 'DateReturnService', 'DateRequestService', 'CardService','NgTableParams','$route',
+        function (CardViewService, ComplaintService, DateReturnService, DateRequestService, CardService, NgTableParams, $route) {
 
             var self = this;
             self.cardForRemove = {};
@@ -11,6 +11,12 @@ angular.module('courtApp').controller('CardViewController',
             self.removeCard = removeCard;
             self.setCard = setCard;
             self.setCardForRemove = setCardForRemove;
+
+            var data = getAllCards();
+            self.tableParams = new NgTableParams({
+                sorting: {createDate: "desc"},
+                count: 10
+            }, {counts: [10, 25, 50], dataset: data});
 
             document.getElementById("removeButton").setAttribute('disabled', 'disabled');
             $(document).ready(function () {
@@ -61,8 +67,11 @@ angular.module('courtApp').controller('CardViewController',
                 CardService.removeCard(self.cardForRemove.id)
                     .then(
                         function () {
-                            Message.generate('Карточка № '+self.cardForRemove.cardNumber+' успешно удалена!', 0);
+                            Message.generate('Карточка № '+self.cardForRemove.cardNumber+' успешно удалена!', 3);
                             console.log('card  removed successfully');
+                            $route.reload();
+
+
                         },
                         function (errResponse) {
                             console.error('Error while removing card, Error :' + errResponse.data);

@@ -1,10 +1,15 @@
 'use strict';
 
 angular.module('courtApp').controller('EntityController',
-    ['EntityService', '$scope', function (EntityService, $scope) {
+    ['EntityService', '$scope', 'NgTableParams', function (EntityService, $scope, NgTableParams) {
         var self = this;
         self.entity = {};
         self.entities = [];
+        var data = getAllEntities();
+        self.tableParams = new NgTableParams({
+            sorting: {name: "asc"},
+            count: 10
+        }, {counts: [10, 25, 50], dataset: data});
 
         self.submit = submit;
         self.createEntity = createEntity;
@@ -13,6 +18,7 @@ angular.module('courtApp').controller('EntityController',
         self.editEntity = editEntity;
         self.removeEntity = removeEntity;
         self.clearEntity = clearEntity;
+        self.modalShow = modalShow;
 
 
         function getAllEntities() {
@@ -64,6 +70,12 @@ angular.module('courtApp').controller('EntityController',
                     }
                 );
         }
+
+        function modalShow(entity) {
+            self.entity = entity;
+            $('#ModalSaveEntityIsk').modal('toggle');
+        }
+
         function editEntity(id) {
             console.log('entity get');
             EntityService.getEntity(id).then(

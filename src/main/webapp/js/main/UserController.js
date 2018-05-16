@@ -15,6 +15,7 @@ angular.module('courtApp').controller('UserController',
 
         var data = UserService.getAllUsers();
         var oldPassword = '';
+
         self.tableParams = new NgTableParams({
             sorting: {name: "asc"},
             count: 10
@@ -45,7 +46,6 @@ angular.module('courtApp').controller('UserController',
             if (self.user.id != null) {
                 document.getElementById("usernameSave").readOnly = true;
             }
-
         }
 
         function clearUser() {

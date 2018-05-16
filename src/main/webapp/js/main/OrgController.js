@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('courtApp').controller('OrgController',
-    ['OrgService', '$scope', function (OrgService, $scope) {
+    ['OrgService', '$scope', 'NgTableParams', function (OrgService, $scope, NgTableParams) {
         var self = this;
         self.organization = {};
         self.organizations = [];
@@ -12,11 +12,25 @@ angular.module('courtApp').controller('OrgController',
         self.getAllOrganizations = getAllOrganizations;
         self.editOrganization = editOrganization;
         self.removeOrganization = removeOrganization;
+        self.modalShow = modalShow;
+
+        var data = getAllOrganizations();
+        self.tableParams = new NgTableParams({
+            count: 15
+        }, {counts: [15, 50, 100], dataset: data});
 
         function getAllOrganizations() {
             return OrgService.getAllOrganizations();
         }
 
+        function modalShow(organization) {
+            if (organization.type =='1'){
+                Message.generate('Нельзя редактировать название суда!', 3);
+            }else {
+                self.organization = organization;
+                $('#ModalSaveOrganization').modal('toggle');
+            }
+        }
 
         function submit() {
             if ($scope.organizationForm.$valid) {
