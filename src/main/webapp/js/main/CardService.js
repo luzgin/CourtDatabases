@@ -8,7 +8,6 @@ angular.module('courtApp').factory('CardService',
                 createCard: createCard,
                 updateCard: updateCard,
                 removeCard: removeCard
-
             };
             return factory;
 
@@ -86,8 +85,13 @@ angular.module('courtApp').factory('CardService',
                 $http.delete(urls.CARD_SERVICE_API + id)
                     .then(
                         function (response) {
-                            CardViewService.loadAllCards();
-                            deferred.resolve(response.data);
+                            CardViewService.loadAllCards().then(
+                                function () {
+                                    deferred.resolve(response.data);
+                                }, function (errResponse) {
+                                }
+                            );
+
                         },
                         function (errResponse) {
                             console.error('Error while removing Card with id :' + id);

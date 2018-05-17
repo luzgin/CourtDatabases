@@ -12,11 +12,11 @@ angular.module('courtApp').controller('CardViewController',
             self.setCard = setCard;
             self.setCardForRemove = setCardForRemove;
 
-            var data = getAllCards();
+            self.data = getAllCards();
             self.tableParams = new NgTableParams({
                 sorting: {createDate: "desc"},
                 count: 10
-            }, {counts: [10, 25, 50], dataset: data});
+            }, {counts: [10, 25, 50], dataset: self.data});
 
             document.getElementById("removeButton").setAttribute('disabled', 'disabled');
             $(document).ready(function () {
@@ -50,7 +50,7 @@ angular.module('courtApp').controller('CardViewController',
                     }
                 }
 
-                if (self.cardForRemove != item) {
+                if (self.cardForRemove !== item) {
                     self.cardForRemove = item;
                     ressetBorder();
                     currentTr[tr.$index].style.backgroundColor = '#9cc3e0';
@@ -70,8 +70,6 @@ angular.module('courtApp').controller('CardViewController',
                             Message.generate('Карточка № '+self.cardForRemove.cardNumber+' успешно удалена!', 3);
                             console.log('card  removed successfully');
                             $route.reload();
-
-
                         },
                         function (errResponse) {
                             console.error('Error while removing card, Error :' + errResponse.data);
