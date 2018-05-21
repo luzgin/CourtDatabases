@@ -1,6 +1,14 @@
 <div class="panel panel-default">
     <div class="panel-heading text-center py-3 h3">Авторы документов</div>
     <div class="panel-body">
+        <div class=" mb-3 col row justify-content-end">
+            <button type="button"
+                    ng-click="autC.clearAuthor()"
+                    class="btn btn-primary"
+                    data-toggle="modal"
+                    data-target="#ModalSaveAuthor">Добавить автора
+            </button>
+        </div>
         <div class="scroll-table">
             <table class="tab-scroll bor-table table-sm table-hover">
                 <thead>

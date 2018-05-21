@@ -55,8 +55,14 @@ angular.module('courtApp').factory('OrgService',
                 $http.post(urls.ORGANIZATION_SERVICE_API, organization)
                     .then(
                         function (response) {
-                            loadAllOrganizations();
-                            deferred.resolve(response.data);
+                            loadAllOrganizations()
+                                .then(
+                                    function (response1) {
+                                        deferred.resolve(response.data);
+                                    },
+                                    function (errResponse) {
+                                        deferred.reject(errResponse);
+                                    });
                         },
                         function (errResponse) {
                             console.error('Error while creating organization : ' + errResponse.data.errorMessage);
@@ -72,8 +78,13 @@ angular.module('courtApp').factory('OrgService',
                 $http.put(urls.ORGANIZATION_SERVICE_API + id, organization)
                     .then(
                         function (response) {
-                            loadAllOrganizations();
-                            deferred.resolve(response.data);
+                            loadAllOrganizations().then(
+                                function (response1) {
+                                    deferred.resolve(response.data);
+                                },
+                                function (errResponse) {
+                                    deferred.reject(errResponse);
+                                });
                         },
                         function (errResponse) {
                             console.error('Error while updating organization with id :' + id);

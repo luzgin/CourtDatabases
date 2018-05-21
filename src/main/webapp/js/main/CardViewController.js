@@ -11,6 +11,7 @@ angular.module('courtApp').controller('CardViewController',
             self.removeCard = removeCard;
             self.setCard = setCard;
             self.setCardForRemove = setCardForRemove;
+            self.showRemoveModal = showRemoveModal;
 
             self.data = getAllCards();
             self.tableParams = new NgTableParams({
@@ -34,6 +35,9 @@ angular.module('courtApp').controller('CardViewController',
                 return CardViewService.getAllCards();
             }
 
+            function showRemoveModal() {
+                $('#ModalRemoveCard').modal('show');
+            }
             function setCard(item) {
                 CardViewService.setCard(item);
                 ComplaintService.loadComplaintsForDecree(item.decreeAdm.id);
@@ -63,6 +67,7 @@ angular.module('courtApp').controller('CardViewController',
             }
 
             function removeCard() {
+                $('#ModalRemoveCard').modal('hide');
                 console.log('About to remove card with id ');
                 CardService.removeCard(self.cardForRemove.id)
                     .then(

@@ -13,20 +13,25 @@ angular.module('courtApp').controller('OrgController',
         self.editOrganization = editOrganization;
         self.removeOrganization = removeOrganization;
         self.modalShow = modalShow;
+        self.clearOrganization = clearOrganization;
 
-        var data = getAllOrganizations();
+
         self.tableParams = new NgTableParams({
             count: 15
-        }, {counts: [15, 50, 100], dataset: data});
+        }, {counts: [15, 50, 100], dataset: getAllOrganizations()});
 
         function getAllOrganizations() {
             return OrgService.getAllOrganizations();
         }
 
+        function clearOrganization() {
+            self.organization = {};
+        }
+
         function modalShow(organization) {
-            if (organization.type =='1'){
+            if (organization.type == '1') {
                 Message.generate('Нельзя редактировать название суда!', 3);
-            }else {
+            } else {
                 self.organization = organization;
                 $('#ModalSaveOrganization').modal('toggle');
             }
@@ -38,12 +43,11 @@ angular.module('courtApp').controller('OrgController',
                 if (self.organization.id === undefined || self.organization.id === null) {
                     console.log('Saving New organization', self.organization);
                     createOrganization(self.organization);
-                    $('#ModalSaveOrganization').modal('toggle');
                 } else {
                     updateOrganization(self.organization, self.organization.id);
                     console.log('organization updated with id ', self.organization.id);
-                    $('#ModalSaveOrganization').modal('toggle');
                 }
+                $('#ModalSaveOrganization').modal('toggle');
             }
             else {
                 if ($scope.organizationForm.nameModalOrganization.$error.required) {
@@ -60,7 +64,6 @@ angular.module('courtApp').controller('OrgController',
                 function (response) {
                     Message.generate('Организация успешно добавлена', 1);
                     console.log('organization created successfully');
-                    self.organization = {};
                 },
                 function (errResponse) {
                     Message.generate('Ошибка при добавлении организации!', 3);
@@ -109,6 +112,11 @@ angular.module('courtApp').controller('OrgController',
                     }
                 );
         }
+
+        $scope.$on('clearOrganization', function () {
+            self.organization = {};
+            console.log("qweqweqwe");
+        })
 
     }
     ]);

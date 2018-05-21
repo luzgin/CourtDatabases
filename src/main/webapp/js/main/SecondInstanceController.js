@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('courtApp').controller('SecondInstanceController',
-    ['SecondInstanceService', 'OrgService', 'AuthorService', '$scope', function (SecondInstanceService, OrgService, AuthorService, $scope) {
+    ['SecondInstanceService', 'OrgService', 'AuthorService', '$scope','$rootScope', function (SecondInstanceService, OrgService, AuthorService, $scope, $rootScope) {
         var self = this;
         self.secondInstance = {};
         self.secondInstances = [];
@@ -17,6 +17,8 @@ angular.module('courtApp').controller('SecondInstanceController',
         self.removeSecondInstance = removeSecondInstance;
         self.getAuthorsForOrganization = getAuthorsForOrganization;
         self.stringToDate = stringToDate;
+        self.clearOrganization = clearOrganization;
+        self.setOrganizationForAuthor = setOrganizationForAuthor;
 
         function stringToDate(st) {
             var pattern = /(\d{2})\.(\d{2})\.(\d{4})/;
@@ -63,6 +65,9 @@ angular.module('courtApp').controller('SecondInstanceController',
 
         function getAuthorsForOrganization() {
             return AuthorService.getAuthorsForOrganization();
+        }
+        function clearOrganization() {
+            $rootScope.$broadcast('clearOrganization', {});
         }
 
         function getAllSecondInstances() {
@@ -163,6 +168,10 @@ angular.module('courtApp').controller('SecondInstanceController',
                         console.error('Error while removing secondInstance ' + id + ', Error :' + errResponse.data);
                     }
                 );
+        }
+
+        function setOrganizationForAuthor(item) {
+            $rootScope.$broadcast('setOrganizationForAuthor', {a: item});
         }
 
     }

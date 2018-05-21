@@ -28,6 +28,8 @@ angular.module('courtApp').controller('VialatorController',
                     if (self.vialator != null) {
                         if (self.vialator.typeVialator == 2) {
                             $scope.radioChecked = {on: '2'};
+                        }else {
+                            $scope.radioChecked = {on: '1'};
                         }
                     }
                 })

@@ -31,6 +31,14 @@
             </table>
         </div>
         -->
+        <div class=" mb-3 col row justify-content-end">
+            <button type="button"
+                    ng-click="orgC.clearOrganization()"
+                    class="btn btn-primary"
+                    data-toggle="modal"
+                    data-target="#ModalSaveOrganization">Добавить организацию
+            </button>
+        </div>
         <table ng-table="orgC.tableParams" class="col bor-table table-sm table-hover table-condensed"
                show-filter="true">
             <tr class="cursor" ng-repeat="item in $data" ng-dblclick="orgC.modalShow(item)">
@@ -45,7 +53,7 @@
     <div class="widht-modal-dialog modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title">Добавление/редактирование организации</h4>
+                <h4 class="modal-title">{{!orgC.organization.id ? 'Добавление' : 'Редактирвоание'}} организации</h4>
             </div>
             <div class="modal-body">
                 <form name="organizationForm" ng-submit="orgC.submit()" class="form-horizontal" role="form"

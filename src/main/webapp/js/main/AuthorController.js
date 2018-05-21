@@ -14,11 +14,15 @@ angular.module('courtApp').controller('AuthorController',
         self.getAllOrganizations = getAllOrganizations;
         self.editAuthor = editAuthor;
         self.removeAuthor = removeAuthor;
+        self.clearAuthor = clearAuthor;
 
         self.done = false;
 
         function getAllAuthors() {
             return AuthorService.getAllAuthors();
+        }
+        function clearAuthor() {
+            self.author = {};
         }
 
         function getAllOrganizations() {
