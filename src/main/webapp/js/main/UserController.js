@@ -43,10 +43,14 @@ angular.module('courtApp').controller('UserController',
             $scope.selection = self.user.authorities;
             oldPassword = self.user.password;
             self.user.password = null;
+        }
+        $("#ModalSave").on('show.bs.modal', function (e) {
             if (self.user.id != null) {
                 document.getElementById("usernameSave").readOnly = true;
+            }else {
+                document.getElementById("usernameSave").readOnly = false;
             }
-        }
+        });
 
         function clearUser() {
             $scope.selection = ['USER'];
