@@ -19,6 +19,8 @@ posdApp.constant('urls', {
     USER_SERVICE_API: 'http://localhost:8080/api/users/'
 });
 
+
+
 posdApp.config(function ($routeProvider, $locationProvider) {
     $routeProvider
         .when('/', {
@@ -287,6 +289,8 @@ posdApp.config(function ($routeProvider, $locationProvider) {
 });
 
 posdApp.run(function (AuthService, $rootScope, $location) {
+    $rootScope.dateFrom = new Date(new Date().getFullYear(), 0, 1);
+    $rootScope.dateTo = new Date();
     $rootScope.$on("$routeChangeStart", function (event, toState) {
         $rootScope.viewMenuAccses = AuthService.user;
         if (!AuthService.user) {

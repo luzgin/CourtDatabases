@@ -65,6 +65,13 @@ public class CardController {
     }
 
     @PreAuthorize("hasAuthority('USER')")
+    @GetMapping(value = "/cardAdm/getCards/{dateFrom}/{dateTo}")
+    public List<CardAdm> getCardsBetweenDate(@NonNull @PathVariable("dateFrom") @DateTimeFormat(pattern = "yyyy-MM-dd") Date dateFrom,
+                                             @NonNull @PathVariable("dateTo") @DateTimeFormat(pattern = "yyyy-MM-dd") Date dateTo) {
+        return cardAdmService.findByCreateDateBetween(dateFrom, dateTo);
+    }
+
+    @PreAuthorize("hasAuthority('USER')")
     @DeleteMapping("/cardAdm/{id}")
     public void deleteEntity(@NonNull @PathVariable("id") long id) {
         cardAdmService.delete(id);

@@ -2,17 +2,53 @@
     <div class="panel-heading text-center h3">Карточки</div>
     <div class="panel-body">
         <div class="m-0 row">
-            <div class=" mb-3 col row justify-content-end">
+
+            <form name="getCardsForm" ng-submit="cdviewC.getCards()" class="form-horizontal" role="form"
+                  novalidate>
+                <div class=" mb-3 col row justify-content-start align-items-center">
+                    <div class="col-md-1 "><p class="h6">C</p></div>
+                    <div class="col-md-4">
+                        <input id="dateFrom"
+                               name="dateFrom"
+                               type="date"
+                               class="form-control "
+                               ng-model="dateFrom"
+                               ng-required="true"/>
+                        <span style="color:red"
+                              ng-show="getCardsForm.dateFrom.check && getCardsForm.dateFrom.$error.required">
+                                   Не может быть пустым!
+                                </span>
+                    </div>
+                    <div class="col-md-1"><p class="h6">ПО</p></div>
+                    <div class="col-md-4">
+                        <input id="dateTo"
+                               name="dateTo"
+                               type="date"
+                               class="form-control"
+                               ng-model="dateTo"
+                               ng-required="true"/>
+                        <span style="color:red"
+                              ng-show="getCardsForm.dateTo.check && getCardsForm.dateTo.$error.required">
+                                   Не может быть пустым!
+                                </span>
+                    </div>
+                    <div class="col-md-2">
+                        <input type="submit" value="Загрузить"
+                               class="btn btn-outline-primary"></div>
+                </div>
+            </form>
+
+            <div class=" mb-3 col row justify-content-end align-items-center">
                 <a href="#/card">
                     <button type="button" class="btn btn-primary mr-3">
                         Добавить карточку
                     </button>
                 </a>
-                <button id="removeButton" class="btn btn-danger btn-sm" ng-click="cdviewC.showRemoveModal();">Удалить
+                <button id="removeButton" class="btn btn-danger" ng-click="cdviewC.showRemoveModal();">Удалить
                 </button>
             </div>
         </div>
-        <!--
+
         <div class="scroll-table">
             <table id="myTable" class="bor-table table-sm table-hover">
                 <thead>
@@ -66,7 +102,8 @@
                 </tbody>
             </table>
         </div>
--->
+
+        <!--
         <table id="myTable" name="myTable" ng-table="cdviewC.tableParams"
                class="col bor-table table-sm table-hover table-condensed"
                show-filter="true">
@@ -110,6 +147,7 @@
                 </td>
             </tr>
         </table>
+        -->
     </div>
 </div>
 <div id="ModalRemoveCard" class="modal fade" role="dialog">
