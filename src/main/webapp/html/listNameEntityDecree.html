@@ -12,19 +12,19 @@
         <table class="tab-scroll bor-table table-sm table-hover col">
             <thead>
             <tr>
-                <th class="text-center" width="90%">Название</th>
-                <th class="text-center" width="10%"></th>
+                <th class="text-center">Название</th>
+            </tr>
+            <tr>
+                <th>
+                    <input type="text" class="form-control text-center" ng-model="search.name"
+                           placeholder="Найти"/>
+                </th>
             </tr>
             </thead>
             <tbody>
-            <tr ng-repeat="item in nedC.getAllNamesEntityDecree()">
+            <tr class="cursor" ng-repeat="item in nedC.getAllNamesEntityDecree() | filter: search"
+                ng-dblclick="nedC.modalShow(item)">
                 <td class="text-left pl-3">{{item.name}}</td>
-                <td>
-                    <div ng-if="item.type !='1'" class="text-center">
-                        <button type="button"data-toggle="modal"
-                                data-target="#ModalSaveNameEntityDecree" ng-click="nedC.editNameEntityDecree(item.id)" class="btn btn-success btn-sm custom-width">Редактировать</button>
-                    </div>
-                </td>
             </tr>
             </tbody>
         </table>
@@ -34,20 +34,22 @@
     <div class="widht-modal-dialog modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title">Добавление/Редактирование сущности</h4>
+                <h4 class="modal-title">{{!nedC.nameEntityDecree.id ? 'Добавление' : 'Редактирвоание'}} сущности</h4>
             </div>
             <div class="modal-body">
                 <form ng-submit="nedC.submit()" class="form-horizontal" role="form">
-                    <input type="hidden" ng-model="nedC.nameEntityDecree.id" />
+                    <input type="hidden" ng-model="nedC.nameEntityDecree.id"/>
                     <div class="form-group row">
                         <label class="col-md-2 control-label" for="nameSave">Название</label>
                         <div class="col-md-10">
-                            <input type="text" class="form-control" id="nameSave" ng-model="nedC.nameEntityDecree.name"/>
+                            <input type="text" class="form-control" id="nameSave"
+                                   ng-model="nedC.nameEntityDecree.name"/>
                         </div>
                     </div>
                     <div class="modal-footer row mr-0">
-                        <input type="submit"  value="{{!nedC.nameEntityDecree.id ? 'Добавить' : 'Изменить'}}" class="btn btn-primary btn-sm">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
+                        <input type="submit" value="{{!nedC.nameEntityDecree.id ? 'Добавить' : 'Изменить'}}"
+                               class="btn btn-primary btn-sm">
+                        <button type="button" class="btn btn-sm" data-dismiss="modal">Закрыть</button>
                     </div>
                 </form>
             </div>

@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('courtApp').controller('VialatorController',
-    ['VialatorService', '$scope', '$rootScope', function (VialatorService, $scope, $rootScope) {
+    ['VialatorService', '$scope', '$rootScope', 'NgTableParams', function (VialatorService, $scope, $rootScope, NgTableParams) {
         var self = this;
         self.vialatorsFiz = [];
         self.vialatorsOrg = [];
@@ -18,23 +18,44 @@ angular.module('courtApp').controller('VialatorController',
         self.editVialator = editVialator;
         self.removeVialator = removeVialator;
         self.save = save;
+        self.modalShow = modalShow;
+
+
+        self.tableFiz = new NgTableParams({
+            sorting: {name: "asc"},
+            count: 15
+        }, {counts: [15, 50, 100], dataset: getAllVialatorsFiz()});
+
+        self.tableOrg = new NgTableParams({
+            sorting: {name: "asc"},
+            count: 15
+        }, {counts: [15, 50, 100], dataset: getAllVialatorsOrg()});
 
         $("#ModalSaveVialators").on('show.bs.modal', function () {
-            if (document.getElementById("vialatorId").value != null) {
-                $scope.$apply(function () {
-                    try {
-                        self.vialator = document.getElementById("uiVialator").value;
-                    }catch (e){}
-                    if (self.vialator != null) {
-                        if (self.vialator.typeVialator == 2) {
-                            $scope.radioChecked = {on: '2'};
-                        }else {
-                            $scope.radioChecked = {on: '1'};
+            if (document.getElementById("vialatorId") != null) {
+                if (document.getElementById("vialatorId").value != null) {
+                    $scope.$apply(function () {
+                        try {
+                            self.vialator = document.getElementById("uiVialator").value;
+                        } catch (e) {
                         }
-                    }
-                })
+                        if (self.vialator != null) {
+                            if (self.vialator.typeVialator == 2) {
+                                $scope.radioChecked = {on: '2'};
+                            } else {
+                                $scope.radioChecked = {on: '1'};
+                            }
+                        }
+                    })
+                }
             }
         });
+
+
+        function modalShow(vialator) {
+            self.vialator = vialator;
+            $('#ModalSaveVialators').modal('toggle');
+        }
 
         function getAllVialators() {
             return VialatorService.getAllVialators();

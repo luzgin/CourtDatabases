@@ -9,64 +9,30 @@
                     data-target="#ModalSaveAuthor">Добавить автора
             </button>
         </div>
-        <div class="scroll-table">
-            <table class="tab-scroll bor-table table-sm table-hover">
-                <thead>
-                <tr>
-                    <th class="text-center" width="20%">ФИО</th>
-                    <th class="text-center" width="25%">Должность</th>
-                    <th class="text-center" width="10">Статус</th>
-                    <th class="text-center" width="35%">Организация</th>
-                    <th class="text-center" width="5%"></th>
-                </tr>
-                <tr>
-                    <th>
-                        <input type="text" class="form-control text-center" ng-model="search1.name"
-                               placeholder="Найти"/>
-                    </th>
-                    <th>
-                        <input type="text" class="form-control text-center" ng-model="search2.position"
-                               placeholder="Найти"/>
-                    </th>
-                    <th>
-                        <input type="text" class="form-control text-center" ng-model="search3.activWork"
-                               placeholder="Найти"/>
-                    </th>
-                    <th>
-                        <input type="text" class="form-control text-center" ng-model="search4.organization.name"
-                               placeholder="Найти"/>
-                    </th>
-                    <th></th>
-
-                </tr>
-                </thead>
-                <tbody>
-                <tr ng-repeat="item in autC.getAllAuthors() | filter: search1 | filter: search2 | filter: search3 | filter: search4">
-                    <td>{{item.name}}</td>
-                    <td>{{item.position}}</td>
-                    <td>{{item.activWork == 1 ? 'Работает' : 'Уволен' }}</td>
-                    <td>{{item.organization.name}}</td>
-                    <td>
-                        <div ng-if="item.type !='1'" class="text-center">
-                            <button type="button" data-toggle="modal"
-                                    data-target="#ModalSaveAuthor" ng-click="autC.editAuthor(item.id)"
-                                    class="btn btn-sm btn-success custom-width">Редактировать
-                            </button>
-                        </div>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
+        <table ng-table="autC.tableParams" class="col bor-table table-sm table-hover table-condensed"
+               show-filter="true">
+            <tr class="cursor" ng-repeat="item in $data" ng-dblclick="autC.modalShow(item)">
+                <td class="text-center" width="30%" title="'ФИО'" filter="{ name: 'text'}" sortable="'name'">
+                    {{item.name}}
+                </td>
+                <td class="text-center" width="25%" title="'Должность'" filter="{ position: 'text'}" sortable="'position'">
+                   {{item.position}}
+                </td>
+                <td class="text-left" width="10%" title="'Статус'" sortable="'activWork'">
+                    {{item.activWork == 1 ? 'Работает' : 'Уволен' }}
+                </td>
+                <td class="text-left" width="35%" title="'Организация'" sortable="'organization.name'">
+                    {{item.organization.name}}
+                </td>
+            </tr>
+        </table>
     </div>
 </div>
-
-
 <div id="ModalSaveAuthor" class="modal fade" role="dialog" data-backdrop="static" data-keyboard="false">
     <div class="widht-modal-dialog modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title">Добавление/Редактирование автора</h4>
+                <h4 class="modal-title">{{!autC.author.id ? 'Добавление' : 'Редактирвоание'}} автора</h4>
             </div>
             <div class="modal-body">
                 <form name="authorForm" ng-submit="autC.submit()" class="form-horizontal" role="form" novalidate>

@@ -12,6 +12,7 @@ angular.module('courtApp').controller('NameEntityDecreeController',
         self.getAllNamesEntityDecree = getAllNamesEntityDecree;
         self.editNameEntityDecree = editNameEntityDecree;
         self.removeNameEntityDecree = removeNameEntityDecree;
+        self.modalShow = modalShow;
 
         self.clearMameEntityDecree = clearMameEntityDecree;
 
@@ -33,6 +34,11 @@ angular.module('courtApp').controller('NameEntityDecreeController',
                 console.log('nameEntityDecree updated with id ', self.nameEntityDecree.id);
                 $('#ModalSaveNameEntityDecree').modal('toggle');
             }
+        }
+
+        function modalShow(item) {
+            self.nameEntityDecree = item;
+            $('#ModalSaveNameEntityDecree').modal('toggle');
         }
 
         function createNameEntityDecree(nameEntityDecree) {

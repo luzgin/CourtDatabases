@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('courtApp').controller('AuthorController',
-    ['AuthorService', 'OrgService', '$scope', function (AuthorService, OrgService, $scope) {
+    ['AuthorService', 'OrgService', '$scope','NgTableParams', function (AuthorService, OrgService, $scope, NgTableParams) {
         var self = this;
         self.author = {};
         self.authors = [];
@@ -15,11 +15,23 @@ angular.module('courtApp').controller('AuthorController',
         self.editAuthor = editAuthor;
         self.removeAuthor = removeAuthor;
         self.clearAuthor = clearAuthor;
+        self.modalShow = modalShow;
 
-        self.done = false;
+        var data = getAllAuthors();
+
+        self.tableParams = new NgTableParams({
+            sorting: {name: "asc"},
+            count: 15
+        }, {counts: [15, 50, 100], dataset: data});
+
 
         function getAllAuthors() {
             return AuthorService.getAllAuthors();
+        }
+
+        function modalShow(item) {
+            self.author = item;
+            $('#ModalSaveAuthor').modal('toggle');
         }
         function clearAuthor() {
             self.author = {};
@@ -69,6 +81,7 @@ angular.module('courtApp').controller('AuthorController',
                 function (response) {
                     Message.generate('Автор успешно добавлен', 1);
                     self.author = {};
+                    self.tableParams.reload();
                 },
                 function (errResponse) {
                     Message.generate('Ошибка при добавлении автора', 1);

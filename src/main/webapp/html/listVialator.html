@@ -13,77 +13,36 @@
                 </div>
             </div>
             <div ng-if="radioChecked.on==='1'?true:false">
-                <div class="scroll-table">
-                    <table class="tab-scroll bor-table table-sm table-hover col">
-                        <thead>
-                        <tr>
-                            <th class="text-center" width="20%">Личный номер</th>
-                            <th class="text-center" width="30%">Фамилия</th>
-                            <th class="text-center" width="20%">Имя</th>
-                            <th class="text-center" width="20%">Отчество</th>
-                            <th class="text-center"></th>
-                        </tr>
-                        <tr>
-                            <th> <input type="text" class="form-control text-center" ng-model="search1.privateNumber"
-                                        placeholder="Найти"/></th>
-                            <th> <input type="text" class="form-control text-center" ng-model="search2.firstName"
-                                        placeholder="Найти"/></th>
-                            <th> <input type="text" class="form-control text-center" ng-model="search3.secondName"
-                                        placeholder="Найти"/></th>
-                            <th> <input type="text" class="form-control text-center" ng-model="search4.lastName"
-                                        placeholder="Найти"/></th>
-                            <th></th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr ng-repeat="item in viaC.getAllVialatorsFiz() | filter: search1 | filter: search2 | filter: search3 | filter: search4">
-                            <td class="text-center"><input type="hidden" id="vialatorId" ng-model="item.id">{{item.privateNumber}}</td>
-                            <td class="text-center">{{item.firstName}}</td>
-                            <td class="text-center">{{item.secondName}}</td>
-                            <td class="text-center">{{item.lastName}}</td>
-                            <td>
-                                <button type="button" data-toggle="modal"
-                                        data-target="#ModalSaveVialators" ng-click="viaC.editVialator(item.id)"
-                                        class="btn btn-sm btn-success custom-width">Редактировать
-                                </button>
-                            </td>
-                        </tr>
-
-                        </tbody>
-                    </table>
-                </div>
+                <table ng-table="viaC.tableFiz" class="col bor-table table-sm table-hover table-condensed"
+                       show-filter="true">
+                    <tr class="cursor" ng-repeat="item in $data" ng-dblclick="viaC.modalShow(item)">
+                        <td class="text-center" width="25%" title="'Личный номер'" filter="{ privateNumber: 'text'}" sortable="'privateNumber'">
+                            <input type="hidden" ng-model="item.id"> {{item.privateNumber}}
+                        </td>
+                        <td class="text-center" width="30%" title="'Фамилия'" filter="{ firstName: 'text'}" sortable="'firstName'">
+                            {{item.firstName}}
+                        </td>
+                        <td class="text-center" width="20%" title="'Имя'" filter="{ secondName: 'text'}" sortable="'secondName'">
+                            {{item.secondName}}
+                        </td>
+                        <td class="text-center" width="25%" title="'Отчество'" filter="{ lastName: 'text'}" sortable="'lastName'">
+                            {{item.lastName}}
+                        </td>
+                    </tr>
+                </table>
             </div>
             <div ng-if="radioChecked.on==='2'?true:false">
-                <div class="scroll-table">
-                    <table class="tab-scroll bor-table table-sm table-hover col">
-                        <thead>
-                        <tr>
-                            <th class="text-center" width="10%">УНП</th>
-                            <th class="text-center" width="70%">Название</th>
-                            <th class="text-center" width="5%"></th>
-                        </tr>
-                        <tr>
-                            <th><input type="text" class="form-control text-center" ng-model="search1.privateNumber"
-                                       placeholder="Найти"/></th></th>
-                            <th><input type="text" class="form-control text-left" ng-model="search2.firstName"
-                                       placeholder="Найти"/></th></th>
-                            <th></th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr ng-repeat="item in viaC.getAllVialatorsOrg() | filter: search1 | filter: search2">
-                            <td><input type="hidden" id="vialatorId" ng-model="item.id">{{item.privateNumber}}</td>
-                            <td class="text-left pl-3">{{item.firstName}}</td>
-                            <td>
-                                <button type="button" data-toggle="modal"
-                                        data-target="#ModalSaveVialators" ng-click="viaC.editVialator(item.id)"
-                                        class="btn btn-sm btn-success custom-width">Редактировать
-                                </button>
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
+                <table ng-table="viaC.tableOrg" class="col bor-table table-sm table-hover table-condensed"
+                       show-filter="true">
+                    <tr class="cursor" ng-repeat="item in $data" ng-dblclick="viaC.modalShow(item)">
+                        <td class="text-center" width="20%" title="'УНП'" filter="{ privateNumber: 'text'}" sortable="'privateNumber'">
+                            <input type="hidden" ng-model="item.id"> {{item.privateNumber}}
+                        </td>
+                        <td class="text-left pl-3" width="80%" title="'Название'" filter="{ firstName: 'text'}" sortable="'firstName'">
+                            {{item.firstName}}
+                        </td>
+                    </tr>
+                </table>
             </div>
         </div>
     </div>
@@ -92,9 +51,9 @@
     <div class="widht-modal-dialog modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title" ng-if="radioChecked.on==='1'?true:false">Добавление/Редактирование физ.
+                <h4 class="modal-title" ng-if="radioChecked.on==='1'?true:false">{{!viaC.vialator.id ? 'Добавление' : 'Редактирвоание'}} физ.
                     лица</h4>
-                <h4 class="modal-title" ng-if="radioChecked.on==='2'?true:false">Добавление/Редактирование юр.
+                <h4 class="modal-title" ng-if="radioChecked.on==='2'?true:false">{{!viaC.vialator.id ? 'Добавление' : 'Редактирвоание'}} юр.
                     лица</h4>
             </div>
             <div class="modal-body">
@@ -145,7 +104,7 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-md-2 control-label" for="secondName">Имя</label>
+                            <label class="col-md-2 control-label" for="secondNameFiz">Имя</label>
                             <div class="col-md-10">
                                 <input id="secondNameFiz"
                                        name="secondNameModalVialator"
@@ -160,7 +119,7 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-md-2 control-label" for="lastName">Отчество</label>
+                            <label class="col-md-2 control-label" for="lastNameModalVialator">Отчество</label>
                             <div class="col-md-10">
                                 <input id="lastNameModalVialator"
                                        name="lastNameModalVialator"
