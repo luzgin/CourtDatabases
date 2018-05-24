@@ -13,4 +13,5 @@ import java.util.List;
 public interface ComplaintsAdmRepository extends JpaRepository<ComplaintsAdm, Long> {
     List<ComplaintsAdm> findByDecreeAdm_Id(Long id);
     List<ComplaintsAdm> findByDecreeAdm(DecreeAdm decreeAdm);
+    List<ComplaintsAdm> findByActiv(Boolean active);
 }

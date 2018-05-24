@@ -50,9 +50,9 @@ angular.module('courtApp').controller('CardController',
 
             self.stringToDate = stringToDate;
 
-            if( self.card.createDate != null){
+            if (self.card.createDate != null) {
                 self.card.createDate = new Date(self.card.createDate);
-            }else{
+            } else {
                 self.card.createDate = new Date();
             }
 

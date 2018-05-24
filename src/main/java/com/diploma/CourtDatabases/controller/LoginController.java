@@ -32,7 +32,7 @@ public class LoginController {
         Optional<User> user = userService.findByUsername(userRequest.getUsername());
         Map<String, Object> tokenMap = new HashMap<String, Object>();
         if (user.isPresent() && new BCryptPasswordEncoder().matches(userRequest.getPassword(), user.get().getPassword())) {
-            if (user.get().isEnabled()){
+            if (user.get().isEnabled()) {
                 token = Jwts
                         .builder()
                         .setSubject(user.get().getUsername())
@@ -42,15 +42,10 @@ public class LoginController {
                 tokenMap.put("token", token);
                 tokenMap.put("user", user.get());
                 return new ResponseEntity<Map<String, Object>>(tokenMap, HttpStatus.OK);
-            }else {
+            } else {
                 tokenMap.put("LOCKED", null);
                 return new ResponseEntity<Map<String, Object>>(tokenMap, HttpStatus.LOCKED);
             }
-
-
-
-
-
         } else {
             tokenMap.put("UNAUTHORIZED", null);
             return new ResponseEntity<Map<String, Object>>(tokenMap, HttpStatus.UNAUTHORIZED);

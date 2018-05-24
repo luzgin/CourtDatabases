@@ -1,12 +1,7 @@
 package com.diploma.CourtDatabases.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
 import javax.persistence.*;
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
 
 @Entity
 @Table(name = "date_request_case")
@@ -16,7 +11,7 @@ public class DateRequestCase {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column (name = "organization")
+    @Column(name = "organization")
     private String organization;
 
     @Column(name = "date")
@@ -27,7 +22,7 @@ public class DateRequestCase {
     @JoinColumn(name = "card_id", nullable = false)
     private CardAdm cardAdm;
 
-    public DateRequestCase(){
+    public DateRequestCase() {
 
     }
 

@@ -14,10 +14,6 @@ angular.module('courtApp').controller('CardViewController',
             self.showRemoveModal = showRemoveModal;
             self.getCards = getCards;
             /*
-                        self.dateFrom = new Date(new Date().getFullYear(), 0, 1);
-                        self.dateTo = new Date();
-            */
-            /*
             self.tableParams = new NgTableParams({
                 page: 1,
                 count: 10,

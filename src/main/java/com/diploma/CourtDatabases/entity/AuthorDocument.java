@@ -1,7 +1,6 @@
 package com.diploma.CourtDatabases.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -30,15 +29,15 @@ public class AuthorDocument {
 
     @JsonIgnore
     @OneToMany(mappedBy = "judge", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private  Set<CardAdm> cardAdms = new HashSet<CardAdm>();
+    private Set<CardAdm> cardAdms = new HashSet<CardAdm>();
 
     @JsonIgnore
     @OneToMany(mappedBy = "authorDocument", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private  Set<SecondInstanceAdm> secondInstanceAdms = new HashSet<SecondInstanceAdm>();
+    private Set<SecondInstanceAdm> secondInstanceAdms = new HashSet<SecondInstanceAdm>();
 
     @JsonIgnore
     @OneToMany(mappedBy = "authorDocument", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private  Set<DecreeAdm> decreeAdms = new HashSet<DecreeAdm>();
+    private Set<DecreeAdm> decreeAdms = new HashSet<DecreeAdm>();
 
     public AuthorDocument() {
 

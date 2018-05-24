@@ -1,0 +1,26 @@
+<div class="panel panel-default">
+    <div class="panel-heading text-center h3">Проверка сроков ответа на жалобы</div>
+    <div class="panel-body">
+        <table ng-table="repC.tableComplaints" class="col bor-table table-sm table-hover table-condensed"
+               show-filter="true">
+            <tr class="cursor" ng-repeat="item in $data" ng-dblclick="repC.setCard(item)"
+                ondblclick="location.href ='#/card'">
+                <td class="text-center" width="10%" title="'№ карточки'"  sortable="'cardAdm.cardNumber'">
+                    {{item.cardAdm.cardNumber}}
+                </td>
+                <td class="text-center" width="15%" title="'Дата жалобы'"  sortable="'complainDate'">
+                    {{item.complainDate |  date: 'dd.MM.yyyy'}}
+                </td>
+                <td class="text-center" width="40%" title="'Сущность жалобы'" sortable="'entityIskAdm.name'">
+                    {{item.entityIskAdm.name}}
+                </td>
+                <td class="text-center" width="20%" title="'Ф.И.О.'" sortable="'nameAuthorComplaint'">
+                    {{item.nameAuthorComplaint}}
+                </td>
+                <td class="text-center" width="15%" title="'Предпологаемая дата отчета'" sortable="'complainDate'">
+                    {{item.dateAnswer|  date: 'dd.MM.yyyy'}}
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>

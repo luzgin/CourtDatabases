@@ -16,7 +16,7 @@ angular.module('courtApp').factory('ComplaintService',
 
             function loadAllComplaints() {
                 var deferred = $q.defer();
-                $http.get(urls.CONPLAINT_SERVICE_API)
+                $http.get(urls.COMPLAINT_SERVICE_API)
                     .then(
                         function (response) {
                             $localStorage.complaints = response.data;
@@ -31,7 +31,7 @@ angular.module('courtApp').factory('ComplaintService',
 
             function loadComplaintsForDecree(id) {
                 var deferred = $q.defer();
-                $http.get(urls.CONPLAINT_SERVICE_API + "dec/" + id)
+                $http.get(urls.COMPLAINT_SERVICE_API + "dec/" + id)
                     .then(
                         function (response) {
                             $localStorage.complaintsForDecree = response.data;
@@ -54,7 +54,7 @@ angular.module('courtApp').factory('ComplaintService',
             function getComplaint(item) {
                 console.log('Fetching Complaint');
                 var deferred = $q.defer();
-                $http.get(urls.CONPLAINT_SERVICE_API + item.id)
+                $http.get(urls.COMPLAINT_SERVICE_API + item.id)
                     .then(
                         function (response) {
                             console.log('Fetched successfully Complaint with id :' + item.id);
@@ -72,7 +72,7 @@ angular.module('courtApp').factory('ComplaintService',
             function createComplaint(entity) {
                 console.log('Creating entity1', entity);
                 var deferred = $q.defer();
-                $http.post(urls.CONPLAINT_SERVICE_API, entity)
+                $http.post(urls.COMPLAINT_SERVICE_API, entity)
                     .then(
                         function (response) {
                             loadComplaintsForDecree(entity.decreeAdm.id);
@@ -89,7 +89,7 @@ angular.module('courtApp').factory('ComplaintService',
             function updateComplaint(entity, id) {
                 console.log('Updating entity with id ' + id);
                 var deferred = $q.defer();
-                $http.put(urls.CONPLAINT_SERVICE_API + id, entity)
+                $http.put(urls.COMPLAINT_SERVICE_API + id, entity)
                     .then(
                         function (response) {
                             loadComplaintsForDecree(entity.decreeAdm.id);
@@ -106,7 +106,7 @@ angular.module('courtApp').factory('ComplaintService',
             function removeComplaint(item) {
                 console.log('Removing Complaint with id ' + item.id);
                 var deferred = $q.defer();
-                $http.delete(urls.CONPLAINT_SERVICE_API + item.id)
+                $http.delete(urls.COMPLAINT_SERVICE_API + item.id)
                     .then(
                         function (response) {
                             loadComplaintsForDecree($localStorage.card.decreeAdm.id);

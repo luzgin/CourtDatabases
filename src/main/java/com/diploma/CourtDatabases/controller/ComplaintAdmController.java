@@ -1,6 +1,7 @@
 package com.diploma.CourtDatabases.controller;
 
 import com.diploma.CourtDatabases.entity.ComplaintsAdm;
+import com.diploma.CourtDatabases.entity.report.ComplaintAdmReport;
 import com.diploma.CourtDatabases.service.ComplaintsAdmService;
 import com.diploma.CourtDatabases.service.DecreeAdmService;
 import lombok.NonNull;
@@ -8,6 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -32,6 +36,36 @@ public class ComplaintAdmController {
     @GetMapping("/complaint/{id}")
     public ComplaintsAdm findById(@NonNull @PathVariable("id") long id) {
         return complaintsAdmService.findById(id);
+    }
+
+    @PreAuthorize("hasAuthority('USER')")
+    @GetMapping("/complaint/check")
+    public List<ComplaintAdmReport> getComplaintsForCheck() {
+        List<ComplaintsAdm> complaintsAdmListWhereActivFalse = complaintsAdmService.findByActiv(false);
+        Date currentDate = new Date();
+        List<ComplaintAdmReport> complaintAdmReportList = new ArrayList<ComplaintAdmReport>();
+        for (int i = 0; i < complaintsAdmListWhereActivFalse.size(); i++) {
+            System.out.println("cerrent "+ currentDate.getTime());
+            System.out.println("complaintDate "+ complaintsAdmListWhereActivFalse.get(i).getComplainDate().getTime());
+            System.out.println("5 "+ (25 * 1000 * 60 * 60 * 24));
+            if (((currentDate.getTime() - complaintsAdmListWhereActivFalse.get(i).getComplainDate().getTime())/(1000 * 60 * 60 * 24)) > 25) {
+                Calendar dateAnswer = Calendar.getInstance();
+                dateAnswer.setTime(complaintsAdmListWhereActivFalse.get(i).getComplainDate());
+                dateAnswer.add(Calendar.DATE, 30);
+                ComplaintAdmReport complaintAdmReport = new ComplaintAdmReport();
+                complaintAdmReport.setComplainDate(complaintsAdmListWhereActivFalse.get(i).getComplainDate());
+                complaintAdmReport.setEntityIskAdm(complaintsAdmListWhereActivFalse.get(i).getEntityIskAdm());
+                complaintAdmReport.setNameAuthorComplaint(complaintsAdmListWhereActivFalse.get(i).getNameAuthorComplaint());
+                complaintAdmReport.setActiv(complaintsAdmListWhereActivFalse.get(i).isActiv());
+                complaintAdmReport.setReinstatementOfTerm(complaintsAdmListWhereActivFalse.get(i).isReinstatementOfTerm());
+                complaintAdmReport.setDecreeAdm(complaintsAdmListWhereActivFalse.get(i).getDecreeAdm());
+                complaintAdmReport.setSummPoshlini(complaintsAdmListWhereActivFalse.get(i).getSummPoshlini());
+                complaintAdmReport.setCardAdm(complaintsAdmListWhereActivFalse.get(i).getCardAdm());
+                complaintAdmReport.setDateAnswer(dateAnswer.getTime());
+                complaintAdmReportList.add(complaintAdmReport);
+            }
+        }
+        return complaintAdmReportList;
     }
 
     @PreAuthorize("hasAuthority('USER')")

@@ -13,6 +13,7 @@ public interface ComplaintsAdmService {
     List<ComplaintsAdm> findAll();
     List<ComplaintsAdm> findByDecreeAdm_Id(Long id);
     List<ComplaintsAdm> findByDecreeAdm(DecreeAdm decreeAdm);
+    List<ComplaintsAdm> findByActiv(Boolean active);
     ComplaintsAdm findById(long id);
 
 

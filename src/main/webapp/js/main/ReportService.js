@@ -4,13 +4,14 @@ angular.module('courtApp').factory('ReportService',
         function ($http, $q, urls) {
             var factory = {
                 getReport: getReport,
-                getArticle: getArticle
+                getArticle: getArticle,
+                getComplaintsForCheck: getComplaintsForCheck
             };
             return factory;
 
             function getReport(dateFrom, dateTo) {
                 var deferred = $q.defer();
-                $http.get(urls.CARD_SERVICE_API+"report/"+dateFrom+"/"+dateTo)
+                $http.get(urls.CARD_SERVICE_API + "report/" + dateFrom + "/" + dateTo)
                     .then(
                         function (response) {
                             deferred.resolve(response.data);
@@ -39,9 +40,19 @@ angular.module('courtApp').factory('ReportService',
                     );
                 return deferred.promise;
             }
-
-
-
-
+            function getComplaintsForCheck() {
+                var deferred = $q.defer();
+                $http.get(urls.COMPLAINT_SERVICE_API + "check")
+                    .then(
+                        function (response) {
+                            deferred.resolve(response.data);
+                        },
+                        function (errResponse) {
+                            console.error('Error getComplaintsForCheck');
+                            deferred.reject(errResponse);
+                        }
+                    );
+                return deferred.promise;
+            }
         }
     ]);

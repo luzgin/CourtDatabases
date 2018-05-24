@@ -45,6 +45,12 @@ public class ComplaintsAdmServiceImpl implements ComplaintsAdmService {
     public List<ComplaintsAdm> findByDecreeAdm(@NonNull DecreeAdm decreeAdm) {
         return complaintsAdmRepository.findByDecreeAdm(decreeAdm);
     }
+
+    @Override
+    public List<ComplaintsAdm> findByActiv(@NonNull Boolean active) {
+        return complaintsAdmRepository.findByActiv(active);
+    }
+
     @Override
     public ComplaintsAdm findById(@NonNull long id) {
         return complaintsAdmRepository.findOne(id);

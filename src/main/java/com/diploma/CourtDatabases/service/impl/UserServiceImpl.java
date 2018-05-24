@@ -1,22 +1,15 @@
 package com.diploma.CourtDatabases.service.impl;
 
-import com.diploma.CourtDatabases.entity.Role;
 import com.diploma.CourtDatabases.entity.User;
 import com.diploma.CourtDatabases.repository.UserRepository;
 import com.diploma.CourtDatabases.service.UserService;
-import com.google.common.collect.ImmutableList;
 import lombok.NonNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.annotation.PostConstruct;
-import javax.persistence.*;
-import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -25,48 +18,6 @@ import java.util.Optional;
 public class UserServiceImpl implements UserService {
     @Autowired
     private UserRepository userRepository;
-
-
-  /*  @PostConstruct
-    public void init() {
-        if (!findByUsername("super_admin").isPresent()) {
-            save(User.builder()
-                    .username("super_admin")
-                    .password(new BCryptPasswordEncoder().encode("password"))
-                    .authorities(ImmutableList.of(Role.USER, Role.ADMIN, Role.SUPER_ADMIN))
-                    .accountNonExpired(true)
-                    .accountNonLocked(true)
-                    .credentialsNonExpired(true)
-                    .enabled(true)
-                    .name("Иванов И.В.")
-                    .build());
-        }
-        if (!findByUsername("admin").isPresent()) {
-            save(User.builder()
-                    .username("admin")
-                    .password(new BCryptPasswordEncoder().encode("password"))
-                    .authorities(ImmutableList.of(Role.USER, Role.ADMIN))
-                    .accountNonExpired(true)
-                    .accountNonLocked(true)
-                    .credentialsNonExpired(true)
-                    .enabled(true)
-                    .name("Семенов Г.Д.")
-                    .build());
-        }
-        if (!findByUsername("user").isPresent()) {
-            save(User.builder()
-                    .username("user")
-                    .password(new BCryptPasswordEncoder().encode("password"))
-                    .authorities(ImmutableList.of(Role.USER))
-                    .accountNonExpired(true)
-                    .accountNonLocked(true)
-                    .credentialsNonExpired(true)
-                    .enabled(true)
-                    .name("Шышкина Ю.В.")
-                    .build());
-        }
-
-    }*/
 
     @Override
     public Optional<User> findById(@NonNull long id) {

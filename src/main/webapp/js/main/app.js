@@ -11,7 +11,7 @@ posdApp.constant('urls', {
     NAME_ENTITY_DECREE_SERVICE_API: 'http://localhost:8080/api/nameentitydecree/',
     SECOND_INSTANCE_SERVICE_API: 'http://localhost:8080/api/secondInstance/',
     DECREE_SERVICE_API: 'http://localhost:8080/api/decree/',
-    CONPLAINT_SERVICE_API: 'http://localhost:8080/api/complaint/',
+    COMPLAINT_SERVICE_API: 'http://localhost:8080/api/complaint/',
     CARD_SERVICE_API: 'http://localhost:8080/api/cardAdm/',
     DATE_RETURN_SERVICE_API: 'http://localhost:8080/api/returnCase/',
     DATE_REQUEST_SERVICE_API: 'http://localhost:8080/api/requestCase/',
@@ -70,6 +70,14 @@ posdApp.config(function ($routeProvider, $locationProvider) {
         })
         .when('/report', {
             templateUrl: '/html/report.html',
+            controller: 'ReportController',
+            controllerAs: 'repC',
+            data: {
+                authorities: ['USER']
+            }
+        })
+        .when('/checkAnswerDate', {
+            templateUrl: '/html/checkAnswerDate.html',
             controller: 'ReportController',
             controllerAs: 'repC',
             data: {

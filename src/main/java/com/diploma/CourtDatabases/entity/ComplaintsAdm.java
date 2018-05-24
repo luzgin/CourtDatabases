@@ -39,7 +39,7 @@ public class ComplaintsAdm {
     @JoinColumn(name = "card_adm_id", nullable = true)
     private CardAdm cardAdm;
 
-    public ComplaintsAdm(){
+    public ComplaintsAdm() {
 
     }
 
