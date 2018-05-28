@@ -59,13 +59,6 @@ angular.module('courtApp').controller('ReportController',
                 ReportService.getComplaintsForCheck().then(
                     function (response) {
                         self.dataComplaints = response;
-                       /*
-                        for (var i = 0; i < response.length; i++) {
-                            var date = new Date(response[i].complainDate);
-                            date.setDate(date.getDate() + 30);
-                            self.dataComplaints[i].dateAnswer = date;
-                        }
-*/
                         self.tableComplaints = new NgTableParams({
                             sorting: {name: "asc"},
                             count: 15

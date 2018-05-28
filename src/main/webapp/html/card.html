@@ -26,10 +26,10 @@
 
                     </div>
                 </div>
-                <div class="col-md-7">
+                <div class="col-md-4">
                     <div class="form-group row">
-                        <label class="col-md-3" for="createCard">Дата создания *</label>
-                        <div class="col-md-4">
+                        <label class="col-md-6" for="createCard">Дата создания *</label>
+                        <div class="col-md-6">
                             <input type="date"
                                    class="form-control btn-sm"
                                    id="createCard"
@@ -40,6 +40,13 @@
                                   ng-show="cardForm.createCard.check && cardForm.createCard.$error.required">Выберете дату</span>
                         </div>
                     </div>
+                </div>
+                <div class="col-md-4">
+                    <input id="wordButton"
+                           type="button"
+                           class="btn btn-outline-primary btn-sm"
+                           value="Передать в Word"
+                           ng-click="cardC.createWord()"/>
                 </div>
             </div>
             <div class="card border-dark">
@@ -708,7 +715,8 @@
                                    class="btn btn-primary btn-sm">
                             <button type="button"
                                     class="btn btn-default btn-sm"
-                                    data-dismiss="modal">Закрыть</button>
+                                    data-dismiss="modal">Закрыть
+                            </button>
                         </div>
                     </form>
                 </div>
@@ -804,7 +812,8 @@
         <div class="widht-modal-dialog modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">{{!secIC.secondInstance.id ? 'Добавление' : 'Редактирвоание'}} инстанции</h4>
+                    <h4 class="modal-title">{{!secIC.secondInstance.id ? 'Добавление' : 'Редактирвоание'}}
+                        инстанции</h4>
                 </div>
                 <div class="modal-body">
                     <form name="secondInstanceForm" ng-submit="secIC.submit()" class="form-horizontal" role="form"
@@ -908,9 +917,11 @@
         <div class="widht-modal-dialog modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title" ng-if="radioChecked.on==='1'?true:false">{{!viaC.vialator.id ? 'Добавление' : 'Редактирвоание'}} физ.
+                    <h4 class="modal-title" ng-if="radioChecked.on==='1'?true:false">{{!viaC.vialator.id ? 'Добавление'
+                        : 'Редактирвоание'}} физ.
                         лица</h4>
-                    <h4 class="modal-title" ng-if="radioChecked.on==='2'?true:false">{{!viaC.vialator.id ? 'Добавление' : 'Редактирвоание'}} юр.
+                    <h4 class="modal-title" ng-if="radioChecked.on==='2'?true:false">{{!viaC.vialator.id ? 'Добавление'
+                        : 'Редактирвоание'}} юр.
                         лица</h4>
                 </div>
                 <div class="modal-body">
@@ -1180,7 +1191,8 @@
         <div class="widht-modal-dialog modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">{{!dretC.dateReturn.id ? 'Добавление' : 'Редактирвоание'}} возвращения дела</h4>
+                    <h4 class="modal-title">{{!dretC.dateReturn.id ? 'Добавление' : 'Редактирвоание'}} возвращения
+                        дела</h4>
                 </div>
                 <div class="modal-body">
                     <form name="dateReturnForm" ng-submit="dretC.submit()" class="form-horizontal" role="form"
@@ -1232,7 +1244,8 @@
         <div class="widht-modal-dialog modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">{{!dreqC.dateRequest.id ? 'Добавление' : 'Редактирвоание'}} возвращения дела</h4>
+                    <h4 class="modal-title">{{!dreqC.dateRequest.id ? 'Добавление' : 'Редактирвоание'}} возвращения
+                        дела</h4>
                 </div>
                 <div class="modal-body">
                     <form name="dateRequestForm" ng-submit="dreqC.submit()" class="form-horizontal" role="form"

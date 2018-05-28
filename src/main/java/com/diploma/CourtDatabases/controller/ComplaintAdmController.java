@@ -45,10 +45,7 @@ public class ComplaintAdmController {
         Date currentDate = new Date();
         List<ComplaintAdmReport> complaintAdmReportList = new ArrayList<ComplaintAdmReport>();
         for (int i = 0; i < complaintsAdmListWhereActivFalse.size(); i++) {
-            System.out.println("cerrent "+ currentDate.getTime());
-            System.out.println("complaintDate "+ complaintsAdmListWhereActivFalse.get(i).getComplainDate().getTime());
-            System.out.println("5 "+ (25 * 1000 * 60 * 60 * 24));
-            if (((currentDate.getTime() - complaintsAdmListWhereActivFalse.get(i).getComplainDate().getTime())/(1000 * 60 * 60 * 24)) > 25) {
+            if (((currentDate.getTime() - complaintsAdmListWhereActivFalse.get(i).getComplainDate().getTime()) / (1000 * 60 * 60 * 24)) > 25) {
                 Calendar dateAnswer = Calendar.getInstance();
                 dateAnswer.setTime(complaintsAdmListWhereActivFalse.get(i).getComplainDate());
                 dateAnswer.add(Calendar.DATE, 30);

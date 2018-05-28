@@ -47,6 +47,7 @@ angular.module('courtApp').controller('CardController',
             self.editRequestCase = editRequestCase;
             self.removeRequestCase = removeRequestCase;
             self.getDateRequestCaseForCard = getDateRequestCaseForCard;
+            self.createWord = createWord;
 
             self.stringToDate = stringToDate;
 
@@ -68,6 +69,21 @@ angular.module('courtApp').controller('CardController',
             }
             if (self.card.vialator != null) {
                 document.getElementById("addVialator").setAttribute('disabled', 'disabled');
+            }
+
+            function createWord() {
+                if (self.card.id === undefined) {
+                    Message.generate('Карточка не сохранена!', 3);
+                } else {
+                    CardService.createWord(self.card).then(
+                        function (response) {
+                            Message.generate('Ok', 1)
+                        },
+                        function (errResponse) {
+                            Message.generate('Ошибка при создании документа', 3);
+                        }
+                    );
+                }
             }
 
             document.getElementById("editComplaint").setAttribute('disabled', 'disabled');

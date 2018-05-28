@@ -7,7 +7,8 @@ angular.module('courtApp').factory('CardService',
                 getCardLocal: getCardLocal,
                 createCard: createCard,
                 updateCard: updateCard,
-                removeCard: removeCard
+                removeCard: removeCard,
+                createWord: createWord
             };
             return factory;
 
@@ -73,6 +74,22 @@ angular.module('courtApp').factory('CardService',
                         },
                         function (errResponse) {
                             console.error('Error while updating entity with id :' + id);
+                            deferred.reject(errResponse);
+                        }
+                    );
+                return deferred.promise;
+            }
+
+            function createWord(card) {
+                console.log('Create word for card with id ' + card.id);
+                var deferred = $q.defer();
+                $http.get(urls.CARD_SERVICE_API+ "word/" + card.id)
+                    .then(
+                        function (response) {
+                            deferred.resolve(response.data);
+                        },
+                        function (errResponse) {
+                            console.error('Error create word for card with id :' + card.id);
                             deferred.reject(errResponse);
                         }
                     );

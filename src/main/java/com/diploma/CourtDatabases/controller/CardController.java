@@ -9,6 +9,7 @@ import com.diploma.CourtDatabases.service.CardAdmService;
 import com.diploma.CourtDatabases.service.ComplaintsAdmService;
 import com.diploma.CourtDatabases.service.DateRequestCaseService;
 import com.diploma.CourtDatabases.service.DateReturnCaseService;
+import com.diploma.CourtDatabases.service.impl.CardWordDocument;
 import lombok.NonNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -37,6 +38,16 @@ public class CardController {
     @GetMapping("/cardAdm/{id}")
     public CardAdm findById(@NonNull @PathVariable("id") long id) {
         return cardAdmService.findById(id);
+    }
+
+    @PreAuthorize("hasAuthority('USER')")
+    @GetMapping("/cardAdm/word/{id}")
+    public String createWord(@NonNull @PathVariable("id") long id) {
+        CardAdm card = cardAdmService.findById(id);
+        if (card != null){
+            CardWordDocument.main(card);
+        }
+        return null;
     }
 
     @PreAuthorize("hasAuthority('USER')")

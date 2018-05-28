@@ -58,7 +58,8 @@
                                                                 placeholder="Номер"/>
                     </th>
                     <th class="text-center" width="15%">Дата создания</th>
-                    <th class="text-center" width="30%">Правонарушитель</th>
+                    <th class="text-center" width="30%"> <input type="text" class="form-control text-center" ng-model="search1.vialator.privateNumber"
+                                                                placeholder="Правонарушитель"/></th>
                     <th class="text-center" width="35%">Постановление</th>
                     <th class="text-center" width="10%">Дата решения</th>
                 </tr>
@@ -66,7 +67,7 @@
                 <tbody>
                 <tr class="cursor" ng-click="cdviewC.setCardForRemove(item, this)" ng-dblclick="cdviewC.setCard(item)"
                     ondblclick="location.href ='#/card'"
-                    ng-repeat="item in cdviewC.getAllCards() | filter:search | orderBy: '-createDate'">
+                    ng-repeat="item in cdviewC.getAllCards() | filter:search | filter:search1 | orderBy: '-createDate'">
                     <td>{{item.cardNumber}}</td>
                     <td>{{item.createDate | date: 'dd.MM.yyyy'}}</td>
                     <td>
